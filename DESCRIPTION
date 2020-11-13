@@ -13,6 +13,9 @@ Description: The WMATA (Washington Metropolitan Area Transit
     locations, and arrival predictions. This data is returned as tidy data
     frames for easy analysis in R.
 License: GPL-3
+Suggests: 
+    testthat (>= 3.0.0),
+    usethis (>= 1.6.3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
