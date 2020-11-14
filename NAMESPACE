@@ -2,3 +2,10 @@
 
 export(browse_wmata_key)
 export(wmata_key)
+importFrom(httr,GET)
+importFrom(httr,add_headers)
+importFrom(httr,content)
+importFrom(httr,http_error)
+importFrom(httr,http_type)
+importFrom(httr,modify_url)
+importFrom(httr,status_code)
