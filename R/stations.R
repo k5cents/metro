@@ -17,6 +17,7 @@
 #' The result of this endpoint is saved as the [stations] object.
 #' @param line Two-letter line code abbreviation, see Details or [rail_lines()].
 #'   If `NULL`, (the default) all stations are returned.
+#' @importFrom utils type.convert
 #' @export
 rail_stations <- function(line = NULL) {
   json <- wmata_api("Rail.svc/json/jStations", list(LineCode = line))

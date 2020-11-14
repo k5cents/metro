@@ -2,6 +2,7 @@
 #'
 #' The result of this endpoint is saved as the [lines] object.
 #'
+#' @importFrom utils type.convert
 #' @export
 rail_lines <- function() {
   json <- wmata_api("Rail.svc/json/jLines")
