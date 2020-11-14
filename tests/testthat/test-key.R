@@ -16,3 +16,10 @@ test_that("key instructions given if possible", {
   skip_if_not_installed("usethis")
   expect_invisible(usethis::ui_silence(browse_wmata_key()))
 })
+
+test_that("demo can be scraped with rvest", {
+  skip_if_not_installed("rvest")
+  key <- wmata_demo()
+  expect_length(key, 1)
+  expect_type(key, "character")
+})
