@@ -32,16 +32,20 @@ devtools::install_github("kiernann/metro")
 ## Key
 
 Usage of the WMATA API requires a developer API key. Such a key can be
-obtained by creating a developer account and subscribing to the default
-tier, which allows 10 calls per second and full access to all eight
-APIs.
+obtained by creating a developer account and subscribing to the free
+default tier.
 
-The WMATA also provides a demo key which should **not** be used in
-production. This key is severely rate limited and is subject to change
-at any time. It is only suitable for trying out the various features of
-the API. As of November 13, 2020 this is the demo key you can use:
+The WMATA also provides a [demo
+key](https://developer.wmata.com/products/5475f236031f590f380924ff) to
+try out the various features of the API. This key should **never** be
+used in production, it is rate limited and subject to change at any
+time.
 
-    e13626d03d8e4c03ac07f95541b3091b
+As of 2020-11-14, the demo key can be used like this:
+
+``` r
+Sys.setenv("WMATA_KEY" = "e13626d03d8e4c03ac07f95541b3091b")
+```
 
 ## Example
 
@@ -54,22 +58,22 @@ All functions return data frames for easy analysis.
 ``` r
 rail_stations(line = "RD")
 #> # A tibble: 27 x 10
-#>    station name                  txfer lines      lat   lon street             city     state   zip
-#>    <chr>   <chr>                 <chr> <list>   <dbl> <dbl> <chr>              <chr>    <chr> <int>
-#>  1 A01     Metro Center          C01   <chr [1…  38.9 -77.0 607 13th St. NW    Washing… DC    20005
-#>  2 A02     Farragut North        <NA>  <chr [1…  38.9 -77.0 1001 Connecticut … Washing… DC    20036
-#>  3 A03     Dupont Circle         <NA>  <chr [1…  38.9 -77.0 1525 20th St. NW   Washing… DC    20036
-#>  4 A04     Woodley Park-Zoo/Ada… <NA>  <chr [1…  38.9 -77.1 2700 Connecticut … Washing… DC    20008
-#>  5 A05     Cleveland Park        <NA>  <chr [1…  38.9 -77.1 3599 Connecticut … Washing… DC    20008
-#>  6 A06     Van Ness-UDC          <NA>  <chr [1…  38.9 -77.1 4200 Connecticut … Washing… DC    20008
-#>  7 A07     Tenleytown-AU         <NA>  <chr [1…  38.9 -77.1 4501 Wisconsin Av… Washing… DC    20016
-#>  8 A08     Friendship Heights    <NA>  <chr [1…  39.0 -77.1 5337 Wisconsin Av… Washing… DC    20015
-#>  9 A09     Bethesda              <NA>  <chr [1…  39.0 -77.1 7450 Wisconsin Av… Bethesda MD    20814
-#> 10 A10     Medical Center        <NA>  <chr [1…  39.0 -77.1 8810 Rockville Pi… Bethesda MD    20814
+#>    station name                txfer lines      lat   lon street            city    state   zip
+#>    <chr>   <chr>               <chr> <list>   <dbl> <dbl> <chr>             <chr>   <chr> <int>
+#>  1 A01     Metro Center        C01   <chr [1…  38.9 -77.0 607 13th St. NW   Washin… DC    20005
+#>  2 A02     Farragut North      <NA>  <chr [1…  38.9 -77.0 1001 Connecticut… Washin… DC    20036
+#>  3 A03     Dupont Circle       <NA>  <chr [1…  38.9 -77.0 1525 20th St. NW  Washin… DC    20036
+#>  4 A04     Woodley Park-Zoo/A… <NA>  <chr [1…  38.9 -77.1 2700 Connecticut… Washin… DC    20008
+#>  5 A05     Cleveland Park      <NA>  <chr [1…  38.9 -77.1 3599 Connecticut… Washin… DC    20008
+#>  6 A06     Van Ness-UDC        <NA>  <chr [1…  38.9 -77.1 4200 Connecticut… Washin… DC    20008
+#>  7 A07     Tenleytown-AU       <NA>  <chr [1…  38.9 -77.1 4501 Wisconsin A… Washin… DC    20016
+#>  8 A08     Friendship Heights  <NA>  <chr [1…  39.0 -77.1 5337 Wisconsin A… Washin… DC    20015
+#>  9 A09     Bethesda            <NA>  <chr [1…  39.0 -77.1 7450 Wisconsin A… Bethes… MD    20814
+#> 10 A10     Medical Center      <NA>  <chr [1…  39.0 -77.1 8810 Rockville P… Bethes… MD    20814
 #> # … with 17 more rows
 ```
 
-Functions that typically return the same data have that data saved as
+Functions that always return the same data have that data saved as
 objects.
 
 ``` r

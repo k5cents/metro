@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
   dpi = 300
 )
 if (!interactive()) {
-  options(width = 99)
+  options(width = 95)
 }
 ```
 
@@ -46,16 +46,16 @@ devtools::install_github("kiernann/metro")
 ## Key
 
 Usage of the WMATA API requires a developer API key. Such a key can be obtained
-by creating a developer account and subscribing to the default tier, which
-allows 10 calls per second and full access to all eight APIs.
+by creating a developer account and subscribing to the free default tier.
 
-The WMATA also provides a demo key which should **not** be used in production.
-This key is severely rate limited and is subject to change at any time. It is
-only suitable for trying out the various features of the API. As of November 13,
-2020 this is the demo key you can use:
+The WMATA also provides a [demo key][demo] to try out the various features of
+the API. This key should **never** be used in production, it is rate limited and
+subject to change at any time.
 
-```
-e13626d03d8e4c03ac07f95541b3091b
+As of 2020-11-14, the demo key can be used like this:
+
+```{r key}
+Sys.setenv("WMATA_KEY" = "e13626d03d8e4c03ac07f95541b3091b")
 ```
 
 ## Example
@@ -70,7 +70,7 @@ All functions return data frames for easy analysis.
 rail_stations(line = "RD")
 ```
 
-Functions that typically return the same data have that data saved as objects.
+Functions that always return the same data have that data saved as objects.
 
 ```{r lines}
 metro::lines
@@ -86,4 +86,5 @@ metro::lines
 [cov_badge]: https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg
 [cov_link]: https://codecov.io/gh/kiernann/metro?branch=master
 [gh]: https://github.com/kiernann/metro
+[demo]: https://developer.wmata.com/products/5475f236031f590f380924ff
 <!-- refs: end -->
