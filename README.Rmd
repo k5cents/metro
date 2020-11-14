@@ -1,0 +1,89 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  error = FALSE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  fig.height = 4,
+  fig.width = 9,
+  out.width = "100%",
+  dpi = 300
+)
+if (!interactive()) {
+  options(width = 99)
+}
+```
+
+# metro <img src='man/figures/logo.png' align="right" height="139" />
+
+<!-- badges: start -->
+[![Lifecycle: experimental][life_badge]][life_link]
+[![CRAN status][cran_badge]][cran_link]
+[![Codecov test coverage][cov_badge]][cov_link]
+[![R build status][ga_badge]][ga_link]
+<!-- badges: end -->
+
+The goal of metro is to return data frames from the Washington Metropolitan Area
+Transit Authority API. User need a WMATA API key, see below for more details.
+
+## Installation
+
+You can install the development version of metro from [GitHub][gh]:
+
+```{r install, eval=FALSE}
+# install.packages("devtools")
+devtools::install_github("kiernann/metro")
+```
+
+## Key
+
+Usage of the WMATA API requires a developer API key. Such a key can be obtained
+by creating a developer account and subscribing to the default tier, which
+allows 10 calls per second and full access to all eight APIs.
+
+The WMATA also provides a demo key which should **not** be used in production.
+This key is severely rate limited and is subject to change at any time. It is
+only suitable for trying out the various features of the API. As of November 13,
+2020 this is the demo key you can use:
+
+```
+e13626d03d8e4c03ac07f95541b3091b
+```
+
+## Example
+
+```{r library}
+library(metro)
+```
+
+All functions return data frames for easy analysis.
+
+```{r stations}
+rail_stations(line = "RD")
+```
+
+Functions that typically return the same data have that data saved as objects.
+
+```{r lines}
+metro::lines
+```
+
+<!-- refs: start -->
+[life_badge]: https://img.shields.io/badge/lifecycle-experimental-orange.svg
+[life_link]: https://www.tidyverse.org/lifecycle/#experimental
+[cran_badge]: https://www.r-pkg.org/badges/version/metro
+[cran_link]: https://CRAN.R-project.org/package=metro
+[ga_badge]: https://github.com/kiernann/metro/workflows/R-CMD-check/badge.svg
+[ga_link]: https://github.com/kiernann/metro/actions
+[cov_badge]: https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg
+[cov_link]: https://codecov.io/gh/kiernann/metro?branch=master
+[gh]: https://github.com/kiernann/metro
+<!-- refs: end -->
