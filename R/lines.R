@@ -8,5 +8,5 @@ rail_lines <- function() {
   df <- jsonlite::fromJSON(json)
   df <- type.convert(df$Lines[, 1:4], na.strings = "", as.is = TRUE)
   names(df) <- c("line", "name", "start", "end")
-  tibble::as_tibble(df)
+  as_tibble(df)
 }
