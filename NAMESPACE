@@ -2,6 +2,7 @@
 
 export(browse_wmata_key)
 export(rail_lines)
+export(rail_stations)
 export(wmata_demo)
 export(wmata_key)
 importFrom(httr,GET)
