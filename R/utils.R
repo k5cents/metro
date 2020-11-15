@@ -9,3 +9,15 @@ as_tibble <- function(x) {
     x
   }
 }
+
+skip_if_no_key <- function(sys = "WMATA_KEY") {
+  key <- Sys.getenv(sys)
+  if (!nzchar(key) && is_installed("rvest")) {
+    key <- wmata_demo()
+  }
+  if (!nzchar(key)) {
+    skip("No API key found")
+  } else {
+    Sys.setenv("WMATA_KEY" = key)
+  }
+}
