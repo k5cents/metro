@@ -16,7 +16,7 @@ skip_if_no_key <- function(sys = "WMATA_KEY") {
     key <- wmata_demo()
   }
   if (!nzchar(key)) {
-    skip("No API key found")
+    testthat::skip("No API key found")
   } else {
     Sys.setenv("WMATA_KEY" = key)
   }
