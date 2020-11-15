@@ -1,5 +1,6 @@
-Sys.sleep(1)
 test_that("all lines are returned", {
+  skip_if_no_key()
+  Sys.sleep(0.1)
   l <- rail_lines()
   expect_length(l, 4)
   expect_equal(nrow(l), 6)
