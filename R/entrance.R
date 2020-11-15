@@ -7,6 +7,10 @@
 #' @param lon Center point Longitude
 #' @param radius Radius (meters) to include in the search area. If `NULL`, while
 #'   `lat` and `lon` are supplied, all stations are returned.
+#' @importFrom geodist geodist
+#' @importFrom tibble as_tibble add_column
+#' @importFrom jsonlite fromJSON
+#' @importFrom utils type.convert
 #' @export
 rail_entrance <- function(lat = NULL, lon = NULL, radius = NULL) {
   coord <- list(Lat = lat, Lon = lon, Radius = radius)

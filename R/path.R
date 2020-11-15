@@ -7,6 +7,8 @@
 #' between stations. Distance is converted from feet to round meters.
 #' @param from Station code for the origin station.
 #' @param to Station code for the destination station.
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble
 #' @export
 rail_path <- function(from, to) {
   json <- wmata_api(
@@ -19,7 +21,7 @@ rail_path <- function(from, to) {
   }
   names(df) <- c("line", "station", "name", "order", "distance")
   df$distance <- as.integer(round(df$distance / 3.281))
-  as_tibble(df[, c(1, 4, 2:3, 5)])
+  tibble::as_tibble(df[, c(1, 4, 2:3, 5)])
 }
 
 #' @rdname rail_path

@@ -17,6 +17,8 @@
 #' The result of this endpoint is saved as the [stations] object.
 #' @param line Two-letter line code abbreviation, see Details or [rail_lines()].
 #'   If `NULL`, (the default) all stations are returned.
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble add_column
 #' @importFrom utils type.convert
 #' @export
 rail_stations <- function(line = NULL) {
@@ -25,10 +27,9 @@ rail_stations <- function(line = NULL) {
   df <- type.convert(df$Stations[, c(-4, -8)], na.strings = "", as.is = TRUE)
   l <- mapply(paste, df[4], df[5], df[6], SIMPLIFY = FALSE)
   l <- strsplit(gsub("\\s?NA\\s?", "", l[[1]]), "\\s")
-  df$lines <- l
-  df <- df[, c(1:3, 13, 7:12)]
+  df <- tibble::add_column(df[, -(4:6)], lines = l, .after = 3)
   nm <- names(df)
   nm[c(1, 3)] <- c("station", "txfer")
   names(df) <- gsub("address\\.", "", tolower(nm))
-  as_tibble(df)
+  tibble::as_tibble(df)
 }
