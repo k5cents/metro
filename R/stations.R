@@ -32,5 +32,3 @@ rail_stations <- function(line = NULL) {
   names(df) <- gsub("address\\.", "", tolower(nm))
   as_tibble(df)
 }
-
-
