@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All WMATA rail stations — stations • metro</title>
+<title>Rail station entrances — rail_entrance • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="All WMATA rail stations — stations" />
-<meta property="og:description" content="All WMATA rail stations" />
+<meta property="og:title" content="Rail station entrances — rail_entrance" />
+<meta property="og:description" content="Returns a list of nearby station entrances based on latitude, longitude, and
+radius (meters). Omit search parameters to return all station entrances." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -119,38 +120,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>All WMATA rail stations</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>stations.Rd</code></div>
+    <h1>Rail station entrances</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/entrance.R'><code>R/entrance.R</code></a></small>
+    <div class="hidden name"><code>rail_entrance.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>All WMATA rail stations</p>
+    <p>Returns a list of nearby station entrances based on latitude, longitude, and
+radius (meters). Omit search parameters to return all station entrances.</p>
     </div>
 
-    <pre class="usage"><span class='va'>stations</span></pre>
+    <pre class="usage"><span class='fu'>rail_entrance</span><span class='op'>(</span>lat <span class='op'>=</span> <span class='cn'>NULL</span>, lon <span class='op'>=</span> <span class='cn'>NULL</span>, radius <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>lat</th>
+      <td><p>Center point Latitude.</p></td>
+    </tr>
+    <tr>
+      <th>lon</th>
+      <td><p>Center point Longitude</p></td>
+    </tr>
+    <tr>
+      <th>radius</th>
+      <td><p>Radius (meters) to include in the search area. If <code>NULL</code>, while
+<code>lat</code> and <code>lon</code> are supplied, all stations are returned.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A data frame with 95 rows and 10 variables:</p><dl>
-<dt>station</dt><dd><p>Station code.</p></dd>
-<dt>name</dt><dd><p>Station name.</p></dd>
-<dt>txfer</dt><dd><p>For stations with multiple platforms, the additional code.</p></dd>
-<dt>lines</dt><dd><p>Vector of line codes services by station.</p></dd>
-<dt>lat</dt><dd><p>Latitude.</p></dd>
-<dt>lon</dt><dd><p>Longitude.</p></dd>
-<dt>street</dt><dd><p>Street address (for GPS use).</p></dd>
-<dt>city</dt><dd><p>City.</p></dd>
-<dt>state</dt><dd><p>State (abbreviated).</p></dd>
-<dt>zip</dt><dd><p>Zip code.</p></dd>
-...
-
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p><a href='https://api.wmata.com/Rail.svc/json/jStations'>https://api.wmata.com/Rail.svc/json/jStations</a></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

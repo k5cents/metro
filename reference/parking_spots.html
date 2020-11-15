@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All WMATA rail stations — stations • metro</title>
+<title>Parking information at Metro stations — parking_spots • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="All WMATA rail stations — stations" />
-<meta property="og:description" content="All WMATA rail stations" />
+<meta property="og:title" content="Parking information at Metro stations — parking_spots" />
+<meta property="og:description" content="Parking information at Metro stations" />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -119,38 +119,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>All WMATA rail stations</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>stations.Rd</code></div>
+    <h1>Parking information at Metro stations</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/parking.R'><code>R/parking.R</code></a></small>
+    <div class="hidden name"><code>parking_spots.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>All WMATA rail stations</p>
+    <p>Parking information at Metro stations</p>
     </div>
 
-    <pre class="usage"><span class='va'>stations</span></pre>
+    <pre class="usage"><span class='fu'>parking_spots</span><span class='op'>(</span>line <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
+<span class='fu'>parking_cost</span><span class='op'>(</span>line <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>line</th>
+      <td><p>Two-letter line code abbreviation, see <a href='lines.html'>lines</a> or <code><a href='rail_lines.html'>rail_lines()</a></code>.</p></td>
+    </tr>
+    </table>
 
-    <p>A data frame with 95 rows and 10 variables:</p><dl>
-<dt>station</dt><dd><p>Station code.</p></dd>
-<dt>name</dt><dd><p>Station name.</p></dd>
-<dt>txfer</dt><dd><p>For stations with multiple platforms, the additional code.</p></dd>
-<dt>lines</dt><dd><p>Vector of line codes services by station.</p></dd>
-<dt>lat</dt><dd><p>Latitude.</p></dd>
-<dt>lon</dt><dd><p>Longitude.</p></dd>
-<dt>street</dt><dd><p>Street address (for GPS use).</p></dd>
-<dt>city</dt><dd><p>City.</p></dd>
-<dt>state</dt><dd><p>State (abbreviated).</p></dd>
-<dt>zip</dt><dd><p>Zip code.</p></dd>
-...
-
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p><a href='https://api.wmata.com/Rail.svc/json/jStations'>https://api.wmata.com/Rail.svc/json/jStations</a></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
