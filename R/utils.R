@@ -5,7 +5,7 @@ is_installed <- function(pkg) {
 skip_if_no_key <- function(sys = "WMATA_KEY") {
   key <- Sys.getenv(sys)
   if (!nzchar(key) && is_installed("rvest")) {
-    key <- wmata_demo()
+    # key <- wmata_demo()
   }
   if (!nzchar(key)) {
     testthat::skip("No API key found")
