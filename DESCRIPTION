@@ -18,6 +18,7 @@ BugReports: https://github.com/kiernann/metro/issues
 Depends: 
     R (>= 2.10)
 Imports: 
+    geodist (>= 0.0.6),
     httr (>= 1.4.2),
     jsonlite (>= 1.7.1),
     utils
