@@ -99,9 +99,11 @@
 <div id="key" class="section level2">
 <h2 class="hasAnchor">
 <a href="#key" class="anchor"></a>Key</h2>
-<p>Usage of the WMATA API requires a developer API key. Such a key can be obtained by creating a developer account and subscribing to the default tier, which allows 10 calls per second and full access to all eight APIs.</p>
-<p>The WMATA also provides a demo key which should <strong>not</strong> be used in production. This key is severely rate limited and is subject to change at any time. It is only suitable for trying out the various features of the API. As of November 13, 2020 this is the demo key you can use:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>e13626d03d8e4c03ac07f95541b3091b</span></code></pre></div>
+<p>Usage of the WMATA API requires a developer API key. Such a key can be obtained by creating a developer account and subscribing to the free default tier.</p>
+<p>The WMATA also provides a <a href="https://developer.wmata.com/products/5475f236031f590f380924ff">demo key</a> to try out the various features of the API. This key should <strong>never</strong> be used in production, it is rate limited and subject to change at any time.</p>
+<p>As of 2020-11-14, the demo key can be used like this:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"WMATA_KEY"</span> <span class="op">=</span> <span class="st">"e13626d03d8e4c03ac07f95541b3091b"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -112,20 +114,20 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rail_stations.html">rail_stations</a></span><span class="op">(</span>line <span class="op">=</span> <span class="st">"RD"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 27 x 10</span>
-<span class="co">#&gt;    station name                  txfer lines      lat   lon street             city     state   zip</span>
-<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                 &lt;chr&gt; &lt;list&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt; &lt;int&gt;</span>
-<span class="co">#&gt;  1 A01     Metro Center          C01   &lt;chr [1…  38.9 -77.0 607 13th St. NW    Washing… DC    20005</span>
-<span class="co">#&gt;  2 A02     Farragut North        &lt;NA&gt;  &lt;chr [1…  38.9 -77.0 1001 Connecticut … Washing… DC    20036</span>
-<span class="co">#&gt;  3 A03     Dupont Circle         &lt;NA&gt;  &lt;chr [1…  38.9 -77.0 1525 20th St. NW   Washing… DC    20036</span>
-<span class="co">#&gt;  4 A04     Woodley Park-Zoo/Ada… &lt;NA&gt;  &lt;chr [1…  38.9 -77.1 2700 Connecticut … Washing… DC    20008</span>
-<span class="co">#&gt;  5 A05     Cleveland Park        &lt;NA&gt;  &lt;chr [1…  38.9 -77.1 3599 Connecticut … Washing… DC    20008</span>
-<span class="co">#&gt;  6 A06     Van Ness-UDC          &lt;NA&gt;  &lt;chr [1…  38.9 -77.1 4200 Connecticut … Washing… DC    20008</span>
-<span class="co">#&gt;  7 A07     Tenleytown-AU         &lt;NA&gt;  &lt;chr [1…  38.9 -77.1 4501 Wisconsin Av… Washing… DC    20016</span>
-<span class="co">#&gt;  8 A08     Friendship Heights    &lt;NA&gt;  &lt;chr [1…  39.0 -77.1 5337 Wisconsin Av… Washing… DC    20015</span>
-<span class="co">#&gt;  9 A09     Bethesda              &lt;NA&gt;  &lt;chr [1…  39.0 -77.1 7450 Wisconsin Av… Bethesda MD    20814</span>
-<span class="co">#&gt; 10 A10     Medical Center        &lt;NA&gt;  &lt;chr [1…  39.0 -77.1 8810 Rockville Pi… Bethesda MD    20814</span>
+<span class="co">#&gt;    station name                txfer lines      lat   lon street            city    state   zip</span>
+<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;               &lt;chr&gt; &lt;list&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;   &lt;chr&gt; &lt;int&gt;</span>
+<span class="co">#&gt;  1 A01     Metro Center        C01   &lt;chr [1…  38.9 -77.0 607 13th St. NW   Washin… DC    20005</span>
+<span class="co">#&gt;  2 A02     Farragut North      &lt;NA&gt;  &lt;chr [1…  38.9 -77.0 1001 Connecticut… Washin… DC    20036</span>
+<span class="co">#&gt;  3 A03     Dupont Circle       &lt;NA&gt;  &lt;chr [1…  38.9 -77.0 1525 20th St. NW  Washin… DC    20036</span>
+<span class="co">#&gt;  4 A04     Woodley Park-Zoo/A… &lt;NA&gt;  &lt;chr [1…  38.9 -77.1 2700 Connecticut… Washin… DC    20008</span>
+<span class="co">#&gt;  5 A05     Cleveland Park      &lt;NA&gt;  &lt;chr [1…  38.9 -77.1 3599 Connecticut… Washin… DC    20008</span>
+<span class="co">#&gt;  6 A06     Van Ness-UDC        &lt;NA&gt;  &lt;chr [1…  38.9 -77.1 4200 Connecticut… Washin… DC    20008</span>
+<span class="co">#&gt;  7 A07     Tenleytown-AU       &lt;NA&gt;  &lt;chr [1…  38.9 -77.1 4501 Wisconsin A… Washin… DC    20016</span>
+<span class="co">#&gt;  8 A08     Friendship Heights  &lt;NA&gt;  &lt;chr [1…  39.0 -77.1 5337 Wisconsin A… Washin… DC    20015</span>
+<span class="co">#&gt;  9 A09     Bethesda            &lt;NA&gt;  &lt;chr [1…  39.0 -77.1 7450 Wisconsin A… Bethes… MD    20814</span>
+<span class="co">#&gt; 10 A10     Medical Center      &lt;NA&gt;  &lt;chr [1…  39.0 -77.1 8810 Rockville P… Bethes… MD    20814</span>
 <span class="co">#&gt; # … with 17 more rows</span></code></pre></div>
-<p>Functions that typically return the same data have that data saved as objects.</p>
+<p>Functions that always return the same data have that data saved as objects.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">metro</span><span class="fu">::</span><span class="va"><a href="reference/lines.html">lines</a></span>
 <span class="co">#&gt; # A tibble: 6 x 4</span>
