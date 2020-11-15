@@ -2,6 +2,7 @@
 
 * Add `parking_spots()` and `_cost()`.
 * Add `rail_path()` and `path_distance()`
+* Add `rail_entrance()`
 
 # metro 0.0.1
 
