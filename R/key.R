@@ -6,12 +6,12 @@
 #' [browse_wmata_key()] for more information on getting a key and storing on
 #' your system.
 #'
-#' The WMATA also provides a demonstration key. This key should not be used in
-#' production applications; it is rate limited and subject to change at _any_
-#' time. The key can be found on
+#' The WMATA also provides a demonstration key. This key should **never** be
+#' used in production applications, it is rate limited and subject to change at
+#' _any_ time. The key can be found on
 #' [this page](https://developer.wmata.com/products/5475f236031f590f380924ff).
 #' If the user has the "rvest" package installed, the [wmata_demo()] function
-#' can be used to scape said page and look for the key automatically.
+#' can be used to try scrape said page and look for the key automatically.
 #'
 #' @details
 #' Default tier sufficient for most casual developers. Rate limited to 10
@@ -30,14 +30,13 @@ wmata_key <- function() {
   key <- Sys.getenv("WMATA_KEY", "")
   if (!nzchar(key)) {
     if (is_installed("usethis")) {
-      usethis::ui_stop("no WMATA key found, see \\
+      usethis::ui_oops("no WMATA key found, see \\
                        {usethis::ui_code('browse_wmata_key()')}")
     } else {
       stop("no WMATA key found, see `browse_wmata_key()`")
     }
-  } else {
-    return(key)
   }
+  return(key)
 }
 
 #' @rdname wmata_key
@@ -45,16 +44,16 @@ wmata_key <- function() {
 wmata_demo <- function() {
   if (is_installed("rvest")) {
     a <- "https://developer.wmata.com/products/5475f236031f590f380924ff"
-    b <- httr::content(httr::GET(a))
-    c <- tryCatch(
-      expr = rvest::html_text(rvest::html_nodes(b, ".bg-primary")),
-      error = function(e) return(NULL)
+    tryCatch(
+      error = function(e) {
+        message("no key scraped")
+        return("")
+      },
+      expr = {
+        b <- httr::content(httr::GET(a))
+        rvest::html_text(rvest::html_nodes(b, ".bg-primary"))
+      }
     )
-    if (!is.null(c)) {
-      return(c)
-    } else {
-      stop("No API key was able to be scraped", call. = FALSE)
-    }
   } else {
     stop("The \"rvest\" package needed to scrape demo key", call. = FALSE)
   }

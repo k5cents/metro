@@ -18,12 +18,12 @@ key can be obtained by subscribing to the default tier. See
 \code{\link[=browse_wmata_key]{browse_wmata_key()}} for more information on getting a key and storing on
 your system.
 
-The WMATA also provides a demonstration key. This key should not be used in
-production applications; it is rate limited and subject to change at \emph{any}
-time. The key can be found on
+The WMATA also provides a demonstration key. This key should \strong{never} be
+used in production applications, it is rate limited and subject to change at
+\emph{any} time. The key can be found on
 \href{https://developer.wmata.com/products/5475f236031f590f380924ff}{this page}.
 If the user has the "rvest" package installed, the \code{\link[=wmata_demo]{wmata_demo()}} function
-can be used to scape said page and look for the key automatically.
+can be used to try scrape said page and look for the key automatically.
 }
 \details{
 Default tier sufficient for most casual developers. Rate limited to 10
