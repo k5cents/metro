@@ -1,3 +1,7 @@
+# metro 0.0.3
+
+* Add `rail_times()`.
+
 # metro 0.0.2
 
 * Add `parking_spots()` and `_cost()`.
