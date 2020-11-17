@@ -4,10 +4,12 @@
 \alias{wmata_api}
 \title{Call the WMATA API}
 \usage{
-wmata_api(path, query = NULL)
+wmata_api(type = c("Rail", "Bus"), endpoint, query = NULL)
 }
 \arguments{
-\item{path}{The API endpoint path, passed to \code{\link[httr:modify_url]{httr::modify_url()}}.}
+\item{type}{The API base type to call, one of "Rail" or "Bus".}
+
+\item{endpoint}{The API endpoint (e.g., "jStations").}
 
 \item{query}{Additional queries also passed, possibly your key if need be.}
 }
@@ -25,7 +27,7 @@ This function was modified from zamorarr's wmata on GitHub:
 }
 \examples{
 \dontrun{
-wmata_api("/Rail.svc/json/jLines", query = list(LineCode = "RD"))
+wmata_api("Rail", "jLines", query = list(LineCode = "RD"))
 }
 }
 \keyword{internal}

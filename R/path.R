@@ -12,7 +12,7 @@
 #' @export
 rail_path <- function(from, to) {
   json <- wmata_api(
-    path = "Rail.svc/json/jPath",
+    type = "Rail", endpoint = "jPath",
     query = list(FromStationCode = from, ToStationCode = to)
   )
   df <- jsonlite::fromJSON(json, simplifyVector = TRUE)[[1]]

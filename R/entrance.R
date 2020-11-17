@@ -14,7 +14,7 @@
 #' @export
 rail_entrance <- function(lat = NULL, lon = NULL, radius = NULL) {
   coord <- list(Lat = lat, Lon = lon, Radius = radius)
-  json <- wmata_api("Rail.svc/json/jStationEntrances", query = coord)
+  json <- wmata_api("Rail", "jStationEntrances", query = coord)
   df <- jsonlite::fromJSON(json, flatten = TRUE)
   if (length(df[[1]]) == 0) {
     warning("no entrances found within your radius, please expand")

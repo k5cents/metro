@@ -6,7 +6,7 @@
 #' @importFrom utils type.convert
 #' @export
 parking_spots <- function(line = NULL) {
-  json <- wmata_api("Rail.svc/json/jStationParking", list(LineCode = line))
+  json <- wmata_api("Rail", "jStationParking", list(LineCode = line))
   df <- jsonlite::fromJSON(json, flatten = TRUE)
   df <- type.convert(df$StationsParking, na.strings = "", as.is = TRUE)
   out <- rbind(
@@ -22,7 +22,7 @@ parking_spots <- function(line = NULL) {
 #' @importFrom utils type.convert
 #' @export
 parking_cost <- function(line = NULL) {
-  json <- wmata_api("Rail.svc/json/jStationParking", list(LineCode = line))
+  json <- wmata_api("Rail", "jStationParking", list(LineCode = line))
   df <- jsonlite::fromJSON(json, flatten = TRUE)
   df <- type.convert(df$StationsParking, na.strings = "", as.is = TRUE)
   all_day <- data.frame(

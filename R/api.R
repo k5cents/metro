@@ -6,19 +6,22 @@
 #'
 #' This function was modified from zamorarr's wmata on GitHub:
 #' <https://github.com/zamorarr/wmata/blob/master/R/api.r>
-#' @param path The API endpoint path, passed to [httr::modify_url()].
+#' @param type The API base type to call, one of "Rail" or "Bus".
+#' @param endpoint The API endpoint (e.g., "jStations").
 #' @param query Additional queries also passed, possibly your key if need be.
 #' @return A single JSON string.
 #' @examples
 #' \dontrun{
-#' wmata_api("/Rail.svc/json/jLines", query = list(LineCode = "RD"))
+#' wmata_api("Rail", "jLines", query = list(LineCode = "RD"))
 #' }
 #' @importFrom httr modify_url GET add_headers http_type content http_error
 #'   status_code
 #' @importFrom jsonlite fromJSON
 #' @keywords internal
-wmata_api <- function(path, query = NULL) {
-  stopifnot(length(path) == 1L)
+wmata_api <- function(type = c("Rail", "Bus"), endpoint, query = NULL) {
+  type <- match.arg(type)
+  stopifnot(length(endpoint) == 1L)
+  path <- paste0(type, ".svc/json/", endpoint)
   api <- httr::modify_url("https://api.wmata.com", path = path, query = query)
   request <- httr::add_headers(
     `api_key` = wmata_key(),
