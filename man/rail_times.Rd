@@ -4,14 +4,12 @@
 \alias{rail_times}
 \title{Rail station times}
 \usage{
-rail_times(station = NULL, dates = TRUE, numeric = FALSE)
+rail_times(station = NULL, dates = TRUE)
 }
 \arguments{
 \item{station}{Station code, see \link{stations} or \code{\link[=rail_stations]{rail_stations()}}.}
 
 \item{dates}{Should daily hours be converted to dates for current week?}
-
-\item{numeric}{Should times be converted to doubles? (e.g., 09:30 to 9.5)}
 }
 \description{
 Returns opening and scheduled first/last train times based on a given

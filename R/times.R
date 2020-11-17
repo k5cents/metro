@@ -9,14 +9,10 @@
 #' the full set of train times at such stations.
 #' @param station Station code, see [stations] or [rail_stations()].
 #' @param dates Should daily hours be converted to dates for current week?
-#' @param numeric Should times be converted to doubles? (e.g., 09:30 to 9.5)
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble tibble as_tibble
 #' @export
-rail_times <- function(station = NULL, dates = TRUE, numeric = FALSE) {
-  if (dates && numeric) {
-    stop("chose one of weekly dates or numeric, not both")
-  }
+rail_times <- function(station = NULL, dates = TRUE) {
   json <- wmata_api("Rail", "jStationTimes", list(StationCode = station))
   df <- jsonlite::fromJSON(json, simplifyDataFrame = TRUE)[[1]]
   out <- rep(list(NA), 7)
@@ -53,20 +49,8 @@ rail_times <- function(station = NULL, dates = TRUE, numeric = FALSE) {
         as.POSIXct(paste(ds, t))
       }
     )
-  } else if (numeric) {
-    out[c(2, 5:6)] <- lapply(out[c(2, 5:6)], time_hours)
   }
   return(out)
-}
-
-time_hours <- function(x) {
-  is_na <- is.na(x)
-  x[is_na] <- "99:99"
-  x <- lapply(strsplit(x, ":"), as.numeric)
-  min <- round(sapply(x, `[[`, 2)/60, digits = 2)
-  hour <- min + sapply(x, `[[`, 1)
-  hour[is_na] <- NA
-  hour
 }
 
 wdays <- factor(
