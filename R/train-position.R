@@ -23,7 +23,7 @@ train_positions <- function() {
    )
    json <- content(response, as = "text")
    df <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
-   names(df) <- c("id", "numner", "cars", "direction", "circuit",
+   names(df) <- c("id", "number", "cars", "direction", "circuit",
                   "dest", "line", "dwell", "normal")
    df$normal <- df$normal == "Normal"
    df$direction <- c("NS", "EW")[df$direction]
