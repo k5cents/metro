@@ -10,6 +10,9 @@
     <loc>https://kiernann.com/metro/reference/parking_spots.html</loc>
   </url>
   <url>
+    <loc>https://kiernann.com/metro/reference/rail_destination.html</loc>
+  </url>
+  <url>
     <loc>https://kiernann.com/metro/reference/rail_entrance.html</loc>
   </url>
   <url>
@@ -26,6 +29,9 @@
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/stations.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/reference/train_positions.html</loc>
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/wmata_api.html</loc>

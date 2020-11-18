@@ -56,7 +56,8 @@ used in production applications, it is rate limited and subject to change at
 any time. The key can be found on
 this page.
 If the user has the &quot;rvest&quot; package installed, the wmata_demo() function
-can be used to try scrape said page and look for the key automatically." />
+can be used to try scrape said page and look for the key automatically.
+The wmata_validate() function can be used to verify a key is valid." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -144,14 +145,25 @@ used in production applications, it is rate limited and subject to change at
 <a href='https://developer.wmata.com/products/5475f236031f590f380924ff'>this page</a>.
 If the user has the "rvest" package installed, the <code>wmata_demo()</code> function
 can be used to try scrape said page and look for the key automatically.</p>
+<p>The <code>wmata_validate()</code> function can be used to verify a key is valid.</p>
     </div>
 
     <pre class="usage"><span class='fu'>wmata_key</span><span class='op'>(</span><span class='op'>)</span>
 
 <span class='fu'>wmata_demo</span><span class='op'>(</span><span class='op'>)</span>
 
+<span class='fu'>wmata_validate</span><span class='op'>(</span>key <span class='op'>=</span> <span class='fu'>wmata_key</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+
 <span class='fu'>browse_wmata_key</span><span class='op'>(</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>key</th>
+      <td><p>A WMATA API key to validate, defaults to <code>wamta_key()</code>.</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 

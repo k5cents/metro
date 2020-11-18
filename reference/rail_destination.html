@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • metro</title>
+<title>Station to station — rail_destination • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,11 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Station to station — rail_destination" />
+<meta property="og:description" content="Returns a distance, fare information, and estimated travel time between any
+two stations, including those on different lines. Omit both parameters to
+retrieve data for all stations. Omit one parameter to return all combinations
+to or from the provided station." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -66,7 +70,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -116,102 +120,47 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Station to station</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/dest.R'><code>R/dest.R</code></a></small>
+    <div class="hidden name"><code>rail_destination.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Returns a distance, fare information, and estimated travel time between any
+two stations, including those on different lines. Omit both parameters to
+retrieve data for all stations. Omit one parameter to return all combinations
+to or from the provided station.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>rail_destination</span><span class='op'>(</span>from <span class='op'>=</span> <span class='cn'>NULL</span>, to <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="lines.html">lines</a></code> </p>
-        </td>
-        <td><p>All WMATA rail lines</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="parking_spots.html">parking_spots()</a></code> <code><a href="parking_spots.html">parking_cost()</a></code> </p>
-        </td>
-        <td><p>Parking information at Metro stations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rail_destination.html">rail_destination()</a></code> </p>
-        </td>
-        <td><p>Station to station</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rail_entrance.html">rail_entrance()</a></code> </p>
-        </td>
-        <td><p>Rail station entrances</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rail_lines.html">rail_lines()</a></code> </p>
-        </td>
-        <td><p>Metro rail lines</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rail_path.html">rail_path()</a></code> <code><a href="rail_path.html">path_distance()</a></code> </p>
-        </td>
-        <td><p>Path between rail stations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rail_stations.html">rail_stations()</a></code> </p>
-        </td>
-        <td><p>Metro rail stations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rail_times.html">rail_times()</a></code> </p>
-        </td>
-        <td><p>Rail station times</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stations.html">stations</a></code> </p>
-        </td>
-        <td><p>All WMATA rail stations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="train_positions.html">train_positions()</a></code> </p>
-        </td>
-        <td><p>Live train position</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="wmata_key.html">wmata_key()</a></code> <code><a href="wmata_key.html">wmata_demo()</a></code> <code><a href="wmata_key.html">wmata_validate()</a></code> <code><a href="wmata_key.html">browse_wmata_key()</a></code> </p>
-        </td>
-        <td><p>Find a WMATA API key</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>from</th>
+      <td><p>Station code for the origin station.</p></td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td><p>Station code for the destination station.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+<ul>
+<li><p><code>peak_fee</code>: Fare during peak times (weekdays from opening to 9:30 AM and
+3-7 PM, and weekends from midnight to closing).</p></li>
+<li><p><code>off_fee</code>: Fare during off-peak times.</p></li>
+<li><p><code>min_fee</code>: Reduced fare for senior citizens or people with disabilities.</p></li>
+</ul>
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
