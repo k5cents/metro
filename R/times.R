@@ -10,35 +10,20 @@
 #' @param station Station code, see [stations] or [rail_stations()].
 #' @param dates Should daily hours be converted to dates for current week?
 #' @importFrom jsonlite fromJSON
-#' @importFrom tibble tibble as_tibble
+#' @importFrom tibble tibble as_tibble add_column rownames_to_column
 #' @export
 rail_times <- function(station = NULL, dates = TRUE) {
   json <- wmata_api("Rail", "jStationTimes", list(StationCode = station))
   df <- jsonlite::fromJSON(json, simplifyDataFrame = TRUE)[[1]]
   out <- rep(list(NA), 7)
   for (i in 1:7) {
-    j <- 1 + 2
-    first <- df[[j]]$FirstTrains
-    last <- df[[j]]$LastTrains
-    c <- rep(list(NA), length(first))
-    for (k in seq_along(c)) {
-      if (nrow(first[[k]]) == 0 | nrow(last[[k]]) == 0) {
-        next
-      }
-      aa <- tibble::tibble(dest = first[[k]][[2]], first = first[[k]][[1]])
-      bb <- tibble::tibble(dest = last[[k]][[2]], last = last[[k]][[1]])
-      cc <- merge(aa, bb, all = TRUE)
-      c[[k]] <- tibble::tibble(
-        station = df$Code[k],
-        open = df[[j]][[1]][k],
-        dest = cc$dest,
-        day = wdays[i],
-        cc[2:3]
-      )
-    }
-    out[[i]] <- tibble::as_tibble(do.call(rbind, c))
+    j <- i + 2
+    f <- day_times(df[[j]]$FirstTrains, df$Code, "first", df[[j]]$OpeningTime)
+    l <- day_times(df[[j]]$LastTrains,  df$Code, "last",  df[[j]]$OpeningTime)
+    fl <- merge(x = f, y = l, all = TRUE)
+    out[[i]] <- tibble::add_column(fl, day = wdays[i], .after = "dest")
   }
-  out <- do.call(rbind, out)
+  out <- tibble::as_tibble(do.call(rbind, out))
   if (dates) {
     offset <- as.Date(1 - 4, origin = "1970-01-01")
     last_mon <- 7 * floor(as.numeric(Sys.Date() - 1 + 4) / 7) + offset
@@ -58,3 +43,13 @@ wdays <- factor(
   labels = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"),
   ordered = TRUE
 )
+
+day_times <- function(b, rname, type = c("first", "last"), open = NULL) {
+  names(b) <- rname
+  o <- data.frame(station = rname, open = open, stringsAsFactors = FALSE)
+  f <- tibble::rownames_to_column(do.call(rbind, b), var = "station")
+  f$station <- gsub("\\.\\d+", "",  f$station)
+  f <- merge(f, o, sort = FALSE)
+  names(f)[2:3] <- c(type, "dest")
+  f[, c(1, 4, 3, 2)]
+}
