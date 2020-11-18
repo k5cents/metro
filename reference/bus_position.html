@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Station to station — rail_destination • metro</title>
+<title>Bus position — bus_position • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,9 @@
 
 
 
-<meta property="og:title" content="Station to station — rail_destination" />
-<meta property="og:description" content="Returns a distance, fare information, and estimated travel time between any
-two stations, including those on different lines. Omit both parameters to
-retrieve data for all stations. Omit one parameter to return all combinations
-to or from the provided station." />
+<meta property="og:title" content="Bus position — bus_position" />
+<meta property="og:description" content="Returns bus positions for the given route, with an optional search radius. If
+no parameters are specified, all bus positions are returned." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -122,43 +120,65 @@ to or from the provided station." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Station to station</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/train-dest.R'><code>R/train-dest.R</code></a></small>
-    <div class="hidden name"><code>rail_destination.Rd</code></div>
+    <h1>Bus position</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/bus-position.R'><code>R/bus-position.R</code></a></small>
+    <div class="hidden name"><code>bus_position.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns a distance, fare information, and estimated travel time between any
-two stations, including those on different lines. Omit both parameters to
-retrieve data for all stations. Omit one parameter to return all combinations
-to or from the provided station.</p>
+    <p>Returns bus positions for the given route, with an optional search radius. If
+no parameters are specified, all bus positions are returned.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rail_destination</span><span class='op'>(</span>from <span class='op'>=</span> <span class='cn'>NULL</span>, to <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bus_position</span><span class='op'>(</span>route <span class='op'>=</span> <span class='cn'>NULL</span>, lat <span class='op'>=</span> <span class='cn'>NULL</span>, lon <span class='op'>=</span> <span class='cn'>NULL</span>, radius <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>from</th>
-      <td><p>Station code for the origin station.</p></td>
+      <th>route</th>
+      <td><p>Base bus route, e.g.: 70, 10A.</p></td>
     </tr>
     <tr>
-      <th>to</th>
-      <td><p>Station code for the destination station.</p></td>
+      <th>lat</th>
+      <td><p>Center point Latitude.</p></td>
+    </tr>
+    <tr>
+      <th>lon</th>
+      <td><p>Center point Longitude.</p></td>
+    </tr>
+    <tr>
+      <th>radius</th>
+      <td><p>Meters to include in the search area for <code>lat</code> and <code>lon</code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A tibble with 13 variables:</p><dl>
+<dt>vehicle</dt><dd><p>Unique identifier. Usually visible on the bus itself.</p></dd>
+<dt>lat</dt><dd><p>Last reported Latitude of the bus.</p></dd>
+<dt>lon</dt><dd><p>Last reported Longitude of the bus.</p></dd>
+<dt>dist</dt><dd><p>Distance in meters from provided coordinates.</p></dd>
+<dt>deviation</dt><dd><p>Deviation, in minutes, from schedule.</p></dd>
+<dt>time</dt><dd><p>Date and time (EST) of last position update.</p></dd>
+<dt>trip</dt><dd><p>Unique trip ID. Used with the schedule-related functions.</p></dd>
+<dt>route</dt><dd><p>Base route name as shown on the bus.</p></dd>
+<dt>direction</dt><dd><p>General direction of the trip, not the bus itself</p></dd>
+<dt>head</dt><dd><p>Destination of the bus.</p></dd>
+<dt>start</dt><dd><p>Scheduled start time (EST) of the bus's current trip.</p></dd>
+<dt>end</dt><dd><p>Scheduled end time (EST) of the bus's current trip.</p></dd>
+<dt>block</dt><dd><p></p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='https://api.wmata.com/Bus.svc/json/jBusPositions'>https://api.wmata.com/Bus.svc/json/jBusPositions</a></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<ul>
-<li><p><code>peak_fee</code>: Fare during peak times (weekdays from opening to 9:30 AM and
-3-7 PM, and weekends from midnight to closing).</p></li>
-<li><p><code>off_fee</code>: Fare during off-peak times.</p></li>
-<li><p><code>min_fee</code>: Reduced fare for senior citizens or people with disabilities.</p></li>
-</ul>
-
+    <p>Note that the <code>route</code> parameter accepts only base route names and no
+variations, i.e.: use 10A instead of 10Av1 or 10Av2.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
