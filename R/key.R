@@ -13,6 +13,8 @@
 #' If the user has the "rvest" package installed, the [wmata_demo()] function
 #' can be used to try scrape said page and look for the key automatically.
 #'
+#' The [wmata_validate()] function can be used to verify a key is valid.
+#'
 #' @details
 #' Default tier sufficient for most casual developers. Rate limited to 10
 #' calls/second and 50,000 calls per day. This product contains 8 APIs:
@@ -57,6 +59,20 @@ wmata_demo <- function() {
   } else {
     stop("The \"rvest\" package needed to scrape demo key", call. = FALSE)
   }
+}
+
+#' @rdname wmata_key
+#' @param key A WMATA API key to validate, defaults to [wamta_key()].
+#' @export
+wmata_validate <- function(key = wmata_key()) {
+  api <- "https://api.wmata.com/Misc/Validate"
+  request <- httr::add_headers(
+    `api_key` = wmata_key(),
+    `Content-Type` = "application/json",
+    `Accept` = "application/json"
+  )
+  response <- httr::GET(api, config = request)
+  !httr::http_error(response)
 }
 
 #' @rdname wmata_key

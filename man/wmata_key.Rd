@@ -3,6 +3,7 @@
 \name{wmata_key}
 \alias{wmata_key}
 \alias{wmata_demo}
+\alias{wmata_validate}
 \alias{browse_wmata_key}
 \title{Find a WMATA API key}
 \usage{
@@ -10,7 +11,12 @@ wmata_key()
 
 wmata_demo()
 
+wmata_validate(key = wmata_key())
+
 browse_wmata_key()
+}
+\arguments{
+\item{key}{A WMATA API key to validate, defaults to \code{\link[=wamta_key]{wamta_key()}}.}
 }
 \description{
 All calls to the WMATA API must be accompanied by a personal API key. A free
@@ -24,6 +30,8 @@ used in production applications, it is rate limited and subject to change at
 \href{https://developer.wmata.com/products/5475f236031f590f380924ff}{this page}.
 If the user has the "rvest" package installed, the \code{\link[=wmata_demo]{wmata_demo()}} function
 can be used to try scrape said page and look for the key automatically.
+
+The \code{\link[=wmata_validate]{wmata_validate()}} function can be used to verify a key is valid.
 }
 \details{
 Default tier sufficient for most casual developers. Rate limited to 10

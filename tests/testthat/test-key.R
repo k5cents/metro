@@ -24,3 +24,7 @@ test_that("demo can be scraped with rvest", {
   expect_length(key, 1)
   expect_type(key, "character")
 })
+
+test_that("key can be validated", {
+  expect_true(wmata_validate(Sys.getenv("WMATA_KEY")))
+})
