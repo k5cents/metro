@@ -3,6 +3,7 @@
 export(browse_wmata_key)
 export(bus_path)
 export(bus_position)
+export(bus_routes)
 export(parking_cost)
 export(parking_spots)
 export(path_distance)
