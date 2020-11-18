@@ -16,7 +16,7 @@ wmata_validate(key = wmata_key())
 browse_wmata_key()
 }
 \arguments{
-\item{key}{A WMATA API key to validate, defaults to \code{\link[=wamta_key]{wamta_key()}}.}
+\item{key}{A WMATA API key to validate, defaults to \code{wamta_key()}.}
 }
 \description{
 All calls to the WMATA API must be accompanied by a personal API key. A free

@@ -62,7 +62,7 @@ wmata_demo <- function() {
 }
 
 #' @rdname wmata_key
-#' @param key A WMATA API key to validate, defaults to [wamta_key()].
+#' @param key A WMATA API key to validate, defaults to `wamta_key()`.
 #' @export
 wmata_validate <- function(key = wmata_key()) {
   api <- "https://api.wmata.com/Misc/Validate"
