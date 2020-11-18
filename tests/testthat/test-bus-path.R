@@ -1,4 +1,6 @@
 test_that("multiplication works", {
+  skip_if_no_key()
+  Sys.sleep(0.1)
   p <- bus_path("10A")
   expect_type(p, "list")
   expect_length(p, 4)
