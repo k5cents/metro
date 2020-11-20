@@ -1,4 +1,4 @@
-test_that("multiplication works", {
+test_that("bus paths return list of shapes and stop", {
   skip_if_no_key()
   Sys.sleep(0.1)
   p <- bus_path("10A")
