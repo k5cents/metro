@@ -23,9 +23,9 @@ this location.}
 bus_departs(stop = NULL, date = NULL)
 }
 \arguments{
-\item{date}{Date for which to retrieve route and stop information.}
+\item{stop}{7-digit regional stop ID.}
 
-\item{route}{7-digit regional stop ID.}
+\item{date}{Date for which to retrieve route and stop information.}
 }
 \description{
 Returns schedules for a given route variant for a given date.

@@ -14,7 +14,7 @@
 #'   \item{end_time}{Scheduled end date and time (EST) for this trip.}
 #' }
 #' @source <https://api.wmata.com/Bus.svc/json/jRouteSchedule>
-#' @param route 7-digit regional stop ID.
+#' @param stop 7-digit regional stop ID.
 #' @param date Date for which to retrieve route and stop information.
 #' @export
 bus_departs <- function(stop = NULL, date = NULL) {
