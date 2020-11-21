@@ -18,7 +18,8 @@
 #'   status_code
 #' @importFrom jsonlite fromJSON
 #' @keywords internal
-wmata_api <- function(type = c("Rail", "Bus"), endpoint, query = NULL) {
+wmata_api <- function(type = c("Rail", "Bus", "Incidents"), endpoint,
+                      query = NULL) {
   type <- match.arg(type)
   stopifnot(length(endpoint) == 1L)
   path <- paste0(type, ".svc/json/", endpoint)
