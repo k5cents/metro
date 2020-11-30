@@ -7,6 +7,7 @@
 #' Please refer to [this page](https://developer.wmata.com/TrainPositionsFAQ)
 #' for additional details.
 #'
+#' @importFrom httr GET content add_headers
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble
 #' @export
@@ -21,7 +22,7 @@ train_positions <- function() {
      config = request,
      query = list(contentType = "json")
    )
-   json <- content(response, as = "text")
+   json <- httr::content(response, as = "text")
    df <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
    names(df) <- c("id", "number", "cars", "direction", "circuit",
                   "dest", "line", "dwell", "normal")
