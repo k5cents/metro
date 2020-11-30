@@ -4,7 +4,11 @@
 \alias{wmata_api}
 \title{Call the WMATA API}
 \usage{
-wmata_api(type = c("Rail", "Bus", "Incidents"), endpoint, query = NULL)
+wmata_api(
+  type = c("Rail", "Bus", "Incidents", "NextBusService", "StationPrediction"),
+  endpoint,
+  query = NULL
+)
 }
 \arguments{
 \item{type}{The API base type to call, one of "Rail" or "Bus".}
