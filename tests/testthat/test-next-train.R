@@ -1,0 +1,32 @@
+test_that("all next trains from null", {
+  skip_if_no_key()
+  Sys.sleep(0.1)
+  n <- next_train(NULL)
+  expect_s3_class(n, "data.frame")
+  expect_length(n, 9)
+  expect_gt(length(unique(n$station)), 1)
+  expect_type(n$min, "integer")
+  expect_type(n$cars, "integer")
+})
+
+test_that("next trains from one station", {
+  skip_if_no_key()
+  Sys.sleep(0.1)
+  n <- next_train("A08")
+  expect_s3_class(n, "data.frame")
+  expect_length(n, 9)
+  expect_equal(length(unique(n$station)), 1)
+  expect_type(n$min, "integer")
+  expect_type(n$cars, "integer")
+})
+
+test_that("next trains from multiple stations", {
+  skip_if_no_key()
+  Sys.sleep(0.1)
+  n <- next_train(stations$station[1:3])
+  expect_s3_class(n, "data.frame")
+  expect_length(n, 9)
+  expect_equal(length(unique(n$station)), 3)
+  expect_type(n$min, "integer")
+  expect_type(n$cars, "integer")
+})
