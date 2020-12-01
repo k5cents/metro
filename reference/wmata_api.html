@@ -132,7 +132,11 @@ JSON string. This function is used in others devoted to a
 specific APIs and endpoints.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>wmata_api</span><span class='op'>(</span>type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Rail"</span>, <span class='st'>"Bus"</span><span class='op'>)</span>, <span class='va'>endpoint</span>, query <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>wmata_api</span><span class='op'>(</span>
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Rail"</span>, <span class='st'>"Bus"</span>, <span class='st'>"Incidents"</span>, <span class='st'>"NextBusService"</span>, <span class='st'>"StationPrediction"</span><span class='op'>)</span>,
+  <span class='va'>endpoint</span>,
+  query <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -7,6 +7,9 @@
     <loc>https://kiernann.com/metro/reference/bus_departs.html</loc>
   </url>
   <url>
+    <loc>https://kiernann.com/metro/reference/bus_incidents.html</loc>
+  </url>
+  <url>
     <loc>https://kiernann.com/metro/reference/bus_path.html</loc>
   </url>
   <url>
@@ -22,7 +25,16 @@
     <loc>https://kiernann.com/metro/reference/bus_stops.html</loc>
   </url>
   <url>
+    <loc>https://kiernann.com/metro/reference/elevator_incidents.html</loc>
+  </url>
+  <url>
     <loc>https://kiernann.com/metro/reference/lines.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/reference/next_bus.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/reference/next_train.html</loc>
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/parking_spots.html</loc>
@@ -32,6 +44,9 @@
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/rail_entrance.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/reference/rail_incidents.html</loc>
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/rail_lines.html</loc>
@@ -46,7 +61,13 @@
     <loc>https://kiernann.com/metro/reference/rail_times.html</loc>
   </url>
   <url>
+    <loc>https://kiernann.com/metro/reference/standard_routes.html</loc>
+  </url>
+  <url>
     <loc>https://kiernann.com/metro/reference/stations.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/reference/track_circuits.html</loc>
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/train_positions.html</loc>
