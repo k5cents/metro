@@ -1,5 +1,9 @@
 test_that("API errors for a bad path", {
-  expect_error(wmata_api("Rail", path = ""))
+  expect_error(wmata_api("Rail", endpoint = ""))
+})
+
+test_that("API errors with message", {
+  expect_error(next_train(station = "XXX"))
 })
 
 test_that("API returns JSON for a proper path", {
