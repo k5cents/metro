@@ -1,6 +1,6 @@
 Package: metro
 Title: Washington Metropolitan Area Transit Authority API
-Version: 0.0.3
+Version: 1.0.0
 Authors@R: 
     person(given = "Kiernan",
            family = "Nicholls",

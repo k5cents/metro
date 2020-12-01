@@ -1,3 +1,9 @@
+# metro 1.0.0
+
+* [All API JSON endpoints](https://developer.wmata.com/docs/services/) are 
+covered as tidy data frames (#1). Buses stops, train stations, next bus or
+trains, incidents, paths, routes, circuits.
+
 # metro 0.0.3
 
 * Add `rail_times()`.
