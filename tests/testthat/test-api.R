@@ -8,7 +8,7 @@ test_that("API errors with message", {
 
 test_that("API returns JSON for a proper path", {
   skip_if_no_key()
-  Sys.sleep(0.5)
+  Sys.sleep(0.11)
   x <- wmata_api("Rail", "jLines")
   expect_length(x, 1)
 })

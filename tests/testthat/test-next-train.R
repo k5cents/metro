@@ -1,6 +1,6 @@
 test_that("all next trains from null", {
   skip_if_no_key()
-  Sys.sleep(0.1)
+  Sys.sleep(0.11)
   n <- next_train(NULL)
   expect_s3_class(n, "data.frame")
   expect_length(n, 9)
@@ -11,7 +11,7 @@ test_that("all next trains from null", {
 
 test_that("next trains from one station", {
   skip_if_no_key()
-  Sys.sleep(0.1)
+  Sys.sleep(0.11)
   n <- next_train("A08")
   expect_s3_class(n, "data.frame")
   expect_length(n, 9)
@@ -22,7 +22,7 @@ test_that("next trains from one station", {
 
 test_that("next trains from multiple stations", {
   skip_if_no_key()
-  Sys.sleep(0.1)
+  Sys.sleep(0.11)
   n <- next_train(stations$station[1:3])
   expect_s3_class(n, "data.frame")
   expect_length(n, 9)
