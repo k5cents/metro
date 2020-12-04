@@ -7,7 +7,7 @@
 #' Note that for stations with multiple platforms (e.g.: Metro Center, L'Enfant
 #' Plaza, etc.), a distinct call is required for each `station` to retrieve
 #' the full set of train times at such stations.
-#' @param station Station code, see [stations] or [rail_stations()].
+#' @param station Station code, see [metro_stations] or [rail_stations()].
 #' @param dates Should daily hours be converted to dates for current week?
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble tibble as_tibble add_column rownames_to_column

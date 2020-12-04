@@ -7,7 +7,7 @@
 rail_times(station = NULL, dates = TRUE)
 }
 \arguments{
-\item{station}{Station code, see \link{stations} or \code{\link[=rail_stations]{rail_stations()}}.}
+\item{station}{Station code, see \link{metro_stations} or \code{\link[=rail_stations]{rail_stations()}}.}
 
 \item{dates}{Should daily hours be converted to dates for current week?}
 }

@@ -41,7 +41,7 @@ try out the various features of the API. This key should **never** be
 used in production, it is rate limited and subject to change at any
 time.
 
-As of 2020-11-14, the demo key can be used like this:
+As of December 2020, the demo key can be used like this:
 
 ``` r
 Sys.setenv("WMATA_KEY" = "e13626d03d8e4c03ac07f95541b3091b")
@@ -53,40 +53,59 @@ Sys.setenv("WMATA_KEY" = "e13626d03d8e4c03ac07f95541b3091b")
 library(metro)
 ```
 
-All functions return data frames for easy analysis.
+Functions return data frames for easy analysis.
 
 ``` r
 rail_stations(line = "RD")
-#> # A tibble: 27 x 10
-#>    station name                txfer lines      lat   lon street            city    state   zip
-#>    <chr>   <chr>               <chr> <list>   <dbl> <dbl> <chr>             <chr>   <chr> <int>
-#>  1 A01     Metro Center        C01   <chr [1…  38.9 -77.0 607 13th St. NW   Washin… DC    20005
-#>  2 A02     Farragut North      <NA>  <chr [1…  38.9 -77.0 1001 Connecticut… Washin… DC    20036
-#>  3 A03     Dupont Circle       <NA>  <chr [1…  38.9 -77.0 1525 20th St. NW  Washin… DC    20036
-#>  4 A04     Woodley Park-Zoo/A… <NA>  <chr [1…  38.9 -77.1 2700 Connecticut… Washin… DC    20008
-#>  5 A05     Cleveland Park      <NA>  <chr [1…  38.9 -77.1 3599 Connecticut… Washin… DC    20008
-#>  6 A06     Van Ness-UDC        <NA>  <chr [1…  38.9 -77.1 4200 Connecticut… Washin… DC    20008
-#>  7 A07     Tenleytown-AU       <NA>  <chr [1…  38.9 -77.1 4501 Wisconsin A… Washin… DC    20016
-#>  8 A08     Friendship Heights  <NA>  <chr [1…  39.0 -77.1 5337 Wisconsin A… Washin… DC    20015
-#>  9 A09     Bethesda            <NA>  <chr [1…  39.0 -77.1 7450 Wisconsin A… Bethes… MD    20814
-#> 10 A10     Medical Center      <NA>  <chr [1…  39.0 -77.1 8810 Rockville P… Bethes… MD    20814
-#> # … with 17 more rows
 ```
+
+    #> # A tibble: 27 x 8
+    #>    station name                         lat   lon street                  city      state   zip
+    #>    <chr>   <chr>                      <dbl> <dbl> <chr>                   <chr>     <chr> <int>
+    #>  1 A01     Metro Center                38.9 -77.0 607 13th St. NW         Washingt… DC    20005
+    #>  2 A02     Farragut North              38.9 -77.0 1001 Connecticut Avenu… Washingt… DC    20036
+    #>  3 A03     Dupont Circle               38.9 -77.0 1525 20th St. NW        Washingt… DC    20036
+    #>  4 A04     Woodley Park-Zoo/Adams Mo…  38.9 -77.1 2700 Connecticut Ave.,… Washingt… DC    20008
+    #>  5 A05     Cleveland Park              38.9 -77.1 3599 Connecticut Avenu… Washingt… DC    20008
+    #>  6 A06     Van Ness-UDC                38.9 -77.1 4200 Connecticut Avenu… Washingt… DC    20008
+    #>  7 A07     Tenleytown-AU               38.9 -77.1 4501 Wisconsin Avenue … Washingt… DC    20016
+    #>  8 A08     Friendship Heights          39.0 -77.1 5337 Wisconsin Avenue … Washingt… DC    20015
+    #>  9 A09     Bethesda                    39.0 -77.1 7450 Wisconsin Avenue   Bethesda  MD    20814
+    #> 10 A10     Medical Center              39.0 -77.1 8810 Rockville Pike     Bethesda  MD    20814
+    #> # … with 17 more rows
+
+Dates and locations often assume the user is in the Washington area.
+
+``` r
+rail_entrance(lat = 38.8979, lon = -77.0365, radius = 500)
+```
+
+    #> # A tibble: 3 x 5
+    #>   station   lat   lon distance name                                
+    #>   <chr>   <dbl> <dbl>    <dbl> <chr>                               
+    #> 1 C02      38.9 -77.0     379. WEST ENTRANCE (VERMONT & I STs)     
+    #> 2 C03      38.9 -77.0     422. EAST ENTRANCE (EAST OF 17th & I STs)
+    #> 3 C02      38.9 -77.0     499. EAST ENTRANCE (14TH & I STs)
 
 Functions that always return the same data have that data saved as
 objects.
 
 ``` r
-metro::lines
-#> # A tibble: 6 x 4
-#>   line  name   start end  
-#>   <chr> <chr>  <chr> <chr>
-#> 1 BL    Blue   J03   G05  
-#> 2 GR    Green  F11   E10  
-#> 3 OR    Orange K08   D13  
-#> 4 RD    Red    A15   B11  
-#> 5 SV    Silver N06   G05  
-#> 6 YL    Yellow C15   E06
+metro_stops # bus_stops() for live
+#> # A tibble: 9,074 x 5
+#>    stop    name                                  lon   lat routes    
+#>    <chr>   <chr>                               <dbl> <dbl> <list>    
+#>  1 2000474 UNIVERSITY BLVD W + HEMINGWAY CT    -77.0  39.0 <chr [6]> 
+#>  2 2000475 UNIVERSITY BLVD W + INWOOD AVE      -77.0  39.0 <chr [6]> 
+#>  3 2000477 UNIVERSITY BLVD W + SLIGO CREEK PKY -77.0  39.0 <chr [2]> 
+#>  4 2000479 LOCKWOOD DR + NORTHWEST DR          -77.0  39.0 <chr [10]>
+#>  5 2000480 UNIVERSITY BLVD W + SLIGO CREEK PKY -77.0  39.0 <chr [6]> 
+#>  6 2000481 LOCKWOOD DR + NORTHWEST DR          -77.0  39.0 <chr [9]> 
+#>  7 2000483 NEW HAMPSHIRE AVE + NORTHWEST DR    -77.0  39.0 <chr [4]> 
+#>  8 2000486 FALLS RD + ELDWICK WAY              -77.2  39.0 <chr [1]> 
+#>  9 2000487 UNIVERSITY BLVD W + EASECREST DR    -77.0  39.0 <chr [6]> 
+#> 10 2000488 UNIVERSITY BLVD W + EASECREST DR    -77.0  39.0 <chr [2]> 
+#> # … with 9,064 more rows
 ```
 
 <!-- refs: start -->

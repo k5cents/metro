@@ -27,5 +27,5 @@ The \code{line_code} takes one of these two-letter codes:
 \item YL = Yellow
 }
 
-The result of this endpoint is saved as the \link{stations} object.
+The result of this endpoint is saved as the \link{metro_stations} object.
 }

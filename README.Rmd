@@ -52,7 +52,7 @@ The WMATA also provides a [demo key][demo] to try out the various features of
 the API. This key should **never** be used in production, it is rate limited and
 subject to change at any time.
 
-As of 2020-11-14, the demo key can be used like this:
+As of December 2020, the demo key can be used like this:
 
 ```{r key}
 Sys.setenv("WMATA_KEY" = "e13626d03d8e4c03ac07f95541b3091b")
@@ -64,16 +64,34 @@ Sys.setenv("WMATA_KEY" = "e13626d03d8e4c03ac07f95541b3091b")
 library(metro)
 ```
 
-All functions return data frames for easy analysis.
+Functions return data frames for easy analysis.
 
-```{r stations}
+```{r eval=FALSE}
 rail_stations(line = "RD")
+```
+
+```{r echo=FALSE}
+rail_stations(line = "RD")[, c(-3, -4)]
+```
+
+Dates and locations often assume the user is in the Washington area.
+
+```{r eval=FALSE}
+rail_entrance(lat = 38.8979, lon = -77.0365, radius = 500)
+```
+
+```{r echo=FALSE}
+rail_entrance(
+  lat = 38.897957, 
+  lon = -77.036560, 
+  radius = 500
+)[, -5]
 ```
 
 Functions that always return the same data have that data saved as objects.
 
 ```{r lines}
-metro::lines
+metro_stops # bus_stops() for live
 ```
 
 <!-- refs: start -->

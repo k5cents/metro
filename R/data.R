@@ -15,7 +15,7 @@
 #'   ...
 #' }
 #' @source <https://api.wmata.com/Rail.svc/json/jStations>
-"stations"
+"metro_stations"
 
 #' All WMATA rail lines
 #'
@@ -28,4 +28,32 @@
 #'   ...
 #' }
 #' @source <https://api.wmata.com/Rail.svc/json/jLines>
-"lines"
+"metro_lines"
+
+#' All WMATA bus routes
+#'
+#' @format A data frame with 325 rows and 3 variables:
+#' \describe{
+#'   \item{route}{Unique identifier for a given route variant.}
+#'   \item{name}{Descriptive name of the route variant.}
+#'   \item{description}{Denotes the route variant’s grouping – lines are a
+#'   combination of routes which lie in the same corridor and which have
+#'   significant portions of their paths along the same roadways.}
+#'   ...
+#' }
+#' @source <https://api.wmata.com/Bus.svc/json/jRoutes>
+"metro_routes"
+
+#' All WMATA bus stops
+#'
+#' @format A data frame with 9,074 rows and 5 variables:
+#' \describe{
+#'   \item{stop}{Bus stop ID}
+#'   \item{name}{Bus stop name}
+#'   \item{lon}{Latitude.}
+#'   \item{lat}{Longitude.}
+#'   \item{routes}{Chracter vector of routes services by stop.}
+#'   ...
+#' }
+#' @source <https://api.wmata.com/Bus.svc/json/jStops>
+"metro_stops"

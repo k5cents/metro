@@ -14,7 +14,7 @@
 #' * SV = Silver
 #' * YL = Yellow
 #'
-#' The result of this endpoint is saved as the [stations] object.
+#' The result of this endpoint is saved as the [metro_stations] object.
 #' @param line Two-letter line code abbreviation, see Details or [rail_lines()].
 #'   If `NULL`, (the default) all stations are returned.
 #' @importFrom jsonlite fromJSON
