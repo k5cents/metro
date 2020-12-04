@@ -28,7 +28,16 @@
     <loc>https://kiernann.com/metro/reference/elevator_incidents.html</loc>
   </url>
   <url>
-    <loc>https://kiernann.com/metro/reference/lines.html</loc>
+    <loc>https://kiernann.com/metro/reference/metro_lines.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/reference/metro_routes.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/reference/metro_stations.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/reference/metro_stops.html</loc>
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/next_bus.html</loc>
@@ -62,9 +71,6 @@
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/standard_routes.html</loc>
-  </url>
-  <url>
-    <loc>https://kiernann.com/metro/reference/stations.html</loc>
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/track_circuits.html</loc>

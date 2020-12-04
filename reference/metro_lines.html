@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Metro rail stations — rail_stations • metro</title>
+<title>All WMATA rail lines — metro_lines • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,8 @@
 
 
 
-<meta property="og:title" content="Metro rail stations — rail_stations" />
-<meta property="og:description" content="The stations on a Metro rail line, including the full names and geographic
-locations. The four big transfer stations have two station code designations,
-one for each track direction. All the lines running through each station
-are listed in a single list-column." />
+<meta property="og:title" content="All WMATA rail lines — metro_lines" />
+<meta property="og:description" content="All WMATA rail lines" />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -122,42 +119,32 @@ are listed in a single list-column." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Metro rail stations</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/train-stations.R'><code>R/train-stations.R</code></a></small>
-    <div class="hidden name"><code>rail_stations.Rd</code></div>
+    <h1>All WMATA rail lines</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>metro_lines.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The stations on a Metro rail line, including the full names and geographic
-locations. The four big transfer stations have two station code designations,
-one for each track direction. All the lines running through each station
-are listed in a single list-column.</p>
+    <p>All WMATA rail lines</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rail_stations</span><span class='op'>(</span>line <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='va'>metro_lines</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>line</th>
-      <td><p>Two-letter line code abbreviation, see Details or <code><a href='rail_lines.html'>rail_lines()</a></code>.
-If <code>NULL</code>, (the default) all stations are returned.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>The <code>line_code</code> takes one of these two-letter codes:</p><ul>
-<li><p>BL = Blue</p></li>
-<li><p>GR = Green</p></li>
-<li><p>OR = Orange</p></li>
-<li><p>RD = Red</p></li>
-<li><p>SV = Silver</p></li>
-<li><p>YL = Yellow</p></li>
-</ul>
+    <p>A data frame with 95 rows and 10 variables:</p><dl>
+<dt>line</dt><dd><p>Two-letter abbreviation for the line.</p></dd>
+<dt>name</dt><dd><p>Full name of line color.</p></dd>
+<dt>start</dt><dd><p>Start station code.</p></dd>
+<dt>end</dt><dd><p>End station code.</p></dd>
+...
 
-<p>The result of this endpoint is saved as the <a href='metro_stations.html'>metro_stations</a> object.</p>
+</dl>
+
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='https://api.wmata.com/Rail.svc/json/jLines'>https://api.wmata.com/Rail.svc/json/jLines</a></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
