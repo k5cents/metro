@@ -21,9 +21,6 @@ A tibble with 13 variables:
 \item{block}{}
 }
 }
-\source{
-\url{https://api.wmata.com/Bus.svc/json/jBusPositions}
-}
 \usage{
 bus_position(route = NULL, lat = NULL, lon = NULL, radius = 1000)
 }

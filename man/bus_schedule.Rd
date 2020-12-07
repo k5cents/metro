@@ -18,9 +18,6 @@ A tibble with 10 variables:
 \item{stop_time}{Scheduled departure date and time (EST) from this stop.}
 }
 }
-\source{
-\url{https://api.wmata.com/Bus.svc/json/jRouteSchedule}
-}
 \usage{
 bus_schedule(route = NULL, variants = TRUE, date = NULL)
 }

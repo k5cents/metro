@@ -13,9 +13,6 @@ combination of routes which lie in the same corridor and which have
 significant portions of their paths along the same roadways.}
 }
 }
-\source{
-\url{https://api.wmata.com/Bus.svc/json/jRoutes}
-}
 \usage{
 bus_routes()
 }

@@ -17,9 +17,6 @@ A tibble with 9 variables:
 \item{cars}{Number of cars on a train, usually 6 or 8.}
 }
 }
-\source{
-\url{https://api.wmata.com/StationPrediction.svc/json/GetPrediction/}
-}
 \usage{
 next_train(station = NULL)
 }

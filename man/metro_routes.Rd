@@ -15,9 +15,6 @@ significant portions of their paths along the same roadways.}
 ...
 }
 }
-\source{
-\url{https://api.wmata.com/Bus.svc/json/jRoutes}
-}
 \usage{
 metro_routes
 }

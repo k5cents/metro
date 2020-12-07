@@ -21,7 +21,6 @@
 #'   \item{end}{Scheduled end time (EST) of the bus's current trip.}
 #'   \item{block}{}
 #' }
-#' @source <https://api.wmata.com/Bus.svc/json/jBusPositions>
 #' @param route Base bus route, e.g.: 70, 10A.
 #' @param lat Center point Latitude.
 #' @param lon Center point Longitude.

@@ -20,9 +20,6 @@ A data frame with 95 rows and 10 variables:
 ...
 }
 }
-\source{
-\url{https://api.wmata.com/Rail.svc/json/jStations}
-}
 \usage{
 metro_stations
 }

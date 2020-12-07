@@ -13,7 +13,6 @@
 #'   \item{start_time}{Scheduled start date and time (EST) for this trip.}
 #'   \item{end_time}{Scheduled end date and time (EST) for this trip.}
 #' }
-#' @source <https://api.wmata.com/Bus.svc/json/jRouteSchedule>
 #' @param stop 7-digit regional stop ID.
 #' @param date Date for which to retrieve route and stop information.
 #' @export

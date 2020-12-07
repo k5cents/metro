@@ -16,9 +16,6 @@ signifies that the buses are traveling in opposite directions.}
 \item{trip}{Trip identifier.}
 }
 }
-\source{
-\url{https://api.wmata.com/NextBusService.svc/json/jPredictions}
-}
 \usage{
 next_bus(stop = NULL)
 }

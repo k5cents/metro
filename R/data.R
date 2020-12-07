@@ -14,7 +14,6 @@
 #'   \item{zip}{Zip code.}
 #'   ...
 #' }
-#' @source <https://api.wmata.com/Rail.svc/json/jStations>
 "metro_stations"
 
 #' All WMATA rail lines
@@ -27,7 +26,6 @@
 #'   \item{end}{End station code.}
 #'   ...
 #' }
-#' @source <https://api.wmata.com/Rail.svc/json/jLines>
 "metro_lines"
 
 #' All WMATA bus routes
@@ -41,7 +39,6 @@
 #'   significant portions of their paths along the same roadways.}
 #'   ...
 #' }
-#' @source <https://api.wmata.com/Bus.svc/json/jRoutes>
 "metro_routes"
 
 #' All WMATA bus stops
@@ -55,5 +52,4 @@
 #'   \item{routes}{Chracter vector of routes services by stop.}
 #'   ...
 #' }
-#' @source <https://api.wmata.com/Bus.svc/json/jStops>
 "metro_stops"

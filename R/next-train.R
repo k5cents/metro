@@ -24,7 +24,6 @@
 #'   \item{line}{Two-letter abbreviation for the line}
 #'   \item{cars}{Number of cars on a train, usually 6 or 8.}
 #' }
-#' @source <https://api.wmata.com/StationPrediction.svc/json/GetPrediction/>
 #' @param station Character vector of station names or `NULL` for all.
 #' @export
 next_train <- function(station = NULL) {

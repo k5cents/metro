@@ -11,7 +11,6 @@
 #'   \item{shape}{The coordinate path of the line in both directions.}
 #'   \item{stops}{The coordinates of stops on a given line.}
 #' }
-#' @source <https://api.wmata.com/Bus.svc/json/jRouteDetails>
 #' @param route Bus route variant, e.g.: 70, 10A, 10Av1.
 #' @param date Date for which to retrieve route and stop information.
 #' @export

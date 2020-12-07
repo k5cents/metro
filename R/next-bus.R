@@ -13,7 +13,6 @@
 #'   \item{vehicle}{Bus identifier.}
 #'   \item{trip}{Trip identifier.}
 #' }
-#' @source <https://api.wmata.com/NextBusService.svc/json/jPredictions>
 #' @param stop 7-digit regional stop ID.
 #' @export
 next_bus <- function(stop = NULL) {

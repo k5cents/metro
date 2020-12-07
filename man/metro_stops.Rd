@@ -15,9 +15,6 @@ A data frame with 9,074 rows and 5 variables:
 ...
 }
 }
-\source{
-\url{https://api.wmata.com/Bus.svc/json/jStops}
-}
 \usage{
 metro_stops
 }

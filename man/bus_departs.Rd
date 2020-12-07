@@ -16,9 +16,6 @@ this location.}
 \item{end_time}{Scheduled end date and time (EST) for this trip.}
 }
 }
-\source{
-\url{https://api.wmata.com/Bus.svc/json/jRouteSchedule}
-}
 \usage{
 bus_departs(stop = NULL, date = NULL)
 }

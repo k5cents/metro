@@ -3,9 +3,6 @@
 \name{elevator_incidents}
 \alias{elevator_incidents}
 \title{Bus incidents}
-\source{
-\url{https://api.wmata.com/Incidents.svc/json/ElevatorIncidents}
-}
 \usage{
 elevator_incidents(station = NULL)
 }

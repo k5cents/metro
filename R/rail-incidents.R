@@ -3,7 +3,6 @@
 #' Returns reported rail incidents (significant disruptions and delays to normal
 #' service). The data is identical to WMATA's Metrorail Service Status feed.
 #'
-#' @source <https://api.wmata.com/Incidents.svc/json/Incidents>
 #' @export
 rail_incidents <- function() {
   json <- wmata_api(type = "Incidents", endpoint = "Incidents")

@@ -15,7 +15,6 @@
 #'   \item{stop_name}{Stop name. May be different from what is displayed.}
 #'   \item{stop_time}{Scheduled departure date and time (EST) from this stop.}
 #' }
-#' @source <https://api.wmata.com/Bus.svc/json/jRouteSchedule>
 #' @param route Bus route variant, e.g.: 70, 10A, 10Av1, etc.
 #' @param date Date for which to retrieve route and stop information.
 #' @param variants Should variations of `route` be included?. For example, if

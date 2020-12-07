@@ -12,9 +12,6 @@ A list with 4 elements:
 \item{stops}{The coordinates of stops on a given line.}
 }
 }
-\source{
-\url{https://api.wmata.com/Bus.svc/json/jRouteDetails}
-}
 \usage{
 bus_path(route = NULL, date = NULL)
 }

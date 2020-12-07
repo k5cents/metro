@@ -3,9 +3,6 @@
 \name{rail_incidents}
 \alias{rail_incidents}
 \title{Rail incidents}
-\source{
-\url{https://api.wmata.com/Incidents.svc/json/Incidents}
-}
 \usage{
 rail_incidents()
 }

@@ -6,7 +6,6 @@
 #' (e.g.: Metro Center, L'Enfant Plaza, etc.), a distinct call is required for
 #' each code.
 #' @param station Station code. Omit to return all reported outages (default).
-#' @source <https://api.wmata.com/Incidents.svc/json/ElevatorIncidents>
 #' @export
 elevator_incidents <- function(station = NULL) {
   json <- wmata_api(
