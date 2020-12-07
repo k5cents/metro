@@ -26,5 +26,6 @@ test_that("demo can be scraped with rvest", {
 })
 
 test_that("key can be validated", {
+  skip_if_no_key()
   expect_true(wmata_validate(Sys.getenv("WMATA_KEY")))
 })
