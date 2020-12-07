@@ -11,7 +11,7 @@ A data frame with 9,074 rows and 5 variables:
 \item{name}{Bus stop name}
 \item{lon}{Latitude.}
 \item{lat}{Longitude.}
-\item{routes}{Chracter vector of routes services by stop.}
+\item{routes}{Character vector of routes services by stop.}
 ...
 }
 }

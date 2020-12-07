@@ -49,7 +49,7 @@
 #'   \item{name}{Bus stop name}
 #'   \item{lon}{Latitude.}
 #'   \item{lat}{Longitude.}
-#'   \item{routes}{Chracter vector of routes services by stop.}
+#'   \item{routes}{Character vector of routes services by stop.}
 #'   ...
 #' }
 "metro_stops"

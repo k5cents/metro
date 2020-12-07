@@ -10,7 +10,7 @@
 #'   \item{lon}{Latitude.}
 #'   \item{lat}{Longitude.}
 #'   \item{distance}{Distance in meters from provided coordinates.}
-#'   \item{routes}{Chracter vector of routes services by stop.}
+#'   \item{routes}{Character vector of routes services by stop.}
 #' }
 #' @param lat Center point Latitude.
 #' @param lon Center point Longitude

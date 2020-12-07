@@ -7,13 +7,14 @@ Authors@R:
            role = c("aut", "cre"),
            email = "kiernann@protonmail.com")
 Description: The WMATA (Washington Metropolitan Area Transit
-    Authority) is the government agency that opperates the lightrail and
-    passenger busses of the Washington D.C. area. The WMATA provides a
-    free API that can be used to access rail station information, trail
-    locations, and arrival predictions. This data is returned as tidy data
-    frames for easy analysis in R.
+    Authority) is the government agency that operates the light rail and
+    passenger buses of the Washington D.C. area. The WMATA provides a
+    free API that can be used to access JSON rail station information,
+    train locations, and arrival predictions. This data is returned as
+    tidy data frames for easy analysis in R.
 License: GPL-3
-URL: https://github.com/kiernann/metro
+URL: https://github.com/kiernann/metro,
+  https://kiernann.com/metro/
 BugReports: https://github.com/kiernann/metro/issues
 Depends: 
     R (>= 2.10)
@@ -28,8 +29,10 @@ Suggests:
     crayon (>= 1.3.4),
     rvest (>= 0.3.6),
     testthat (>= 3.0.0),
-    usethis (>= 1.6.3)
+    usethis (>= 1.6.3),
+    spelling
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Language: en-US

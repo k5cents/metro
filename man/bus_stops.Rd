@@ -11,7 +11,7 @@ A tibble with 6 variables:
 \item{lon}{Latitude.}
 \item{lat}{Longitude.}
 \item{distance}{Distance in meters from provided coordinates.}
-\item{routes}{Chracter vector of routes services by stop.}
+\item{routes}{Character vector of routes services by stop.}
 }
 }
 \usage{
