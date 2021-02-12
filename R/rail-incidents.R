@@ -25,6 +25,6 @@ empty_incidents <- data.frame(
   incident = character(),
   type = character(),
   lines = character(),
-  updated = as.Date(character()),
+  updated = as.POSIXct(character()),
   description = character()
 )
