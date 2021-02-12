@@ -4,6 +4,6 @@ test_that("bus paths return list of shapes and stop", {
   p <- bus_path("10A")
   expect_type(p, "list")
   expect_length(p, 4)
-  expect_s3_class(p$shape, "data.frame")
-  expect_s3_class(p$stops, "data.frame")
+  expect_s3_class(p$ShapePoint, "data.frame")
+  expect_s3_class(p$Stops, "data.frame")
 })

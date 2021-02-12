@@ -19,3 +19,8 @@ api_time <- function(x) {
   attr(out, "tzone") <- "UTC"
   out
 }
+
+merge2 <- function (x, y, ...) {
+  out <- merge(x, y, sort = FALSE, ...)[, union(names(x), names(y))]
+  tibble::as_tibble(out)
+}

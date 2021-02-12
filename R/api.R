@@ -4,12 +4,11 @@
 #' JSON string. This function is used in others devoted to a
 #' specific APIs and endpoints.
 #'
-#' This function was modified from zamorarr's wmata on GitHub:
+#' This function was modified from 'zamorarr/wmata' on GitHub:
 #' <https://github.com/zamorarr/wmata/blob/master/R/api.r>
 #' @param type The API base type to call, one of "Rail" or "Bus".
 #' @param endpoint The API endpoint (e.g., "jStations").
 #' @param query Additional queries also passed, possibly your key if need be.
-#' @return A single JSON string.
 #' @examples
 #' \dontrun{
 #' wmata_api("Rail", "jLines", query = list(LineCode = "RD"))
@@ -18,6 +17,7 @@
 #'   status_code
 #' @importFrom jsonlite fromJSON
 #' @keywords internal
+#' @return A single JSON string.
 wmata_api <- function(type = c("Rail", "Bus", "Incidents", "NextBusService",
                                "StationPrediction"), endpoint, query = NULL) {
   type <- match.arg(type)

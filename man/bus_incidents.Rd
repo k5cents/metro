@@ -2,13 +2,13 @@
 % Please edit documentation in R/bus-incidents.R
 \name{bus_incidents}
 \alias{bus_incidents}
-\title{Bus incidents}
+\title{Bus Incidents}
 \usage{
 bus_incidents(route = NULL)
 }
 \arguments{
-\item{route}{Base bus route; variations are not recognized. Omit the Route to
-return all reported items (default).}
+\item{route}{(Optional) Bus route. Use full route code, i.e.: C2 instead of
+C2v1, C2v2, etc. Omit the Route to return all reported items (default).}
 }
 \description{
 Returns a set of reported bus incidents/delays for a given Route.
@@ -17,3 +17,7 @@ Returns a set of reported bus incidents/delays for a given Route.
 Note that the Route parameter accepts only base route names and no
 variations, i.e.: use 10A instead of 10Av1 and 10Av2.
 }
+\seealso{
+\url{https://developer.wmata.com/docs/services/54763641281d83086473f232/operations/54763641281d830c946a3d75}
+}
+\concept{Incidents}

@@ -2,7 +2,7 @@
 #'
 #' Returns a set of buses scheduled at a stop for a given date.
 #'
-#' @format A tibble with 13 variables:
+#' @format A tibble with 1 row per bus departure and 13 variables:
 #' \describe{
 #'   \item{RouteID}{Bus route variant identifier (pattern). This variant can be
 #'   used in several other bus methods which accept variants. Note that
@@ -18,19 +18,22 @@
 #'   \item{StartTime}{Scheduled start date and time (UTC) for this trip.}
 #'   \item{EndTime}{Scheduled end date and time (UTC) for this trip.}
 #' }
-#' @param stop 7-digit regional stop ID.
-#' @param date (Optional) Date for which to retrieve route and stop information.
+#' @param StopID 7-digit regional stop ID.
+#' @param Date (Optional) Date for which to retrieve route and stop information.
 #' @examples
 #' \dontrun{
 #' bus_departs(2000474, "2021-02-16")
 #' }
-#' @family Bus Route and Stop Methods
+#' @return Data frame containing scheduled arrival information
 #' @seealso <https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6c/console>
+#' @family Bus Route and Stop Methods
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble
 #' @export
-bus_departs <- function(stop, date = NULL) {
+bus_departs <- function(StopID, Date = NULL) {
   json <- wmata_api(
     type = "Bus", endpoint = "jStopSchedule",
-    query = list(StopID = stop, Date = date)
+    query = list(StopID = StopID, Date = Date)
   )
   dat <- jsonlite::fromJSON(json, flatten = TRUE)[[2]]
   dat <- dat[, c(5, 1, 8, 6:7, 3:4)]

@@ -4,7 +4,7 @@
 \alias{bus_departs}
 \title{Bus Route and Stop Methods}
 \format{
-A tibble with 13 variables:
+A tibble with 1 row per bus departure and 13 variables:
 \describe{
 \item{RouteID}{Bus route variant identifier (pattern). This variant can be
 used in several other bus methods which accept variants. Note that
@@ -22,12 +22,15 @@ EAST, WEST).}
 }
 }
 \usage{
-bus_departs(stop, date = NULL)
+bus_departs(StopID, Date = NULL)
 }
 \arguments{
-\item{stop}{7-digit regional stop ID.}
+\item{StopID}{7-digit regional stop ID.}
 
-\item{date}{(Optional) Date for which to retrieve route and stop information.}
+\item{Date}{(Optional) Date for which to retrieve route and stop information.}
+}
+\value{
+Data frame containing scheduled arrival information
 }
 \description{
 Returns a set of buses scheduled at a stop for a given date.
@@ -39,5 +42,12 @@ bus_departs(2000474, "2021-02-16")
 }
 \seealso{
 \url{https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6c/console}
+
+Other Bus Route and Stop Methods: 
+\code{\link{bus_path}()},
+\code{\link{bus_position}()},
+\code{\link{bus_routes}()},
+\code{\link{bus_schedule}()},
+\code{\link{bus_stops}()}
 }
 \concept{Bus Route and Stop Methods}

@@ -1,74 +1,74 @@
-#' Bus route and stop methods
+#' Bus Schedule
 #'
 #' Returns schedules for a given route variant for a given date.
 #'
-#' @format A tibble with 10 variables:
+#' @format A data frame with 1 row per trip and 10 variables:
 #' \describe{
-#'   \item{route_id}{The bus route ID}
-#'   \item{direction}{General route direction}
-#'   \item{trip_head}{Destination of the bus.}
-#'   \item{trip_id}{Trip identifier.}
-#'   \item{start_time}{Scheduled start date and time (EST) for this trip.}
-#'   \item{end_time}{Scheduled end date and time (EST) for this trip.}
-#'   \item{stop_seq}{Order of the stop in the sequence of StopTimes.}
-#'   \item{stop_id}{7-digit regional ID. If unavailable, 0 or NULL.}
-#'   \item{stop_name}{Stop name. May be different from what is displayed.}
-#'   \item{stop_time}{Scheduled departure date and time (EST) from this stop.}
+#'   \item{RouteID}{Bus route variant. This can be used in several other bus
+#'   methods which accept variants.}
+#'   \item{TripDirectionText}{General direction of the trip (NORTH, SOUTH, EAST,
+#'   WEST, LOOP, etc.).}
+#'   \item{TripHeadsign}{Descriptive text of where the bus is headed. This is
+#'   similar, but not necessarily identical, to what is displayed on the bus.}
+#'   \item{StartTime}{Scheduled start date and time (UTC) for this trip.}
+#'   \item{EndTime}{Scheduled end date and time (UTC) for this trip.}
+#'   \item{TripID}{Unique trip ID. This can be correlated with the data returned
+#'   from the schedule-related methods.}
+#'   \item{StopID}{7-digit regional ID which can be used in various bus-related
+#'   methods. If unavailable, the `StopID` will be 0 or `NA`}
+#'   \item{StopName}{Stop name. May be slightly different from what is spoken or
+#'   displayed in the bus.}
+#'   \item{StopSeq}{Order of the stop in the sequence of StopTimes.}
+#'   \item{Time}{Scheduled departure date and time (UTC) from this stop.}
 #' }
-#' @param route Bus route variant, e.g.: 70, 10A, 10Av1, etc.
-#' @param date Date for which to retrieve route and stop information.
-#' @param variants Should variations of `route` be included?. For example, if
-#'   B30 is specified and `TRUE` (default), data for all variations of B30 such
-#'   as B30v1, B30v2, etc. will be returned.
+#' @param RouteID Bus route variant, e.g.: 70, 10A, 10Av1, etc.
+#' @param Date (Optional) Date for which to retrieve route and stop information.
+#' @param IncludingVariations Whether or not to include variations if a base
+#'   route is specified in RouteID. For example, if B30 is specified and
+#'   `IncludingVariations` is set to `TRUE` (default), data for all variations
+#'   of B30 such as B30v1, B30v2, etc. will be returned.
+#' @examples
+#' \dontrun{
+#' bus_schedule("10A")
+#' }
+#' @return Data frame containing trip information
+#' @seealso <https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6b>
+#' @family Bus Route and Stop Methods
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble add_column as_tibble
 #' @export
-bus_schedule <- function(route = NULL, variants = TRUE, date = NULL) {
+bus_schedule <- function(RouteID, IncludingVariations = TRUE,
+                         Date = NULL) {
   json <- wmata_api(
     type = "Bus", endpoint = "jRouteSchedule",
     query = list(
-      RouteID = route, Date = date,
-      IncludingVariations = variants
+      RouteID = RouteID, Date = Date,
+      IncludingVariations = IncludingVariations
     )
   )
-  df <- jsonlite::fromJSON(json, flatten = TRUE)
-  dir0_stops <- df$Direction0$StopTimes
-  names(dir0_stops) <- df$Direction0$TripID
+  dat <- jsonlite::fromJSON(json, flatten = TRUE)
+  dir0_stops <- dat$Direction0$StopTimes
+  names(dir0_stops) <- dat$Direction0$TripID
   dir0_stops <- do.call(rbind, dir0_stops)
   dir0_stops <- tibble::add_column(
     .data = dir0_stops, .before = 1,
     TripID = gsub("\\.\\d+", "", rownames(dir0_stops))
   )
-  df$Direction0 <- merge2(df$Direction0[, -7], dir0_stops)
-  if (!is.null(df$Direction1)) {
-    dir1_stops <- df$Direction1$StopTimes
-    names(dir1_stops) <- df$Direction1$TripID
+  dat$Direction0 <- merge2(dat$Direction0[, -7], dir0_stops)
+  if (!is.null(dat$Direction1)) {
+    dir1_stops <- dat$Direction1$StopTimes
+    names(dir1_stops) <- dat$Direction1$TripID
     dir1_stops <- do.call(rbind, dir1_stops)
     dir1_stops <- tibble::add_column(
       .data = dir1_stops, .before = 1,
       TripID = gsub("\\.\\d+", "", rownames(dir1_stops))
     )
-    df$Direction1 <- merge2(df$Direction1[, -7], dir0_stops)
-    df <- rbind(df$Direction0, df$Direction1)
+    dat$Direction1 <- merge2(dat$Direction1[, -7], dir0_stops)
+    dat <- rbind(dat$Direction0, dat$Direction1)
   } else {
-    df <- df$Direction0
+    dat <- dat$Direction0
   }
-  df[, c(5:6, 11)] <- lapply(df[, c(5:6, 11)], api_time)
-  df <- df[, c(1, 3:4, 7, 5:6, 10, 8:9, 11)]
-  names(df) <- snake_case(names(df))
-  names(df)[c(2:3, 10)] <- c("direction", "trip_head", "stop_time")
-  return(df)
-}
-
-merge2 <- function (x, y, ...) {
-  out <- merge(x, y, sort = FALSE, ...)[, union(names(x), names(y))]
-  tibble::as_tibble(out)
-}
-
-snake_case <- function(x) {
-  # from https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/snake-case.R
-  s <- gsub("\\.", "_", x)
-  s <- gsub("(.)([A-Z][a-z]+)", "\\1_\\2", s)
-  s <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", s))
-  s <- gsub(" ", "_", s)
-  s <- gsub("__", "_", s)
-  return(s)
+  dat[, c(5:6, 11)] <- lapply(dat[, c(5:6, 11)], api_time)
+  dat <- dat[, -2] # DirectionNum Deprecated
+  tibble::as_tibble(dat)
 }

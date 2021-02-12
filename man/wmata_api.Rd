@@ -26,7 +26,7 @@ JSON string. This function is used in others devoted to a
 specific APIs and endpoints.
 }
 \details{
-This function was modified from zamorarr's wmata on GitHub:
+This function was modified from 'zamorarr/wmata' on GitHub:
 \url{https://github.com/zamorarr/wmata/blob/master/R/api.r}
 }
 \examples{
