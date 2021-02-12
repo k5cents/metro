@@ -27,7 +27,7 @@ test_that("all entrances returned without radius", {
   expect_length(s, 6)
   expect_s3_class(s, "data.frame")
   expect_false(any(is.na(s$distance)))
-  expect_equal(nrow(s), 9074) # all
+  expect_gt(nrow(s), 9000) # all
 })
 
 test_that("distances not returned without coordinates", {
