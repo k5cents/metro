@@ -10,7 +10,6 @@
 #' @importFrom geodist geodist
 #' @importFrom tibble as_tibble add_column
 #' @importFrom jsonlite fromJSON
-#' @importFrom utils type.convert
 #' @export
 rail_entrance <- function(lat = NULL, lon = NULL, radius = NULL) {
   coord <- list(Lat = lat, Lon = lon, Radius = radius)
@@ -20,7 +19,11 @@ rail_entrance <- function(lat = NULL, lon = NULL, radius = NULL) {
     warning("no entrances found within your radius, please expand")
     return(empty_entrance)
   }
-  df <- type.convert(df[[1]][, c(3, 6:7, 5, 2)], na.strings = "", as.is = TRUE)
+  df <- utils::type.convert(
+    x = df[[1]][, c(3, 6:7, 5, 2)],
+    na.strings = "",
+    as.is = TRUE
+  )
   dist <- if (is.null(lat) || is.null(lon)) {
     NA_real_
   } else {

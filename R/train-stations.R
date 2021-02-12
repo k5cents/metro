@@ -19,12 +19,15 @@
 #'   If `NULL`, (the default) all stations are returned.
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble add_column
-#' @importFrom utils type.convert
 #' @export
 rail_stations <- function(line = NULL) {
   json <- wmata_api("Rail", "jStations", list(LineCode = line))
   df <- jsonlite::fromJSON(json, flatten = TRUE)
-  df <- type.convert(df$Stations[, c(-4, -8)], na.strings = "", as.is = TRUE)
+  df <- utils::type.convert(
+    x = df$Stations[, c(-4, -8)],
+    na.strings = "",
+    as.is = TRUE
+  )
   l <- Map(paste, df[4], df[5], df[6])
   l <- strsplit(gsub("\\s?NA\\s?", "", l[[1]]), "\\s")
   df <- tibble::add_column(df[, -(4:6)], lines = l, .after = 3)
