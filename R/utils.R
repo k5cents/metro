@@ -13,3 +13,9 @@ skip_if_no_key <- function(sys = "WMATA_KEY") {
     Sys.setenv("WMATA_KEY" = key)
   }
 }
+
+api_time <- function(x) {
+  out <- as.POSIXct(x, format = "%Y-%m-%dT%H:%M:%S", tz = "EST")
+  attr(out, "tzone") <- "UTC"
+  out
+}

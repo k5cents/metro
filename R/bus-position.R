@@ -49,10 +49,6 @@ bus_position <- function(route = NULL, lat = NULL, lon = NULL, radius = 1000) {
   tibble::as_tibble(df)
 }
 
-api_time <- function(x) {
-  as.POSIXlt(x, format = "%Y-%m-%dT%H:%M:%S")
-}
-
 empty_routes <- data.frame(
   vehicle = character(),
   lat = double(),
