@@ -47,9 +47,6 @@ work.
 \usage{
 train_positions()
 }
-\value{
-
-}
 \description{
 Returns uniquely identifiable trains in service and what track circuits they
 currently occupy. Will return an empty set of results when no positions are

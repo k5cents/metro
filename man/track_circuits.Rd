@@ -13,12 +13,13 @@ respectively.}
 number.}
 \item{Neighbors}{Data frame containing track circuit neighbor information.
 Note that some track circuits have no neighbors in one direction. All track
-circuits have at least one neighbor:
+circuits have at least one neighbor.
 \itemize{
-\item \code{CircuitIds}: Array containing neighboring circuit ids.
 \item \code{NeighborType}: Left or Right neighbor group. Generally speaking, left
 neighbors are to the west and south, while right neighbors are to the
 east/north.
+\item \code{CircuitIds}: Data frame containing neighboring circuit IDs as list
+column.
 }
 }
 }

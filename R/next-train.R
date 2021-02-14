@@ -66,7 +66,6 @@ next_train <- function(StationCodes = NULL) {
     warning("no next trains at this station")
     return(empty_train)
   }
-  dat <- tibble::add_column(dat, Order = seq(nrow(dat)), .before = 1)
   dat$Min[dat$Min == "ARR"] <- 0
   dat$Min[dat$Min == "BRD"] <- -1
   dat$Min[dat$Min == "---" | dat$Min == ""] <- NA
@@ -77,7 +76,6 @@ next_train <- function(StationCodes = NULL) {
 }
 
 empty_train <- tibble::tibble(
-  Order = integer(),
   Car = integer(),
   Destination = character(),
   DestinationCode = character(),

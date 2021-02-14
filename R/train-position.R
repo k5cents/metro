@@ -44,11 +44,11 @@
 #'   * `Unknown`: This often denotes cases with unknown data or work vehicles.
 #'   }
 #' }
+#'
 #' @examples
 #' \dontrun{
 #' train_positions()
 #' }
-#' @return
 #' @seealso <https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/5763fb35f91823096cac1058>
 #' @family Train Positions
 #' @importFrom httr GET content add_headers

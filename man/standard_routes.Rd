@@ -26,7 +26,7 @@ rail-related APIs to retrieve data about a station.
 standard_routes()
 }
 \value{
-
+A nested data frame of track circuits.
 }
 \description{
 Returns an ordered list of mostly revenue (and some lead) track circuits,
