@@ -17,7 +17,7 @@ browse_wmata_key()
 }
 \arguments{
 \item{api_key}{Subscription key which provides access to this API. Found in
-your Profile. Defaults to \code{wamta_key()}.}
+your Profile. Defaults to \code{\link[=wamta_key]{wamta_key()}}.}
 }
 \description{
 All calls to the WMATA API must be accompanied by a personal API key. A free

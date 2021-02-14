@@ -2,26 +2,47 @@
 % Please edit documentation in R/next-bus.R
 \name{next_bus}
 \alias{next_bus}
-\title{Next buses}
+\title{Next Buses}
 \format{
-A tibble with 6 variables:
+A tibble 1 row per arrival with 6 variables:
 \describe{
-\item{route}{Base route name as shown on the bus.}
-\item{direction}{Friendly description of direction and destination.}
-\item{dir_num}{Denotes a binary direction (0 or 1) of the bus. There is no
-specific mapping to direction, but a different value for the same route
-signifies that the buses are traveling in opposite directions.}
-\item{minutes}{Minutes until bus arrival at this stop.}
-\item{vehicle}{Bus identifier.}
-\item{trip}{Trip identifier.}
+\item{RouteID}{Base route name as shown on the bus. This can be used in
+other bus-related methods. Note that all variants will be shown as their
+base route names (i.e.: 10Av1 and 10Av2 will be shown as 10A).}
+\item{DirectionText}{Customer-friendly description of direction and
+destination for a bus.}
+\item{DirectionNum}{Denotes a binary direction (0 or 1) of the bus. There
+is no specific mapping to direction, but a different value for the same
+route signifies that the buses are traveling in opposite directions. Use
+the DirectionText element to show the actual destination of the bus.}
+\item{Minutes}{Minutes until bus arrival at this stop. Numeric value.}
+\item{VehicleID}{Bus identifier. This can be correlated with results
+returned from bus positions.}
+\item{TripID}{Trip identifier. This can be correlated with the data in our
+bus schedule information as well as bus positions.}
 }
 }
 \usage{
-next_bus(stop = NULL)
+next_bus(StopID = NULL)
 }
 \arguments{
-\item{stop}{7-digit regional stop ID.}
+\item{StopID}{7-digit regional stop ID.}
+}
+\value{
+Data frame of bus arrivals
 }
 \description{
 Returns next bus arrival times at a stop.
 }
+\examples{
+\dontrun{
+next_bus(stopID = "1001195")
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/5476365e031f590f38092508/operations/5476365e031f5909e4fe331d}
+
+Other Real-Time Predictions: 
+\code{\link{next_train}()}
+}
+\concept{Real-Time Predictions}

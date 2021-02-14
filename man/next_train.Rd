@@ -2,31 +2,46 @@
 % Please edit documentation in R/next-train.R
 \name{next_train}
 \alias{next_train}
-\title{Next train}
+\title{Next Trains}
 \format{
-A tibble with 9 variables:
+A tibble 1 row per arrival with 9 variables:
 \describe{
-\item{order}{The order in which trains will arrive at the station.}
-\item{station}{Station code for where the train is arriving.}
-\item{name}{Full name of the station where the train is arriving.}
-\item{min}{Minutes until arrival: "ARR" converted to 0 and "BRD" to -1.}
-\item{to_station}{Abbreviated \emph{final} destination for a train.}
-\item{to_name}{Destination station code.}
-\item{group}{Denotes the track this train is on but not Track "1" or "2".}
-\item{line}{Two-letter abbreviation for the line}
-\item{cars}{Number of cars on a train, usually 6 or 8.}
+\item{Car}{Number of cars on a train, usually 6 or 8, but might also \code{NA}.}
+\item{Destination}{Abbreviated version of the final destination for a
+train. This is similar to what is displayed on the signs at stations.}
+\item{DestinationCode}{}Destination station code. Can be \code{NA}. Use this
+value in other rail-related APIs to retrieve data about a station.
+\item{DestinationName}{When \code{DestinationCode} is populated, this is the
+full name of the destination station, as shown on the WMATA website.}
+\item{Group}{Denotes the track this train is on, but does not necessarily
+equate to Track 1 or Track 2. With the exception of terminal stations,
+predictions at the same station with different Group values refer to trains
+on different tracks.}
+\item{Line}{Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,
+or SV). May also be \code{NA} for trains with no passengers.}
+\item{LocationCode}{Station code for where the train is arriving. Useful
+when passing in All as the \code{StationCodes} parameter. Use this value in
+other rail-related APIs to retrieve data about a station.}
+\item{LocationName}{Full name of the station where the train is arriving.
+Useful when passing in "All" as the \code{StationCodes} parameter.}
+\item{Min}{Minutes until arrival. Can be a numeric value, 0 (arriving),
+-1 (boarding), or \code{NA}.}
 }
 }
 \usage{
-next_train(station = NULL)
+next_train(StationCodes = NULL)
 }
 \arguments{
-\item{station}{Character vector of station names or \code{NULL} for all.}
+\item{StationCodes}{Character vector of station codes. For all predictions,
+use \code{NULL} (default) or "All".}
+}
+\value{
+Data frame of train arrivals
 }
 \description{
 Returns next train arrival information for one or more stations. Will return
-an empty set of results when no predictions are available. Use \code{NULL} for the
-\code{station} parameter to return predictions for all stations.
+an empty set of results when no predictions are available. Use All for the
+\code{StationCodes} parameter to return predictions for all stations.
 }
 \details{
 For terminal stations (e.g.: Greenbelt, Shady Grove, etc.), predictions may
@@ -36,5 +51,17 @@ Some stations have two platforms (e.g.: Gallery Place, Fort Totten, L'Enfant
 Plaza, and Metro Center). To retrieve complete predictions for these
 stations, be sure to pass in both StationCodes.
 
-For trains with no passengers, the DestinationName will be "No Passenger".
+For trains with no passengers, the \code{DestinationName} will be "No Passenger".
 }
+\examples{
+\dontrun{
+next_train(StationCodes = c("A02", "B02"))
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/547636a6f9182302184cda78/operations/547636a6f918230da855363f}
+
+Other Real-Time Predictions: 
+\code{\link{next_bus}()}
+}
+\concept{Real-Time Predictions}
