@@ -8,7 +8,7 @@ test_that("key is is proper character if exists", {
 test_that("key returns empty if not found", {
   old_key <- Sys.getenv("WMATA_KEY")
   Sys.unsetenv("WMATA_KEY")
-  expect_false(nzchar(wmata_key()))
+  expect_warning(nzchar(wmata_key()))
   Sys.setenv("WMATA_KEY" = old_key)
 })
 

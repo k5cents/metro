@@ -11,12 +11,13 @@ wmata_key()
 
 wmata_demo()
 
-wmata_validate(key = wmata_key())
+wmata_validate(api_key = wmata_key())
 
 browse_wmata_key()
 }
 \arguments{
-\item{key}{A WMATA API key to validate, defaults to \code{wamta_key()}.}
+\item{api_key}{Subscription key which provides access to this API. Found in
+your Profile. Defaults to \code{wamta_key()}.}
 }
 \description{
 All calls to the WMATA API must be accompanied by a personal API key. A free

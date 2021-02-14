@@ -29,16 +29,11 @@
 #'
 #' @export
 wmata_key <- function() {
-  key <- Sys.getenv("WMATA_KEY", "")
-  if (!nzchar(key)) {
-    if (is_installed("usethis")) {
-      usethis::ui_oops("no WMATA key found, see \\
-                       {usethis::ui_code('browse_wmata_key()')}")
-    } else {
-      stop("no WMATA key found, see `browse_wmata_key()`")
-    }
+  api_key <- Sys.getenv("WMATA_KEY", "")
+  if (!nzchar(api_key)) {
+    warning("No WMATA API key found, see `browse_wmata_key()`.", call. = FALSE)
   }
-  return(key)
+  return(api_key)
 }
 
 #' @rdname wmata_key
@@ -48,7 +43,7 @@ wmata_demo <- function() {
     a <- "https://developer.wmata.com/products/5475f236031f590f380924ff"
     tryCatch(
       error = function(e) {
-        message("no key scraped")
+        warning("No API key scraped, returning empty string.", call. = FALSE)
         return("")
       },
       expr = {
@@ -57,22 +52,25 @@ wmata_demo <- function() {
       }
     )
   } else {
-    stop("The \"rvest\" package needed to scrape demo key", call. = FALSE)
+    stop("The 'rvest' package is needed to scrape demo API key.", call. = FALSE)
   }
 }
 
 #' @rdname wmata_key
-#' @param key A WMATA API key to validate, defaults to `wamta_key()`.
+#' @param api_key Subscription key which provides access to this API. Found in
+#'   your Profile. Defaults to [wamta_key()].
 #' @export
-wmata_validate <- function(key = wmata_key()) {
-  api <- "https://api.wmata.com/Misc/Validate"
-  request <- httr::add_headers(
-    `api_key` = wmata_key(),
-    `Content-Type` = "application/json",
-    `Accept` = "application/json"
+wmata_validate <- function(api_key = wmata_key()) {
+  !httr::http_error(
+    x = httr::GET(
+      url = "https://api.wmata.com/Misc/Validate",
+      httr::add_headers(
+        `api_key` = api_key,
+        `Content-Type` = "application/json",
+        `Accept` = "application/json"
+      )
+    )
   )
-  response <- httr::GET(api, config = request)
-  !httr::http_error(response)
 }
 
 #' @rdname wmata_key
@@ -98,6 +96,6 @@ browse_wmata_key <- function() {
     usethis::ui_todo("Make sure {usethis::ui_value('.Renviron')} ends with \\n")
     invisible()
   } else {
-    stop("The \"usethis\" package needed for key instructions", call. = FALSE)
+    stop("The 'usethis' is package needed for key instructions", call. = FALSE)
   }
 }
