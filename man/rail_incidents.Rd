@@ -2,11 +2,34 @@
 % Please edit documentation in R/rail-incidents.R
 \name{rail_incidents}
 \alias{rail_incidents}
-\title{Rail incidents}
+\title{Rail Incidents}
+\format{
+A data frame with 1 row per bus and 13 variables:
+\describe{
+\item{VehicleID}{Unique identifier for the bus. This is usually visible on
+the bus itself.}
+}
+}
 \usage{
 rail_incidents()
+}
+\value{
+Data frame of all rail incidents.
 }
 \description{
 Returns reported rail incidents (significant disruptions and delays to normal
 service). The data is identical to WMATA's Metrorail Service Status feed.
 }
+\examples{
+\dontrun{
+rail_incidents()
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/54763641281d83086473f232/operations/54763641281d830c946a3d77}
+
+Other Incident APIs: 
+\code{\link{bus_incidents}()},
+\code{\link{elevator_incidents}()}
+}
+\concept{Incident APIs}

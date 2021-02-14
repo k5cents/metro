@@ -2,18 +2,35 @@
 % Please edit documentation in R/elevator-incidents.R
 \name{elevator_incidents}
 \alias{elevator_incidents}
-\title{Bus incidents}
+\title{Elevator/Escalator Outages}
 \usage{
-elevator_incidents(station = NULL)
+elevator_incidents(StationCode = NULL)
 }
 \arguments{
-\item{station}{Station code. Omit to return all reported outages (default).}
+\item{StationCode}{Station code. Use \code{\link[=rail_stations]{rail_stations()}} to return a list of
+all station codes. Use \code{NULL} (default) to list all incidents.}
+}
+\value{
+Data frame of \emph{reported} elevator and escalator outages.
 }
 \description{
-Returns a list of reported elevator and escalator outages at a given station.
+Elevator/Escalator Outages
 }
 \details{
-Note that for stations with multiple platforms and therefore \code{station} codes
+Note that for stations with multiple platforms and therefore \code{StationCodes}
 (e.g.: Metro Center, L'Enfant Plaza, etc.), a distinct call is required for
-each code.
+each \code{StationCode}.
 }
+\examples{
+\dontrun{
+elevator_incidents("A01")
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/54763641281d83086473f232/operations/54763641281d830c946a3d76}
+
+Other Incident APIs: 
+\code{\link{bus_incidents}()},
+\code{\link{rail_incidents}()}
+}
+\concept{Incident APIs}
