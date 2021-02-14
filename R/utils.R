@@ -24,3 +24,8 @@ merge2 <- function (x, y, ...) {
   out <- merge(x, y, sort = FALSE, ...)[, union(names(x), names(y))]
   tibble::as_tibble(out)
 }
+
+extract_rx <- function(x, rx) {
+  as.integer(regmatches(x, m = regexpr(rx, x)))
+}
+

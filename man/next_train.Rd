@@ -40,7 +40,7 @@ Data frame of train arrivals
 }
 \description{
 Returns next train arrival information for one or more stations. Will return
-an empty set of results when no predictions are available. Use All for the
+an empty set of results when no predictions are available. Use "All" for the
 \code{StationCodes} parameter to return predictions for all stations.
 }
 \details{

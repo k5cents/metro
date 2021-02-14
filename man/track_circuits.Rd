@@ -2,9 +2,32 @@
 % Please edit documentation in R/track-circuits.R
 \name{track_circuits}
 \alias{track_circuits}
-\title{Track circuits}
+\title{Track Circuits}
+\format{
+A nested tibble with 1 row per train and 9 variables:
+\describe{
+\item{Track}{Track number. 1 and 2 denote "main" lines, while 0 and 3 are
+connectors (between different types of tracks) and pocket tracks,
+respectively.}
+\item{CircuitId}{An internal system-wide uniquely identifiable circuit
+number.}
+\item{Neighbors}{Data frame containing track circuit neighbor information.
+Note that some track circuits have no neighbors in one direction. All track
+circuits have at least one neighbor:
+\itemize{
+\item \code{CircuitIds}: Array containing neighboring circuit ids.
+\item \code{NeighborType}: Left or Right neighbor group. Generally speaking, left
+neighbors are to the west and south, while right neighbors are to the
+east/north.
+}
+}
+}
+}
 \usage{
 track_circuits()
+}
+\value{
+Data frame containing track circuit information
 }
 \description{
 Returns a list of all track circuits including those on pocket tracks and
@@ -15,3 +38,16 @@ neighbors.
 Please refer to \href{https://developer.wmata.com/TrainPositionsFAQ}{this page}
 for additional details.
 }
+\examples{
+\dontrun{
+track_circuits()
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/57644238031f59363c586dcb}
+
+Other Train Positions: 
+\code{\link{standard_routes}()},
+\code{\link{train_positions}()}
+}
+\concept{Train Positions}
