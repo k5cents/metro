@@ -29,3 +29,6 @@ extract_rx <- function(x, rx) {
   as.integer(regmatches(x, m = regexpr(rx, x)))
 }
 
+rows_bind <- function(list, ...) {
+  do.call(what = "rbind", args = list, ...)
+}
