@@ -14,7 +14,7 @@ test_that("entrances found for single location", {
   e <- rail_entrance(38.897957, -77.036560, 1000)
   expect_length(e, 6)
   expect_s3_class(e, "data.frame")
-  expect_false(any(is.na(e$distance)))
+  expect_false(any(is.na(e$Distance)))
 })
 
 test_that("all entrances returned without radius", {
@@ -24,8 +24,8 @@ test_that("all entrances returned without radius", {
   e <- rail_entrance(38.897957, -77.036560)
   expect_length(e, 6)
   expect_s3_class(e, "data.frame")
-  expect_false(any(is.na(e$distance)))
-  expect_equal(nrow(e), 246) # all
+  expect_false(any(is.na(e$Distance)))
+  expect_gt(nrow(e), 200) # all
 })
 
 test_that("distances not returned without coordinates", {
@@ -34,5 +34,5 @@ test_that("distances not returned without coordinates", {
   e <- rail_entrance()
   expect_length(e, 6)
   expect_s3_class(e, "data.frame")
-  expect_true(all(is.na(e$distance)))
+  expect_true(all(is.na(e$Distance)))
 })
