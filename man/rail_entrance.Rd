@@ -2,19 +2,60 @@
 % Please edit documentation in R/rail-entrance.R
 \name{rail_entrance}
 \alias{rail_entrance}
-\title{Rail station entrances}
+\title{Rail Station Entrances}
+\format{
+A tibble 1 row per entrance with 7 variables:
+\describe{
+\item{Name}{Name of the entrance (usually the station name and nearest
+intersection).}
+\item{StationCode}{The station code associated with this entrance. Use this
+value in other rail-related APIs to retrieve data about a station.}
+\item{StationTogether}{For stations containing multiple platforms (e.g.:
+Gallery Place, Fort Totten, L'Enfant Plaza, and Metro Center), the other
+station code (previously \code{StationCode2}).}
+\item{Description}{Additional information for the entrance, if available.
+Currently available data usually shows the same value as the \code{Name}
+element.}
+\item{Lat}{Latitude.}
+\item{Lon}{Longitude.}
+\item{Distance}{Distance (meters) of the entrance from the provided search
+coordinates. Calculated using \code{\link[geodist:geodist]{geodist::geodist()}} and the "cheap ruler"
+method.}
+}
+}
 \usage{
-rail_entrance(lat = NULL, lon = NULL, radius = NULL)
+rail_entrance(Lat = NULL, Lon = NULL, Radius = NULL)
 }
 \arguments{
-\item{lat}{Center point Latitude.}
+\item{Lat}{(Optional) Center point Latitude, required if \code{Longitude} and
+\code{Radius} are specified.}
 
-\item{lon}{Center point Longitude}
+\item{Lon}{(Optional) Center point Longitude, required if \code{Latitude} and
+\code{Radius} are specified.}
 
-\item{radius}{Radius (meters) to include in the search area. If \code{NULL}, while
-\code{lat} and \code{lon} are supplied, all stations are returned.}
+\item{Radius}{(Optional) Radius (meters) to include in the search area,
+required if \code{Latitude} and \code{Longitude} are specified.}
+}
+\value{
+A data frame of station entrances.
 }
 \description{
 Returns a list of nearby station entrances based on latitude, longitude, and
 radius (meters). Omit search parameters to return all station entrances.
 }
+\examples{
+\dontrun{
+rail_entrance(38.8977, -77.0365, 500)
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe330f}
+
+Other Rail Station Information: 
+\code{\link{rail_destination}()},
+\code{\link{rail_lines}()},
+\code{\link{rail_path}()},
+\code{\link{rail_stations}()},
+\code{\link{rail_times}()}
+}
+\concept{Rail Station Information}

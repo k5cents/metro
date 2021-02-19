@@ -1,44 +1,75 @@
-#' Rail station entrances
+#' Rail Station Entrances
 #'
 #' Returns a list of nearby station entrances based on latitude, longitude, and
 #' radius (meters). Omit search parameters to return all station entrances.
 #'
-#' @param lat Center point Latitude.
-#' @param lon Center point Longitude
-#' @param radius Radius (meters) to include in the search area. If `NULL`, while
-#'   `lat` and `lon` are supplied, all stations are returned.
+#' @format A tibble 1 row per entrance with 7 variables:
+#' \describe{
+#'   \item{Name}{Name of the entrance (usually the station name and nearest
+#'   intersection).}
+#'   \item{StationCode}{The station code associated with this entrance. Use this
+#'   value in other rail-related APIs to retrieve data about a station.}
+#'   \item{StationTogether}{For stations containing multiple platforms (e.g.:
+#'   Gallery Place, Fort Totten, L'Enfant Plaza, and Metro Center), the other
+#'   station code (previously `StationCode2`).}
+#'   \item{Description}{Additional information for the entrance, if available.
+#'   Currently available data usually shows the same value as the `Name`
+#'   element.}
+#'   \item{Lat}{Latitude.}
+#'   \item{Lon}{Longitude.}
+#'   \item{Distance}{Distance (meters) of the entrance from the provided search
+#'   coordinates. Calculated using [geodist::geodist()] and the "cheap ruler"
+#'   method.}
+#' }
+#'
+#' @param Lat (Optional) Center point Latitude, required if `Longitude` and
+#'   `Radius` are specified.
+#' @param Lon (Optional) Center point Longitude, required if `Latitude` and
+#'   `Radius` are specified.
+#' @param Radius (Optional) Radius (meters) to include in the search area,
+#'   required if `Latitude` and `Longitude` are specified.
+#' @examples
+#' \dontrun{
+#' rail_entrance(38.8977, -77.0365, 500)
+#' }
+#' @return A data frame of station entrances.
+#' @seealso <https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe330f>
+#' @family Rail Station Information
 #' @importFrom geodist geodist
-#' @importFrom tibble as_tibble add_column
 #' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble
 #' @export
-rail_entrance <- function(lat = NULL, lon = NULL, radius = NULL) {
-  coord <- list(Lat = lat, Lon = lon, Radius = radius)
-  json <- wmata_api("Rail", "jStationEntrances", query = coord)
-  df <- jsonlite::fromJSON(json, flatten = TRUE)
-  if (length(df[[1]]) == 0) {
+rail_entrance <- function(Lat = NULL, Lon = NULL, Radius = NULL) {
+  coord <- list(Lat = Lat, Lon = Lon, Radius = Radius)
+  json <- wmata_api(
+    type = "Rail",
+    endpoint = "jStationEntrances",
+    query = coord
+  )
+  dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
+  if (length(dat) == 0) {
     warning("no entrances found within your radius, please expand")
     return(empty_entrance)
   }
-  df <- utils::type.convert(
-    x = df[[1]][, c(3, 6:7, 5, 2)],
-    na.strings = "",
-    as.is = TRUE
-  )
-  dist <- if (is.null(lat) || is.null(lon)) {
-    NA_real_
+  dat <- dat[, -1] # Deprecated: ID
+  dat <- utils::type.convert(dat, na.strings = "", as.is = TRUE)
+  if (is.null(Lat) || is.null(Lon)) {
+    dist <- NA_real_
   } else {
-    as.vector(geodist::geodist(coord, df))
+    dist <- as.vector(geodist::geodist(coord, dat))
   }
-  df <- tibble::add_column(df, .after = 3, distance = dist)
-  names(df) <- names(empty_entrance)
-  tibble::as_tibble(df[order(df$distance), ])
+  dat$Distance <- dist
+  names(dat)[2:3] <- c("StationCode", "StationTogether")
+  dat$StationTogether <- as.character(dat$StationTogether)
+  tibble::as_tibble(dat[order(dat$Distance), ])
 }
 
-empty_entrance <- data.frame(
-  station = character(),
-  lat = double(),
-  lon = double(),
-  distance = double(),
-  description = character(),
-  name = character()
+empty_entrance <- tibble::tibble(
+  Name = character(),
+  StationCode = character(),
+  StationTogether = character(),
+  Description = character(),
+  Lat = double(),
+  Lon = double(),
+  Distance = double()
 )

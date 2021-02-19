@@ -2,23 +2,56 @@
 % Please edit documentation in R/rail-path.R
 \name{rail_path}
 \alias{rail_path}
-\alias{path_distance}
-\title{Path between rail stations}
+\title{Path Between Stations}
+\format{
+A tibble 1 row per arrival with 6 variables:
+\describe{
+\item{LineCode}{Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
+GR, or SV) this station's platform is on.}
+\item{StationCode}{Station code for this station. Use this value in other
+rail-related APIs to retrieve data about a station.}
+\item{StationName}{Full name for this station, as shown on the WMATA
+website.}
+\item{SeqNum}{Ordered sequence number.}
+\item{DistanceToPrev}{Distance in meters to the previous station in the
+list, ordered by \code{SeqNum}. Converted from feet, rounded to the nearest
+meter.}
+}
+}
 \usage{
-rail_path(from, to)
-
-path_distance(from, to)
+rail_path(FromStationCode, ToStationCode)
 }
 \arguments{
-\item{from}{Station code for the origin station.}
+\item{FromStationCode}{Station code for the origin station. Use the Station
+List method to return a list of all station codes.}
 
-\item{to}{Station code for the destination station.}
+\item{ToStationCode}{Station code for the destination station. Use the
+Station List method to return a list of all station codes.}
+}
+\value{
+A data frame of stations on rail path.
 }
 \description{
 Returns a set of ordered stations and distances between two stations on the
-same line.
+\emph{same line}.
 }
 \details{
 Note that this method is not suitable on its own as a pathfinding solution
-between stations. Distance is converted from feet to round meters.
+between stations.
 }
+\examples{
+\dontrun{
+rail_path("A01", "A08")
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe330e}
+
+Other Rail Station Information: 
+\code{\link{rail_destination}()},
+\code{\link{rail_entrance}()},
+\code{\link{rail_lines}()},
+\code{\link{rail_stations}()},
+\code{\link{rail_times}()}
+}
+\concept{Rail Station Information}

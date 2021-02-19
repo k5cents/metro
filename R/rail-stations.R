@@ -1,38 +1,61 @@
-#' Metro rail stations
+#' Rail Station List
 #'
-#' The stations on a Metro rail line, including the full names and geographic
-#' locations. The four big transfer stations have two station code designations,
-#' one for each track direction. All the lines running through each station
-#' are listed in a single list-column.
+#' Returns a list of station location and address information based on a given
+#' `LineCode`. Use `NULL` (default) to return all stations. The response is an
+#' data frame identical to that returned in the Station Information method.
 #'
-#' @details
-#' The `line_code` takes one of these two-letter codes:
-#' * BL = Blue
-#' * GR = Green
-#' * OR = Orange
-#' * RD = Red
-#' * SV = Silver
-#' * YL = Yellow
+#' @format A tibble 1 row per station with 10 variables:
+#' \describe{
+#'   \item{StationCode}{Station code for this station. Use this value in other
+#'   rail-related APIs to retrieve data about a station.}
+#'   \item{StationName}{Full name for this station, as shown on the WMATA
+#'   website.}
+#'   \item{StationTogether}{For stations with multiple platforms (e.g.: Gallery
+#'   Place, Fort Totten, L'Enfant Plaza, and Metro Center), the additional
+#'   `StationCode` will be listed here.}
+#'   \item{LineCodes}{Character vector of two-letter abbreviations (e.g.: RD,
+#'   BL, YL, OR, GR, or SV) served by this station. If the station has an
+#'   additional platform, the lines served by the other platform are listed in
+#'   the `LineCodes` values for the record associated with the `StationCode`
+#'   found in `StationTogether.`}
+#'   \item{Lat}{Latitude.}
+#'   \item{Lon}{Longitude.}
+#'   \item{Street}{Street address (for GPS use).}
+#'   \item{City}{City.}
+#'   \item{State}{State (abbreviated).}
+#'   \item{Zip}{Zip code.}
+#' }
 #'
-#' The result of this endpoint is saved as the [metro_stations] object.
-#' @param line Two-letter line code abbreviation, see Details or [rail_lines()].
-#'   If `NULL`, (the default) all stations are returned.
+#' @param LineCode Two-letter line code abbreviation, or `NULL` (default):
+#' * RD - Red
+#' * YL - Yellow
+#' * GR - Green
+#' * BL - Blue
+#' * OR - Orange
+#' * SV - Silver
+#' @examples
+#' \dontrun{
+#' rail_stations("RD")
+#' }
+#' @return A data frame of stations on a rail line.
+#' @seealso <https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3311>
+#' @family Rail Station Information
 #' @importFrom jsonlite fromJSON
-#' @importFrom tibble as_tibble add_column
+#' @importFrom tibble add_column as_tibble
 #' @export
-rail_stations <- function(line = NULL) {
-  json <- wmata_api("Rail", "jStations", list(LineCode = line))
-  df <- jsonlite::fromJSON(json, flatten = TRUE)
-  df <- utils::type.convert(
-    x = df$Stations[, c(-4, -8)],
-    na.strings = "",
-    as.is = TRUE
+rail_stations <- function(LineCode = NULL) {
+  json <- wmata_api(
+    type = "Rail",
+    endpoint = "jStations",
+    query = list(LineCode = LineCode)
   )
-  l <- Map(paste, df[4], df[5], df[6])
+  dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
+  dat <- utils::type.convert(dat, na.strings = "", as.is = TRUE)
+  dat <- dat[, -4] # Currently not in use: StationTogether2
+  l <- Map(paste, dat[4], dat[5], dat[6])
   l <- strsplit(gsub("\\s?NA\\s?", "", l[[1]]), "\\s")
-  df <- tibble::add_column(df[, -(4:6)], lines = l, .after = 3)
-  nm <- names(df)
-  nm[c(1, 3)] <- c("station", "txfer")
-  names(df) <- gsub("address\\.", "", tolower(nm))
-  tibble::as_tibble(df)
+  dat <- tibble::add_column(dat[, -(4:7)], LineCodes = l, .after = 3)
+  names(dat)[1:3] <- c("StationCode", "StationName", "StationTogether")
+  names(dat)[7:10] <- gsub("Address\\.", "", names(dat)[7:10])
+  tibble::as_tibble(dat)
 }
