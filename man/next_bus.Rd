@@ -4,8 +4,12 @@
 \alias{next_bus}
 \title{Next Buses}
 \format{
-A tibble 1 row per arrival with 6 variables:
+A tibble 1 row per arrival with 8 variables:
 \describe{
+\item{StopID}{7-digit regional ID which can be used in various bus-related
+methods. If unavailable, the \code{StopID} will be 0 or \code{NA}}
+\item{StopName}{Stop name. May be slightly different from what is spoken or
+displayed in the bus.}
 \item{RouteID}{Base route name as shown on the bus. This can be used in
 other bus-related methods. Note that all variants will be shown as their
 base route names (i.e.: 10Av1 and 10Av2 will be shown as 10A).}
@@ -23,20 +27,24 @@ bus schedule information as well as bus positions.}
 }
 }
 \usage{
-next_bus(StopID = NULL)
+next_bus(StopID, api_key = wmata_key())
 }
 \arguments{
 \item{StopID}{7-digit regional stop ID.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
-Data frame of bus arrivals
+Data frame of bus arrivals.
 }
 \description{
 Returns next bus arrival times at a stop.
 }
 \examples{
 \dontrun{
-next_bus(stopID = "1001195")
+next_bus(StopID = "1001195")
 }
 }
 \seealso{

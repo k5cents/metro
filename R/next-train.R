@@ -38,33 +38,35 @@
 #'   \item{Min}{Minutes until arrival. Can be a numeric value, 0 (arriving),
 #'   -1 (boarding), or `NA`.}
 #' }
+#'
 #' @param StationCodes Character vector of station codes. For all predictions,
 #'   use `NULL` (default) or "All".
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
 #' next_train(StationCodes = c("A02", "B02"))
 #' }
-#' @return Data frame of train arrivals
+#' @return Data frame of train arrivals.
 #' @seealso <https://developer.wmata.com/docs/services/547636a6f9182302184cda78/operations/547636a6f918230da855363f>
 #' @family Real-Time Predictions
-#' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble
 #' @export
-next_train <- function(StationCodes = NULL) {
+next_train <- function(StationCodes = NULL, api_key = wmata_key()) {
   if (all(is.null(StationCodes))) {
     StationCodes <- "All"
   }
-  json <- wmata_api(
-    type = "StationPrediction",
-    endpoint = paste(
-      "GetPrediction",
-      paste(StationCodes, collapse = ","),
-      sep = "/")
+  dat <- wmata_api(
+    path = paste0(
+      "StationPrediction.svc/json/GetPrediction/",
+      paste(StationCodes, collapse = ",")
+    ),
+    flatten = TRUE,
+    level = 1,
+    api_key = api_key
   )
-  dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
   if (length(dat) == 1) {
-    warning("no next trains at this station")
-    return(empty_train)
+    warning("No next trains arriving at this station")
+    return(empty_next_train)
   }
   dat$Min[dat$Min == "ARR"] <- 0
   dat$Min[dat$Min == "BRD"] <- -1
@@ -75,7 +77,7 @@ next_train <- function(StationCodes = NULL) {
   tibble::as_tibble(dat)
 }
 
-empty_train <- tibble::tibble(
+empty_next_train <- tibble::tibble(
   Car = integer(),
   Destination = character(),
   DestinationCode = character(),

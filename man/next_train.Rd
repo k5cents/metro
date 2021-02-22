@@ -36,7 +36,7 @@ next_train(StationCodes = NULL)
 use \code{NULL} (default) or "All".}
 }
 \value{
-Data frame of train arrivals
+Data frame of train arrivals.
 }
 \description{
 Returns next train arrival information for one or more stations. Will return
