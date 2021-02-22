@@ -32,7 +32,7 @@
 bus_incidents <- function(Route = NULL) {
   json <- wmata_api("Incidents", "BusIncidents", list(Route = Route))
   dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
-  if (nrow(dat) < 1) {
+  if (length(dat) == 0 || nrow(dat) < 1) {
     message("no bus incidents reported")
     return(empty_bus_incident)
   }
