@@ -27,8 +27,9 @@
 #'   leaves on Sunday at 2:30 AM.}
 #' }
 #'
-#' @param StationCode Station code. Use the [rail_stations()] to return a list
-#'   of all station codes.
+#' @param StationCode Station code. Use the [rail_stations()] function to return
+#'   a list of all station codes. Use `NULL` (default) to return times for all
+#'   stations.
 #' @examples
 #' \dontrun{
 #' rail_times("A01")
@@ -48,41 +49,41 @@ rail_times <- function(StationCode = NULL) {
       StationCode = StationCode
     )
   )
-  dat <- jsonlite::fromJSON(json, flatten = FALSE)[[1]]
-  dat <- tibble::as_tibble(dat)
-  days <- as_tibble(do.call(rbind, dat[3:9]))
-  # add opening time to each day
-  for (i in seq_along(days$FirstTrains)) {
-    days$FirstTrains[[i]] <- tibble::add_column(
-      days$FirstTrains[[i]],
-      OpeningTime = rep(days$OpeningTime[i], each = nrow(days$FirstTrains[[i]]))
-    )
-    days$LastTrains[[i]] <- tibble::add_column(
-      days$LastTrains[[i]],
-      OpeningTime = rep(days$OpeningTime[i], each = nrow(days$LastTrains[[i]]))
-    )
+  dat <- jsonlite::fromJSON(json)[[1]]
+  stn_codes <- dat$Code
+  stn_names <- dat$StationName
+  dat <- dat[, 3:9]
+  out <- rep(list(rep(list(NA), length(dat$Monday$FirstTrains))), 7)
+  for (i in seq_along(dat)) {
+    for (k in seq_along(dat[[i]]$FirstTrains)) {
+      if (nrow(dat[[i]]$FirstTrains[[k]]) < 1) {
+        next
+      } else {
+        out[[i]][[k]] <- tibble::tibble(
+          StationCode = stn_codes[k],
+          StationName = stn_names[k],
+          Weekday = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[i],
+          OpeningTime = dat[[i]]$OpeningTime[k],
+          merge(
+            x = dat[[i]]$FirstTrains[[k]],
+            y = dat[[i]]$LastTrains[[k]],
+            by = "DestinationStation",
+            all = TRUE,
+            suffixes = c("First","Last")
+          )
+        )
+      }
+    }
   }
-  # unnest all weekday times
-  first_trains <- days$FirstTrains
-  names(first_trains) <- wdays
-  first_trains <- rows_bind(first_trains)[, 3:1]
-  names(first_trains)[2:3] <- c("FirstStation", "FirstTime")
-  first_trains <- tibble::rownames_to_column(first_trains, "Weekday")
-  first_trains$Weekday <- gsub("\\.\\d$", "", first_trains$Weekday)
-  # repeat for last trains
-  last_trains <- days$LastTrains
-  names(last_trains) <- wdays
-  last_trains <- rows_bind(last_trains)[, 3:1]
-  names(last_trains)[2:3] <- c("LastStation", "LastTime")
-  last_trains <- tibble::rownames_to_column(last_trains, "Weekday")
-  last_trains$Weekday <- gsub("\\.\\d$", "", last_trains$Weekday)
-  # combine and add station info
-  tibble::add_column(
-    merge2(first_trains, last_trains),
-    .before = 1,
-    StationCode = dat$Code,
-    StationName = dat$StationName
+  out <- do.call(
+    what = rbind,
+    args = lapply(
+      X = out,
+      FUN = function(dat) {
+        do.call(rbind, dat)
+      }
+    )
   )
+  names(out)[6:7] <- c("FirstTime", "LastTime")
+  out[!is.na(out$StationCode), c(1:2, 5, 4, 6:7)]
 }
-
-wdays <- c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")

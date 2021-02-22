@@ -27,8 +27,9 @@ leaves on Sunday at 2:30 AM.}
 rail_times(StationCode = NULL)
 }
 \arguments{
-\item{StationCode}{Station code. Use the \code{\link[=rail_stations]{rail_stations()}} to return a list
-of all station codes.}
+\item{StationCode}{Station code. Use the \code{\link[=rail_stations]{rail_stations()}} function to return
+a list of all station codes. Use \code{NULL} (default) to return times for all
+stations.}
 }
 \value{
 A \emph{tidy} data frame of station schedules. Combined from a nested list
