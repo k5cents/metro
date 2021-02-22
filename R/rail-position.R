@@ -57,13 +57,13 @@
 #' @export
 train_positions <- function() {
    response <- httr::GET(
-     url = "https://api.wmata.com/TrainPositions/TrainPositions",
-     query = list(contentType = "json"),
-     httr::add_headers(
-        `api_key` = wmata_key(),
-        `Content-Type` = "application/json",
-        `Accept` = "application/json"
-     )
+      url = "https://api.wmata.com/TrainPositions/TrainPositions",
+      query = list(contentType = "json"),
+      httr::add_headers(
+         `api_key` = wmata_key(),
+         `Content-Type` = "application/json",
+         `Accept` = "application/json"
+      )
    )
    json <- httr::content(response, as = "text")
    dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
