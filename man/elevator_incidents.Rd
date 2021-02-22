@@ -3,12 +3,37 @@
 \name{elevator_incidents}
 \alias{elevator_incidents}
 \title{Elevator/Escalator Outages}
+\format{
+A data frame with 1 row per incident and 9 variables:
+\describe{
+\item{UnitName}{Unique identifier for unit, by type (a single elevator and
+escalator may have the same \code{UnitName}, but no two elevators or two
+escalators will have the same \code{UnitName}).}
+\item{UnitType}{Type of unit. Will be \code{ELEVATOR} or \code{ESCALATOR}.}
+\item{StationCode}{Unit's station code. Use this value in other
+rail-related APIs to retrieve data about a station.}
+\item{StationName}{Full station name, may include entrance information
+(e.g.: Metro Center, G and 11th St Entrance).}
+\item{LocationDescription}{Free-text description of the unit location
+within a station (e.g.: Escalator between mezzanine and platform).}
+\item{SymptomDescription}{Description for why the unit is out of service or
+otherwise in reduced operation.}
+\item{DateOutOfServ}{Date and time (UTC) unit was reported out of service.}
+\item{DateUpdated}{Date and time (UTC) outage details was last updated.}
+\item{EstimatedReturnToService}{Estimated date and time (UTC) by when unit
+is expected to return to normal service. May be NULL.}
+}
+}
 \usage{
-elevator_incidents(StationCode = NULL)
+elevator_incidents(StationCode = NULL, api_key = wmata_key())
 }
 \arguments{
 \item{StationCode}{Station code. Use \code{\link[=rail_stations]{rail_stations()}} to return a list of
 all station codes. Use \code{NULL} (default) to list all incidents.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 Data frame of \emph{reported} elevator and escalator outages.
@@ -23,7 +48,7 @@ each \code{StationCode}.
 }
 \examples{
 \dontrun{
-elevator_incidents("A01")
+elevator_incidents()
 }
 }
 \seealso{

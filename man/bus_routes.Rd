@@ -2,7 +2,7 @@
 % Please edit documentation in R/bus-routes.R
 \name{bus_routes}
 \alias{bus_routes}
-\title{Bus routes}
+\title{Bus Routes}
 \format{
 A tibble with 3 variables and one row per route variant:
 \describe{

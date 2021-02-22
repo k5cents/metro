@@ -17,11 +17,15 @@ are usually identical to base route names (i.e.: not 10Av1 or 10Av2, but
 }
 }
 \usage{
-bus_incidents(Route = NULL)
+bus_incidents(Route = NULL, api_key = wmata_key())
 }
 \arguments{
 \item{Route}{Base bus route; variations are not recognized (i.e.: C2 instead
 of C2v1, C2v2, etc.).}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 Data frame of bus incidents and delays.

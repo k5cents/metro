@@ -4,21 +4,34 @@
 \alias{rail_incidents}
 \title{Rail Incidents}
 \format{
-A data frame with 1 row per bus and 13 variables:
+A data frame with 1 row incident and 5 variables:
 \describe{
-\item{VehicleID}{Unique identifier for the bus. This is usually visible on
-the bus itself.}
+\item{IncidentID}{Unique identifier for an incident.}
+\item{Description}{Free-text description of the incident.}
+\item{IncidentType}{Free-text description of the incident type. Usually
+Delay or Alert but is subject to change at any time.}
+\item{LinesAffected}{Character vector of line codes (e.g.: RD; or BL; OR;
+or BL; OR; RD;).}
+\item{DateUpdated}{Date and time (UTC) of last update.}
 }
 }
 \usage{
-rail_incidents()
+rail_incidents(api_key = wmata_key())
+}
+\arguments{
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 Data frame of all rail incidents.
 }
 \description{
-Returns reported rail incidents (significant disruptions and delays to normal
-service). The data is identical to WMATA's Metrorail Service Status feed.
+Reported rail incidents (significant disruptions and delays to normal
+service). The data is identical to WMATA's \link[=1]{Metrorail Service Status feed}.
+}
+\details{
+
 }
 \examples{
 \dontrun{

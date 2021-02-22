@@ -25,7 +25,12 @@ displayed in the bus.}
 }
 }
 \usage{
-bus_schedule(RouteID, IncludingVariations = TRUE, Date = NULL)
+bus_schedule(
+  RouteID,
+  IncludingVariations = TRUE,
+  Date = NULL,
+  api_key = wmata_key()
+)
 }
 \arguments{
 \item{RouteID}{Bus route variant, e.g.: 70, 10A, 10Av1, etc.}
@@ -36,6 +41,10 @@ route is specified in RouteID. For example, if B30 is specified and
 of B30 such as B30v1, B30v2, etc. will be returned.}
 
 \item{Date}{(Optional) Date for which to retrieve route and stop information.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 Data frame containing trip information
@@ -45,7 +54,7 @@ Returns schedules for a given route variant for a given date.
 }
 \examples{
 \dontrun{
-bus_schedule("10A")
+bus_schedule("70")
 }
 }
 \seealso{

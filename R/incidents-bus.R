@@ -17,8 +17,10 @@
 #'   \item{Description}{Free-text description of the delay or incident.}
 #'   \item{DateUpdated}{Date and time (UTC) of last update.}
 #' }
+#'
 #' @param Route Base bus route; variations are not recognized (i.e.: C2 instead
 #'   of C2v1, C2v2, etc.).
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
 #' bus_incidents()
@@ -26,14 +28,17 @@
 #' @return Data frame of bus incidents and delays.
 #' @seealso <https://developer.wmata.com/docs/services/54763641281d83086473f232/operations/54763641281d830c946a3d75>
 #' @family Incident APIs
-#' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble tibble
 #' @export
-bus_incidents <- function(Route = NULL) {
-  json <- wmata_api("Incidents", "BusIncidents", list(Route = Route))
-  dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
-  if (length(dat) == 0 || nrow(dat) < 1) {
-    message("no bus incidents reported")
+bus_incidents <- function(Route = NULL, api_key = wmata_key()) {
+  dat <- wmata_api(
+    path = "Incidents.svc/json/BusIncidents",
+    query = list(Route = Route),
+    flatten = TRUE,
+    level = 1
+  )
+  if (length(dat) == 0 || nrow(dat) == 0) {
+    message("No bus incidents reported")
     return(empty_bus_incident)
   }
   dat$DateUpdated <- api_time(dat$DateUpdated)
