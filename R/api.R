@@ -10,6 +10,8 @@
 #' @param endpoint The API endpoint (e.g., "jStations").
 #' @param query Additional queries also passed, possibly your key if need be.
 #' @param ... Arguments passed to [jsonlite::fromJSON()] for parsing.
+#' @param level If parsed JSON is a list, select only this element. Useful if
+#'   the list is length one containing a data frame or some other object.
 #' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
@@ -21,7 +23,7 @@
 #' @importFrom jsonlite fromJSON
 #' @keywords internal
 #' @export
-wmata_api <- function(path, query = NULL, ..., api_key = wmata_key()) {
+wmata_api <- function(path, query = NULL, ..., level, api_key = wmata_key()) {
   stopifnot(length(path) == 1L)
   ua <- httr::user_agent("https://github.com/kiernann/metro/")
   url <- httr::modify_url("https://api.wmata.com", path = path, query = query)
@@ -31,6 +33,9 @@ wmata_api <- function(path, query = NULL, ..., api_key = wmata_key()) {
   }
   raw <- httr::content(resp, as = "text", encoding = "UTF-8")
   parsed <- jsonlite::fromJSON(raw, ...)
+  if (!missing(level) && is.list(parsed)) {
+    parsed <- parsed[[level]]
+  }
   if (httr::http_error(resp)) {
     stop(
       sprintf(

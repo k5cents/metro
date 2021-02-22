@@ -4,12 +4,15 @@
 \alias{wmata_api}
 \title{Call the WMATA API}
 \usage{
-wmata_api(path, query = NULL, ..., api_key = wmata_key())
+wmata_api(path, query = NULL, ..., level, api_key = wmata_key())
 }
 \arguments{
 \item{query}{Additional queries also passed, possibly your key if need be.}
 
 \item{...}{Arguments passed to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} for parsing.}
+
+\item{level}{If parsed JSON is a list, select only this element. Useful if
+the list is length one containing a data frame or some other object.}
 
 \item{api_key}{Subscription key which provides access to this API. Found in
 your \href{https://developer.wmata.com/developer}{Profile}. Defaults
