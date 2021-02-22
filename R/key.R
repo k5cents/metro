@@ -40,8 +40,8 @@
 #' * Train Positions
 #'
 #' @param api_key Subscription key which provides access to this API. Found in
-#'   your [Profile](https://developer.wmata.com/developer). Defaults to calling
-#'   `Sys.getenv("WMATA_KEY")`.
+#'   your [Profile](https://developer.wmata.com/developer). Defaults
+#'   `Sys.getenv("WMATA_KEY")` via [wmata_key()].
 #' @return For [wmata_key()] and [wmata_demo()], a 32 character alphanumeric
 #' API key. For [wmata_validate()], either `TRUE` for a valid key or an
 #' error if invalid.
@@ -51,7 +51,7 @@
 #' @export
 wmata_key <- function(api_key = Sys.getenv("WMATA_KEY")) {
   stopifnot(is.character(api_key), length(api_key) == 1)
-  if (!nzchar(api_key)) {
+  if (identical(api_key, "")) {
     warning("No WMATA API key found, see help(wmata_key)", call. = FALSE)
   }
   return(api_key)
@@ -73,13 +73,24 @@ wmata_validate <- function(api_key = wmata_key()) {
   } else {
     TRUE
   }
-
-  return(TRUE)
 }
 
 #' @rdname wmata_key
 #' @export
-wmata_demo <- function() {
+wmata_demo <- function(validate) {
+  api_key <- wmata_key()
+  if (!nzchar(api_key)) {
+    prompt <- utils::askYesNo(
+      msg = "A key has already been found, do you really need the demo?",
+      default = FALSE,
+    )
+    if (is.na(prompt)) {
+      return()
+    }
+    if (isFALSE(prompt)) {
+      return(api_key)
+    }
+  }
   tryCatch(
     error = function(e) {
       warning("No API key scraped, returning an empty string.", call. = FALSE)

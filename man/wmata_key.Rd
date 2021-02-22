@@ -10,12 +10,12 @@ wmata_key(api_key = Sys.getenv("WMATA_KEY"))
 
 wmata_validate(api_key = wmata_key())
 
-wmata_demo()
+wmata_demo(validate)
 }
 \arguments{
 \item{api_key}{Subscription key which provides access to this API. Found in
-your \href{https://developer.wmata.com/developer}{Profile}. Defaults to calling
-\code{Sys.getenv("WMATA_KEY")}.}
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 For \code{\link[=wmata_key]{wmata_key()}} and \code{\link[=wmata_demo]{wmata_demo()}}, a 32 character alphanumeric
