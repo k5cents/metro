@@ -33,6 +33,7 @@
 #' * BL - Blue
 #' * OR - Orange
 #' * SV - Silver
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
 #' rail_stations("RD")
@@ -40,16 +41,16 @@
 #' @return A data frame of stations on a rail line.
 #' @seealso <https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3311>
 #' @family Rail Station Information
-#' @importFrom jsonlite fromJSON
 #' @importFrom tibble add_column as_tibble
 #' @export
-rail_stations <- function(LineCode = NULL) {
-  json <- wmata_api(
-    type = "Rail",
-    endpoint = "jStations",
-    query = list(LineCode = LineCode)
+rail_stations <- function(LineCode = NULL, api_key = wmata_key()) {
+  dat <- wmata_api(
+    path = "Rail.svc/json/jStations",
+    query = list(LineCode = LineCode),
+    flatten = TRUE,
+    level = 1,
+    api_key = api_key
   )
-  dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
   dat <- utils::type.convert(dat, na.strings = "", as.is = TRUE)
   dat <- dat[, -4] # Currently not in use: StationTogether2
   l <- Map(paste, dat[4], dat[5], dat[6])
@@ -57,5 +58,6 @@ rail_stations <- function(LineCode = NULL) {
   dat <- tibble::add_column(dat[, -(4:7)], LineCodes = l, .after = 3)
   names(dat)[1:3] <- c("StationCode", "StationName", "StationTogether")
   names(dat)[7:10] <- gsub("Address\\.", "", names(dat)[7:10])
+  dat$Zip <- as.character(dat$Zip)
   tibble::as_tibble(dat)
 }

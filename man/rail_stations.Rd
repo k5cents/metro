@@ -27,7 +27,7 @@ found in \code{StationTogether.}}
 }
 }
 \usage{
-rail_stations(LineCode = NULL)
+rail_stations(LineCode = NULL, api_key = wmata_key())
 }
 \arguments{
 \item{LineCode}{Two-letter line code abbreviation, or \code{NULL} (default):
@@ -39,6 +39,10 @@ rail_stations(LineCode = NULL)
 \item OR - Orange
 \item SV - Silver
 }}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 A data frame of stations on a rail line.

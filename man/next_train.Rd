@@ -29,11 +29,15 @@ Useful when passing in "All" as the \code{StationCodes} parameter.}
 }
 }
 \usage{
-next_train(StationCodes = NULL)
+next_train(StationCodes = NULL, api_key = wmata_key())
 }
 \arguments{
 \item{StationCodes}{Character vector of station codes. For all predictions,
 use \code{NULL} (default) or "All".}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 Data frame of train arrivals.

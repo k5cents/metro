@@ -21,6 +21,8 @@
 #'   not defined.}
 #'   \item{InternalDestination2}{Similar to `InternalDestination1`.}
 #' }
+#'
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
 #' rail_lines()
@@ -28,12 +30,14 @@
 #' @return A data frame of rail lines.
 #' @seealso <https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe330c>
 #' @family Rail Station Information
-#' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble
 #' @export
-rail_lines <- function() {
-  json <- wmata_api(type = "Rail", endpoint = "jLines")
-  dat <- jsonlite::fromJSON(json)[[1]]
+rail_lines <- function(api_key = wmata_key()) {
+  dat <- wmata_api(
+    path = "Rail.svc/json/jLines",
+    level = 1,
+    api_key = api_key
+  )
   dat <- utils::type.convert(dat, na.strings = "", as.is = TRUE)
   tibble::as_tibble(dat)
 }

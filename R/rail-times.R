@@ -30,6 +30,7 @@
 #' @param StationCode Station code. Use the [rail_stations()] function to return
 #'   a list of all station codes. Use `NULL` (default) to return times for all
 #'   stations.
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
 #' rail_times("A01")
@@ -38,18 +39,15 @@
 #'   of weekday times.
 #' @seealso <https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3312>
 #' @family Rail Station Information
-#' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble rownames_to_column
 #' @export
-rail_times <- function(StationCode = NULL) {
-  json <- wmata_api(
-    type = "Rail",
-    endpoint = "jStationTimes",
-    query = list(
-      StationCode = StationCode
-    )
+rail_times <- function(StationCode = NULL, api_key = wmata_key()) {
+  dat <- wmata_api(
+    path = "Rail.svc/json/jStationTimes",
+    query = list(StationCode = StationCode),
+    level = 1,
+    api_key = api_key
   )
-  dat <- jsonlite::fromJSON(json)[[1]]
   stn_codes <- dat$Code
   stn_names <- dat$StationName
   dat <- dat[, 3:9]

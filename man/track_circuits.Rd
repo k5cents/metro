@@ -28,7 +28,7 @@ column.
 track_circuits()
 }
 \value{
-Data frame containing track circuit information
+A data frame of nested track circuit information.
 }
 \description{
 Returns a list of all track circuits including those on pocket tracks and

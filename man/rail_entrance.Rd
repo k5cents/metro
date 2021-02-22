@@ -24,7 +24,7 @@ method.}
 }
 }
 \usage{
-rail_entrance(Lat = NULL, Lon = NULL, Radius = NULL)
+rail_entrance(Lat = NULL, Lon = NULL, Radius = NULL, api_key = wmata_key())
 }
 \arguments{
 \item{Lat}{(Optional) Center point Latitude, required if \code{Longitude} and
@@ -35,6 +35,10 @@ rail_entrance(Lat = NULL, Lon = NULL, Radius = NULL)
 
 \item{Radius}{(Optional) Radius (meters) to include in the search area,
 required if \code{Latitude} and \code{Longitude} are specified.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 A data frame of station entrances.

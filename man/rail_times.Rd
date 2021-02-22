@@ -24,12 +24,16 @@ leaves on Sunday at 2:30 AM.}
 }
 }
 \usage{
-rail_times(StationCode = NULL)
+rail_times(StationCode = NULL, api_key = wmata_key())
 }
 \arguments{
 \item{StationCode}{Station code. Use the \code{\link[=rail_stations]{rail_stations()}} function to return
 a list of all station codes. Use \code{NULL} (default) to return times for all
 stations.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 A \emph{tidy} data frame of station schedules. Combined from a nested list

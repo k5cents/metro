@@ -45,7 +45,15 @@ work.
 }
 }
 \usage{
-train_positions()
+train_positions(api_key = api_key)
+}
+\arguments{
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
+}
+\value{
+A data frame of train positions.
 }
 \description{
 Returns uniquely identifiable trains in service and what track circuits they

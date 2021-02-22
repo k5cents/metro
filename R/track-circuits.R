@@ -29,7 +29,7 @@
 #' \dontrun{
 #' track_circuits()
 #' }
-#' @return Data frame containing track circuit information
+#' @return A data frame of nested track circuit information.
 #' @seealso <https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/57644238031f59363c586dcb>
 #' @family Train Positions
 #' @importFrom httr GET content add_headers
@@ -37,17 +37,12 @@
 #' @importFrom tibble as_tibble
 #' @export
 track_circuits <- function() {
-  response <- httr::GET(
-    url = "https://api.wmata.com/TrainPositions/TrackCircuits",
+  dat <- wmata_api(
+    path = "TrainPositions/TrackCircuits",
     query = list(contentType = "json"),
-    httr::add_headers(
-      `api_key` = wmata_key(),
-      `Content-Type` = "application/json",
-      `Accept` = "application/json"
-    )
+    flatten = TRUE,
+    level = 1
   )
-  json <- httr::content(response, as = "text")
-  dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
   dat$Neighbors <- lapply(dat$Neighbors, FUN = tibble::as_tibble)
   tibble::as_tibble(dat)
 }

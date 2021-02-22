@@ -45,27 +45,22 @@
 #'   }
 #' }
 #'
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
 #' train_positions()
 #' }
+#' @return A data frame of train positions.
 #' @seealso <https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/5763fb35f91823096cac1058>
 #' @family Train Positions
-#' @importFrom httr GET content add_headers
-#' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble
 #' @export
-train_positions <- function() {
-   response <- httr::GET(
-      url = "https://api.wmata.com/TrainPositions/TrainPositions",
+train_positions <- function(api_key = api_key) {
+   dat <- wmata_api(
+      path = "TrainPositions/TrainPositions",
       query = list(contentType = "json"),
-      httr::add_headers(
-         `api_key` = wmata_key(),
-         `Content-Type` = "application/json",
-         `Accept` = "application/json"
-      )
+      flatten = TRUE,
+      level = 1
    )
-   json <- httr::content(response, as = "text")
-   dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
    tibble::as_tibble(dat)
 }

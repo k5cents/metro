@@ -31,6 +31,7 @@
 #'   [rail_stations()] function to return a list of all station codes.
 #' @param ToStationCode Station code for the destination station. Use the
 #'   [rail_stations()] function to return a list of all station codes.
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
 #' rail_destination("A01", "A08")
@@ -41,15 +42,18 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble
 #' @export
-rail_destination <- function(FromStationCode = NULL, ToStationCode = NULL) {
-  json <- wmata_api(
-    type = "Rail", endpoint = "jSrcStationToDstStationInfo",
+rail_destination <- function(FromStationCode = NULL, ToStationCode = NULL,
+                             api_key = wmata_key()) {
+  dat <- wmata_api(
+    path = "Rail.svc/json/jSrcStationToDstStationInfo",
     query = list(
       FromStationCode = FromStationCode,
       ToStationCode = ToStationCode
-    )
+    ),
+    flatten = FALSE,
+    level = 1,
+    api_key = api_key
   )
-  dat <- jsonlite::fromJSON(json, flatten = FALSE)[[1]]
   dat <- cbind(dat[-length(dat)], dat$RailFare)
   tibble::as_tibble(dat)
 }

@@ -28,6 +28,7 @@
 #'   `Radius` are specified.
 #' @param Radius (Optional) Radius (meters) to include in the search area,
 #'   required if `Latitude` and `Longitude` are specified.
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
 #' rail_entrance(38.8977, -77.0365, 500)
@@ -36,17 +37,18 @@
 #' @seealso <https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe330f>
 #' @family Rail Station Information
 #' @importFrom geodist geodist
-#' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble
 #' @export
-rail_entrance <- function(Lat = NULL, Lon = NULL, Radius = NULL) {
+rail_entrance <- function(Lat = NULL, Lon = NULL, Radius = NULL,
+                          api_key = wmata_key()) {
   coord <- list(Lat = Lat, Lon = Lon, Radius = Radius)
-  json <- wmata_api(
-    type = "Rail",
-    endpoint = "jStationEntrances",
-    query = coord
+  dat <- wmata_api(
+    path = "Rail.svc/json/jStationEntrances",
+    query = coord,
+    flatten = TRUE,
+    level = 1,
+    api_key = api_key
   )
-  dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
   if (length(dat) == 0) {
     warning("no entrances found within your radius, please expand")
     return(empty_entrance)

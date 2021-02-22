@@ -19,7 +19,7 @@ meter.}
 }
 }
 \usage{
-rail_path(FromStationCode, ToStationCode)
+rail_path(FromStationCode, ToStationCode, api_key = wmata_key())
 }
 \arguments{
 \item{FromStationCode}{Station code for the origin station. Use the Station
@@ -27,6 +27,10 @@ List method to return a list of all station codes.}
 
 \item{ToStationCode}{Station code for the destination station. Use the
 Station List method to return a list of all station codes.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 A data frame of stations on rail path.

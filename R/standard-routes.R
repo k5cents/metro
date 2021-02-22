@@ -35,17 +35,12 @@
 #' @importFrom tibble as_tibble
 #' @export
 standard_routes <- function() {
-  response <- httr::GET(
-    url = "https://api.wmata.com/TrainPositions/StandardRoutes",
+  dat <- wmata_api(
+    path = "TrainPositions/StandardRoutes",
     query = list(contentType = "json"),
-    httr::add_headers(
-      `api_key` = wmata_key(),
-      `Content-Type` = "application/json",
-      `Accept` = "application/json"
-    )
+    flatten = TRUE,
+    level = 1
   )
-  json <- httr::content(response, as = "text")
-  dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
   dat$TrackCircuits <- lapply(dat$TrackCircuits, FUN = tibble::as_tibble)
   tibble::as_tibble(dat)
 }
