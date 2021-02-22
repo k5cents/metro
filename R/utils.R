@@ -29,6 +29,12 @@ extract_rx <- function(x, rx) {
   as.integer(regmatches(x, m = regexpr(rx, x)))
 }
 
-rows_bind <- function(list, ...) {
-  do.call(what = "rbind", args = list, ...)
+rows_bind <- function(list, list_names, col_name = "rowname", ...) {
+  if (is.null(names(list)) && !missing(list_names)) {
+    names(list) <- list_names
+  }
+  out <- do.call(what = "rbind", args = list, ...)
+  out[[col_name]] <- gsub("\\.\\d+$", "", rownames(out))
+  rownames(out) <- NULL
+  out[, c(ncol(out), 1:ncol(out) - 1)]
 }
