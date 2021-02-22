@@ -27,42 +27,34 @@
 #'   route is specified in RouteID. For example, if B30 is specified and
 #'   `IncludingVariations` is set to `TRUE` (default), data for all variations
 #'   of B30 such as B30v1, B30v2, etc. will be returned.
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
-#' bus_schedule("10A")
+#' bus_schedule("70")
 #' }
 #' @return Data frame containing trip information
 #' @seealso <https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6b>
 #' @family Bus Route and Stop Methods
-#' @importFrom jsonlite fromJSON
 #' @importFrom tibble add_column as_tibble
 #' @export
-bus_schedule <- function(RouteID, IncludingVariations = TRUE,
-                         Date = NULL) {
-  json <- wmata_api(
-    type = "Bus", endpoint = "jRouteSchedule",
+bus_schedule <- function(RouteID, IncludingVariations = TRUE, Date = NULL,
+                         api_key = wmata_key()) {
+  dat <- wmata_api(
+    path = "Bus.svc/json/jRouteSchedule",
     query = list(
-      RouteID = RouteID, Date = Date,
-      IncludingVariations = IncludingVariations
-    )
+      RouteID = RouteID,
+      IncludingVariations = IncludingVariations,
+      Date = Date
+    ),
+    flatten = TRUE,
+    api_key = api_key
   )
-  dat <- jsonlite::fromJSON(json, flatten = TRUE)
   dir0_stops <- dat$Direction0$StopTimes
-  names(dir0_stops) <- dat$Direction0$TripID
-  dir0_stops <- do.call(rbind, dir0_stops)
-  dir0_stops <- tibble::add_column(
-    .data = dir0_stops, .before = 1,
-    TripID = gsub("\\.\\d+", "", rownames(dir0_stops))
-  )
+  dir0_stops <- rows_bind(dir0_stops, dat$Direction0$TripID, "TripID")
   dat$Direction0 <- merge2(dat$Direction0[, -7], dir0_stops)
   if (!is.null(dat$Direction1)) {
     dir1_stops <- dat$Direction1$StopTimes
-    names(dir1_stops) <- dat$Direction1$TripID
-    dir1_stops <- do.call(rbind, dir1_stops)
-    dir1_stops <- tibble::add_column(
-      .data = dir1_stops, .before = 1,
-      TripID = gsub("\\.\\d+", "", rownames(dir1_stops))
-    )
+    dir1_stops <- rows_bind(dir1_stops, dat$Direction1$TripID, "TripID")
     dat$Direction1 <- merge2(dat$Direction1[, -7], dir0_stops)
     dat <- rbind(dat$Direction0, dat$Direction1)
   } else {

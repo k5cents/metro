@@ -15,7 +15,12 @@ significant portions of their paths along the same roadways.}
 }
 }
 \usage{
-bus_routes()
+bus_routes(api_key = wmata_key())
+}
+\arguments{
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 Data frame containing route variant information

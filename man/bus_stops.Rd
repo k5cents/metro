@@ -22,7 +22,7 @@ stops at this stop on any day will be listed.}
 }
 }
 \usage{
-bus_stops(Lat = NULL, Lon = NULL, Radius = NULL)
+bus_stops(Lat = NULL, Lon = NULL, Radius = NULL, api_key = wmata_key())
 }
 \arguments{
 \item{Lat}{Center point Latitude, required if \code{Longitude} and \code{Radius} are
@@ -33,6 +33,10 @@ specified.}
 
 \item{Radius}{Radius (meters) to include in the search area, required if
 \code{Latitude} and \code{Longitude} are specified.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 Data frame containing stop information
@@ -43,7 +47,7 @@ Omit all parameters to retrieve a list of all stops.
 }
 \examples{
 \dontrun{
-bus_stops(38.897, -77.036, 500)
+bus_stops(38.8895, -77.0353, 500)
 }
 }
 \seealso{

@@ -33,7 +33,13 @@ trip.}
 }
 }
 \usage{
-bus_position(RouteId = NULL, Lat = NULL, Lon = NULL, Radius = 1000)
+bus_position(
+  RouteId = NULL,
+  Lat = NULL,
+  Lon = NULL,
+  Radius = 1000,
+  api_key = wmata_key()
+)
 }
 \arguments{
 \item{RouteId}{Base bus route, e.g.: 70, 10A.}
@@ -46,9 +52,13 @@ specified.}
 
 \item{Radius}{Radius (meters) to include in the search area, required if
 \code{Latitude} and \code{Longitude} are specified.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
-Data frame containing bus position information
+Data frame containing bus position information.
 }
 \description{
 Returns bus positions for the given route, with an optional search radius. If
@@ -60,7 +70,7 @@ variations, i.e.: use 10A instead of 10Av1 or 10Av2.
 }
 \examples{
 \dontrun{
-bus_position(NULL, 38.897957, -77.036560, 1000)
+bus_position("70", 38.8895, -77.0353, 1200)
 }
 }
 \seealso{

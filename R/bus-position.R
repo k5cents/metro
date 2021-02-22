@@ -33,6 +33,7 @@
 #'   trip.}
 #'   \item{BlockNumber}{}
 #' }
+#'
 #' @param RouteId Base bus route, e.g.: 70, 10A.
 #' @param Lat Center point Latitude, required if Longitude and Radius are
 #'   specified.
@@ -40,24 +41,27 @@
 #'   specified.
 #' @param Radius Radius (meters) to include in the search area, required if
 #'   `Latitude` and `Longitude` are specified.
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
-#' bus_position(NULL, 38.897957, -77.036560, 1000)
+#' bus_position("70", 38.8895, -77.0353, 1200)
 #' }
-#' @return Data frame containing bus position information
+#' @return Data frame containing bus position information.
 #' @seealso <https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d68>
 #' @family Bus Route and Stop Methods
 #' @importFrom geodist geodist
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble add_column as_tibble
 #' @export
-bus_position <- function(RouteId = NULL, Lat = NULL, Lon = NULL, Radius = 1000) {
+bus_position <- function(RouteId = NULL, Lat = NULL, Lon = NULL, Radius = 1000,
+                         api_key = wmata_key()) {
   coord <- list(Lat = Lat, Lon = Lon, Radius = Radius)
-  json <- wmata_api(
-    type = "Bus", endpoint = "jBusPositions",
-    query = c(list(RouteId = RouteId), coord)
+  dat <- wmata_api(
+    path = "Bus.svc/json/jBusPositions",
+    query = c(list(RouteId = RouteId), coord),
+    flatten = TRUE,
+    level = 1
   )
-  dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
   if (length(dat) == 0) {
     warning("no routes found within your radius, please expand")
     return(empty_positions)

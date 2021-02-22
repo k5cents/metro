@@ -13,13 +13,17 @@ A list with 4 elements:
 }
 }
 \usage{
-bus_path(RouteID = NULL, Date = NULL)
+bus_path(RouteID, Date = NULL, api_key = wmata_key())
 }
 \arguments{
 \item{RouteID}{Bus route variant, e.g.: 70, 10A, 10Av1.}
 
 \item{Date}{Date for which to retrieve route and stop information. Uses
 today's date if \code{NULL} (default).}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
 A list with (1) set of ordered latitude/longitude points along a
@@ -31,11 +35,11 @@ a route variant along with the list of stops served.
 }
 \examples{
 \dontrun{
-bus_path("10A")
+bus_path("70")
 }
 }
 \seealso{
-\url{https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d69?}
+\url{https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d69}
 
 Other Bus Route and Stop Methods: 
 \code{\link{bus_departs}()},

@@ -25,23 +25,29 @@
 #'   specified.
 #' @param Radius Radius (meters) to include in the search area, required if
 #'   `Latitude` and `Longitude` are specified.
+#' @inheritParams wmata_api
 #' @examples
 #' \dontrun{
-#' bus_stops(38.897, -77.036, 500)
+#' bus_stops(38.8895, -77.0353, 500)
 #' }
 #' @return Data frame containing stop information
 #' @seealso <https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6d>
 #' @family Bus Route and Stop Methods
 #' @importFrom geodist geodist
-#' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble add_column
 #' @export
-bus_stops <- function(Lat = NULL, Lon = NULL, Radius = NULL) {
+bus_stops <- function(Lat = NULL, Lon = NULL, Radius = NULL,
+                      api_key = wmata_key()) {
   coord <- list(Lat = Lat, Lon = Lon, Radius = Radius)
-  json <- wmata_api(type = "Bus", endpoint = "jStops", query = coord)
-  dat <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
+  dat <- wmata_api(
+    path = "Bus.svc/json/jStops",
+    query = coord,
+    flatten = TRUE,
+    level = 1,
+    api_key = api_key
+  )
   if (length(dat) == 0) {
-    warning("no stops found within your Radius, please expand")
+    warning("No bus stops found, please expand your Radius")
     return(empty_stops)
   }
   if (is.null(Lat) || is.null(Lon)) {
@@ -53,7 +59,7 @@ bus_stops <- function(Lat = NULL, Lon = NULL, Radius = NULL) {
   tibble::as_tibble(dat[order(dat$Distance), ])
 }
 
-empty_stops <- data.frame(
+empty_stops <- tibble::tibble(
   StopID = character(),
   Name = character(),
   Lon = double(),
