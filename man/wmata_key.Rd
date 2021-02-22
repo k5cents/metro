@@ -2,44 +2,57 @@
 % Please edit documentation in R/key.R
 \name{wmata_key}
 \alias{wmata_key}
-\alias{wmata_demo}
 \alias{wmata_validate}
-\alias{browse_wmata_key}
+\alias{wmata_demo}
 \title{Find a WMATA API key}
 \usage{
-wmata_key()
-
-wmata_demo()
+wmata_key(api_key = Sys.getenv("WMATA_KEY"))
 
 wmata_validate(api_key = wmata_key())
 
-browse_wmata_key()
+wmata_demo()
 }
 \arguments{
 \item{api_key}{Subscription key which provides access to this API. Found in
-your Profile. Defaults to \code{\link[=wamta_key]{wamta_key()}}.}
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults to calling
+\code{Sys.getenv("WMATA_KEY")}.}
+}
+\value{
+For \code{\link[=wmata_key]{wmata_key()}} and \code{\link[=wmata_demo]{wmata_demo()}}, a 32 character alphanumeric
+API key. For \code{\link[=wmata_validate]{wmata_validate()}}, either \code{TRUE} for a valid key or an
+error if invalid.
 }
 \description{
 All calls to the WMATA API must be accompanied by a personal API key. A free
-key can be obtained by subscribing to the default tier. See
-\code{\link[=browse_wmata_key]{browse_wmata_key()}} for more information on getting a key and storing on
-your system.
+key can be obtained by subscribing to the default tier:
+\enumerate{
+\item Sign up for a free WMATA \href{https://developer.wmata.com/signup/}{developer account}.
+\item Log in and subscribe to the free \href{https://developer.wmata.com/products/5475f1b0031f590f380924fe}{default tier}.
+\item Copy the primary or secondary key from your \href{https://developer.wmata.com/developer}{profile}.
+\item Pass your API key to a function through one of three ways:
+\enumerate{
+\item Use \code{\link[=Sys.setenv]{Sys.setenv()}} to temporarily set define \code{WMATA_KEY}.
+\item Pass your key as a string to the \code{api_key} argument of any function.
+\item Store the the WMATA key as a line like \code{WMATA_KEY=xxxyyyzzz} in your
+\code{.Renviron} file.
+}
+}
 
 The WMATA also provides a demonstration key. This key should \strong{never} be
 used in production applications, it is rate limited and subject to change at
-\emph{any} time. The key can be found on
-\href{https://developer.wmata.com/products/5475f236031f590f380924ff}{this page}.
-If the user has the "rvest" package installed, the \code{\link[=wmata_demo]{wmata_demo()}} function
-can be used to try scrape said page and look for the key automatically.
+\emph{any} time. The key can be found on the \href{https://developer.wmata.com/products/5475f236031f590f380924ff}{WMATA products page} when not
+signed into a developer account. The \code{\link[=wmata_demo]{wmata_demo()}} function can be used to
+try and scrape the demo key from this page automatically.
 
 The \code{\link[=wmata_validate]{wmata_validate()}} function can be used to verify a key is valid.
 }
 \details{
 Default tier sufficient for most casual developers. Rate limited to 10
-calls/second and 50,000 calls per day. This product contains 8 APIs:
+calls/second and 50,000 calls per day. This product contains 8 APIs and all
+APIs needed for the functions in this package:
 \itemize{
 \item Bus Route and Stop Methods
-\item GTFS
+\item GTFS (unused)
 \item Incidents
 \item Misc Methods
 \item Rail Station Information
@@ -48,3 +61,7 @@ calls/second and 50,000 calls per day. This product contains 8 APIs:
 \item Train Positions
 }
 }
+\seealso{
+\url{https://developer.wmata.com/docs/services/5923434c08d33c0f201a600a/operations/5923437c031f5914d0204bcf}
+}
+\concept{Misc Methods}
