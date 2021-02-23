@@ -47,9 +47,9 @@
 
 
 <meta property="og:title" content="Call the WMATA API — wmata_api" />
-<meta property="og:description" content="Use httr::GET() to make a request to the WMATA API and return the unparsed
-JSON string. This function is used in others devoted to a
-specific APIs and endpoints." />
+<meta property="og:description" content="Use httr::GET() to make a request to the WMATA API and return the parsed
+list from the JSON data. The function uses httr::RETRY(), so the call will
+repeat up to three times if there is a failure (often from a rate limit)." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -127,9 +127,9 @@ specific APIs and endpoints." />
     </div>
 
     <div class="ref-description">
-    <p>Use <code><a href='https://httr.r-lib.org/reference/GET.html'>httr::GET()</a></code> to make a request to the WMATA API and return the unparsed
-JSON string. This function is used in others devoted to a
-specific APIs and endpoints.</p>
+    <p>Use <code><a href='https://httr.r-lib.org/reference/GET.html'>httr::GET()</a></code> to make a request to the WMATA API and return the parsed
+list from the JSON data. The function uses <code><a href='https://httr.r-lib.org/reference/RETRY.html'>httr::RETRY()</a></code>, so the call will
+repeat up to three times if there is a failure (often from a rate limit).</p>
     </div>
 
     <pre class="usage"><span class='fu'>wmata_api</span><span class='op'>(</span><span class='va'>path</span>, query <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span>, <span class='va'>level</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>

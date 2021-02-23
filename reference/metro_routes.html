@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All WMATA bus routes — metro_routes • metro</title>
+<title>All WMATA Bus Routes — metro_routes • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="All WMATA bus routes — metro_routes" />
-<meta property="og:description" content="All WMATA bus routes" />
+<meta property="og:title" content="All WMATA Bus Routes — metro_routes" />
+<meta property="og:description" content="All WMATA Bus Routes" />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -119,13 +119,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>All WMATA bus routes</h1>
+    <h1>All WMATA Bus Routes</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/data.R'><code>R/data.R</code></a></small>
     <div class="hidden name"><code>metro_routes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>All WMATA bus routes</p>
+    <p>All WMATA Bus Routes</p>
     </div>
 
     <pre class="usage"><span class='va'>metro_routes</span></pre>
@@ -133,16 +133,19 @@
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 325 rows and 3 variables:</p><dl>
-<dt>route</dt><dd><p>Unique identifier for a given route variant.</p></dd>
-<dt>name</dt><dd><p>Descriptive name of the route variant.</p></dd>
-<dt>description</dt><dd><p>Denotes the route variant’s grouping – lines are a
+    <p>A tibble 322 rows and 3 variables:</p><dl>
+<dt>RouteID</dt><dd><p>Unique identifier for a given route variant. Can be used in
+various other bus-related methods.</p></dd>
+<dt>Name</dt><dd><p>Descriptive name of the route variant.</p></dd>
+<dt>LineDescription</dt><dd><p>Denotes the route variant's grouping – lines are a
 combination of routes which lie in the same corridor and which have
 significant portions of their paths along the same roadways.</p></dd>
-...
 
 </dl>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>As of 2021-02-22 22:00:00 ET.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

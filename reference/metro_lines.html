@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All WMATA rail lines — metro_lines • metro</title>
+<title>All WMATA Rail Lines — metro_lines • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="All WMATA rail lines — metro_lines" />
-<meta property="og:description" content="All WMATA rail lines" />
+<meta property="og:title" content="All WMATA Rail Lines — metro_lines" />
+<meta property="og:description" content="All WMATA Rail Lines" />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -119,13 +119,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>All WMATA rail lines</h1>
+    <h1>All WMATA Rail Lines</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/data.R'><code>R/data.R</code></a></small>
     <div class="hidden name"><code>metro_lines.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>All WMATA rail lines</p>
+    <p>All WMATA Rail Lines</p>
     </div>
 
     <pre class="usage"><span class='va'>metro_lines</span></pre>
@@ -133,15 +133,29 @@
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 95 rows and 10 variables:</p><dl>
-<dt>line</dt><dd><p>Two-letter abbreviation for the line.</p></dd>
-<dt>name</dt><dd><p>Full name of line color.</p></dd>
-<dt>start</dt><dd><p>Start station code.</p></dd>
-<dt>end</dt><dd><p>End station code.</p></dd>
-...
+    <p>A tibble with 6 rows and 6 variables:</p><dl>
+<dt>LineCode</dt><dd><p>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
+GR, or SV).</p></dd>
+<dt>DisplayName</dt><dd><p>Full name of line color.</p></dd>
+<dt>StartStationCode</dt><dd><p>Start station code. For example, will be F11
+(Branch Avenue) for the Green Line, A15 (Shady Grove) for the Red Line,
+etc. Use this value in other rail-related APIs to retrieve data about a
+station.</p></dd>
+<dt>EndStationCode</dt><dd><p>End station code. For example, will be E10
+(Greenbelt) for the Green Line, B11 (Glenmont) for the Red Line, etc. Use
+this value in other rail-related APIs to retrieve data about a station.</p></dd>
+<dt>InternalDestination1</dt><dd><p>Intermediate terminal station code. During
+normal service, some trains on some lines might end their trip prior to the
+<code>StartStationCode</code> or <code>EndStationCode.</code> A good example is on the Red Line
+where some trains stop at A11 (Grosvenor) or B08 (Silver Spring). <code>NA</code> if
+not defined.</p></dd>
+<dt>InternalDestination2</dt><dd><p>Similar to <code>InternalDestination1</code>.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>As of 2021-02-22 22:00:00 ET.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

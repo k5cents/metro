@@ -87,7 +87,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of metro is to return data frames from the Washington Metropolitan Area Transit Authority API. User need a WMATA API key, see below for more details.</p>
+<p>The goal of metro is to return data frames from the Washington Metropolitan Area Transit Authority API. Nested lists have been converted to <a href="https://en.wikipedia.org/wiki/Tidy_data">tidy</a> data frames when possible.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -101,7 +101,7 @@
 <a href="#key" class="anchor"></a>Key</h2>
 <p>Usage of the WMATA API requires a developer API key. Such a key can be obtained by creating a developer account and subscribing to the free default tier.</p>
 <p>The WMATA also provides a <a href="https://developer.wmata.com/products/5475f236031f590f380924ff">demo key</a> to try out the various features of the API. This key should <strong>never</strong> be used in production, it is rate limited and subject to change at any time.</p>
-<p>As of December 2020, the demo key can be used like this:</p>
+<p>As of February 2021, the demo key can be used like this:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"WMATA_KEY"</span> <span class="op">=</span> <span class="st">"e13626d03d8e4c03ac07f95541b3091b"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -112,47 +112,75 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kiernann/metro">metro</a></span><span class="op">)</span></code></pre></div>
 <p>Functions return data frames for easy analysis.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/rail_stations.html">rail_stations</a></span><span class="op">(</span>line <span class="op">=</span> <span class="st">"RD"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">#&gt; # A tibble: 27 x 8</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;    station name                         lat   lon street                  city      state   zip</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                      &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                   &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;  1 A01     Metro Center                38.9 -77.0 607 13th St. NW         Washingt… DC    20005</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;  2 A02     Farragut North              38.9 -77.0 1001 Connecticut Avenu… Washingt… DC    20036</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;  3 A03     Dupont Circle               38.9 -77.0 1525 20th St. NW        Washingt… DC    20036</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt;  4 A04     Woodley Park-Zoo/Adams Mo…  38.9 -77.1 2700 Connecticut Ave.,… Washingt… DC    20008</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt;  5 A05     Cleveland Park              38.9 -77.1 3599 Connecticut Avenu… Washingt… DC    20008</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;  6 A06     Van Ness-UDC                38.9 -77.1 4200 Connecticut Avenu… Washingt… DC    20008</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;  7 A07     Tenleytown-AU               38.9 -77.1 4501 Wisconsin Avenue … Washingt… DC    20016</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;  8 A08     Friendship Heights          39.0 -77.1 5337 Wisconsin Avenue … Washingt… DC    20015</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;  9 A09     Bethesda                    39.0 -77.1 7450 Wisconsin Avenue   Bethesda  MD    20814</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt; 10 A10     Medical Center              39.0 -77.1 8810 Rockville Pike     Bethesda  MD    20814</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; # … with 17 more rows</span></span></code></pre></div>
-<p>Dates and locations often assume the user is in the Washington area.</p>
+<code class="sourceCode R"><span class="fu"><a href="reference/rail_stations.html">rail_stations</a></span><span class="op">(</span>LineCode <span class="op">=</span> <span class="st">"RD"</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 27 x 8</span>
+<span class="co">#&gt;    StationCode StationName                 Lat   Lon Street                City     State Zip  </span>
+<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;</span>
+<span class="co">#&gt;  1 A01         Metro Center               38.9 -77.0 607 13th St. NW       Washing… DC    20005</span>
+<span class="co">#&gt;  2 A02         Farragut North             38.9 -77.0 1001 Connecticut Ave… Washing… DC    20036</span>
+<span class="co">#&gt;  3 A03         Dupont Circle              38.9 -77.0 1525 20th St. NW      Washing… DC    20036</span>
+<span class="co">#&gt;  4 A04         Woodley Park-Zoo/Adams M…  38.9 -77.1 2700 Connecticut Ave… Washing… DC    20008</span>
+<span class="co">#&gt;  5 A05         Cleveland Park             38.9 -77.1 3599 Connecticut Ave… Washing… DC    20008</span>
+<span class="co">#&gt;  6 A06         Van Ness-UDC               38.9 -77.1 4200 Connecticut Ave… Washing… DC    20008</span>
+<span class="co">#&gt;  7 A07         Tenleytown-AU              38.9 -77.1 4501 Wisconsin Avenu… Washing… DC    20016</span>
+<span class="co">#&gt;  8 A08         Friendship Heights         39.0 -77.1 5337 Wisconsin Avenu… Washing… DC    20015</span>
+<span class="co">#&gt;  9 A09         Bethesda                   39.0 -77.1 7450 Wisconsin Avenue Bethesda MD    20814</span>
+<span class="co">#&gt; 10 A10         Medical Center             39.0 -77.1 8810 Rockville Pike   Bethesda MD    20814</span>
+<span class="co">#&gt; # … with 17 more rows</span></code></pre></div>
+<p>Use coordinates to find station entrances or bus stops near a location.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># White House coordinates</span>
+<span class="fu"><a href="reference/rail_entrance.html">rail_entrance</a></span><span class="op">(</span>Lat <span class="op">=</span> <span class="fl">38.8979</span>, Lon <span class="op">=</span> <span class="op">-</span><span class="fl">77.0365</span>, Radius <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 3 x 5</span>
+<span class="co">#&gt;   Name                                 StationCode   Lat   Lon Distance</span>
+<span class="co">#&gt;   &lt;chr&gt;                                &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 WEST ENTRANCE (VERMONT &amp; I STs)      C02          38.9 -77.0     379.</span>
+<span class="co">#&gt; 2 EAST ENTRANCE (EAST OF 17th &amp; I STs) C03          38.9 -77.0     422.</span>
+<span class="co">#&gt; 3 EAST ENTRANCE (14TH &amp; I STs)         C02          38.9 -77.0     499.</span></code></pre></div>
+<p>Dates use the UTC time zone but times use EST. Times are represented using the <a href="https://github.com/tidyverse/hms/issues/28"><code>hms</code></a> class, which counts the seconds since midnight (sometimes this means AM times are over 24 hours).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/rail_entrance.html">rail_entrance</a></span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">38.8979</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">77.0365</span>, radius <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">#&gt; # A tibble: 3 x 5</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt;   station   lat   lon distance name                                </span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                               </span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; 1 C02      38.9 -77.0     379. WEST ENTRANCE (VERMONT &amp; I STs)     </span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; 2 C03      38.9 -77.0     422. EAST ENTRANCE (EAST OF 17th &amp; I STs)</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; 3 C02      38.9 -77.0     499. EAST ENTRANCE (14TH &amp; I STs)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/bus_position.html">bus_position</a></span><span class="op">(</span>RouteId <span class="op">=</span> <span class="st">"L2"</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 2 x 7</span>
+<span class="co">#&gt;   VehicleID TripID  RouteID DirectionText TripHeadsign  TripStartTime       TripEndTime        </span>
+<span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;         &lt;dttm&gt;              &lt;dttm&gt;             </span>
+<span class="co">#&gt; 1 7120      190912… L2      NORTH         CHEVY CHASE … 2021-02-23 03:32:00 2021-02-23 04:08:00</span>
+<span class="co">#&gt; 2 7112      190915… L2      SOUTH         FARRAGUT SQU… 2021-02-23 03:45:00 2021-02-23 04:15:00</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/rail_times.html">rail_times</a></span><span class="op">(</span>StationCode <span class="op">=</span> <span class="st">"A07"</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 14 x 7</span>
+<span class="co">#&gt;    StationCode StationName   DestinationStation Weekday OpeningTime FirstTime LastTime</span>
+<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;              &lt;chr&gt;   &lt;time&gt;      &lt;time&gt;    &lt;time&gt;  </span>
+<span class="co">#&gt;  1 A07         Tenleytown-AU A15                Mon     05:14       05:46     23:51   </span>
+<span class="co">#&gt;  2 A07         Tenleytown-AU B11                Mon     05:14       05:24     23:19   </span>
+<span class="co">#&gt;  3 A07         Tenleytown-AU A15                Tue     05:14       05:46     23:51   </span>
+<span class="co">#&gt;  4 A07         Tenleytown-AU B11                Tue     05:14       05:24     23:19   </span>
+<span class="co">#&gt;  5 A07         Tenleytown-AU A15                Wed     05:14       05:46     23:51   </span>
+<span class="co">#&gt;  6 A07         Tenleytown-AU B11                Wed     05:14       05:24     23:19   </span>
+<span class="co">#&gt;  7 A07         Tenleytown-AU A15                Thu     05:14       05:46     23:51   </span>
+<span class="co">#&gt;  8 A07         Tenleytown-AU B11                Thu     05:14       05:24     23:19   </span>
+<span class="co">#&gt;  9 A07         Tenleytown-AU A15                Fri     05:14       05:46     25:21   </span>
+<span class="co">#&gt; 10 A07         Tenleytown-AU B11                Fri     05:14       05:24     24:49   </span>
+<span class="co">#&gt; 11 A07         Tenleytown-AU A15                Sat     07:14       07:46     25:21   </span>
+<span class="co">#&gt; 12 A07         Tenleytown-AU B11                Sat     07:14       07:24     24:49   </span>
+<span class="co">#&gt; 13 A07         Tenleytown-AU A15                Sun     08:14       08:46     23:21   </span>
+<span class="co">#&gt; 14 A07         Tenleytown-AU B11                Sun     08:14       08:24     22:49</span></code></pre></div>
 <p>Functions that always return the same data have that data saved as objects.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">metro_stops</span> <span class="co"># bus_stops() for live</span>
-<span class="co">#&gt; # A tibble: 9,074 x 5</span>
-<span class="co">#&gt;    stop    name                                  lon   lat routes    </span>
-<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                               &lt;dbl&gt; &lt;dbl&gt; &lt;list&gt;    </span>
-<span class="co">#&gt;  1 2000474 UNIVERSITY BLVD W + HEMINGWAY CT    -77.0  39.0 &lt;chr [6]&gt; </span>
-<span class="co">#&gt;  2 2000475 UNIVERSITY BLVD W + INWOOD AVE      -77.0  39.0 &lt;chr [6]&gt; </span>
-<span class="co">#&gt;  3 2000477 UNIVERSITY BLVD W + SLIGO CREEK PKY -77.0  39.0 &lt;chr [2]&gt; </span>
-<span class="co">#&gt;  4 2000479 LOCKWOOD DR + NORTHWEST DR          -77.0  39.0 &lt;chr [10]&gt;</span>
-<span class="co">#&gt;  5 2000480 UNIVERSITY BLVD W + SLIGO CREEK PKY -77.0  39.0 &lt;chr [6]&gt; </span>
-<span class="co">#&gt;  6 2000481 LOCKWOOD DR + NORTHWEST DR          -77.0  39.0 &lt;chr [9]&gt; </span>
-<span class="co">#&gt;  7 2000483 NEW HAMPSHIRE AVE + NORTHWEST DR    -77.0  39.0 &lt;chr [4]&gt; </span>
-<span class="co">#&gt;  8 2000486 FALLS RD + ELDWICK WAY              -77.2  39.0 &lt;chr [1]&gt; </span>
-<span class="co">#&gt;  9 2000487 UNIVERSITY BLVD W + EASECREST DR    -77.0  39.0 &lt;chr [6]&gt; </span>
-<span class="co">#&gt; 10 2000488 UNIVERSITY BLVD W + EASECREST DR    -77.0  39.0 &lt;chr [2]&gt; </span>
-<span class="co">#&gt; # … with 9,064 more rows</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 9,044 x 5</span>
+<span class="co">#&gt;    StopID  Name                                                Lon   Lat Routes   </span>
+<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                                             &lt;dbl&gt; &lt;dbl&gt; &lt;list&gt;   </span>
+<span class="co">#&gt;  1 1000001 SHEPHERD PKY SW + SHEPHERD PKY SW                 -77.0  38.8 &lt;chr [3]&gt;</span>
+<span class="co">#&gt;  2 1000003 SHEPHERD PKY SW + DC VILLAGE LN                   -77.0  38.8 &lt;chr [3]&gt;</span>
+<span class="co">#&gt;  3 1000004 M L KING AVE + JOLIET ST                          -77.0  38.8 &lt;chr [5]&gt;</span>
+<span class="co">#&gt;  4 1000005 SHEPHERD PKWY + FIRE DEPT TRNG CTR                -77.0  38.8 &lt;chr [3]&gt;</span>
+<span class="co">#&gt;  5 1000006 SHEPHERD PKY SW + FIRE DEPARTMENT TRAINING CENTER -77.0  38.8 &lt;chr [3]&gt;</span>
+<span class="co">#&gt;  6 1000007 IRVINGTON ST SW + MARTIN LUTHER KING JR AVE SW    -77.0  38.8 &lt;chr [6]&gt;</span>
+<span class="co">#&gt;  7 1000008 IRVINGTON ST + IVANHOE ST                         -77.0  38.8 &lt;chr [6]&gt;</span>
+<span class="co">#&gt;  8 1000009 SOUTHERN AVE SE + S CAPITOL ST SE                 -77.0  38.8 &lt;chr [1]&gt;</span>
+<span class="co">#&gt;  9 1000010 MARTIN LUTHER KING JR AVE SW + #4660              -77.0  38.8 &lt;chr [5]&gt;</span>
+<span class="co">#&gt; 10 1000012 MARTIN LUTHER KING JR AVE SW + BLUE PLAINS DR SW  -77.0  38.8 &lt;chr [6]&gt;</span>
+<span class="co">#&gt; # … with 9,034 more rows</span></code></pre></div>
 <!-- refs: start -->
 <!-- refs: end -->
 </div>

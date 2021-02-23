@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All WMATA bus stops — metro_stops • metro</title>
+<title>All WMATA Bus Stops — metro_stops • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="All WMATA bus stops — metro_stops" />
-<meta property="og:description" content="All WMATA bus stops" />
+<meta property="og:title" content="All WMATA Bus Stops — metro_stops" />
+<meta property="og:description" content="All WMATA Bus Stops" />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -119,13 +119,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>All WMATA bus stops</h1>
+    <h1>All WMATA Bus Stops</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/data.R'><code>R/data.R</code></a></small>
     <div class="hidden name"><code>metro_stops.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>All WMATA bus stops</p>
+    <p>All WMATA Bus Stops</p>
     </div>
 
     <pre class="usage"><span class='va'>metro_stops</span></pre>
@@ -133,16 +133,23 @@
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 9,074 rows and 5 variables:</p><dl>
-<dt>stop</dt><dd><p>Bus stop ID</p></dd>
-<dt>name</dt><dd><p>Bus stop name</p></dd>
-<dt>lon</dt><dd><p>Latitude.</p></dd>
-<dt>lat</dt><dd><p>Longitude.</p></dd>
-<dt>routes</dt><dd><p>Character vector of routes services by stop.</p></dd>
-...
+    <p>A tibble with 9,044 rows and 5 variables:</p><dl>
+<dt>StopID</dt><dd><p>String array of route variants which provide service at this
+stop. Note that these are not date-specific; any route variant which stops
+at this stop on any day will be listed.</p></dd>
+<dt>Name</dt><dd><p>Stop name. May be slightly different from what is spoken or
+displayed in the bus.</p></dd>
+<dt>Lat</dt><dd><p>Latitude.</p></dd>
+<dt>Lon</dt><dd><p>Longitude.</p></dd>
+<dt>Routes</dt><dd><p>Character string of route variants which provide service at
+this stop. Note that these are not date-specific; any route variant which
+stops at this stop on any day will be listed.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>As of 2021-02-22 22:00:00 ET.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

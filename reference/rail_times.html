@@ -157,18 +157,18 @@ your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
 <dt>StationCode</dt><dd><p>Station code for this station. Use this value in other
 rail-related APIs to retrieve data about a station.</p></dd>
 <dt>StationName</dt><dd><p>Full name of the station.</p></dd>
-<dt>Weekday</dt><dd><p>Abbreviated day of the week.</p></dd>
-<dt>OpeningTime</dt><dd><p>Station opening time (EST). Format is HH:mm.</p></dd>
-<dt>FirstStation</dt><dd><p>Station code for the train's destination. Use this
-value in other rail-related APIs to retrieve data about a station.</p></dd>
-<dt>FirstTime</dt><dd><p>First train leaves the station at this time (EST). Format
-is HH:mm.</p></dd>
-<dt>LastStation</dt><dd><p>Station code for the train's destination. Use this value
-in other rail-related APIs to retrieve data about a station.</p></dd>
-<dt>LastTime</dt><dd><p>Last train leaves the station at this time (EST). Format is
-HH:mm. Note that when the time is AM, it signifies the next day. For
-example, a value of 02:30 under a Saturday element means the last train
-leaves on Sunday at 2:30 AM.</p></dd>
+<dt>DestinationStation</dt><dd><p>Station code for the train's destination. Use
+this value in other rail-related APIs to retrieve data about a station.</p></dd>
+<dt>Weekday</dt><dd><p>Day of the week abbreviation. From list element names.</p></dd>
+<dt>OpeningTime</dt><dd><p>Station opening time. Converted to <code>hms</code> class with
+<code><a href='https://hms.tidyverse.org/reference/parse_hms.html'>hms::parse_hm()</a></code>, representing seconds since midnight of that <code>Weekday</code>.</p></dd>
+<dt>FirstTime</dt><dd><p>First train leaves the station at this time (ET).
+Converted to <code>hms</code> class with <code><a href='https://hms.tidyverse.org/reference/parse_hms.html'>hms::parse_hm()</a></code>, representing seconds since
+midnight of that <code>Weekday</code>.</p></dd>
+<dt>LastTime</dt><dd><p>Last train leaves the station at this time (ET). Converted
+to <code>hms</code> class with <code><a href='https://hms.tidyverse.org/reference/parse_hms.html'>hms::parse_hm()</a></code>, representing seconds since midnight
+of that <code>Weekday</code>. For times that were in the AM of the <em>next</em> <code>Weekday</code>,
+time is greater than 24 hours.</p></dd>
 
 </dl>
 
