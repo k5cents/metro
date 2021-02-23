@@ -23,10 +23,10 @@ test_that("next trains from one station", {
 test_that("next trains from multiple stations", {
   skip_if_no_key()
   Sys.sleep(0.11)
-  n <- next_train(StationCodes = c("A02", "B02", "C02"))
+  n <- next_train(StationCodes = sample(metro_stations$StationCode, 10))
   expect_s3_class(n, "data.frame")
   expect_length(n, 9)
-  expect_equal(length(unique(n$LocationCode)), 3)
+  expect_gt(length(unique(n$LocationCode)), 1)
   expect_type(n$Min, "integer")
   expect_type(n$Car, "integer")
 })
