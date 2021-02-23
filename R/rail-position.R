@@ -48,14 +48,14 @@
 #' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
-#' train_positions()
+#' rail_positions()
 #' }
 #' @return A data frame of train positions.
 #' @seealso <https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/5763fb35f91823096cac1058>
 #' @family Train Positions
 #' @importFrom tibble as_tibble
 #' @export
-train_positions <- function(api_key = api_key) {
+rail_positions <- function(api_key = api_key) {
    dat <- wmata_api(
       path = "TrainPositions/TrainPositions",
       query = list(contentType = "json"),

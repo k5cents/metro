@@ -46,7 +46,7 @@ standard_routes()
 \url{https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/57641afc031f59363c586dca}
 
 Other Train Positions: 
-\code{\link{track_circuits}()},
-\code{\link{train_positions}()}
+\code{\link{rail_positions}()},
+\code{\link{track_circuits}()}
 }
 \concept{Train Positions}
