@@ -14,9 +14,9 @@ test_that("entrances found for single location", {
   s <- bus_stops(38.897957, -77.036560, 1000)
   expect_length(s, 6)
   expect_s3_class(s, "data.frame")
-  expect_false(any(is.na(s$distance)))
-  expect_type(s$routes, "list")
-  expect_true(is.vector(s$routes[[1]]))
+  expect_false(any(is.na(s$Distance)))
+  expect_type(s$Routes, "list")
+  expect_true(is.vector(s$Routes[[1]]))
 })
 
 test_that("all entrances returned without radius", {
@@ -26,7 +26,7 @@ test_that("all entrances returned without radius", {
   s <- bus_stops(38.897957, -77.036560)
   expect_length(s, 6)
   expect_s3_class(s, "data.frame")
-  expect_false(any(is.na(s$distance)))
+  expect_false(any(is.na(s$Distance)))
   expect_gt(nrow(s), 9000) # all
 })
 
@@ -36,5 +36,5 @@ test_that("distances not returned without coordinates", {
   s <- bus_stops()
   expect_length(s, 6)
   expect_s3_class(s, "data.frame")
-  expect_true(all(is.na(s$distance)))
+  expect_true(all(is.na(s$Distance)))
 })

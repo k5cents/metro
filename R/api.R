@@ -4,44 +4,46 @@
 #' JSON string. This function is used in others devoted to a
 #' specific APIs and endpoints.
 #'
-#' This function was modified from zamorarr's wmata on GitHub:
+#' This function was modified from 'zamorarr/wmata' on GitHub:
 #' <https://github.com/zamorarr/wmata/blob/master/R/api.r>
 #' @param type The API base type to call, one of "Rail" or "Bus".
 #' @param endpoint The API endpoint (e.g., "jStations").
 #' @param query Additional queries also passed, possibly your key if need be.
-#' @return A single JSON string.
+#' @param ... Arguments passed to [jsonlite::fromJSON()] for parsing.
+#' @param level If parsed JSON is a list, select only this element. Useful if
+#'   the list is length one containing a data frame or some other object.
+#' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
-#' wmata_api("Rail", "jLines", query = list(LineCode = "RD"))
+#' wmata_api("Rail.svc/json/jLines", query = list(LineCode = "RD"))
 #' }
-#' @importFrom httr modify_url GET add_headers http_type content http_error
+#' @return A single JSON string.
+#' @importFrom httr accept_json GET add_headers http_type content http_error
 #'   status_code
 #' @importFrom jsonlite fromJSON
 #' @keywords internal
-wmata_api <- function(type = c("Rail", "Bus", "Incidents", "NextBusService",
-                               "StationPrediction"), endpoint, query = NULL) {
-  type <- match.arg(type)
-  stopifnot(length(endpoint) == 1L)
-  path <- paste0(type, ".svc/json/", endpoint)
-  api <- httr::modify_url("https://api.wmata.com", path = path, query = query)
-  request <- httr::add_headers(
-    `api_key` = wmata_key(),
-    `Content-Type` = "application/json",
-    `Accept` = "application/json"
-  )
-  response <- httr::GET(api, config = request)
-  if (httr::http_type(response) != "application/json") {
-    stop("API did not return json", call. = FALSE)
+#' @export
+wmata_api <- function(path, query = NULL, ..., level, api_key = wmata_key()) {
+  stopifnot(length(path) == 1L)
+  ua <- httr::user_agent("https://github.com/kiernann/metro/")
+  url <- httr::modify_url("https://api.wmata.com", path = path, query = query)
+  resp <- httr::GET(url, ua, httr::add_headers(api_key = api_key))
+  if (httr::http_type(resp) != "application/json") {
+    stop("API did not return JSON", call. = FALSE)
   }
-  content <- httr::content(response, as = "text", encoding = "UTF-8")
-  json <- jsonlite::fromJSON(content, simplifyVector = FALSE)
-  if (httr::http_error(response)) {
+  raw <- httr::content(resp, as = "text", encoding = "UTF-8")
+  parsed <- jsonlite::fromJSON(raw, ...)
+  if (!missing(level) && is.list(parsed)) {
+    parsed <- parsed[[level]]
+  }
+  if (httr::http_error(resp)) {
     stop(
       sprintf(
-        "WMATA API request failed with status %s and message:\n%s",
-        httr::status_code(response), json$Message
-      ), call. = FALSE
+        "WMATA API request failed [%s]\n%s",
+        httr::status_code(resp), parsed$Message
+      ),
+      call. = FALSE,
     )
   }
-  return(content)
+  parsed
 }

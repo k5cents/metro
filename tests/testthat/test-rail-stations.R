@@ -1,19 +1,19 @@
 test_that("rail stations are listed for all lines", {
   skip_if_no_key()
   Sys.sleep(0.11)
-  s <- rail_stations(line = NULL)
+  s <- rail_stations(LineCode = NULL)
   expect_length(s, 10)
   expect_equal(nrow(s), 95)
   expect_s3_class(s, "data.frame")
-  expect_type(s$lines, "list")
+  expect_type(s$LineCodes, "list")
 })
 
-test_that("rail stations are listed for one", {
+test_that("rail stations are listed for one line", {
   skip_if_no_key()
   Sys.sleep(0.11)
-  s <- rail_stations(line = "RD")
+  s <- rail_stations(LineCode = "RD")
   expect_length(s, 10)
   expect_equal(nrow(s), 27)
   expect_s3_class(s, "data.frame")
-  expect_type(s$lines, "list")
+  expect_type(s$LineCodes, "list")
 })

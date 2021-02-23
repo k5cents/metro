@@ -2,42 +2,85 @@
 % Please edit documentation in R/bus-position.R
 \name{bus_position}
 \alias{bus_position}
-\title{Bus position}
+\title{Bus Position}
 \format{
-A tibble with 13 variables:
+A data frame with 1 row per bus and 13 variables:
 \describe{
-\item{vehicle}{Unique identifier. Usually visible on the bus itself.}
-\item{lat}{Last reported Latitude of the bus.}
-\item{lon}{Last reported Longitude of the bus.}
-\item{dist}{Distance in meters from provided coordinates.}
-\item{deviation}{Deviation, in minutes, from schedule.}
-\item{time}{Date and time (EST) of last position update.}
-\item{trip}{Unique trip ID. Used with the schedule-related functions.}
-\item{route}{Base route name as shown on the bus.}
-\item{direction}{General direction of the trip, not the bus itself }
-\item{head}{Destination of the bus.}
-\item{start}{Scheduled start time (EST) of the bus's current trip.}
-\item{end}{Scheduled end time (EST) of the bus's current trip.}
-\item{block}{}
+\item{VehicleID}{Unique identifier for the bus. This is usually visible on
+the bus itself.}
+\item{Lat}{Last reported Latitude of the bus.}
+\item{Lon}{Last reported Longitude of the bus.}
+\item{Distance}{Distance (meters) of the bus from the provided search
+coordinates. Calculated using \code{\link[geodist:geodist]{geodist::geodist()}} and the "cheap ruler"
+method.}
+\item{Deviation}{Deviation, in minutes, from schedule. Positive values
+indicate that the bus is running late while negative ones are for buses
+running ahead of schedule.}
+\item{DateTime}{Date and time (UTC) of last position update.}
+\item{TripID}{Unique trip ID. This can be correlated with the data returned
+from the schedule-related methods.}
+\item{RouteID}{Base route name as shown on the bus. Note that the base
+route name could also refer to any variant, so a RouteID of 10A could refer
+to 10A, 10Av1, 10Av2, etc.}
+\item{DirectionText}{General direction of the trip, not the bus itself
+(e.g.: NORTH, SOUTH, EAST, WEST).}
+\item{TripHeadsign}{Destination of the bus.}
+\item{TripStartTime}{Scheduled start date and time (UTC) of the bus's
+current trip.}
+\item{TripEndTime}{Scheduled end date and time (UTC) of the bus's current
+trip.}
+\item{BlockNumber}{}
 }
 }
 \usage{
-bus_position(route = NULL, lat = NULL, lon = NULL, radius = 1000)
+bus_position(
+  RouteId = NULL,
+  Lat = NULL,
+  Lon = NULL,
+  Radius = 1000,
+  api_key = wmata_key()
+)
 }
 \arguments{
-\item{route}{Base bus route, e.g.: 70, 10A.}
+\item{RouteId}{Base bus route, e.g.: 70, 10A.}
 
-\item{lat}{Center point Latitude.}
+\item{Lat}{Center point Latitude, required if Longitude and Radius are
+specified.}
 
-\item{lon}{Center point Longitude.}
+\item{Lon}{Center point Longitude, required if Latitude and Radius are
+specified.}
 
-\item{radius}{Meters to include in the search area for \code{lat} and \code{lon}.}
+\item{Radius}{Radius (meters) to include in the search area, required if
+\code{Latitude} and \code{Longitude} are specified.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
+}
+\value{
+Data frame containing bus position information.
 }
 \description{
 Returns bus positions for the given route, with an optional search radius. If
 no parameters are specified, all bus positions are returned.
 }
 \details{
-Note that the \code{route} parameter accepts only base route names and no
+Note that the \code{RouteID} parameter accepts only base route names and no
 variations, i.e.: use 10A instead of 10Av1 or 10Av2.
 }
+\examples{
+\dontrun{
+bus_position("70", 38.8895, -77.0353, 1200)
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d68}
+
+Other Bus Route and Stop Methods: 
+\code{\link{bus_departs}()},
+\code{\link{bus_path}()},
+\code{\link{bus_routes}()},
+\code{\link{bus_schedule}()},
+\code{\link{bus_stops}()}
+}
+\concept{Bus Route and Stop Methods}

@@ -2,34 +2,69 @@
 % Please edit documentation in R/bus-schedule.R
 \name{bus_schedule}
 \alias{bus_schedule}
-\title{Bus route and stop methods}
+\title{Bus Schedule}
 \format{
-A tibble with 10 variables:
+A data frame with 1 row per trip and 10 variables:
 \describe{
-\item{route_id}{The bus route ID}
-\item{direction}{General route direction}
-\item{trip_head}{Destination of the bus.}
-\item{trip_id}{Trip identifier.}
-\item{start_time}{Scheduled start date and time (EST) for this trip.}
-\item{end_time}{Scheduled end date and time (EST) for this trip.}
-\item{stop_seq}{Order of the stop in the sequence of StopTimes.}
-\item{stop_id}{7-digit regional ID. If unavailable, 0 or NULL.}
-\item{stop_name}{Stop name. May be different from what is displayed.}
-\item{stop_time}{Scheduled departure date and time (EST) from this stop.}
+\item{RouteID}{Bus route variant. This can be used in several other bus
+methods which accept variants.}
+\item{TripDirectionText}{General direction of the trip (NORTH, SOUTH, EAST,
+WEST, LOOP, etc.).}
+\item{TripHeadsign}{Descriptive text of where the bus is headed. This is
+similar, but not necessarily identical, to what is displayed on the bus.}
+\item{StartTime}{Scheduled start date and time (UTC) for this trip.}
+\item{EndTime}{Scheduled end date and time (UTC) for this trip.}
+\item{TripID}{Unique trip ID. This can be correlated with the data returned
+from the schedule-related methods.}
+\item{StopID}{7-digit regional ID which can be used in various bus-related
+methods. If unavailable, the \code{StopID} will be 0 or \code{NA}}
+\item{StopName}{Stop name. May be slightly different from what is spoken or
+displayed in the bus.}
+\item{StopSeq}{Order of the stop in the sequence of StopTimes.}
+\item{Time}{Scheduled departure date and time (UTC) from this stop.}
 }
 }
 \usage{
-bus_schedule(route = NULL, variants = TRUE, date = NULL)
+bus_schedule(
+  RouteID,
+  IncludingVariations = TRUE,
+  Date = NULL,
+  api_key = wmata_key()
+)
 }
 \arguments{
-\item{route}{Bus route variant, e.g.: 70, 10A, 10Av1, etc.}
+\item{RouteID}{Bus route variant, e.g.: 70, 10A, 10Av1, etc.}
 
-\item{variants}{Should variations of \code{route} be included?. For example, if
-B30 is specified and \code{TRUE} (default), data for all variations of B30 such
-as B30v1, B30v2, etc. will be returned.}
+\item{IncludingVariations}{Whether or not to include variations if a base
+route is specified in RouteID. For example, if B30 is specified and
+\code{IncludingVariations} is set to \code{TRUE} (default), data for all variations
+of B30 such as B30v1, B30v2, etc. will be returned.}
 
-\item{date}{Date for which to retrieve route and stop information.}
+\item{Date}{(Optional) Date for which to retrieve route and stop information.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
+}
+\value{
+Data frame containing trip information
 }
 \description{
 Returns schedules for a given route variant for a given date.
 }
+\examples{
+\dontrun{
+bus_schedule("70")
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6b}
+
+Other Bus Route and Stop Methods: 
+\code{\link{bus_departs}()},
+\code{\link{bus_path}()},
+\code{\link{bus_position}()},
+\code{\link{bus_routes}()},
+\code{\link{bus_stops}()}
+}
+\concept{Bus Route and Stop Methods}

@@ -4,5 +4,5 @@ test_that("bus schedule returns for both directions", {
   s <- bus_schedule("10A")
   expect_length(s, 10)
   expect_s3_class(s, "data.frame")
-  expect_s3_class(s$end_time, "POSIXlt")
+  expect_s3_class(s$EndTime, "POSIXct")
 })

@@ -2,26 +2,50 @@
 % Please edit documentation in R/bus-path.R
 \name{bus_path}
 \alias{bus_path}
-\title{Bus path details}
+\title{Bus Path Details}
 \format{
 A list with 4 elements:
 \describe{
-\item{route}{The route code.}
-\item{name}{The route name.}
-\item{shape}{The coordinate path of the line in both directions.}
-\item{stops}{The coordinates of stops on a given line.}
+\item{RouteID}{Bus route variant.}
+\item{Name}{Descriptive name for the route.}
+\item{ShapePoint}{The coordinate path of the line in both directions.}
+\item{Stops}{The coordinates of stops on a given line.}
 }
 }
 \usage{
-bus_path(route = NULL, date = NULL)
+bus_path(RouteID, Date = NULL, api_key = wmata_key())
 }
 \arguments{
-\item{route}{Bus route variant, e.g.: 70, 10A, 10Av1.}
+\item{RouteID}{Bus route variant, e.g.: 70, 10A, 10Av1.}
 
-\item{date}{Date for which to retrieve route and stop information.}
+\item{Date}{Date for which to retrieve route and stop information. Uses
+today's date if \code{NULL} (default).}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
+}
+\value{
+A list with (1) set of ordered latitude/longitude points along a
+route variant along with (2) the list of stops served.
 }
 \description{
 For a given date, returns the set of ordered latitude/longitude points along
-a route variant along with the list of stops served. Useful for creating
-maps.
+a route variant along with the list of stops served.
 }
+\examples{
+\dontrun{
+bus_path("70")
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d69}
+
+Other Bus Route and Stop Methods: 
+\code{\link{bus_departs}()},
+\code{\link{bus_position}()},
+\code{\link{bus_routes}()},
+\code{\link{bus_schedule}()},
+\code{\link{bus_stops}()}
+}
+\concept{Bus Route and Stop Methods}

@@ -2,30 +2,62 @@
 % Please edit documentation in R/bus-stops.R
 \name{bus_stops}
 \alias{bus_stops}
-\title{Rail stop search}
+\title{Bus Stop Search}
 \format{
-A tibble with 6 variables:
+A tibble with 1 row per stop and 6 variables:
 \describe{
-\item{stop}{Bus stop ID}
-\item{name}{Bus stop name}
-\item{lon}{Latitude.}
-\item{lat}{Longitude.}
-\item{distance}{Distance in meters from provided coordinates.}
-\item{routes}{Character vector of routes services by stop.}
+\item{StopID}{String array of route variants which provide service at this
+stop. Note that these are not date-specific; any route variant which stops
+at this stop on any day will be listed.}
+\item{Name}{Stop name. May be slightly different from what is spoken or
+displayed in the bus.}
+\item{Lat}{Latitude.}
+\item{Lon}{Longitude.}
+\item{Distance}{Distance (meters) of the stop from the provided search
+coordinates. Calculated using \code{\link[geodist:geodist]{geodist::geodist()}} and the "cheap ruler"
+method.}
+\item{Routes}{Character string of route variants which provide service at
+this stop. Note that these are not date-specific; any route variant which
+stops at this stop on any day will be listed.}
 }
 }
 \usage{
-bus_stops(lat = NULL, lon = NULL, radius = NULL)
+bus_stops(Lat = NULL, Lon = NULL, Radius = NULL, api_key = wmata_key())
 }
 \arguments{
-\item{lat}{Center point Latitude.}
+\item{Lat}{Center point Latitude, required if \code{Longitude} and \code{Radius} are
+specified.}
 
-\item{lon}{Center point Longitude}
+\item{Lon}{Center point Longitude, required if \code{Latitude} and \code{Radius} are
+specified.}
 
-\item{radius}{Radius (meters) to include in the search area. If \code{NULL}, while
-\code{lat} and \code{lon} are supplied, all stations are returned.}
+\item{Radius}{Radius (meters) to include in the search area, required if
+\code{Latitude} and \code{Longitude} are specified.}
+
+\item{api_key}{Subscription key which provides access to this API. Found in
+your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
+}
+\value{
+Data frame containing stop information
 }
 \description{
 Returns a list of nearby bus stops based on latitude, longitude, and radius.
 Omit all parameters to retrieve a list of all stops.
 }
+\examples{
+\dontrun{
+bus_stops(38.8895, -77.0353, 500)
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6d}
+
+Other Bus Route and Stop Methods: 
+\code{\link{bus_departs}()},
+\code{\link{bus_path}()},
+\code{\link{bus_position}()},
+\code{\link{bus_routes}()},
+\code{\link{bus_schedule}()}
+}
+\concept{Bus Route and Stop Methods}

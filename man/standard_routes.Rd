@@ -2,9 +2,31 @@
 % Please edit documentation in R/standard-routes.R
 \name{standard_routes}
 \alias{standard_routes}
-\title{Standard routes}
+\title{Standard Routes}
+\format{
+A nested tibble with 1 row per track and 3 variables:
+\describe{
+\item{LineCode}{Abbreviation for the revenue line. Note that this also
+includes \strong{YLRP} (Yellow Line Rush Plus).}
+\item{TrackNum}{Track number (1 or 2).}
+\item{TrackCircuits}{Array containing ordered track circuit information:
+\itemize{
+\item \code{CircuitId}: An internal system-wide uniquely identifiable circuit
+number.
+\item \code{SeqNum}: Order in which the circuit appears for the given line and
+track. Sequences go from West to East and South to North.
+\item \code{StationCode}: If the circuit is at a station, this value will represent
+the station code. Otherwise, it will be be \code{NA}. Use this value in other
+rail-related APIs to retrieve data about a station.
+}
+}
+}
+}
 \usage{
 standard_routes()
+}
+\value{
+A nested data frame of track circuits.
 }
 \description{
 Returns an ordered list of mostly revenue (and some lead) track circuits,
@@ -15,3 +37,16 @@ should be cached for a reasonable amount of time.
 Please refer to \href{https://developer.wmata.com/TrainPositionsFAQ}{this page}
 for additional details.
 }
+\examples{
+\dontrun{
+standard_routes()
+}
+}
+\seealso{
+\url{https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/57641afc031f59363c586dca}
+
+Other Train Positions: 
+\code{\link{track_circuits}()},
+\code{\link{train_positions}()}
+}
+\concept{Train Positions}

@@ -1,70 +1,108 @@
-#' Bus position
+#' Bus Position
 #'
 #' Returns bus positions for the given route, with an optional search radius. If
 #' no parameters are specified, all bus positions are returned.
 #'
-#' Note that the `route` parameter accepts only base route names and no
+#' Note that the `RouteID` parameter accepts only base route names and no
 #' variations, i.e.: use 10A instead of 10Av1 or 10Av2.
-#' @format A tibble with 13 variables:
+#'
+#' @format A data frame with 1 row per bus and 13 variables:
 #' \describe{
-#'   \item{vehicle}{Unique identifier. Usually visible on the bus itself.}
-#'   \item{lat}{Last reported Latitude of the bus.}
-#'   \item{lon}{Last reported Longitude of the bus.}
-#'   \item{dist}{Distance in meters from provided coordinates.}
-#'   \item{deviation}{Deviation, in minutes, from schedule.}
-#'   \item{time}{Date and time (EST) of last position update.}
-#'   \item{trip}{Unique trip ID. Used with the schedule-related functions.}
-#'   \item{route}{Base route name as shown on the bus.}
-#'   \item{direction}{General direction of the trip, not the bus itself }
-#'   \item{head}{Destination of the bus.}
-#'   \item{start}{Scheduled start time (EST) of the bus's current trip.}
-#'   \item{end}{Scheduled end time (EST) of the bus's current trip.}
-#'   \item{block}{}
+#'   \item{VehicleID}{Unique identifier for the bus. This is usually visible on
+#'   the bus itself.}
+#'   \item{Lat}{Last reported Latitude of the bus.}
+#'   \item{Lon}{Last reported Longitude of the bus.}
+#'   \item{Distance}{Distance (meters) of the bus from the provided search
+#'   coordinates. Calculated using [geodist::geodist()] and the "cheap ruler"
+#'   method.}
+#'   \item{Deviation}{Deviation, in minutes, from schedule. Positive values
+#'   indicate that the bus is running late while negative ones are for buses
+#'   running ahead of schedule.}
+#'   \item{DateTime}{Date and time (UTC) of last position update.}
+#'   \item{TripID}{Unique trip ID. This can be correlated with the data returned
+#'   from the schedule-related methods.}
+#'   \item{RouteID}{Base route name as shown on the bus. Note that the base
+#'   route name could also refer to any variant, so a RouteID of 10A could refer
+#'   to 10A, 10Av1, 10Av2, etc.}
+#'   \item{DirectionText}{General direction of the trip, not the bus itself
+#'   (e.g.: NORTH, SOUTH, EAST, WEST).}
+#'   \item{TripHeadsign}{Destination of the bus.}
+#'   \item{TripStartTime}{Scheduled start date and time (UTC) of the bus's
+#'   current trip.}
+#'   \item{TripEndTime}{Scheduled end date and time (UTC) of the bus's current
+#'   trip.}
+#'   \item{BlockNumber}{}
 #' }
-#' @param route Base bus route, e.g.: 70, 10A.
-#' @param lat Center point Latitude.
-#' @param lon Center point Longitude.
-#' @param radius Meters to include in the search area for `lat` and `lon`.
+#'
+#' @param RouteId Base bus route, e.g.: 70, 10A.
+#' @param Lat Center point Latitude, required if Longitude and Radius are
+#'   specified.
+#' @param Lon Center point Longitude, required if Latitude and Radius are
+#'   specified.
+#' @param Radius Radius (meters) to include in the search area, required if
+#'   `Latitude` and `Longitude` are specified.
+#' @inheritParams wmata_key
+#' @examples
+#' \dontrun{
+#' bus_position("70", 38.8895, -77.0353, 1200)
+#' }
+#' @return Data frame containing bus position information.
+#' @seealso <https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d68>
+#' @family Bus Route and Stop Methods
+#' @importFrom geodist geodist
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble add_column as_tibble
 #' @export
-bus_position <- function(route = NULL, lat = NULL, lon = NULL, radius = 1000) {
-  coord <- list(Lat = lat, Lon = lon, Radius = radius)
-  json <- wmata_api(
-    type = "Bus", endpoint = "jBusPositions",
-    query = c(list(RouteId = route), coord)
+bus_position <- function(RouteId = NULL, Lat = NULL, Lon = NULL, Radius = 1000,
+                         api_key = wmata_key()) {
+  coord <- list(Lat = Lat, Lon = Lon, Radius = Radius)
+  dat <- wmata_api(
+    path = "Bus.svc/json/jBusPositions",
+    query = c(list(RouteId = RouteId), coord),
+    flatten = TRUE,
+    level = 1
   )
-  df <- jsonlite::fromJSON(json, flatten = TRUE)[[1]]
-  if (length(df) == 0) {
+  if (length(dat) == 0) {
     warning("no routes found within your radius, please expand")
-    return(empty_routes)
+    return(empty_positions)
   }
-  df <- df[, -8]
-  names(df) <- names(empty_routes)[-4]
-  df[c(5, 10:11)] <- lapply(df[c(5, 10:11)], api_time)
-  dist <- if (is.null(lat) || is.null(lon)) {
-    NA_real_
+  dat <- dat[, -8] # DirectionNum Deprecated
+  dat[c(5, 10:11)] <- lapply(dat[c(5, 10:11)], FUN = api_time)
+  if (is.null(Lat) || is.null(Lon)) {
+    dist <- NA_real_
   } else {
-    as.vector(geodist::geodist(coord, df))
+    dist <- as.vector(geodist::geodist(coord, dat))
   }
-  df <- tibble::add_column(df, distance = dist, .after = "lon")
-  tibble::as_tibble(df)
+  dat <- tibble::add_column(dat, Distance = dist, .after = "Lon")
+  tibble::as_tibble(dat)
 }
 
-api_time <- function(x) {
-  as.POSIXlt(x, format = "%Y-%m-%dT%H:%M:%S")
-}
-
-empty_routes <- data.frame(
-  vehicle = character(),
-  lat = double(),
-  lon = double(),
-  distance = double(),
-  deviation = double(),
-  time = as.POSIXlt(character()),
-  trip = character(),
-  route = character(),
-  direction = character(),
-  head = character(),
-  start = as.POSIXlt(character()),
-  end = as.POSIXlt(character()),
-  block = character()
+empty_positions <- data.frame(
+  VehicleID = character(),
+  Lat = double(),
+  Lon = double(),
+  Distance = double(),
+  Deviation = double(),
+  DateTime = as.POSIXct(character()),
+  TripID = character(),
+  RouteID = character(),
+  DirectionText = character(),
+  TripHeadsign = character(),
+  TripStartTime = as.POSIXct(character()),
+  TripEndTime = as.POSIXct(character()),
+  BlockNumber = character()
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
