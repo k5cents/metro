@@ -32,7 +32,8 @@ if (!interactive()) {
 <!-- badges: end -->
 
 The goal of metro is to return data frames from the Washington Metropolitan Area
-Transit Authority API. User need a WMATA API key, see below for more details.
+Transit Authority API. Nested lists have been converted to [tidy] data frames
+when possible.
 
 ## Installation
 
@@ -52,7 +53,7 @@ The WMATA also provides a [demo key][demo] to try out the various features of
 the API. This key should **never** be used in production, it is rate limited and
 subject to change at any time.
 
-As of December 2020, the demo key can be used like this:
+As of February 2021, the demo key can be used like this:
 
 ```{r key}
 Sys.setenv("WMATA_KEY" = "e13626d03d8e4c03ac07f95541b3091b")
@@ -67,25 +68,42 @@ library(metro)
 Functions return data frames for easy analysis.
 
 ```{r eval=FALSE}
-rail_stations(line = "RD")
+rail_stations(LineCode = "RD")
 ```
 
-```{r echo=FALSE}
-rail_stations(line = "RD")[, c(-3, -4)]
+```{r rail_stations, echo=FALSE}
+rail_stations(LineCode = "RD")[, c(-3, -4)]
 ```
 
-Dates and locations often assume the user is in the Washington area.
+Use coordinates to find station entrances or bus stops near a location. 
 
 ```{r eval=FALSE}
-rail_entrance(lat = 38.8979, lon = -77.0365, radius = 500)
+# White House coordinates
+rail_entrance(Lat = 38.8979, Lon = -77.0365, Radius = 500)
 ```
 
-```{r echo=FALSE}
+```{r rail_entrance, echo=FALSE}
 rail_entrance(
-  lat = 38.897957, 
-  lon = -77.036560, 
-  radius = 500
-)[, -5]
+  Lat = 38.897957, 
+  Lon = -77.036560, 
+  Radius = 500
+)[, -3:-4]
+```
+
+Dates use the UTC time zone but times use EST. Times are represented using the
+[`hms`][hms] class, which counts the seconds since midnight (sometimes this
+means AM times are over 24 hours).
+
+```{r eval=FALSE}
+bus_position(RouteId = "L2")
+```
+
+```{r bus_position, echo=FALSE}
+bus_position(RouteId = "L2")[, -c(2:6, 13)]
+```
+
+```{r rail_times}
+rail_times(StationCode = "A07")
 ```
 
 Functions that always return the same data have that data saved as objects.
@@ -103,6 +121,8 @@ metro_stops # bus_stops() for live
 [ga_link]: https://github.com/kiernann/metro/actions
 [cov_badge]: https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg
 [cov_link]: https://codecov.io/gh/kiernann/metro?branch=master
+[tidy]: https://en.wikipedia.org/wiki/Tidy_data
 [gh]: https://github.com/kiernann/metro
 [demo]: https://developer.wmata.com/products/5475f236031f590f380924ff
+[hms]: https://github.com/tidyverse/hms/issues/28
 <!-- refs: end -->
