@@ -44,7 +44,7 @@
 #' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
-#' bus_position("70", 38.8895, -77.0353, 1200)
+#' bus_position("70", 38.8895, -77.0353, 2000)
 #' }
 #' @return Data frame containing bus position information.
 #' @seealso <https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d68>

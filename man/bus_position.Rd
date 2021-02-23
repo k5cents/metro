@@ -70,7 +70,7 @@ variations, i.e.: use 10A instead of 10Av1 or 10Av2.
 }
 \examples{
 \dontrun{
-bus_position("70", 38.8895, -77.0353, 1200)
+bus_position("70", 38.8895, -77.0353, 2000)
 }
 }
 \seealso{

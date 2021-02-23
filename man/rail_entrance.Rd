@@ -49,7 +49,7 @@ radius (meters). Omit search parameters to return all station entrances.
 }
 \examples{
 \dontrun{
-rail_entrance(38.8977, -77.0365, 500)
+rail_entrance(38.8895, -77.0353)
 }
 }
 \seealso{

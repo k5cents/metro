@@ -31,7 +31,7 @@
 #' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
-#' rail_entrance(38.8977, -77.0365, 500)
+#' rail_entrance(38.8895, -77.0353)
 #' }
 #' @return A data frame of station entrances.
 #' @seealso <https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe330f>
