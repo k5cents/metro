@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bus incidents — elevator_incidents • metro</title>
+<title>Elevator/Escalator Outages — elevator_incidents • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Bus incidents — elevator_incidents" />
-<meta property="og:description" content="Returns a list of reported elevator and escalator outages at a given station." />
+<meta property="og:title" content="Elevator/Escalator Outages — elevator_incidents" />
+<meta property="og:description" content="Elevator/Escalator Outages" />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -119,32 +119,75 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bus incidents</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/elevator-incidents.R'><code>R/elevator-incidents.R</code></a></small>
+    <h1>Elevator/Escalator Outages</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/incidents-elevator.R'><code>R/incidents-elevator.R</code></a></small>
     <div class="hidden name"><code>elevator_incidents.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns a list of reported elevator and escalator outages at a given station.</p>
+    <p>Elevator/Escalator Outages</p>
     </div>
 
-    <pre class="usage"><span class='fu'>elevator_incidents</span><span class='op'>(</span>station <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>elevator_incidents</span><span class='op'>(</span>StationCode <span class='op'>=</span> <span class='cn'>NULL</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>station</th>
-      <td><p>Station code. Omit to return all reported outages (default).</p></td>
+      <th>StationCode</th>
+      <td><p>Station code. Use <code><a href='rail_stations.html'>rail_stations()</a></code> to return a list of
+all station codes. Use <code>NULL</code> (default) to list all incidents.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A data frame with 1 row per incident and 9 variables:</p><dl>
+<dt>UnitName</dt><dd><p>Unique identifier for unit, by type (a single elevator and
+escalator may have the same <code>UnitName</code>, but no two elevators or two
+escalators will have the same <code>UnitName</code>).</p></dd>
+<dt>UnitType</dt><dd><p>Type of unit. Will be <code>ELEVATOR</code> or <code>ESCALATOR</code>.</p></dd>
+<dt>StationCode</dt><dd><p>Unit's station code. Use this value in other
+rail-related APIs to retrieve data about a station.</p></dd>
+<dt>StationName</dt><dd><p>Full station name, may include entrance information
+(e.g.: Metro Center, G and 11th St Entrance).</p></dd>
+<dt>LocationDescription</dt><dd><p>Free-text description of the unit location
+within a station (e.g.: Escalator between mezzanine and platform).</p></dd>
+<dt>SymptomDescription</dt><dd><p>Description for why the unit is out of service or
+otherwise in reduced operation.</p></dd>
+<dt>DateOutOfServ</dt><dd><p>Date and time (UTC) unit was reported out of service.</p></dd>
+<dt>DateUpdated</dt><dd><p>Date and time (UTC) outage details was last updated.</p></dd>
+<dt>EstimatedReturnToService</dt><dd><p>Estimated date and time (UTC) by when unit
+is expected to return to normal service. May be NULL.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Data frame of <em>reported</em> elevator and escalator outages.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Note that for stations with multiple platforms and therefore <code>station</code> codes
+    <p>Note that for stations with multiple platforms and therefore <code>StationCodes</code>
 (e.g.: Metro Center, L'Enfant Plaza, etc.), a distinct call is required for
-each code.</p>
+each <code>StationCode</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/54763641281d83086473f232/operations/54763641281d830c946a3d76'>https://developer.wmata.com/docs/services/54763641281d83086473f232/operations/54763641281d830c946a3d76</a></p>
+<p>Other Incident APIs: 
+<code><a href='bus_incidents.html'>bus_incidents</a>()</code>,
+<code><a href='rail_incidents.html'>rail_incidents</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>elevator_incidents</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Live train position — train_positions • metro</title>
+<title>Live Train Positions — train_positions • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,10 @@
 
 
 
-<meta property="og:title" content="Live train position — train_positions" />
+<meta property="og:title" content="Live Train Positions — train_positions" />
 <meta property="og:description" content="Returns uniquely identifiable trains in service and what track circuits they
 currently occupy. Will return an empty set of results when no positions are
-available. Data is refreshed once every 7-10 seconds." />
+available." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -121,25 +121,90 @@ available. Data is refreshed once every 7-10 seconds." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Live train position</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/train-position.R'><code>R/train-position.R</code></a></small>
+    <h1>Live Train Positions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/rail-position.R'><code>R/rail-position.R</code></a></small>
     <div class="hidden name"><code>train_positions.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Returns uniquely identifiable trains in service and what track circuits they
 currently occupy. Will return an empty set of results when no positions are
-available. Data is refreshed once every 7-10 seconds.</p>
+available.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>train_positions</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>train_positions</span><span class='op'>(</span>api_key <span class='op'>=</span> <span class='va'>api_key</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A tibble with 1 row per train and 9 variables:</p><dl>
+<dt>TrainId</dt><dd><p>Uniquely identifiable internal train identifier.</p></dd>
+<dt>TrainNumber</dt><dd><p><em>Non-unique</em> train identifier, often used by WMATA's
+Rail Scheduling and Operations Teams, as well as over open radio
+communication.</p></dd>
+<dt>CarCount</dt><dd><p>Number of cars. Can sometimes be 0 when there is no data
+available.</p></dd>
+<dt>DirectionNum</dt><dd><p>The direction of movement regardless of which track the
+train is on. Valid values are 1 or 2. Generally speaking, trains with
+direction 1 are northbound/eastbound, while trains with direction 2 are
+southbound/westbound.</p></dd>
+<dt>CircuitId</dt><dd><p>The circuit identifier the train is currently on. This
+identifier can be referenced from the Standard Routes method.</p></dd>
+<dt>DestinationStationCode</dt><dd><p>Destination station code. Can be <code>NA</code>. Use
+this value in other rail-related APIs to retrieve data about a station.
+Note that this value may <em>sometimes</em> differ from the destination station
+code returned by our Next Trains methods.</p></dd>
+<dt>LineCode</dt><dd><p>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
+GR, or SV). May also be <code>NA</code> in certain cases.</p></dd>
+<dt>SecondsAtLocation</dt><dd><p>Approximate "dwell time". This is not an exact
+value, but can be used to determine how long a train has been reported at
+the same track circuit.</p></dd>
+<dt>ServiceType</dt><dd><p>Service Type of a train, can be any of the following
+Service Types:
+<ul>
+<li><p><code>NoPassengers</code>: This is a non-revenue train with no passengers on board.
+Note that this designation of <code>NoPassengers</code> does not necessarily
+correlate with PIDS "No Passengers". As of 08/22/2016, this functionality
+has been reinstated to include all non-revenue vehicles, with minor
+exceptions.</p></li>
+<li><p><code>Normal</code>: This is a normal revenue service train.</p></li>
+<li><p><code>Special</code>: This is a special revenue service train with an unspecified
+line and destination. This is more prevalent during scheduled track
+work.</p></li>
+<li><p><code>Unknown</code>: This often denotes cases with unknown data or work vehicles.</p></li>
+</ul></p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame of train positions.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Please refer to <a href='https://developer.wmata.com/TrainPositionsFAQ'>this page</a>
 for additional details.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/5763fb35f91823096cac1058'>https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/5763fb35f91823096cac1058</a></p>
+<p>Other Train Positions: 
+<code><a href='standard_routes.html'>standard_routes</a>()</code>,
+<code><a href='track_circuits.html'>track_circuits</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>train_positions</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

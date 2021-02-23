@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Next buses — next_bus • metro</title>
+<title>Next Buses — next_bus • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Next buses — next_bus" />
+<meta property="og:title" content="Next Buses — next_bus" />
 <meta property="og:description" content="Returns next bus arrival times at a stop." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
@@ -119,7 +119,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Next buses</h1>
+    <h1>Next Buses</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/next-bus.R'><code>R/next-bus.R</code></a></small>
     <div class="hidden name"><code>next_bus.Rd</code></div>
     </div>
@@ -128,32 +128,61 @@
     <p>Returns next bus arrival times at a stop.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>next_bus</span><span class='op'>(</span>stop <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>next_bus</span><span class='op'>(</span><span class='va'>StopID</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>stop</th>
+      <th>StopID</th>
       <td><p>7-digit regional stop ID.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with 6 variables:</p><dl>
-<dt>route</dt><dd><p>Base route name as shown on the bus.</p></dd>
-<dt>direction</dt><dd><p>Friendly description of direction and destination.</p></dd>
-<dt>dir_num</dt><dd><p>Denotes a binary direction (0 or 1) of the bus. There is no
-specific mapping to direction, but a different value for the same route
-signifies that the buses are traveling in opposite directions.</p></dd>
-<dt>minutes</dt><dd><p>Minutes until bus arrival at this stop.</p></dd>
-<dt>vehicle</dt><dd><p>Bus identifier.</p></dd>
-<dt>trip</dt><dd><p>Trip identifier.</p></dd>
+    <p>A tibble 1 row per arrival with 8 variables:</p><dl>
+<dt>StopID</dt><dd><p>7-digit regional ID which can be used in various bus-related
+methods. If unavailable, the <code>StopID</code> will be 0 or <code>NA</code></p></dd>
+<dt>StopName</dt><dd><p>Stop name. May be slightly different from what is spoken or
+displayed in the bus.</p></dd>
+<dt>RouteID</dt><dd><p>Base route name as shown on the bus. This can be used in
+other bus-related methods. Note that all variants will be shown as their
+base route names (i.e.: 10Av1 and 10Av2 will be shown as 10A).</p></dd>
+<dt>DirectionText</dt><dd><p>Customer-friendly description of direction and
+destination for a bus.</p></dd>
+<dt>DirectionNum</dt><dd><p>Denotes a binary direction (0 or 1) of the bus. There
+is no specific mapping to direction, but a different value for the same
+route signifies that the buses are traveling in opposite directions. Use
+the DirectionText element to show the actual destination of the bus.</p></dd>
+<dt>Minutes</dt><dd><p>Minutes until bus arrival at this stop. Numeric value.</p></dd>
+<dt>VehicleID</dt><dd><p>Bus identifier. This can be correlated with results
+returned from bus positions.</p></dd>
+<dt>TripID</dt><dd><p>Trip identifier. This can be correlated with the data in our
+bus schedule information as well as bus positions.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Data frame of bus arrivals.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/5476365e031f590f38092508/operations/5476365e031f5909e4fe331d'>https://developer.wmata.com/docs/services/5476365e031f590f38092508/operations/5476365e031f5909e4fe331d</a></p>
+<p>Other Real-Time Predictions: 
+<code><a href='next_train.html'>next_train</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>next_bus</span><span class='op'>(</span>StopID <span class='op'>=</span> <span class='st'>"1001195"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

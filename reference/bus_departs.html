@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bus route and stop methods — bus_departs • metro</title>
+<title>Bus Schedule at Stop — bus_departs • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Bus route and stop methods — bus_departs" />
-<meta property="og:description" content="Returns schedules for a given route variant for a given date." />
+<meta property="og:title" content="Bus Schedule at Stop — bus_departs" />
+<meta property="og:description" content="Returns a set of buses scheduled at a stop for a given date." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -119,45 +119,77 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bus route and stop methods</h1>
+    <h1>Bus Schedule at Stop</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/bus-departs.R'><code>R/bus-departs.R</code></a></small>
     <div class="hidden name"><code>bus_departs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns schedules for a given route variant for a given date.</p>
+    <p>Returns a set of buses scheduled at a stop for a given date.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bus_departs</span><span class='op'>(</span>stop <span class='op'>=</span> <span class='cn'>NULL</span>, date <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bus_departs</span><span class='op'>(</span><span class='va'>StopID</span>, Date <span class='op'>=</span> <span class='cn'>NULL</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>stop</th>
+      <th>StopID</th>
       <td><p>7-digit regional stop ID.</p></td>
     </tr>
     <tr>
-      <th>date</th>
-      <td><p>Date for which to retrieve route and stop information.</p></td>
+      <th>Date</th>
+      <td><p>(Optional) Date for which to retrieve route and stop information.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with 13 variables:</p><dl>
-<dt>route</dt><dd><p>Bus route variant identifier (pattern).</p></dd>
-<dt>depart_time</dt><dd><p>Date and time (EST) when the bus is scheduled to stop at
-this location.</p></dd>
-<dt>trip_id</dt><dd><p>Trip identifier.</p></dd>
-<dt>direction</dt><dd><p>General direction of the trip.</p></dd>
-<dt>trip_head</dt><dd><p>Destination of the bus.</p></dd>
-<dt>start_time</dt><dd><p>Scheduled start date and time (EST) for this trip.</p></dd>
-<dt>end_time</dt><dd><p>Scheduled end date and time (EST) for this trip.</p></dd>
+    <p>A tibble with 1 row per bus departure and 8 variables:</p><dl>
+<dt>ScheduleTime</dt><dd><p>Date and time (UTC) when the bus is scheduled to stop
+at this location.</p></dd>
+<dt>DirectionNum</dt><dd><p>Denotes a binary direction (0 or 1) of the bus. There
+is no specific mapping to direction, but a different value for the same
+route signifies that the buses are traveling in opposite directions. Use
+the <code>TripDirectionText</code> column to show the actual destination of the bus.</p></dd>
+<dt>StartTime</dt><dd><p>Scheduled start date and time (UTC) for this trip.</p></dd>
+<dt>EndTime</dt><dd><p>Scheduled end date and time (UTC) for this trip.</p></dd>
+<dt>RouteID</dt><dd><p>Bus route variant identifier (pattern). This variant can be
+used in several other bus methods which accept variants. Note that
+customers will never see anything other than the base route name, so
+variants 10A, 10Av1, 10Av2, etc. will be displayed as 10A on the bus.</p></dd>
+<dt>TripDirectionText</dt><dd><p>General direction of the trip (e.g.: NORTH, SOUTH,
+EAST, WEST).</p></dd>
+<dt>TripHeadsign</dt><dd><p>Destination of the bus.</p></dd>
+<dt>TripID</dt><dd><p>Trip identifier. This can be correlated with the data in our
+bus schedule information as well as bus positions.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Data frame containing scheduled arrival information.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6c/console'>https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6c/console</a></p>
+<p>Other Bus Route and Stop Methods: 
+<code><a href='bus_path.html'>bus_path</a>()</code>,
+<code><a href='bus_position.html'>bus_position</a>()</code>,
+<code><a href='bus_routes.html'>bus_routes</a>()</code>,
+<code><a href='bus_schedule.html'>bus_schedule</a>()</code>,
+<code><a href='bus_stops.html'>bus_stops</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>bus_departs</span><span class='op'>(</span><span class='fl'>1001195</span>, <span class='st'>"2021-01-01"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

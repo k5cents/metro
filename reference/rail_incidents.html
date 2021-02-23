@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rail incidents — rail_incidents • metro</title>
+<title>Rail Incidents — rail_incidents • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,10 @@
 
 
 
-<meta property="og:title" content="Rail incidents — rail_incidents" />
-<meta property="og:description" content="Returns reported rail incidents (significant disruptions and delays to normal
-service). The data is identical to WMATA's Metrorail Service Status feed." />
+<meta property="og:title" content="Rail Incidents — rail_incidents" />
+<meta property="og:description" content="Reported rail incidents (significant disruptions and delays to normal
+service). The data is identical to WMATA's
+Metrorail Service Status feed." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -120,20 +121,58 @@ service). The data is identical to WMATA's Metrorail Service Status feed." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Rail incidents</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/rail-incidents.R'><code>R/rail-incidents.R</code></a></small>
+    <h1>Rail Incidents</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/incidents-rail.R'><code>R/incidents-rail.R</code></a></small>
     <div class="hidden name"><code>rail_incidents.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns reported rail incidents (significant disruptions and delays to normal
-service). The data is identical to WMATA's Metrorail Service Status feed.</p>
+    <p>Reported rail incidents (significant disruptions and delays to normal
+service). The data is identical to WMATA's
+<a href='http://www.metroalerts.info/rss.aspx?rs'>Metrorail Service Status feed</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rail_incidents</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rail_incidents</span><span class='op'>(</span>api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
+    <p>A data frame with 1 row incident and 5 variables:</p><dl>
+<dt>IncidentID</dt><dd><p>Unique identifier for an incident.</p></dd>
+<dt>Description</dt><dd><p>Free-text description of the incident.</p></dd>
+<dt>IncidentType</dt><dd><p>Free-text description of the incident type. Usually
+Delay or Alert but is subject to change at any time.</p></dd>
+<dt>LinesAffected</dt><dd><p>Character vector of line codes (e.g.: RD; or BL; OR;
+or BL; OR; RD;).</p></dd>
+<dt>DateUpdated</dt><dd><p>Date and time (UTC) of last update.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Data frame of all rail incidents.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/54763641281d83086473f232/operations/54763641281d830c946a3d77'>https://developer.wmata.com/docs/services/54763641281d83086473f232/operations/54763641281d830c946a3d77</a></p>
+<p>Other Incident APIs: 
+<code><a href='bus_incidents.html'>bus_incidents</a>()</code>,
+<code><a href='elevator_incidents.html'>elevator_incidents</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>rail_incidents</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

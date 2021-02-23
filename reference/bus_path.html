@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bus path details — bus_path • metro</title>
+<title>Bus Path Details — bus_path • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,9 @@
 
 
 
-<meta property="og:title" content="Bus path details — bus_path" />
+<meta property="og:title" content="Bus Path Details — bus_path" />
 <meta property="og:description" content="For a given date, returns the set of ordered latitude/longitude points along
-a route variant along with the list of stops served. Useful for creating
-maps." />
+a route variant along with the list of stops served." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -121,43 +120,67 @@ maps." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bus path details</h1>
+    <h1>Bus Path Details</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/bus-path.R'><code>R/bus-path.R</code></a></small>
     <div class="hidden name"><code>bus_path.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>For a given date, returns the set of ordered latitude/longitude points along
-a route variant along with the list of stops served. Useful for creating
-maps.</p>
+a route variant along with the list of stops served.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bus_path</span><span class='op'>(</span>route <span class='op'>=</span> <span class='cn'>NULL</span>, date <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bus_path</span><span class='op'>(</span><span class='va'>RouteID</span>, Date <span class='op'>=</span> <span class='cn'>NULL</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>route</th>
+      <th>RouteID</th>
       <td><p>Bus route variant, e.g.: 70, 10A, 10Av1.</p></td>
     </tr>
     <tr>
-      <th>date</th>
-      <td><p>Date for which to retrieve route and stop information.</p></td>
+      <th>Date</th>
+      <td><p>Date for which to retrieve route and stop information. Uses
+today's date if <code>NULL</code> (default).</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A list with 4 elements:</p><dl>
-<dt>route</dt><dd><p>The route code.</p></dd>
-<dt>name</dt><dd><p>The route name.</p></dd>
-<dt>shape</dt><dd><p>The coordinate path of the line in both directions.</p></dd>
-<dt>stops</dt><dd><p>The coordinates of stops on a given line.</p></dd>
+<dt>RouteID</dt><dd><p>Bus route variant.</p></dd>
+<dt>Name</dt><dd><p>Descriptive name for the route.</p></dd>
+<dt>ShapePoint</dt><dd><p>The coordinate path of the line in both directions.</p></dd>
+<dt>Stops</dt><dd><p>The coordinates of stops on a given line.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A list with (1) set of ordered latitude/longitude points along a
+route variant along with (2) the list of stops served.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d69'>https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d69</a></p>
+<p>Other Bus Route and Stop Methods: 
+<code><a href='bus_departs.html'>bus_departs</a>()</code>,
+<code><a href='bus_position.html'>bus_position</a>()</code>,
+<code><a href='bus_routes.html'>bus_routes</a>()</code>,
+<code><a href='bus_schedule.html'>bus_schedule</a>()</code>,
+<code><a href='bus_stops.html'>bus_stops</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>bus_path</span><span class='op'>(</span><span class='st'>"70"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

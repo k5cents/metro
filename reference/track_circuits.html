@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Track circuits — track_circuits • metro</title>
+<title>Track Circuits — track_circuits • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Track circuits — track_circuits" />
+<meta property="og:title" content="Track Circuits — track_circuits" />
 <meta property="og:description" content="Returns a list of all track circuits including those on pocket tracks and
 crossovers. Each track circuit may include references to its right and left
 neighbors." />
@@ -121,7 +121,7 @@ neighbors." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Track circuits</h1>
+    <h1>Track Circuits</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/track-circuits.R'><code>R/track-circuits.R</code></a></small>
     <div class="hidden name"><code>track_circuits.Rd</code></div>
     </div>
@@ -135,11 +135,46 @@ neighbors.</p>
     <pre class="usage"><span class='fu'>track_circuits</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A nested tibble with 1 row per train and 9 variables:</p><dl>
+<dt>Track</dt><dd><p>Track number. 1 and 2 denote "main" lines, while 0 and 3 are
+connectors (between different types of tracks) and pocket tracks,
+respectively.</p></dd>
+<dt>CircuitId</dt><dd><p>An internal system-wide uniquely identifiable circuit
+number.</p></dd>
+<dt>Neighbors</dt><dd><p>Data frame containing track circuit neighbor information.
+Note that some track circuits have no neighbors in one direction. All track
+circuits have at least one neighbor.
+<ul>
+<li><p><code>NeighborType</code>: Left or Right neighbor group. Generally speaking, left
+neighbors are to the west and south, while right neighbors are to the
+east/north.</p></li>
+<li><p><code>CircuitIds</code>: Data frame containing neighboring circuit IDs as list
+column.</p></li>
+</ul></p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame of nested track circuit information.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Please refer to <a href='https://developer.wmata.com/TrainPositionsFAQ'>this page</a>
 for additional details.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/57644238031f59363c586dcb'>https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/57644238031f59363c586dcb</a></p>
+<p>Other Train Positions: 
+<code><a href='standard_routes.html'>standard_routes</a>()</code>,
+<code><a href='train_positions.html'>train_positions</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>track_circuits</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

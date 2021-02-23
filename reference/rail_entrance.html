@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rail station entrances — rail_entrance • metro</title>
+<title>Rail Station Entrances — rail_entrance • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Rail station entrances — rail_entrance" />
+<meta property="og:title" content="Rail Station Entrances — rail_entrance" />
 <meta property="og:description" content="Returns a list of nearby station entrances based on latitude, longitude, and
 radius (meters). Omit search parameters to return all station entrances." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
@@ -120,8 +120,8 @@ radius (meters). Omit search parameters to return all station entrances." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Rail station entrances</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/train-entrance.R'><code>R/train-entrance.R</code></a></small>
+    <h1>Rail Station Entrances</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/rail-entrance.R'><code>R/rail-entrance.R</code></a></small>
     <div class="hidden name"><code>rail_entrance.Rd</code></div>
     </div>
 
@@ -130,27 +130,73 @@ radius (meters). Omit search parameters to return all station entrances." />
 radius (meters). Omit search parameters to return all station entrances.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rail_entrance</span><span class='op'>(</span>lat <span class='op'>=</span> <span class='cn'>NULL</span>, lon <span class='op'>=</span> <span class='cn'>NULL</span>, radius <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rail_entrance</span><span class='op'>(</span>Lat <span class='op'>=</span> <span class='cn'>NULL</span>, Lon <span class='op'>=</span> <span class='cn'>NULL</span>, Radius <span class='op'>=</span> <span class='cn'>NULL</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>lat</th>
-      <td><p>Center point Latitude.</p></td>
+      <th>Lat</th>
+      <td><p>(Optional) Center point Latitude, required if <code>Longitude</code> and
+<code>Radius</code> are specified.</p></td>
     </tr>
     <tr>
-      <th>lon</th>
-      <td><p>Center point Longitude</p></td>
+      <th>Lon</th>
+      <td><p>(Optional) Center point Longitude, required if <code>Latitude</code> and
+<code>Radius</code> are specified.</p></td>
     </tr>
     <tr>
-      <th>radius</th>
-      <td><p>Radius (meters) to include in the search area. If <code>NULL</code>, while
-<code>lat</code> and <code>lon</code> are supplied, all stations are returned.</p></td>
+      <th>Radius</th>
+      <td><p>(Optional) Radius (meters) to include in the search area,
+required if <code>Latitude</code> and <code>Longitude</code> are specified.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
+    <p>A tibble 1 row per entrance with 7 variables:</p><dl>
+<dt>Name</dt><dd><p>Name of the entrance (usually the station name and nearest
+intersection).</p></dd>
+<dt>StationCode</dt><dd><p>The station code associated with this entrance. Use this
+value in other rail-related APIs to retrieve data about a station.</p></dd>
+<dt>StationTogether</dt><dd><p>For stations containing multiple platforms (e.g.:
+Gallery Place, Fort Totten, L'Enfant Plaza, and Metro Center), the other
+station code (previously <code>StationCode2</code>).</p></dd>
+<dt>Description</dt><dd><p>Additional information for the entrance, if available.
+Currently available data usually shows the same value as the <code>Name</code>
+element.</p></dd>
+<dt>Lat</dt><dd><p>Latitude.</p></dd>
+<dt>Lon</dt><dd><p>Longitude.</p></dd>
+<dt>Distance</dt><dd><p>Distance (meters) of the entrance from the provided search
+coordinates. Calculated using <code><a href='https://rdrr.io/pkg/geodist/man/geodist.html'>geodist::geodist()</a></code> and the "cheap ruler"
+method.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame of station entrances.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe330f'>https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe330f</a></p>
+<p>Other Rail Station Information: 
+<code><a href='rail_destination.html'>rail_destination</a>()</code>,
+<code><a href='rail_lines.html'>rail_lines</a>()</code>,
+<code><a href='rail_path.html'>rail_path</a>()</code>,
+<code><a href='rail_stations.html'>rail_stations</a>()</code>,
+<code><a href='rail_times.html'>rail_times</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>rail_entrance</span><span class='op'>(</span><span class='fl'>38.8977</span>, <span class='op'>-</span><span class='fl'>77.0365</span>, <span class='fl'>500</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Standard routes — standard_routes • metro</title>
+<title>Standard Routes — standard_routes • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Standard routes — standard_routes" />
+<meta property="og:title" content="Standard Routes — standard_routes" />
 <meta property="og:description" content="Returns an ordered list of mostly revenue (and some lead) track circuits,
 arranged by line and track number. This data does not change frequently and
 should be cached for a reasonable amount of time." />
@@ -121,7 +121,7 @@ should be cached for a reasonable amount of time." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Standard routes</h1>
+    <h1>Standard Routes</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/standard-routes.R'><code>R/standard-routes.R</code></a></small>
     <div class="hidden name"><code>standard_routes.Rd</code></div>
     </div>
@@ -135,11 +135,44 @@ should be cached for a reasonable amount of time.</p>
     <pre class="usage"><span class='fu'>standard_routes</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A nested tibble with 1 row per track and 3 variables:</p><dl>
+<dt>LineCode</dt><dd><p>Abbreviation for the revenue line. Note that this also
+includes <strong>YLRP</strong> (Yellow Line Rush Plus).</p></dd>
+<dt>TrackNum</dt><dd><p>Track number (1 or 2).</p></dd>
+<dt>TrackCircuits</dt><dd><p>Array containing ordered track circuit information:
+<ul>
+<li><p><code>CircuitId</code>: An internal system-wide uniquely identifiable circuit
+number.</p></li>
+<li><p><code>SeqNum</code>: Order in which the circuit appears for the given line and
+track. Sequences go from West to East and South to North.</p></li>
+<li><p><code>StationCode</code>: If the circuit is at a station, this value will represent
+the station code. Otherwise, it will be be <code>NA</code>. Use this value in other
+rail-related APIs to retrieve data about a station.</p></li>
+</ul></p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A nested data frame of track circuits.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Please refer to <a href='https://developer.wmata.com/TrainPositionsFAQ'>this page</a>
 for additional details.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/57641afc031f59363c586dca'>https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/57641afc031f59363c586dca</a></p>
+<p>Other Train Positions: 
+<code><a href='track_circuits.html'>track_circuits</a>()</code>,
+<code><a href='train_positions.html'>train_positions</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>standard_routes</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Metro rail stations — rail_stations • metro</title>
+<title>Rail Station List — rail_stations • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,10 @@
 
 
 
-<meta property="og:title" content="Metro rail stations — rail_stations" />
-<meta property="og:description" content="The stations on a Metro rail line, including the full names and geographic
-locations. The four big transfer stations have two station code designations,
-one for each track direction. All the lines running through each station
-are listed in a single list-column." />
+<meta property="og:title" content="Rail Station List — rail_stations" />
+<meta property="og:description" content="Returns a list of station location and address information based on a given
+LineCode. Use NULL (default) to return all stations. The response is an
+data frame identical to that returned in the Station Information method." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -122,43 +121,83 @@ are listed in a single list-column." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Metro rail stations</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/train-stations.R'><code>R/train-stations.R</code></a></small>
+    <h1>Rail Station List</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/rail-stations.R'><code>R/rail-stations.R</code></a></small>
     <div class="hidden name"><code>rail_stations.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The stations on a Metro rail line, including the full names and geographic
-locations. The four big transfer stations have two station code designations,
-one for each track direction. All the lines running through each station
-are listed in a single list-column.</p>
+    <p>Returns a list of station location and address information based on a given
+<code>LineCode</code>. Use <code>NULL</code> (default) to return all stations. The response is an
+data frame identical to that returned in the Station Information method.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rail_stations</span><span class='op'>(</span>line <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rail_stations</span><span class='op'>(</span>LineCode <span class='op'>=</span> <span class='cn'>NULL</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>line</th>
-      <td><p>Two-letter line code abbreviation, see Details or <code><a href='rail_lines.html'>rail_lines()</a></code>.
-If <code>NULL</code>, (the default) all stations are returned.</p></td>
+      <th>LineCode</th>
+      <td><p>Two-letter line code abbreviation, or <code>NULL</code> (default):</p><ul>
+<li><p>RD - Red</p></li>
+<li><p>YL - Yellow</p></li>
+<li><p>GR - Green</p></li>
+<li><p>BL - Blue</p></li>
+<li><p>OR - Orange</p></li>
+<li><p>SV - Silver</p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>The <code>line_code</code> takes one of these two-letter codes:</p><ul>
-<li><p>BL = Blue</p></li>
-<li><p>GR = Green</p></li>
-<li><p>OR = Orange</p></li>
-<li><p>RD = Red</p></li>
-<li><p>SV = Silver</p></li>
-<li><p>YL = Yellow</p></li>
-</ul>
+    <p>A tibble 1 row per station with 10 variables:</p><dl>
+<dt>StationCode</dt><dd><p>Station code for this station. Use this value in other
+rail-related APIs to retrieve data about a station.</p></dd>
+<dt>StationName</dt><dd><p>Full name for this station, as shown on the WMATA
+website.</p></dd>
+<dt>StationTogether</dt><dd><p>For stations with multiple platforms (e.g.: Gallery
+Place, Fort Totten, L'Enfant Plaza, and Metro Center), the additional
+<code>StationCode</code> will be listed here.</p></dd>
+<dt>LineCodes</dt><dd><p>Character vector of two-letter abbreviations (e.g.: RD,
+BL, YL, OR, GR, or SV) served by this station. If the station has an
+additional platform, the lines served by the other platform are listed in
+the <code>LineCodes</code> values for the record associated with the <code>StationCode</code>
+found in <code>StationTogether.</code></p></dd>
+<dt>Lat</dt><dd><p>Latitude.</p></dd>
+<dt>Lon</dt><dd><p>Longitude.</p></dd>
+<dt>Street</dt><dd><p>Street address (for GPS use).</p></dd>
+<dt>City</dt><dd><p>City.</p></dd>
+<dt>State</dt><dd><p>State (abbreviated).</p></dd>
+<dt>Zip</dt><dd><p>Zip code.</p></dd>
 
-<p>The result of this endpoint is saved as the <a href='metro_stations.html'>metro_stations</a> object.</p>
+</dl>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame of stations on a rail line.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3311'>https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3311</a></p>
+<p>Other Rail Station Information: 
+<code><a href='rail_destination.html'>rail_destination</a>()</code>,
+<code><a href='rail_entrance.html'>rail_entrance</a>()</code>,
+<code><a href='rail_lines.html'>rail_lines</a>()</code>,
+<code><a href='rail_path.html'>rail_path</a>()</code>,
+<code><a href='rail_times.html'>rail_times</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>rail_stations</span><span class='op'>(</span><span class='st'>"RD"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

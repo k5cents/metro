@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Path between rail stations — rail_path • metro</title>
+<title>Path Between Stations — rail_path • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Path between rail stations — rail_path" />
+<meta property="og:title" content="Path Between Stations — rail_path" />
 <meta property="og:description" content="Returns a set of ordered stations and distances between two stations on the
 same line." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
@@ -120,38 +120,77 @@ same line." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Path between rail stations</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/train-path.R'><code>R/train-path.R</code></a></small>
+    <h1>Path Between Stations</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/rail-path.R'><code>R/rail-path.R</code></a></small>
     <div class="hidden name"><code>rail_path.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Returns a set of ordered stations and distances between two stations on the
-same line.</p>
+<em>same line</em>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rail_path</span><span class='op'>(</span><span class='va'>from</span>, <span class='va'>to</span><span class='op'>)</span>
-
-<span class='fu'>path_distance</span><span class='op'>(</span><span class='va'>from</span>, <span class='va'>to</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rail_path</span><span class='op'>(</span><span class='va'>FromStationCode</span>, <span class='va'>ToStationCode</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>from</th>
-      <td><p>Station code for the origin station.</p></td>
+      <th>FromStationCode</th>
+      <td><p>Station code for the origin station. Use the Station
+List method to return a list of all station codes.</p></td>
     </tr>
     <tr>
-      <th>to</th>
-      <td><p>Station code for the destination station.</p></td>
+      <th>ToStationCode</th>
+      <td><p>Station code for the destination station. Use the
+Station List method to return a list of all station codes.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A tibble 1 row per arrival with 6 variables:</p><dl>
+<dt>LineCode</dt><dd><p>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
+GR, or SV) this station's platform is on.</p></dd>
+<dt>StationCode</dt><dd><p>Station code for this station. Use this value in other
+rail-related APIs to retrieve data about a station.</p></dd>
+<dt>StationName</dt><dd><p>Full name for this station, as shown on the WMATA
+website.</p></dd>
+<dt>SeqNum</dt><dd><p>Ordered sequence number.</p></dd>
+<dt>DistanceToPrev</dt><dd><p>Distance in meters to the previous station in the
+list, ordered by <code>SeqNum</code>. Converted from feet, rounded to the nearest
+meter.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame of stations on rail path.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Note that this method is not suitable on its own as a pathfinding solution
-between stations. Distance is converted from feet to round meters.</p>
+between stations.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe330e'>https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe330e</a></p>
+<p>Other Rail Station Information: 
+<code><a href='rail_destination.html'>rail_destination</a>()</code>,
+<code><a href='rail_entrance.html'>rail_entrance</a>()</code>,
+<code><a href='rail_lines.html'>rail_lines</a>()</code>,
+<code><a href='rail_stations.html'>rail_stations</a>()</code>,
+<code><a href='rail_times.html'>rail_times</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>rail_path</span><span class='op'>(</span><span class='st'>"A01"</span>, <span class='st'>"A08"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Station to station — rail_destination • metro</title>
+<title>Rail Station to Station Information — rail_destination • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,10 @@
 
 
 
-<meta property="og:title" content="Station to station — rail_destination" />
+<meta property="og:title" content="Rail Station to Station Information — rail_destination" />
 <meta property="og:description" content="Returns a distance, fare information, and estimated travel time between any
 two stations, including those on different lines. Omit both parameters to
-retrieve data for all stations. Omit one parameter to return all combinations
-to or from the provided station." />
+retrieve data for all stations." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -122,44 +121,83 @@ to or from the provided station." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Station to station</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/train-dest.R'><code>R/train-dest.R</code></a></small>
+    <h1>Rail Station to Station Information</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/rail-destination.R'><code>R/rail-destination.R</code></a></small>
     <div class="hidden name"><code>rail_destination.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Returns a distance, fare information, and estimated travel time between any
 two stations, including those on different lines. Omit both parameters to
-retrieve data for all stations. Omit one parameter to return all combinations
-to or from the provided station.</p>
+retrieve data for all stations.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rail_destination</span><span class='op'>(</span>from <span class='op'>=</span> <span class='cn'>NULL</span>, to <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rail_destination</span><span class='op'>(</span>
+  FromStationCode <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ToStationCode <span class='op'>=</span> <span class='cn'>NULL</span>,
+  api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>from</th>
-      <td><p>Station code for the origin station.</p></td>
+      <th>FromStationCode</th>
+      <td><p>Station code for the origin station. Use the
+<code><a href='rail_stations.html'>rail_stations()</a></code> function to return a list of all station codes.</p></td>
     </tr>
     <tr>
-      <th>to</th>
-      <td><p>Station code for the destination station.</p></td>
+      <th>ToStationCode</th>
+      <td><p>Station code for the destination station. Use the
+<code><a href='rail_stations.html'>rail_stations()</a></code> function to return a list of all station codes.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    
-<ul>
-<li><p><code>peak_fee</code>: Fare during peak times (weekdays from opening to 9:30 AM and
-3-7 PM, and weekends from midnight to closing).</p></li>
-<li><p><code>off_fee</code>: Fare during off-peak times.</p></li>
-<li><p><code>min_fee</code>: Reduced fare for senior citizens or people with disabilities.</p></li>
-</ul>
+    <p>A tibble 1 row per  with  variables:</p><dl>
+<dt>SourceStation</dt><dd><p>Origin station code. Use this value in other
+rail-related APIs to retrieve data about a station.</p></dd>
+<dt>DestinationStation</dt><dd><p>Destination station code. Use this value in other
+rail-related APIs to retrieve data about a station.</p></dd>
+<dt>CompositeMiles</dt><dd><p>Average of distance traveled between two stations and
+straight-line distance (as used for WMATA fare calculations). For more
+details, please refer to WMATA's <a href='https://www.wmata.com/about/records/public_docs/upload/Tariff-on-Fares-Annotated-2-12-18.pdf#page=6'>Tariff on Fares</a>.</p></dd>
+<dt>RailTime</dt><dd><p>Estimated travel time (schedule time) in minutes between
+the source and destination station. This is not correlated to minutes
+(<code>Min</code>) in Real-Time Rail Predictions.</p></dd>
+<dt>PeakTime</dt><dd><p>Fare during peak times (weekdays from opening to 9:30 AM
+and 3-7 PM (EST), and weekends from midnight to closing).</p></dd>
+<dt>OffPeakTime</dt><dd><p>Fare during off-peak times (times other than the ones
+described below).</p></dd>
+<dt>SeniorDisabled</dt><dd><p>Reduced fare for <a href='http://www.wmata.com/fares/reduced.cfm'>senior citizens or people with disabilities.</a></p></dd>
 
+</dl>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame containing station to station information</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3313'>https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3313</a></p>
+<p>Other Rail Station Information: 
+<code><a href='rail_entrance.html'>rail_entrance</a>()</code>,
+<code><a href='rail_lines.html'>rail_lines</a>()</code>,
+<code><a href='rail_path.html'>rail_path</a>()</code>,
+<code><a href='rail_stations.html'>rail_stations</a>()</code>,
+<code><a href='rail_times.html'>rail_times</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>rail_destination</span><span class='op'>(</span><span class='st'>"A01"</span>, <span class='st'>"A08"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

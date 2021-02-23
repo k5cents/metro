@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bus routes — bus_routes • metro</title>
+<title>Bus Routes — bus_routes • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Bus routes — bus_routes" />
+<meta property="og:title" content="Bus Routes — bus_routes" />
 <meta property="og:description" content="Returns a list of all bus route variants (patterns). For example, the 10A and
 10Av1 are the same route, but may stop at slightly different locations." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
@@ -120,7 +120,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bus routes</h1>
+    <h1>Bus Routes</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/bus-routes.R'><code>R/bus-routes.R</code></a></small>
     <div class="hidden name"><code>bus_routes.Rd</code></div>
     </div>
@@ -130,21 +130,49 @@
 10Av1 are the same route, but may stop at slightly different locations.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bus_routes</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bus_routes</span><span class='op'>(</span>api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with 3 variables:</p><dl>
-<dt>route</dt><dd><p>Unique identifier for a given route variant.</p></dd>
-<dt>name</dt><dd><p>Descriptive name of the route variant.</p></dd>
-<dt>description</dt><dd><p>Denotes the route variant’s grouping – lines are a
+    <p>A tibble with 3 variables and one row per route variant:</p><dl>
+<dt>RouteID</dt><dd><p>Unique identifier for a given route variant. Can be used in
+various other bus-related methods.</p></dd>
+<dt>Name</dt><dd><p>Descriptive name of the route variant.</p></dd>
+<dt>LineDescription</dt><dd><p>Denotes the route variant's grouping – lines are a
 combination of routes which lie in the same corridor and which have
 significant portions of their paths along the same roadways.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Data frame containing route variant information</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6a'>https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6a</a></p>
+<p>Other Bus Route and Stop Methods: 
+<code><a href='bus_departs.html'>bus_departs</a>()</code>,
+<code><a href='bus_path.html'>bus_path</a>()</code>,
+<code><a href='bus_position.html'>bus_position</a>()</code>,
+<code><a href='bus_schedule.html'>bus_schedule</a>()</code>,
+<code><a href='bus_stops.html'>bus_stops</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>bus_routes</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

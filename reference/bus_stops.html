@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rail stop search — bus_stops • metro</title>
+<title>Bus Stop Search — bus_stops • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Rail stop search — bus_stops" />
+<meta property="og:title" content="Bus Stop Search — bus_stops" />
 <meta property="og:description" content="Returns a list of nearby bus stops based on latitude, longitude, and radius.
 Omit all parameters to retrieve a list of all stops." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
@@ -120,7 +120,7 @@ Omit all parameters to retrieve a list of all stops." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Rail stop search</h1>
+    <h1>Bus Stop Search</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/bus-stops.R'><code>R/bus-stops.R</code></a></small>
     <div class="hidden name"><code>bus_stops.Rd</code></div>
     </div>
@@ -130,39 +130,71 @@ Omit all parameters to retrieve a list of all stops." />
 Omit all parameters to retrieve a list of all stops.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bus_stops</span><span class='op'>(</span>lat <span class='op'>=</span> <span class='cn'>NULL</span>, lon <span class='op'>=</span> <span class='cn'>NULL</span>, radius <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bus_stops</span><span class='op'>(</span>Lat <span class='op'>=</span> <span class='cn'>NULL</span>, Lon <span class='op'>=</span> <span class='cn'>NULL</span>, Radius <span class='op'>=</span> <span class='cn'>NULL</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>lat</th>
-      <td><p>Center point Latitude.</p></td>
+      <th>Lat</th>
+      <td><p>Center point Latitude, required if <code>Longitude</code> and <code>Radius</code> are
+specified.</p></td>
     </tr>
     <tr>
-      <th>lon</th>
-      <td><p>Center point Longitude</p></td>
+      <th>Lon</th>
+      <td><p>Center point Longitude, required if <code>Latitude</code> and <code>Radius</code> are
+specified.</p></td>
     </tr>
     <tr>
-      <th>radius</th>
-      <td><p>Radius (meters) to include in the search area. If <code>NULL</code>, while
-<code>lat</code> and <code>lon</code> are supplied, all stations are returned.</p></td>
+      <th>Radius</th>
+      <td><p>Radius (meters) to include in the search area, required if
+<code>Latitude</code> and <code>Longitude</code> are specified.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with 6 variables:</p><dl>
-<dt>stop</dt><dd><p>Bus stop ID</p></dd>
-<dt>name</dt><dd><p>Bus stop name</p></dd>
-<dt>lon</dt><dd><p>Latitude.</p></dd>
-<dt>lat</dt><dd><p>Longitude.</p></dd>
-<dt>distance</dt><dd><p>Distance in meters from provided coordinates.</p></dd>
-<dt>routes</dt><dd><p>Character vector of routes services by stop.</p></dd>
+    <p>A tibble with 1 row per stop and 6 variables:</p><dl>
+<dt>StopID</dt><dd><p>String array of route variants which provide service at this
+stop. Note that these are not date-specific; any route variant which stops
+at this stop on any day will be listed.</p></dd>
+<dt>Name</dt><dd><p>Stop name. May be slightly different from what is spoken or
+displayed in the bus.</p></dd>
+<dt>Lat</dt><dd><p>Latitude.</p></dd>
+<dt>Lon</dt><dd><p>Longitude.</p></dd>
+<dt>Distance</dt><dd><p>Distance (meters) of the stop from the provided search
+coordinates. Calculated using <code><a href='https://rdrr.io/pkg/geodist/man/geodist.html'>geodist::geodist()</a></code> and the "cheap ruler"
+method.</p></dd>
+<dt>Routes</dt><dd><p>Character string of route variants which provide service at
+this stop. Note that these are not date-specific; any route variant which
+stops at this stop on any day will be listed.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Data frame containing stop information</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6d'>https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6d</a></p>
+<p>Other Bus Route and Stop Methods: 
+<code><a href='bus_departs.html'>bus_departs</a>()</code>,
+<code><a href='bus_path.html'>bus_path</a>()</code>,
+<code><a href='bus_position.html'>bus_position</a>()</code>,
+<code><a href='bus_routes.html'>bus_routes</a>()</code>,
+<code><a href='bus_schedule.html'>bus_schedule</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>bus_stops</span><span class='op'>(</span><span class='fl'>38.8895</span>, <span class='op'>-</span><span class='fl'>77.0353</span>, <span class='fl'>500</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

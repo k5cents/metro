@@ -132,15 +132,30 @@ JSON string. This function is used in others devoted to a
 specific APIs and endpoints.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>wmata_api</span><span class='op'>(</span>
-  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Rail"</span>, <span class='st'>"Bus"</span>, <span class='st'>"Incidents"</span>, <span class='st'>"NextBusService"</span>, <span class='st'>"StationPrediction"</span><span class='op'>)</span>,
-  <span class='va'>endpoint</span>,
-  query <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>wmata_api</span><span class='op'>(</span><span class='va'>path</span>, query <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span>, <span class='va'>level</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>query</th>
+      <td><p>Additional queries also passed, possibly your key if need be.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments passed to <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON()</a></code> for parsing.</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>If parsed JSON is a list, select only this element. Useful if
+the list is length one containing a data frame or some other object.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
+    </tr>
     <tr>
       <th>type</th>
       <td><p>The API base type to call, one of "Rail" or "Bus".</p></td>
@@ -149,10 +164,6 @@ specific APIs and endpoints.</p>
       <th>endpoint</th>
       <td><p>The API endpoint (e.g., "jStations").</p></td>
     </tr>
-    <tr>
-      <th>query</th>
-      <td><p>Additional queries also passed, possibly your key if need be.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -160,12 +171,12 @@ specific APIs and endpoints.</p>
     <p>A single JSON string.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function was modified from zamorarr's wmata on GitHub:
+    <p>This function was modified from 'zamorarr/wmata' on GitHub:
 <a href='https://github.com/zamorarr/wmata/blob/master/R/api.r'>https://github.com/zamorarr/wmata/blob/master/R/api.r</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>wmata_api</span><span class='op'>(</span><span class='st'>"Rail"</span>, <span class='st'>"jLines"</span>, query <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>LineCode <span class='op'>=</span> <span class='st'>"RD"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>wmata_api</span><span class='op'>(</span><span class='st'>"Rail.svc/json/jLines"</span>, query <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>LineCode <span class='op'>=</span> <span class='st'>"RD"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

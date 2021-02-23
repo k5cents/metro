@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bus route and stop methods — bus_schedule • metro</title>
+<title>Bus Schedule — bus_schedule • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Bus route and stop methods — bus_schedule" />
+<meta property="og:title" content="Bus Schedule — bus_schedule" />
 <meta property="og:description" content="Returns schedules for a given route variant for a given date." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
@@ -119,7 +119,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bus route and stop methods</h1>
+    <h1>Bus Schedule</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/bus-schedule.R'><code>R/bus-schedule.R</code></a></small>
     <div class="hidden name"><code>bus_schedule.Rd</code></div>
     </div>
@@ -128,44 +128,79 @@
     <p>Returns schedules for a given route variant for a given date.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bus_schedule</span><span class='op'>(</span>route <span class='op'>=</span> <span class='cn'>NULL</span>, variants <span class='op'>=</span> <span class='cn'>TRUE</span>, date <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bus_schedule</span><span class='op'>(</span>
+  <span class='va'>RouteID</span>,
+  IncludingVariations <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  Date <span class='op'>=</span> <span class='cn'>NULL</span>,
+  api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>route</th>
+      <th>RouteID</th>
       <td><p>Bus route variant, e.g.: 70, 10A, 10Av1, etc.</p></td>
     </tr>
     <tr>
-      <th>variants</th>
-      <td><p>Should variations of <code>route</code> be included?. For example, if
-B30 is specified and <code>TRUE</code> (default), data for all variations of B30 such
-as B30v1, B30v2, etc. will be returned.</p></td>
+      <th>IncludingVariations</th>
+      <td><p>Whether or not to include variations if a base
+route is specified in RouteID. For example, if B30 is specified and
+<code>IncludingVariations</code> is set to <code>TRUE</code> (default), data for all variations
+of B30 such as B30v1, B30v2, etc. will be returned.</p></td>
     </tr>
     <tr>
-      <th>date</th>
-      <td><p>Date for which to retrieve route and stop information.</p></td>
+      <th>Date</th>
+      <td><p>(Optional) Date for which to retrieve route and stop information.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with 10 variables:</p><dl>
-<dt>route_id</dt><dd><p>The bus route ID</p></dd>
-<dt>direction</dt><dd><p>General route direction</p></dd>
-<dt>trip_head</dt><dd><p>Destination of the bus.</p></dd>
-<dt>trip_id</dt><dd><p>Trip identifier.</p></dd>
-<dt>start_time</dt><dd><p>Scheduled start date and time (EST) for this trip.</p></dd>
-<dt>end_time</dt><dd><p>Scheduled end date and time (EST) for this trip.</p></dd>
-<dt>stop_seq</dt><dd><p>Order of the stop in the sequence of StopTimes.</p></dd>
-<dt>stop_id</dt><dd><p>7-digit regional ID. If unavailable, 0 or NULL.</p></dd>
-<dt>stop_name</dt><dd><p>Stop name. May be different from what is displayed.</p></dd>
-<dt>stop_time</dt><dd><p>Scheduled departure date and time (EST) from this stop.</p></dd>
+    <p>A data frame with 1 row per trip and 10 variables:</p><dl>
+<dt>RouteID</dt><dd><p>Bus route variant. This can be used in several other bus
+methods which accept variants.</p></dd>
+<dt>TripDirectionText</dt><dd><p>General direction of the trip (NORTH, SOUTH, EAST,
+WEST, LOOP, etc.).</p></dd>
+<dt>TripHeadsign</dt><dd><p>Descriptive text of where the bus is headed. This is
+similar, but not necessarily identical, to what is displayed on the bus.</p></dd>
+<dt>StartTime</dt><dd><p>Scheduled start date and time (UTC) for this trip.</p></dd>
+<dt>EndTime</dt><dd><p>Scheduled end date and time (UTC) for this trip.</p></dd>
+<dt>TripID</dt><dd><p>Unique trip ID. This can be correlated with the data returned
+from the schedule-related methods.</p></dd>
+<dt>StopID</dt><dd><p>7-digit regional ID which can be used in various bus-related
+methods. If unavailable, the <code>StopID</code> will be 0 or <code>NA</code></p></dd>
+<dt>StopName</dt><dd><p>Stop name. May be slightly different from what is spoken or
+displayed in the bus.</p></dd>
+<dt>StopSeq</dt><dd><p>Order of the stop in the sequence of StopTimes.</p></dd>
+<dt>Time</dt><dd><p>Scheduled departure date and time (UTC) from this stop.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Data frame containing trip information</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6b'>https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6b</a></p>
+<p>Other Bus Route and Stop Methods: 
+<code><a href='bus_departs.html'>bus_departs</a>()</code>,
+<code><a href='bus_path.html'>bus_path</a>()</code>,
+<code><a href='bus_position.html'>bus_position</a>()</code>,
+<code><a href='bus_routes.html'>bus_routes</a>()</code>,
+<code><a href='bus_stops.html'>bus_stops</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>bus_schedule</span><span class='op'>(</span><span class='st'>"70"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

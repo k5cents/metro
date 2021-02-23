@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bus position — bus_position • metro</title>
+<title>Bus Position — bus_position • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Bus position — bus_position" />
+<meta property="og:title" content="Bus Position — bus_position" />
 <meta property="og:description" content="Returns bus positions for the given route, with an optional search radius. If
 no parameters are specified, all bus positions are returned." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
@@ -120,7 +120,7 @@ no parameters are specified, all bus positions are returned." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bus position</h1>
+    <h1>Bus Position</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/bus-position.R'><code>R/bus-position.R</code></a></small>
     <div class="hidden name"><code>bus_position.Rd</code></div>
     </div>
@@ -130,53 +130,96 @@ no parameters are specified, all bus positions are returned." />
 no parameters are specified, all bus positions are returned.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bus_position</span><span class='op'>(</span>route <span class='op'>=</span> <span class='cn'>NULL</span>, lat <span class='op'>=</span> <span class='cn'>NULL</span>, lon <span class='op'>=</span> <span class='cn'>NULL</span>, radius <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bus_position</span><span class='op'>(</span>
+  RouteId <span class='op'>=</span> <span class='cn'>NULL</span>,
+  Lat <span class='op'>=</span> <span class='cn'>NULL</span>,
+  Lon <span class='op'>=</span> <span class='cn'>NULL</span>,
+  Radius <span class='op'>=</span> <span class='fl'>1000</span>,
+  api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>route</th>
+      <th>RouteId</th>
       <td><p>Base bus route, e.g.: 70, 10A.</p></td>
     </tr>
     <tr>
-      <th>lat</th>
-      <td><p>Center point Latitude.</p></td>
+      <th>Lat</th>
+      <td><p>Center point Latitude, required if Longitude and Radius are
+specified.</p></td>
     </tr>
     <tr>
-      <th>lon</th>
-      <td><p>Center point Longitude.</p></td>
+      <th>Lon</th>
+      <td><p>Center point Longitude, required if Latitude and Radius are
+specified.</p></td>
     </tr>
     <tr>
-      <th>radius</th>
-      <td><p>Meters to include in the search area for <code>lat</code> and <code>lon</code>.</p></td>
+      <th>Radius</th>
+      <td><p>Radius (meters) to include in the search area, required if
+<code>Latitude</code> and <code>Longitude</code> are specified.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with 13 variables:</p><dl>
-<dt>vehicle</dt><dd><p>Unique identifier. Usually visible on the bus itself.</p></dd>
-<dt>lat</dt><dd><p>Last reported Latitude of the bus.</p></dd>
-<dt>lon</dt><dd><p>Last reported Longitude of the bus.</p></dd>
-<dt>dist</dt><dd><p>Distance in meters from provided coordinates.</p></dd>
-<dt>deviation</dt><dd><p>Deviation, in minutes, from schedule.</p></dd>
-<dt>time</dt><dd><p>Date and time (EST) of last position update.</p></dd>
-<dt>trip</dt><dd><p>Unique trip ID. Used with the schedule-related functions.</p></dd>
-<dt>route</dt><dd><p>Base route name as shown on the bus.</p></dd>
-<dt>direction</dt><dd><p>General direction of the trip, not the bus itself</p></dd>
-<dt>head</dt><dd><p>Destination of the bus.</p></dd>
-<dt>start</dt><dd><p>Scheduled start time (EST) of the bus's current trip.</p></dd>
-<dt>end</dt><dd><p>Scheduled end time (EST) of the bus's current trip.</p></dd>
-<dt>block</dt><dd><p></p></dd>
+    <p>A data frame with 1 row per bus and 13 variables:</p><dl>
+<dt>VehicleID</dt><dd><p>Unique identifier for the bus. This is usually visible on
+the bus itself.</p></dd>
+<dt>Lat</dt><dd><p>Last reported Latitude of the bus.</p></dd>
+<dt>Lon</dt><dd><p>Last reported Longitude of the bus.</p></dd>
+<dt>Distance</dt><dd><p>Distance (meters) of the bus from the provided search
+coordinates. Calculated using <code><a href='https://rdrr.io/pkg/geodist/man/geodist.html'>geodist::geodist()</a></code> and the "cheap ruler"
+method.</p></dd>
+<dt>Deviation</dt><dd><p>Deviation, in minutes, from schedule. Positive values
+indicate that the bus is running late while negative ones are for buses
+running ahead of schedule.</p></dd>
+<dt>DateTime</dt><dd><p>Date and time (UTC) of last position update.</p></dd>
+<dt>TripID</dt><dd><p>Unique trip ID. This can be correlated with the data returned
+from the schedule-related methods.</p></dd>
+<dt>RouteID</dt><dd><p>Base route name as shown on the bus. Note that the base
+route name could also refer to any variant, so a RouteID of 10A could refer
+to 10A, 10Av1, 10Av2, etc.</p></dd>
+<dt>DirectionText</dt><dd><p>General direction of the trip, not the bus itself
+(e.g.: NORTH, SOUTH, EAST, WEST).</p></dd>
+<dt>TripHeadsign</dt><dd><p>Destination of the bus.</p></dd>
+<dt>TripStartTime</dt><dd><p>Scheduled start date and time (UTC) of the bus's
+current trip.</p></dd>
+<dt>TripEndTime</dt><dd><p>Scheduled end date and time (UTC) of the bus's current
+trip.</p></dd>
+<dt>BlockNumber</dt><dd><p></p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Data frame containing bus position information.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Note that the <code>route</code> parameter accepts only base route names and no
+    <p>Note that the <code>RouteID</code> parameter accepts only base route names and no
 variations, i.e.: use 10A instead of 10Av1 or 10Av2.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d68'>https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d68</a></p>
+<p>Other Bus Route and Stop Methods: 
+<code><a href='bus_departs.html'>bus_departs</a>()</code>,
+<code><a href='bus_path.html'>bus_path</a>()</code>,
+<code><a href='bus_routes.html'>bus_routes</a>()</code>,
+<code><a href='bus_schedule.html'>bus_schedule</a>()</code>,
+<code><a href='bus_stops.html'>bus_stops</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>bus_position</span><span class='op'>(</span><span class='st'>"70"</span>, <span class='fl'>38.8895</span>, <span class='op'>-</span><span class='fl'>77.0353</span>, <span class='fl'>1200</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
