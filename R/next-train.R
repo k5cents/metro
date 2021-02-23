@@ -68,12 +68,14 @@ next_train <- function(StationCodes = NULL, api_key = wmata_key()) {
     warning("No next trains arriving at this station")
     return(empty_next_train)
   }
-  dat$Min[dat$Min == "ARR"] <- 0
-  dat$Min[dat$Min == "BRD"] <- -1
-  dat$Min[dat$Min == "---" | dat$Min == ""] <- NA
-  dat$Car[dat$Car == "-"] <- NA
-  dat$Line[dat$Line == "No"] <- NA
-  dat <- utils::type.convert(dat, as.is = TRUE)
+  dat$Min[dat$Min == "ARR"] <- 0L
+  dat$Min[dat$Min == "BRD"] <- -1L
+  dat$Min[dat$Min == "---" | dat$Min == ""] <- NA_integer_
+  dat$Car[dat$Car == "-"] <- NA_integer_
+  dat$Line[dat$Line == "No"] <- NA_character_
+  dat$Min <- as.integer(dat$Min)
+  dat$Group <- as.integer(dat$Group)
+  dat$Car <- as.integer(dat$Car)
   tibble::as_tibble(dat)
 }
 
