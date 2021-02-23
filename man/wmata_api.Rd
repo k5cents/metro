@@ -26,9 +26,9 @@ your \href{https://developer.wmata.com/developer}{Profile}. Defaults
 A single JSON string.
 }
 \description{
-Use \code{\link[httr:GET]{httr::GET()}} to make a request to the WMATA API and return the unparsed
-JSON string. This function is used in others devoted to a
-specific APIs and endpoints.
+Use \code{\link[httr:GET]{httr::GET()}} to make a request to the WMATA API and return the parsed
+list from the JSON data. The function uses \code{\link[httr:RETRY]{httr::RETRY()}}, so the call will
+repeat up to three times if there is a failure (often from a rate limit).
 }
 \details{
 This function was modified from 'zamorarr/wmata' on GitHub:

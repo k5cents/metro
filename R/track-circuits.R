@@ -32,7 +32,6 @@
 #' @return A data frame of nested track circuit information.
 #' @seealso <https://developer.wmata.com/docs/services/5763fa6ff91823096cac1057/operations/57644238031f59363c586dcb>
 #' @family Train Positions
-#' @importFrom httr GET content add_headers
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble
 #' @export
