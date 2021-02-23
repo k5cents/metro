@@ -3,27 +3,37 @@
 \docType{data}
 \name{metro_stations}
 \alias{metro_stations}
-\title{All WMATA rail stations}
+\title{All WMATA Rail Stations}
 \format{
-A data frame with 95 rows and 10 variables:
+A tibble with 95 rows and 10 variables:
 \describe{
-\item{station}{Station code.}
-\item{name}{Station name.}
-\item{txfer}{For stations with multiple platforms, the additional code.}
-\item{lines}{Vector of line codes services by station.}
-\item{lat}{Latitude.}
-\item{lon}{Longitude.}
-\item{street}{Street address (for GPS use).}
-\item{city}{City.}
-\item{state}{State (abbreviated).}
-\item{zip}{Zip code.}
-...
+\item{StationCode}{Station code for this station. Use this value in other
+rail-related APIs to retrieve data about a station.}
+\item{StationName}{Full name for this station, as shown on the WMATA
+website.}
+\item{StationTogether}{For stations with multiple platforms (e.g.: Gallery
+Place, Fort Totten, L'Enfant Plaza, and Metro Center), the additional
+\code{StationCode} will be listed here.}
+\item{LineCodes}{Character vector of two-letter abbreviations (e.g.: RD,
+BL, YL, OR, GR, or SV) served by this station. If the station has an
+additional platform, the lines served by the other platform are listed in
+the \code{LineCodes} values for the record associated with the \code{StationCode}
+found in \code{StationTogether.}}
+\item{Lat}{Latitude.}
+\item{Lon}{Longitude.}
+\item{Street}{Street address (for GPS use).}
+\item{City}{City.}
+\item{State}{State (abbreviated).}
+\item{Zip}{Zip code.}
 }
 }
 \usage{
 metro_stations
 }
 \description{
-All WMATA rail stations
+All WMATA Rail Stations
+}
+\details{
+As of 2021-02-22 22:00:00 ET.
 }
 \keyword{datasets}

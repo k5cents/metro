@@ -3,22 +3,29 @@
 \docType{data}
 \name{metro_stops}
 \alias{metro_stops}
-\title{All WMATA bus stops}
+\title{All WMATA Bus Stops}
 \format{
-A data frame with 9,074 rows and 5 variables:
+A tibble with 9,044 rows and 5 variables:
 \describe{
-\item{stop}{Bus stop ID}
-\item{name}{Bus stop name}
-\item{lon}{Latitude.}
-\item{lat}{Longitude.}
-\item{routes}{Character vector of routes services by stop.}
-...
+\item{StopID}{String array of route variants which provide service at this
+stop. Note that these are not date-specific; any route variant which stops
+at this stop on any day will be listed.}
+\item{Name}{Stop name. May be slightly different from what is spoken or
+displayed in the bus.}
+\item{Lat}{Latitude.}
+\item{Lon}{Longitude.}
+\item{Routes}{Character string of route variants which provide service at
+this stop. Note that these are not date-specific; any route variant which
+stops at this stop on any day will be listed.}
 }
 }
 \usage{
 metro_stops
 }
 \description{
-All WMATA bus stops
+All WMATA Bus Stops
+}
+\details{
+As of 2021-02-22 22:00:00 ET.
 }
 \keyword{datasets}

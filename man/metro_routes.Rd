@@ -3,22 +3,25 @@
 \docType{data}
 \name{metro_routes}
 \alias{metro_routes}
-\title{All WMATA bus routes}
+\title{All WMATA Bus Routes}
 \format{
-A data frame with 325 rows and 3 variables:
+A tibble 322 rows and 3 variables:
 \describe{
-\item{route}{Unique identifier for a given route variant.}
-\item{name}{Descriptive name of the route variant.}
-\item{description}{Denotes the route variant’s grouping – lines are a
+\item{RouteID}{Unique identifier for a given route variant. Can be used in
+various other bus-related methods.}
+\item{Name}{Descriptive name of the route variant.}
+\item{LineDescription}{Denotes the route variant's grouping – lines are a
 combination of routes which lie in the same corridor and which have
 significant portions of their paths along the same roadways.}
-...
 }
 }
 \usage{
 metro_routes
 }
 \description{
-All WMATA bus routes
+All WMATA Bus Routes
+}
+\details{
+As of 2021-02-22 22:00:00 ET.
 }
 \keyword{datasets}
