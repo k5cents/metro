@@ -42,7 +42,7 @@ next_bus <- function(StopID, api_key = wmata_key()) {
     flatten = TRUE,
     api_key = api_key
   )
-  if (length(dat$Predictions) == 1) {
+  if (length(dat$Predictions) == 0) {
     warning("No busses arriving at this stop")
     return(empty_next_bus)
   }
