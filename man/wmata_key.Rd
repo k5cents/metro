@@ -10,12 +10,16 @@ wmata_key(api_key = Sys.getenv("WMATA_KEY"))
 
 wmata_validate(api_key = wmata_key())
 
-wmata_demo(validate)
+wmata_demo(force = FALSE)
 }
 \arguments{
 \item{api_key}{Subscription key which provides access to this API. Found in
 your \href{https://developer.wmata.com/developer}{Profile}. Defaults
 \code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
+
+\item{force}{Should a demo key be scraped even if one exits? If \code{FALSE}
+(default) and a key already exists, the user will be asked if the key
+should be scraped.}
 }
 \value{
 For \code{\link[=wmata_key]{wmata_key()}} and \code{\link[=wmata_demo]{wmata_demo()}}, a 32 character alphanumeric

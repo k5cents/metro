@@ -3,5 +3,5 @@ test_that("next bus returned for single stop", {
   Sys.sleep(0.11)
   n <- next_bus(StopID = 2000474)
   expect_s3_class(n, "data.frame")
-  expect_length(n, 6)
+  expect_length(n, 8)
 })

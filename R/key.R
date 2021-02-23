@@ -42,6 +42,9 @@
 #' @param api_key Subscription key which provides access to this API. Found in
 #'   your [Profile](https://developer.wmata.com/developer). Defaults
 #'   `Sys.getenv("WMATA_KEY")` via [wmata_key()].
+#' @param force Should a demo key be scraped even if one exits? If `FALSE`
+#'   (default) and a key already exists, the user will be asked if the key
+#'   should be scraped.
 #' @return For [wmata_key()] and [wmata_demo()], a 32 character alphanumeric
 #' API key. For [wmata_validate()], either `TRUE` for a valid key or an
 #' error if invalid.
@@ -77,9 +80,9 @@ wmata_validate <- function(api_key = wmata_key()) {
 
 #' @rdname wmata_key
 #' @export
-wmata_demo <- function(validate) {
+wmata_demo <- function(force = FALSE) {
   api_key <- wmata_key()
-  if (!nzchar(api_key)) {
+  if (nzchar(api_key) && isFALSE(force)) {
     prompt <- utils::askYesNo(
       msg = "A key has already been found, do you really need the demo?",
       default = FALSE,

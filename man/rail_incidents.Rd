@@ -28,10 +28,8 @@ Data frame of all rail incidents.
 }
 \description{
 Reported rail incidents (significant disruptions and delays to normal
-service). The data is identical to WMATA's \link[=1]{Metrorail Service Status feed}.
-}
-\details{
-
+service). The data is identical to WMATA's
+\href{http://www.metroalerts.info/rss.aspx?rs}{Metrorail Service Status feed}.
 }
 \examples{
 \dontrun{
