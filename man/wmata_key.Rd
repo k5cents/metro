@@ -31,7 +31,7 @@ All calls to the WMATA API must be accompanied by a personal API key. A free
 key can be obtained by subscribing to the default tier:
 \enumerate{
 \item Sign up for a free WMATA \href{https://developer.wmata.com/signup/}{developer account}.
-\item Log in and subscribe to the free \href{https://developer.wmata.com/products/5475f1b0031f590f380924fe}{default tier}.
+\item Log in and subscribe to the free default tier.
 \item Copy the primary or secondary key from your \href{https://developer.wmata.com/developer}{profile}.
 \item Pass your API key to a function through one of three ways:
 \enumerate{

@@ -5,7 +5,7 @@
 #' key can be obtained by subscribing to the default tier:
 #'
 #' 1. Sign up for a free WMATA [developer account][1].
-#' 2. Log in and subscribe to the free [default tier][2].
+#' 2. Log in and subscribe to the free default tier.
 #' 3. Copy the primary or secondary key from your [profile][3].
 #' 4. Pass your API key to a function through one of three ways:
 #'     1. Use [Sys.setenv()] to temporarily set define `WMATA_KEY`.
@@ -22,7 +22,6 @@
 #' The [wmata_validate()] function can be used to verify a key is valid.
 #'
 #' [1]: https://developer.wmata.com/signup/
-#' [2]: https://developer.wmata.com/products/5475f1b0031f590f380924fe
 #' [3]: https://developer.wmata.com/developer
 #' [4]: https://developer.wmata.com/products/5475f236031f590f380924ff
 #'

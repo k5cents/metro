@@ -2,7 +2,7 @@
 #'
 #' Reported rail incidents (significant disruptions and delays to normal
 #' service). The data is identical to WMATA's
-#' [Metrorail Service Status feed](http://www.metroalerts.info/rss.aspx?rs).
+#' [Metrorail Service Status feed](https://www.metroalerts.info/rss.aspx?rs).
 #'
 #' @format A data frame with 1 row incident and 5 variables:
 #' \describe{

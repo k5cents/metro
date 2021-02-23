@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/metro)](https://CRAN.R-project.org/package=metro)
 [![Codecov test
@@ -58,19 +58,19 @@ Functions return data frames for easy analysis.
 
 ``` r
 rail_stations(LineCode = "RD")
-#> # A tibble: 27 x 8
-#>    StationCode StationName                 Lat   Lon Street                City     State Zip  
-#>    <chr>       <chr>                     <dbl> <dbl> <chr>                 <chr>    <chr> <chr>
-#>  1 A01         Metro Center               38.9 -77.0 607 13th St. NW       Washing… DC    20005
-#>  2 A02         Farragut North             38.9 -77.0 1001 Connecticut Ave… Washing… DC    20036
-#>  3 A03         Dupont Circle              38.9 -77.0 1525 20th St. NW      Washing… DC    20036
-#>  4 A04         Woodley Park-Zoo/Adams M…  38.9 -77.1 2700 Connecticut Ave… Washing… DC    20008
-#>  5 A05         Cleveland Park             38.9 -77.1 3599 Connecticut Ave… Washing… DC    20008
-#>  6 A06         Van Ness-UDC               38.9 -77.1 4200 Connecticut Ave… Washing… DC    20008
-#>  7 A07         Tenleytown-AU              38.9 -77.1 4501 Wisconsin Avenu… Washing… DC    20016
-#>  8 A08         Friendship Heights         39.0 -77.1 5337 Wisconsin Avenu… Washing… DC    20015
-#>  9 A09         Bethesda                   39.0 -77.1 7450 Wisconsin Avenue Bethesda MD    20814
-#> 10 A10         Medical Center             39.0 -77.1 8810 Rockville Pike   Bethesda MD    20814
+#> # A tibble: 27 x 10
+#>    StationCode StationName    StationTogether LineCodes   Lat   Lon Street    City  State Zip  
+#>    <chr>       <chr>          <chr>           <list>    <dbl> <dbl> <chr>     <chr> <chr> <chr>
+#>  1 A01         Metro Center   C01             <chr [1]>  38.9 -77.0 607 13th… Wash… DC    20005
+#>  2 A02         Farragut North <NA>            <chr [1]>  38.9 -77.0 1001 Con… Wash… DC    20036
+#>  3 A03         Dupont Circle  <NA>            <chr [1]>  38.9 -77.0 1525 20t… Wash… DC    20036
+#>  4 A04         Woodley Park-… <NA>            <chr [1]>  38.9 -77.1 2700 Con… Wash… DC    20008
+#>  5 A05         Cleveland Park <NA>            <chr [1]>  38.9 -77.1 3599 Con… Wash… DC    20008
+#>  6 A06         Van Ness-UDC   <NA>            <chr [1]>  38.9 -77.1 4200 Con… Wash… DC    20008
+#>  7 A07         Tenleytown-AU  <NA>            <chr [1]>  38.9 -77.1 4501 Wis… Wash… DC    20016
+#>  8 A08         Friendship He… <NA>            <chr [1]>  39.0 -77.1 5337 Wis… Wash… DC    20015
+#>  9 A09         Bethesda       <NA>            <chr [1]>  39.0 -77.1 7450 Wis… Beth… MD    20814
+#> 10 A10         Medical Center <NA>            <chr [1]>  39.0 -77.1 8810 Roc… Beth… MD    20814
 #> # … with 17 more rows
 ```
 
@@ -79,12 +79,12 @@ Use coordinates to find station entrances or bus stops near a location.
 ``` r
 # White House coordinates
 rail_entrance(Lat = 38.8979, Lon = -77.0365, Radius = 500)
-#> # A tibble: 3 x 5
-#>   Name                                 StationCode   Lat   Lon Distance
-#>   <chr>                                <chr>       <dbl> <dbl>    <dbl>
-#> 1 WEST ENTRANCE (VERMONT & I STs)      C02          38.9 -77.0     379.
-#> 2 EAST ENTRANCE (EAST OF 17th & I STs) C03          38.9 -77.0     422.
-#> 3 EAST ENTRANCE (14TH & I STs)         C02          38.9 -77.0     499.
+#> # A tibble: 3 x 7
+#>   Name          StationCode StationTogether Description                      Lat   Lon Distance
+#>   <chr>         <chr>       <chr>           <chr>                          <dbl> <dbl>    <dbl>
+#> 1 WEST ENTRANC… C02         <NA>            Building entrance from the so…  38.9 -77.0     383.
+#> 2 EAST ENTRANC… C03         <NA>            Building entrance from the so…  38.9 -77.0     430.
+#> 3 EAST ENTRANC… C02         <NA>            Building entrance from the so…  38.9 -77.0     499.
 ```
 
 Dates use the UTC time zone but times use EST. Times are represented
@@ -94,11 +94,13 @@ are over 24 hours).
 
 ``` r
 bus_position(RouteId = "L2")
-#> # A tibble: 2 x 7
-#>   VehicleID TripID  RouteID DirectionText TripHeadsign  TripStartTime       TripEndTime        
-#>   <chr>     <chr>   <chr>   <chr>         <chr>         <dttm>              <dttm>             
-#> 1 7120      190912… L2      NORTH         CHEVY CHASE … 2021-02-23 03:32:00 2021-02-23 04:08:00
-#> 2 7112      190915… L2      SOUTH         FARRAGUT SQU… 2021-02-23 03:45:00 2021-02-23 04:15:00
+#> # A tibble: 2 x 13
+#>   VehicleID   Lat   Lon Distance Deviation DateTime            TripID RouteID DirectionText
+#>   <chr>     <dbl> <dbl>    <dbl>     <dbl> <dttm>              <chr>  <chr>   <chr>        
+#> 1 7112       39.0 -77.1       NA         5 2021-02-23 05:05:16 19091… L2      SOUTH        
+#> 2 7120       38.9 -77.0       NA         1 2021-02-23 05:05:08 19091… L2      NORTH        
+#> # … with 4 more variables: TripHeadsign <chr>, TripStartTime <dttm>, TripEndTime <dttm>,
+#> #   BlockNumber <chr>
 ```
 
 ``` r

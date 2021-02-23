@@ -67,39 +67,23 @@ library(metro)
 
 Functions return data frames for easy analysis.
 
-```{r eval=FALSE}
+```{r rail_stations}
 rail_stations(LineCode = "RD")
-```
-
-```{r rail_stations, echo=FALSE}
-rail_stations(LineCode = "RD")[, c(-3, -4)]
 ```
 
 Use coordinates to find station entrances or bus stops near a location. 
 
-```{r eval=FALSE}
+```{r rail_entrance}
 # White House coordinates
 rail_entrance(Lat = 38.8979, Lon = -77.0365, Radius = 500)
-```
-
-```{r rail_entrance, echo=FALSE}
-rail_entrance(
-  Lat = 38.897957, 
-  Lon = -77.036560, 
-  Radius = 500
-)[, -3:-4]
 ```
 
 Dates use the UTC time zone but times use EST. Times are represented using the
 [`hms`][hms] class, which counts the seconds since midnight (sometimes this
 means AM times are over 24 hours).
 
-```{r eval=FALSE}
+```{r bus_position}
 bus_position(RouteId = "L2")
-```
-
-```{r bus_position, echo=FALSE}
-bus_position(RouteId = "L2")[, -c(2:6, 13)]
 ```
 
 ```{r rail_times}
@@ -114,7 +98,7 @@ metro_stops # bus_stops() for live
 
 <!-- refs: start -->
 [life_badge]: https://img.shields.io/badge/lifecycle-experimental-orange.svg
-[life_link]: https://www.tidyverse.org/lifecycle/#experimental
+[life_link]: https://lifecycle.r-lib.org/articles/stages.html
 [cran_badge]: https://www.r-pkg.org/badges/version/metro
 [cran_link]: https://CRAN.R-project.org/package=metro
 [ga_badge]: https://github.com/kiernann/metro/workflows/R-CMD-check/badge.svg

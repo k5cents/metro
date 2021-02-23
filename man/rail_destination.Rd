@@ -20,7 +20,7 @@ the source and destination station. This is not correlated to minutes
 and 3-7 PM (EST), and weekends from midnight to closing).}
 \item{OffPeakTime}{Fare during off-peak times (times other than the ones
 described below).}
-\item{SeniorDisabled}{Reduced fare for \href{http://www.wmata.com/fares/reduced.cfm}{senior citizens or people with disabilities.}}
+\item{SeniorDisabled}{Reduced fare for \href{https://www.wmata.com/fares/reduced.cfm}{senior citizens or people with disabilities.}}
 }
 }
 \usage{
