@@ -9,18 +9,18 @@ A tibble 1 row per train with 8 variables:
 \item{StationCode}{Station code for this station. Use this value in other
 rail-related APIs to retrieve data about a station.}
 \item{StationName}{Full name of the station.}
-\item{Weekday}{Abbreviated day of the week.}
-\item{OpeningTime}{Station opening time (EST). Format is HH:mm.}
-\item{FirstStation}{Station code for the train's destination. Use this
-value in other rail-related APIs to retrieve data about a station.}
-\item{FirstTime}{First train leaves the station at this time (EST). Format
-is HH:mm.}
-\item{LastStation}{Station code for the train's destination. Use this value
-in other rail-related APIs to retrieve data about a station.}
-\item{LastTime}{Last train leaves the station at this time (EST). Format is
-HH:mm. Note that when the time is AM, it signifies the next day. For
-example, a value of 02:30 under a Saturday element means the last train
-leaves on Sunday at 2:30 AM.}
+\item{DestinationStation}{Station code for the train's destination. Use
+this value in other rail-related APIs to retrieve data about a station.}
+\item{Weekday}{Day of the week abbreviation. From list element names.}
+\item{OpeningTime}{Station opening time. Converted to \code{hms} class with
+\code{\link[hms:parse_hms]{hms::parse_hm()}}, representing seconds since midnight of that \code{Weekday}.}
+\item{FirstTime}{First train leaves the station at this time (ET).
+Converted to \code{hms} class with \code{\link[hms:parse_hms]{hms::parse_hm()}}, representing seconds since
+midnight of that \code{Weekday}.}
+\item{LastTime}{Last train leaves the station at this time (ET). Converted
+to \code{hms} class with \code{\link[hms:parse_hms]{hms::parse_hm()}}, representing seconds since midnight
+of that \code{Weekday}. For times that were in the AM of the \emph{next} \code{Weekday},
+time is greater than 24 hours.}
 }
 }
 \usage{

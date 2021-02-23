@@ -13,18 +13,18 @@
 #'   \item{StationCode}{Station code for this station. Use this value in other
 #'   rail-related APIs to retrieve data about a station.}
 #'   \item{StationName}{Full name of the station.}
-#'   \item{Weekday}{Abbreviated day of the week.}
-#'   \item{OpeningTime}{Station opening time (EST). Format is HH:mm.}
-#'   \item{FirstStation}{Station code for the train's destination. Use this
-#'   value in other rail-related APIs to retrieve data about a station.}
-#'   \item{FirstTime}{First train leaves the station at this time (EST). Format
-#'   is HH:mm.}
-#'   \item{LastStation}{Station code for the train's destination. Use this value
-#'   in other rail-related APIs to retrieve data about a station.}
-#'   \item{LastTime}{Last train leaves the station at this time (EST). Format is
-#'   HH:mm. Note that when the time is AM, it signifies the next day. For
-#'   example, a value of 02:30 under a Saturday element means the last train
-#'   leaves on Sunday at 2:30 AM.}
+#'   \item{DestinationStation}{Station code for the train's destination. Use
+#'   this value in other rail-related APIs to retrieve data about a station.}
+#'   \item{Weekday}{Day of the week abbreviation. From list element names.}
+#'   \item{OpeningTime}{Station opening time. Converted to `hms` class with
+#'   [hms::parse_hm()], representing seconds since midnight of that `Weekday`.}
+#'   \item{FirstTime}{First train leaves the station at this time (ET).
+#'   Converted to `hms` class with [hms::parse_hm()], representing seconds since
+#'   midnight of that `Weekday`.}
+#'   \item{LastTime}{Last train leaves the station at this time (ET). Converted
+#'   to `hms` class with [hms::parse_hm()], representing seconds since midnight
+#'   of that `Weekday`. For times that were in the AM of the _next_ `Weekday`,
+#'   time is greater than 24 hours.}
 #' }
 #'
 #' @param StationCode Station code. Use the [rail_stations()] function to return
@@ -39,6 +39,7 @@
 #'   of weekday times.
 #' @seealso <https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3312>
 #' @family Rail Station Information
+#' @importFrom hms parse_hm
 #' @importFrom tibble as_tibble rownames_to_column
 #' @export
 rail_times <- function(StationCode = NULL, api_key = wmata_key()) {
@@ -83,5 +84,10 @@ rail_times <- function(StationCode = NULL, api_key = wmata_key()) {
     )
   )
   names(out)[6:7] <- c("FirstTime", "LastTime")
-  out[!is.na(out$StationCode), c(1:2, 5, 4, 6:7)]
+  out <- out[!is.na(out$StationCode), c(1:2, 5, 3:4, 6:7)]
+  out[, 5:7] <- lapply(out[, 5:7], hms::parse_hm)
+  # AM time originally means next day, convert to >24 hour time
+  am_last <- which(out$LastTime < 43200) # under 12 hours of seconds
+  out$LastTime[am_last] <- hms::as_hms(out$LastTime[am_last] + 86400)
+  out
 }
