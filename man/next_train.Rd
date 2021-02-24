@@ -35,8 +35,7 @@ next_train(StationCodes = NULL, api_key = wmata_key())
 \item{StationCodes}{Character vector of station codes. For all predictions,
 use \code{NULL} (default) or "All".}
 
-\item{api_key}{Subscription key which provides access to this API. Found in
-your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\item{api_key}{Subscription key which provides access to this API. Defaults
 \code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{

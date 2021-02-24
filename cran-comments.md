@@ -17,6 +17,10 @@ environment variable.
 
 * This is a new release.
 
+## Resubmission
+
+* Invalid URLs are removed from function documentation.
+
 ## Submission
 
 * All functions require a valid free API key. A demo key can be found on the 

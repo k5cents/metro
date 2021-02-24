@@ -1,4 +1,4 @@
-# metro 0.9.0
+# metro 0.9.1
 
 * Covered most [JSON endpoints](https://developer.wmata.com/docs/services/) 
   as tidy data frames. Buses stops, train stations, next bus or
@@ -13,3 +13,4 @@
 * Removed `rail_path()` helper function. Keep only endpoint functions.
 * Removed ability to automatically scrape demo API key.
 * Removed package startup message about API key. (#2)
+* Invalid URLs are removed from function documentation.

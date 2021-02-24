@@ -19,8 +19,7 @@ or BL; OR; RD;).}
 rail_incidents(api_key = wmata_key())
 }
 \arguments{
-\item{api_key}{Subscription key which provides access to this API. Found in
-your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\item{api_key}{Subscription key which provides access to this API. Defaults
 \code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
@@ -28,8 +27,7 @@ Data frame of all rail incidents.
 }
 \description{
 Reported rail incidents (significant disruptions and delays to normal
-service). The data is identical to WMATA's
-\href{https://www.metroalerts.info/rss.aspx?rs}{Metrorail Service Status feed}.
+service). The data is identical to WMATA's Metrorail Service Status feed.
 }
 \examples{
 \dontrun{

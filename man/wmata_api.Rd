@@ -14,8 +14,7 @@ wmata_api(path, query = NULL, ..., level, api_key = wmata_key())
 \item{level}{If parsed JSON is a list, select only this element. Useful if
 the list is length one containing a data frame or some other object.}
 
-\item{api_key}{Subscription key which provides access to this API. Found in
-your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\item{api_key}{Subscription key which provides access to this API. Defaults
 \code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 
 \item{type}{The API base type to call, one of "Rail" or "Bus".}

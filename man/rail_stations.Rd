@@ -40,8 +40,7 @@ rail_stations(LineCode = NULL, api_key = wmata_key())
 \item SV - Silver
 }}
 
-\item{api_key}{Subscription key which provides access to this API. Found in
-your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\item{api_key}{Subscription key which provides access to this API. Defaults
 \code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{

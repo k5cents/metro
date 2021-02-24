@@ -10,8 +10,7 @@ wmata_key(api_key = Sys.getenv("WMATA_KEY"))
 wmata_validate(api_key = wmata_key())
 }
 \arguments{
-\item{api_key}{Subscription key which provides access to this API. Found in
-your \href{https://developer.wmata.com/developer}{Profile}. Defaults
+\item{api_key}{Subscription key which provides access to this API. Defaults
 \code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
 }
 \value{
@@ -22,21 +21,21 @@ For \code{\link[=wmata_key]{wmata_key()}}, a 32 character alphanumeric API key. 
 All calls to the WMATA API must be accompanied by a personal API key. A free
 key can be obtained by subscribing to the default tier:
 \enumerate{
-\item Sign up for a free WMATA \href{https://developer.wmata.com/signup/}{developer account}.
+\item Sign up for a free WMATA developer account: \url{https://developer.wmata.com/}
 \item Log in and subscribe to the free default tier.
-\item Copy the primary or secondary key from your \href{https://developer.wmata.com/developer}{profile}.
+\item Copy the primary or secondary key from your profile.
 \item Pass your API key to a function through one of three ways:
 \enumerate{
 \item Use \code{\link[=Sys.setenv]{Sys.setenv()}} to temporarily set define \code{WMATA_KEY}.
 \item Pass your key as a string to the \code{api_key} argument of any function.
 \item Store the the WMATA key as a line like \code{WMATA_KEY=xxxyyyzzz} in your
-\code{.Renviron} file.
+\code{.Renviron} file, to be called by \code{\link[=wmata_ket]{wmata_ket()}} via \code{\link[=Sys.getenv]{Sys.getenv()}}.
 }
 }
 
 The WMATA also provides a demonstration key. This key should \strong{never} be
 used in production applications, it is rate limited and subject to change at
-\emph{any} time. The key can be found on the \href{https://developer.wmata.com/products/5475f236031f590f380924ff}{WMATA products page} when not
+\emph{any} time. The key can be found on the WMATA products page when not
 signed into a developer account.
 
 The \code{\link[=wmata_validate]{wmata_validate()}} function can be used to verify a key is valid.
