@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metro</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -122,47 +122,21 @@
       <small>Source: <a href='https://github.com/kiernann/metro/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="metro-100" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.0">
-<a href="#metro-100" class="anchor"></a>metro 1.0.0</h1>
+    <div id="metro-090" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.0">
+<a href="#metro-090" class="anchor"></a>metro 0.9.0</h1>
 <ul>
-<li>
-<a href="https://developer.wmata.com/docs/services/">All API JSON endpoints</a> are covered as tidy data frames (<a href='https://github.com/kiernann/metro/issues/1'>#1</a>). Buses stops, train stations, next bus or trains, incidents, paths, routes, circuits.</li>
+<li>Covered most <a href="https://developer.wmata.com/docs/services/">JSON endpoints</a> as tidy data frames. Buses stops, train stations, next bus or trains, incidents, paths, routes, circuits. (<a href='https://github.com/kiernann/metro/issues/1'>#1</a>)</li>
 <li>Stops, Stations, Routes, and Lines saved as exported objects.</li>
-<li>All functions accept <code>api_key</code> argument.</li>
-<li>Demo key can be scraped and keys can be validated.</li>
-<li>Calls are made using <code><a href="https://httr.r-lib.org/reference/RETRY.html">httr::RETRY()</a></code> to deal with issues like rate limit.</li>
-<li>Remove <code>parking_*()</code> functions until a data frames can be made.</li>
-<li>Use the documentation and parameters in the official API documentation.</li>
+<li>All functions accept <code>api_key</code> argument. (<a href='https://github.com/kiernann/metro/issues/5'>#5</a>)</li>
+<li>Calls are made using <code><a href="https://httr.r-lib.org/reference/RETRY.html">httr::RETRY()</a></code> to deal with issues like rate limit. (<a href='https://github.com/kiernann/metro/issues/8'>#8</a>)</li>
+<li>Use the documentation and parameters in the official API documentation. (<a href='https://github.com/kiernann/metro/issues/7'>#7</a>)</li>
 <li>Convert all dates to <code>POSIXct</code> with UTC time zone.</li>
-<li>Convert times to <code>hms</code> columns with values past midnight.</li>
-</ul>
-</div>
-    <div id="metro-003" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.3">
-<a href="#metro-003" class="anchor"></a>metro 0.0.3</h1>
-<ul>
-<li>Add <code><a href="../reference/rail_times.html">rail_times()</a></code>.</li>
-</ul>
-</div>
-    <div id="metro-002" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.2">
-<a href="#metro-002" class="anchor"></a>metro 0.0.2</h1>
-<ul>
-<li>Add <code>parking_spots()</code> and <code>_cost()</code>.</li>
-<li>Add <code><a href="../reference/rail_path.html">rail_path()</a></code> and <code>path_distance()</code>
-</li>
-<li>Add <code><a href="../reference/rail_entrance.html">rail_entrance()</a></code>
-</li>
-</ul>
-</div>
-    <div id="metro-001" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.1">
-<a href="#metro-001" class="anchor"></a>metro 0.0.1</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>Add <code><a href="../reference/rail_lines.html">rail_lines()</a></code> and <code>_stations()</code> and save objects.</li>
-<li>Add <code>wmata_keys()</code> and associated helpers.</li>
+<li>Convert times to <code>hms</code> columns with values past midnight. (<a href='https://github.com/kiernann/metro/issues/6'>#6</a>)</li>
+<li>Removed <code>parking_*()</code> functions until a data frames can be made.</li>
+<li>Removed <code><a href="../reference/rail_path.html">rail_path()</a></code> helper function. Keep only endpoint functions.</li>
+<li>Removed ability to automatically scrape demo API key.</li>
+<li>Removed package startup message about API key. (<a href='https://github.com/kiernann/metro/issues/2'>#2</a>)</li>
 </ul>
 </div>
   </div>
