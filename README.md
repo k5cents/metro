@@ -11,6 +11,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/metro)](https://CRAN.R-project.org/package=metro)
 [![Codecov test
 coverage](https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg)](https://codecov.io/gh/kiernann/metro?branch=master)
+[![CodeFactor](https://www.codefactor.io/repository/github/kiernann/metro/badge)](https://www.codefactor.io/repository/github/kiernann/metro)
 [![R build
 status](https://github.com/kiernann/metro/workflows/R-CMD-check/badge.svg)](https://github.com/kiernann/metro/actions)
 <!-- badges: end -->
@@ -94,11 +95,14 @@ are over 24 hours).
 
 ``` r
 bus_position(RouteId = "L2")
-#> # A tibble: 2 x 13
+#> # A tibble: 5 x 13
 #>   VehicleID   Lat   Lon Distance Deviation DateTime            TripID RouteID DirectionText
 #>   <chr>     <dbl> <dbl>    <dbl>     <dbl> <dttm>              <chr>  <chr>   <chr>        
-#> 1 7112       39.0 -77.1       NA         5 2021-02-23 05:05:16 19091… L2      SOUTH        
-#> 2 7120       38.9 -77.0       NA         1 2021-02-23 05:05:08 19091… L2      NORTH        
+#> 1 7104       39.0 -77.1       NA         0 2021-02-23 15:19:42 19091… L2      NORTH        
+#> 2 7109       39.0 -77.1       NA        -1 2021-02-23 15:20:01 19091… L2      NORTH        
+#> 3 7166       38.9 -77.0       NA        -8 2021-02-23 15:19:43 19091… L2      SOUTH        
+#> 4 7129       39.0 -77.1       NA         2 2021-02-23 15:20:04 19091… L2      SOUTH        
+#> 5 7139       38.9 -77.0       NA         2 2021-02-23 15:20:05 19091… L2      NORTH        
 #> # … with 4 more variables: TripHeadsign <chr>, TripStartTime <dttm>, TripEndTime <dttm>,
 #> #   BlockNumber <chr>
 ```

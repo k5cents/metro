@@ -25,9 +25,10 @@ if (!interactive()) {
 # metro <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
-[![Lifecycle: experimental][life_badge]][life_link]
+[![Lifecycle: maturing][lc_badge]][lc_link]
 [![CRAN status][cran_badge]][cran_link]
-[![Codecov test coverage][cov_badge]][cov_link]
+[![Codecov test coverage][cc_badge]][cc_link]
+[![CodeFactor][cf_badge]][cf_link]
 [![R build status][ga_badge]][ga_link]
 <!-- badges: end -->
 
@@ -71,7 +72,9 @@ Functions return data frames for easy analysis.
 rail_stations(LineCode = "RD")
 ```
 
-Use coordinates to find station entrances or bus stops near a location. 
+Use coordinates to find station entrances or bus stops near a location. The
+[`geodist::geodist()`][gd] function is used to calculate distance from the
+supplied coordinates.
 
 ```{r rail_entrance}
 # White House coordinates
@@ -97,16 +100,19 @@ metro_stops # bus_stops() for live
 ```
 
 <!-- refs: start -->
-[life_badge]: https://img.shields.io/badge/lifecycle-experimental-orange.svg
-[life_link]: https://lifecycle.r-lib.org/articles/stages.html
+[lc_badge]: https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg
+[lc_link]: https://lifecycle.r-lib.org/articles/stages.html
 [cran_badge]: https://www.r-pkg.org/badges/version/metro
 [cran_link]: https://CRAN.R-project.org/package=metro
 [ga_badge]: https://github.com/kiernann/metro/workflows/R-CMD-check/badge.svg
 [ga_link]: https://github.com/kiernann/metro/actions
-[cov_badge]: https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg
-[cov_link]: https://codecov.io/gh/kiernann/metro?branch=master
+[cc_badge]: https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg
+[cc_link]: https://codecov.io/gh/kiernann/metro?branch=master
+[cf_badge]: https://www.codefactor.io/repository/github/kiernann/metro/badge
+[cf_link]: https://www.codefactor.io/repository/github/kiernann/metro
 [tidy]: https://en.wikipedia.org/wiki/Tidy_data
 [gh]: https://github.com/kiernann/metro
 [demo]: https://developer.wmata.com/products/5475f236031f590f380924ff
+p[gd]: https://github.com/hypertidy/geodist
 [hms]: https://github.com/tidyverse/hms/issues/28
 <!-- refs: end -->
