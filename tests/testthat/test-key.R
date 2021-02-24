@@ -12,12 +12,6 @@ test_that("key returns empty if not found", {
   Sys.setenv("WMATA_KEY" = old_key)
 })
 
-test_that("demo can be scraped", {
-  key <- wmata_demo(force = TRUE)
-  expect_length(key, 1)
-  expect_type(key, "character")
-})
-
 test_that("key can be validated", {
   skip_if_no_key()
   expect_true(wmata_validate(Sys.getenv("WMATA_KEY")))

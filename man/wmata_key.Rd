@@ -3,28 +3,20 @@
 \name{wmata_key}
 \alias{wmata_key}
 \alias{wmata_validate}
-\alias{wmata_demo}
 \title{Find a WMATA API key}
 \usage{
 wmata_key(api_key = Sys.getenv("WMATA_KEY"))
 
 wmata_validate(api_key = wmata_key())
-
-wmata_demo(force = FALSE)
 }
 \arguments{
 \item{api_key}{Subscription key which provides access to this API. Found in
 your \href{https://developer.wmata.com/developer}{Profile}. Defaults
 \code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
-
-\item{force}{Should a demo key be scraped even if one exits? If \code{FALSE}
-(default) and a key already exists, the user will be asked if the key
-should be scraped.}
 }
 \value{
-For \code{\link[=wmata_key]{wmata_key()}} and \code{\link[=wmata_demo]{wmata_demo()}}, a 32 character alphanumeric
-API key. For \code{\link[=wmata_validate]{wmata_validate()}}, either \code{TRUE} for a valid key or an
-error if invalid.
+For \code{\link[=wmata_key]{wmata_key()}}, a 32 character alphanumeric API key. For
+\code{\link[=wmata_validate]{wmata_validate()}}, either \code{TRUE} for a valid key or an error if invalid.
 }
 \description{
 All calls to the WMATA API must be accompanied by a personal API key. A free
@@ -45,8 +37,7 @@ key can be obtained by subscribing to the default tier:
 The WMATA also provides a demonstration key. This key should \strong{never} be
 used in production applications, it is rate limited and subject to change at
 \emph{any} time. The key can be found on the \href{https://developer.wmata.com/products/5475f236031f590f380924ff}{WMATA products page} when not
-signed into a developer account. The \code{\link[=wmata_demo]{wmata_demo()}} function can be used to
-try and scrape the demo key from this page automatically.
+signed into a developer account.
 
 The \code{\link[=wmata_validate]{wmata_validate()}} function can be used to verify a key is valid.
 }
