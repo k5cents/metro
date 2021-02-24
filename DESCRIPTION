@@ -9,9 +9,9 @@ Authors@R:
 Description: The Washington Metropolitan Area Transit Authority
     is the government agency that operates the light rail and passenger
     buses of the Washington D.C. area. The WMATA provides a free API that
-    can be used to access rail station information, train locations, and
-    arrival predictions. This data is returned as tidy data frames for
-    easy analysis in R.
+    can be used to access train arrivals, bus predictions, schedules, and
+    more. This data is returned as tidy data frames for easy analysis. A
+    free developer account and API key is needed.
 License: GPL-3
 URL: https://github.com/kiernann/metro,
     https://kiernann.com/metro/
