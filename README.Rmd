@@ -69,8 +69,10 @@ library(metro)
 Functions return data frames for easy analysis.
 
 ```{r rail_stations}
-rail_stations(LineCode = "RD")
+next_train(StationCodes = "A01")
 ```
+
+### Coordinates
 
 Use coordinates to find station entrances or bus stops near a location. The
 [`geodist::geodist()`][gd] function is used to calculate distance from the
@@ -78,25 +80,32 @@ supplied coordinates.
 
 ```{r rail_entrance}
 # White House coordinates
-rail_entrance(Lat = 38.8979, Lon = -77.0365, Radius = 500)
+rail_entrance(Lat = 38.8979, Lon = -77.0365, Radius = 500)[, -4]
 ```
 
-Dates use the UTC time zone but times use EST. Times are represented using the
-[`hms`][hms] class, which counts the seconds since midnight (sometimes this
-means AM times are over 24 hours).
+### Dates and Times
+
+Date columns with class `POSIXt` have been converted to the UTC time zone.
 
 ```{r bus_position}
-bus_position(RouteId = "L2")
+bus_position(RouteId = "L2")[, 1:8]
 ```
+
+Time values are left in EST and are represented using the class [`hms`][hms],
+which counts the seconds since midnight. If the last train on a Saturday leaves
+at 1:21 AM on Sunday, this would be represented as `25:31` for _Saturday_.
 
 ```{r rail_times}
-rail_times(StationCode = "A07")
+tail(rail_times(StationCode = "A07"))
 ```
 
-Functions that always return the same data have that data saved as objects.
+### Data
+
+Some data frames are includes as objects if their functions typically return the
+same thing every time.
 
 ```{r lines}
-metro_stops # bus_stops() for live
+metro_lines # rail_lines() for live
 ```
 
 <!-- refs: start -->
@@ -113,6 +122,6 @@ metro_stops # bus_stops() for live
 [tidy]: https://en.wikipedia.org/wiki/Tidy_data
 [gh]: https://github.com/kiernann/metro
 [demo]: https://developer.wmata.com/products/5475f236031f590f380924ff
-p[gd]: https://github.com/hypertidy/geodist
+[gd]: https://github.com/hypertidy/geodist
 [hms]: https://github.com/tidyverse/hms/issues/28
 <!-- refs: end -->
