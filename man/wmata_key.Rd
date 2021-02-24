@@ -29,7 +29,7 @@ key can be obtained by subscribing to the default tier:
 \item Use \code{\link[=Sys.setenv]{Sys.setenv()}} to temporarily set define \code{WMATA_KEY}.
 \item Pass your key as a string to the \code{api_key} argument of any function.
 \item Store the the WMATA key as a line like \code{WMATA_KEY=xxxyyyzzz} in your
-\code{.Renviron} file, to be called by \code{\link[=wmata_ket]{wmata_ket()}} via \code{\link[=Sys.getenv]{Sys.getenv()}}.
+\code{.Renviron} file, to be called by \code{\link[=wmata_key]{wmata_key()}} via \code{\link[=Sys.getenv]{Sys.getenv()}}.
 }
 }
 

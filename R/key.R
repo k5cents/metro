@@ -11,7 +11,7 @@
 #'     1. Use [Sys.setenv()] to temporarily set define `WMATA_KEY`.
 #'     2. Pass your key as a string to the `api_key` argument of any function.
 #'     3. Store the the WMATA key as a line like `WMATA_KEY=xxxyyyzzz` in your
-#'     `.Renviron` file, to be called by [wmata_ket()] via [Sys.getenv()].
+#'     `.Renviron` file, to be called by [wmata_key()] via [Sys.getenv()].
 #'
 #' The WMATA also provides a demonstration key. This key should **never** be
 #' used in production applications, it is rate limited and subject to change at
