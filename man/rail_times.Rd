@@ -62,6 +62,7 @@ Other Rail Station Information:
 \code{\link{rail_entrance}()},
 \code{\link{rail_lines}()},
 \code{\link{rail_path}()},
-\code{\link{rail_stations}()}
+\code{\link{rail_stations}()},
+\code{\link{station_info}()}
 }
 \concept{Rail Station Information}
