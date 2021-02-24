@@ -48,8 +48,8 @@ There are six endpoint categories returning JSON data.
 }
 \item Real-Time Predictions, starting with \verb{next_*}:
 \itemize{
-\item Next Buses: \code{\link[=next_bus()]{next_bus()()}}
-\item Next Trains: \code{\link[=next_train()]{next_train()()}}
+\item Next Buses: \code{\link[=next_bus]{next_bus()}}
+\item Next Trains: \code{\link[=next_train]{next_train()}}
 }
 \item Train Positions:
 \itemize{
