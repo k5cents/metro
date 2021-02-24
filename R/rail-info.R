@@ -50,13 +50,12 @@ station_info <- function(StationCode, api_key = wmata_key()) {
       "Try using rail_stations() instead?"
     )
   }
-  out <- mapply(
-    FUN = stn_info,
-    StationCode = StationCode,
-    api_key = api_key,
-    SIMPLIFY = FALSE,
-    USE.NAMES = FALSE
+  out <- Map(
+    f = stn_info,
+    StationCode,
+    api_key
   )
+  names(out) <- NULL
   rows_bind(out)
 }
 
