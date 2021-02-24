@@ -1,14 +1,15 @@
 ## Test environments
 
-* local: ubuntu-20.04 (release)
-* github actions: ubuntu-20.04 (release, devel)
+* local: ubuntu-20.04 (release), R 4.0.4
+* github actions: ubuntu-20.04, macOS-latest, windows-latest 
   * <https://github.com/kiernann/metro/actions>
-* github actions: macOS-latest (release)
-* github actions: windows-latest (release) 
 * r-hub: windows-x86_64-devel, ubuntu-gcc-release, fedora-clang-devel
-  * <https://builder.r-hub.io/status/metro_1.0.0.tar.gz-d6786502cfaf46f6809077ace1c94950>
-  * <https://builder.r-hub.io/status/metro_1.0.0.tar.gz-be007c3022ad469cbf9168fba6a6d679>
-  * <https://builder.r-hub.io/status/metro_1.0.0.tar.gz-333d63da4a054a7abeea613d7c05d46a>
+  * <https://builder.r-hub.io/status/metro_1.0.0.tar.gz-7a275cee0ad148dea4c608d7a2270cdb>
+  * <https://builder.r-hub.io/status/metro_1.0.0.tar.gz-542ca41f15f848a7a7b174486eeb06d0>
+  * <https://builder.r-hub.io/status/metro_1.0.0.tar.gz-386073e9a0b744d992e9e60e1e2be34e>
+
+Tests are run on both GitHub Actions and r-hub by supplying the API key as an
+environment variable.
 
 ## R CMD check results
 
