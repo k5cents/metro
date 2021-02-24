@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • metro</title>
+<title>Rail Station Information — station_info • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,10 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Rail Station Information — station_info" />
+<meta property="og:description" content="Returns station location and address information based on a given
+StationCode. Similar to rail_stations(), but returns data on a given
+station(s) rather than all stations on a line." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -66,7 +69,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -118,61 +121,85 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/kiernann/metro/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Rail Station Information</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/rail-info.R'><code>R/rail-info.R</code></a></small>
+    <div class="hidden name"><code>station_info.Rd</code></div>
     </div>
 
-    <div id="metro-100" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.0">
-<a href="#metro-100" class="anchor"></a>metro 1.0.0</h1>
-<ul>
-<li>
-<a href="https://developer.wmata.com/docs/services/">All API JSON endpoints</a> are covered as tidy data frames (<a href='https://github.com/kiernann/metro/issues/1'>#1</a>). Buses stops, train stations, next bus or trains, incidents, paths, routes, circuits.</li>
-<li>Stops, Stations, Routes, and Lines saved as exported objects.</li>
-<li>All functions accept <code>api_key</code> argument.</li>
-<li>Demo key can be scraped and keys can be validated.</li>
-<li>Calls are made using <code><a href="https://httr.r-lib.org/reference/RETRY.html">httr::RETRY()</a></code> to deal with issues like rate limit.</li>
-<li>Remove <code>parking_*()</code> functions until a data frames can be made.</li>
-<li>Use the documentation and parameters in the official API documentation.</li>
-<li>Convert all dates to <code>POSIXct</code> with UTC time zone.</li>
-<li>Convert times to <code>hms</code> columns with values past midnight.</li>
-</ul>
-</div>
-    <div id="metro-003" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.3">
-<a href="#metro-003" class="anchor"></a>metro 0.0.3</h1>
-<ul>
-<li>Add <code><a href="../reference/rail_times.html">rail_times()</a></code>.</li>
-</ul>
-</div>
-    <div id="metro-002" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.2">
-<a href="#metro-002" class="anchor"></a>metro 0.0.2</h1>
-<ul>
-<li>Add <code>parking_spots()</code> and <code>_cost()</code>.</li>
-<li>Add <code><a href="../reference/rail_path.html">rail_path()</a></code> and <code>path_distance()</code>
-</li>
-<li>Add <code><a href="../reference/rail_entrance.html">rail_entrance()</a></code>
-</li>
-</ul>
-</div>
-    <div id="metro-001" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.1">
-<a href="#metro-001" class="anchor"></a>metro 0.0.1</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>Add <code><a href="../reference/rail_lines.html">rail_lines()</a></code> and <code>_stations()</code> and save objects.</li>
-<li>Add <code>wmata_keys()</code> and associated helpers.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Returns station location and address information based on a given
+<code>StationCode</code>. Similar to <code><a href='rail_stations.html'>rail_stations()</a></code>, but returns data on a given
+station(s) rather than all stations on a line.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>station_info</span><span class='op'>(</span><span class='va'>StationCode</span>, api_key <span class='op'>=</span> <span class='fu'><a href='wmata_key.html'>wmata_key</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>StationCode</th>
+      <td><p>A character vector of one or more station codes. A
+separate call is made to the API for each code, do not provide more than
+10.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>Subscription key which provides access to this API. Found in
+your <a href='https://developer.wmata.com/developer'>Profile</a>. Defaults
+<code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("WMATA_KEY")</a></code> via <code><a href='wmata_key.html'>wmata_key()</a></code>.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A tibble 1 row per station with 10 variables:</p><dl>
+<dt>StationCode</dt><dd><p>Station code for this station. Use this value in other
+rail-related APIs to retrieve data about a station.</p></dd>
+<dt>StationName</dt><dd><p>Full name for this station, as shown on the WMATA
+website.</p></dd>
+<dt>StationTogether</dt><dd><p>For stations with multiple platforms (e.g.: Gallery
+Place, Fort Totten, L'Enfant Plaza, and Metro Center), the additional
+<code>StationCode</code> will be listed here.</p></dd>
+<dt>LineCodes</dt><dd><p>Character vector of two-letter abbreviations (e.g.: RD,
+BL, YL, OR, GR, or SV) served by this station. If the station has an
+additional platform, the lines served by the other platform are listed in
+the <code>LineCodes</code> values for the record associated with the <code>StationCode</code>
+found in <code>StationTogether.</code></p></dd>
+<dt>Lat</dt><dd><p>Latitude.</p></dd>
+<dt>Lon</dt><dd><p>Longitude.</p></dd>
+<dt>Street</dt><dd><p>Street address (for GPS use).</p></dd>
+<dt>City</dt><dd><p>City.</p></dd>
+<dt>State</dt><dd><p>State (abbreviated).</p></dd>
+<dt>Zip</dt><dd><p>Zip code.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame of stations.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3311'>https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3311</a></p>
+<p>Other Rail Station Information: 
+<code><a href='rail_destination.html'>rail_destination</a>()</code>,
+<code><a href='rail_entrance.html'>rail_entrance</a>()</code>,
+<code><a href='rail_lines.html'>rail_lines</a>()</code>,
+<code><a href='rail_path.html'>rail_path</a>()</code>,
+<code><a href='rail_stations.html'>rail_stations</a>()</code>,
+<code><a href='rail_times.html'>rail_times</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>station_info</span><span class='op'>(</span>StationCode <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A07"</span>, <span class='st'>"B07"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

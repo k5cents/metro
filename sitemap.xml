@@ -28,6 +28,9 @@
     <loc>https://kiernann.com/metro/reference/elevator_incidents.html</loc>
   </url>
   <url>
+    <loc>https://kiernann.com/metro/reference/metro.html</loc>
+  </url>
+  <url>
     <loc>https://kiernann.com/metro/reference/metro_lines.html</loc>
   </url>
   <url>
@@ -61,6 +64,9 @@
     <loc>https://kiernann.com/metro/reference/rail_path.html</loc>
   </url>
   <url>
+    <loc>https://kiernann.com/metro/reference/rail_positions.html</loc>
+  </url>
+  <url>
     <loc>https://kiernann.com/metro/reference/rail_stations.html</loc>
   </url>
   <url>
@@ -70,10 +76,10 @@
     <loc>https://kiernann.com/metro/reference/standard_routes.html</loc>
   </url>
   <url>
-    <loc>https://kiernann.com/metro/reference/track_circuits.html</loc>
+    <loc>https://kiernann.com/metro/reference/station_info.html</loc>
   </url>
   <url>
-    <loc>https://kiernann.com/metro/reference/train_positions.html</loc>
+    <loc>https://kiernann.com/metro/reference/track_circuits.html</loc>
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/wmata_api.html</loc>

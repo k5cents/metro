@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • metro</title>
+<title>metro: A package for the Washington Metropolitan Area Transit Authority API — metro • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,13 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="metro: A package for the Washington Metropolitan Area Transit Authority API — metro" />
+<meta property="og:description" content="The Metro Transparent Data Sets API provides developer access to JSON data
+for the order and location of rail stations by line, train arrival
+predictions for each station, service alerts, and elevator/escalator status.
+This package has been developed to make calls to the API using dedicated
+R functions with copied documentation and identical parameters/arguments. All
+functions return one or more data frames for easy analysis." />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -66,7 +72,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -118,61 +124,71 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/kiernann/metro/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>metro: A package for the Washington Metropolitan Area Transit Authority API</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/metro.R'><code>R/metro.R</code></a></small>
+    <div class="hidden name"><code>metro.Rd</code></div>
     </div>
 
-    <div id="metro-100" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.0">
-<a href="#metro-100" class="anchor"></a>metro 1.0.0</h1>
-<ul>
-<li>
-<a href="https://developer.wmata.com/docs/services/">All API JSON endpoints</a> are covered as tidy data frames (<a href='https://github.com/kiernann/metro/issues/1'>#1</a>). Buses stops, train stations, next bus or trains, incidents, paths, routes, circuits.</li>
-<li>Stops, Stations, Routes, and Lines saved as exported objects.</li>
-<li>All functions accept <code>api_key</code> argument.</li>
-<li>Demo key can be scraped and keys can be validated.</li>
-<li>Calls are made using <code><a href="https://httr.r-lib.org/reference/RETRY.html">httr::RETRY()</a></code> to deal with issues like rate limit.</li>
-<li>Remove <code>parking_*()</code> functions until a data frames can be made.</li>
-<li>Use the documentation and parameters in the official API documentation.</li>
-<li>Convert all dates to <code>POSIXct</code> with UTC time zone.</li>
-<li>Convert times to <code>hms</code> columns with values past midnight.</li>
-</ul>
-</div>
-    <div id="metro-003" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.3">
-<a href="#metro-003" class="anchor"></a>metro 0.0.3</h1>
-<ul>
-<li>Add <code><a href="../reference/rail_times.html">rail_times()</a></code>.</li>
-</ul>
-</div>
-    <div id="metro-002" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.2">
-<a href="#metro-002" class="anchor"></a>metro 0.0.2</h1>
-<ul>
-<li>Add <code>parking_spots()</code> and <code>_cost()</code>.</li>
-<li>Add <code><a href="../reference/rail_path.html">rail_path()</a></code> and <code>path_distance()</code>
-</li>
-<li>Add <code><a href="../reference/rail_entrance.html">rail_entrance()</a></code>
-</li>
-</ul>
-</div>
-    <div id="metro-001" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.1">
-<a href="#metro-001" class="anchor"></a>metro 0.0.1</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>Add <code><a href="../reference/rail_lines.html">rail_lines()</a></code> and <code>_stations()</code> and save objects.</li>
-<li>Add <code>wmata_keys()</code> and associated helpers.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>The Metro Transparent Data Sets API provides developer access to JSON data
+for the order and location of rail stations by line, train arrival
+predictions for each station, service alerts, and elevator/escalator status.
+This package has been developed to make calls to the API using dedicated
+R functions with copied documentation and identical parameters/arguments. All
+functions return one or more data frames for easy analysis.</p>
+    </div>
 
+
+
+    <h2 class="hasAnchor" id="endpoints"><a class="anchor" href="#endpoints"></a>Endpoints</h2>
+
+    
+
+<p>There are six endpoint categories returning JSON data.</p><ol>
+<li><p>Bus Route and Stop Methods, starting with <code>bus_*</code>:</p><ul>
+<li><p>Bus Position: <code><a href='bus_position.html'>bus_position()</a></code></p></li>
+<li><p>Path details: <code><a href='bus_path.html'>bus_path()</a></code></p></li>
+<li><p>Routes: <code><a href='bus_routes.html'>bus_routes()</a></code></p></li>
+<li><p>Schedule: <code><a href='bus_schedule.html'>bus_schedule()</a></code></p></li>
+<li><p>Schedule at stop: <code><a href='bus_departs.html'>bus_departs()</a></code></p></li>
+<li><p>Stop search: <code><a href='bus_stops.html'>bus_stops()</a></code></p></li>
+</ul></li>
+<li><p>Incidents, ending with <code>*_incidents</code>:</p><ul>
+<li><p>Bus Incidents: <code><a href='bus_incidents.html'>bus_incidents()</a></code></p></li>
+<li><p>Elevator/Escalator Outages: <code><a href='elevator_incidents.html'>elevator_incidents()</a></code></p></li>
+<li><p>Rail Incidents: <code><a href='rail_incidents.html'>rail_incidents()</a></code></p></li>
+</ul></li>
+<li><p>Misc Methods</p><ul>
+<li><p>Validate API Key: <code><a href='wmata_key.html'>wmata_validate()</a></code></p></li>
+</ul></li>
+<li><p>Rail Station Information, starting with <code>rail_*</code>:</p><ul>
+<li><p>Lines: <code><a href='rail_lines.html'>rail_lines()</a></code></p></li>
+<li><p>Parking Information: Not yet covered.</p></li>
+<li><p>Path Between Stations: <code><a href='rail_path.html'>rail_path()</a></code></p></li>
+<li><p>Station Entrances: <code><a href='rail_entrance.html'>rail_entrance()</a></code></p></li>
+<li><p>Station Information: <code><a href='station_info.html'>station_info()</a></code></p></li>
+<li><p>Station List: <code><a href='rail_stations.html'>rail_stations()</a></code></p></li>
+<li><p>Station Timings: <code><a href='rail_times.html'>rail_times()</a></code></p></li>
+<li><p>Station to Station Information: <code><a href='rail_destination.html'>rail_destination()</a></code></p></li>
+</ul></li>
+<li><p>Real-Time Predictions, starting with <code>next_*</code>:</p><ul>
+<li><p>Next Buses: <code><a href='next_bus.html'>next_bus()</a></code></p></li>
+<li><p>Next Trains: <code><a href='next_train.html'>next_train()</a></code></p></li>
+</ul></li>
+<li><p>Train Positions:</p><ul>
+<li><p>Live Train Positions: <code><a href='rail_positions.html'>rail_positions()</a></code></p></li>
+<li><p>Standard Routes: <code><a href='standard_routes.html'>standard_routes()</a></code></p></li>
+<li><p>Track Circuits: <code><a href='track_circuits.html'>track_circuits()</a></code></p></li>
+</ul></li>
+</ol>
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 
