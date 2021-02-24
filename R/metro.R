@@ -37,8 +37,8 @@
 #'     * Station to Station Information: [rail_destination()]
 #'
 #' 5. Real-Time Predictions, starting with `next_*`:
-#'     *  Next Buses: [next_bus()()]
-#'     *  Next Trains: [next_train()()]
+#'     *  Next Buses: [next_bus()]
+#'     *  Next Trains: [next_train()]
 #'
 #' 6. Train Positions:
 #'     * Live Train Positions: [rail_positions()]

@@ -16,12 +16,11 @@ station.}
 \item{EndStationCode}{End station code. For example, will be E10
 (Greenbelt) for the Green Line, B11 (Glenmont) for the Red Line, etc. Use
 this value in other rail-related APIs to retrieve data about a station.}
-\item{InternalDestination1}{Intermediate terminal station code. During
+\item{InternalDestination}{Intermediate terminal station code(s). During
 normal service, some trains on some lines might end their trip prior to the
 \code{StartStationCode} or \code{EndStationCode.} A good example is on the Red Line
 where some trains stop at A11 (Grosvenor) or B08 (Silver Spring). \code{NA} if
 not defined.}
-\item{InternalDestination2}{Similar to \code{InternalDestination1}.}
 }
 }
 \usage{
