@@ -127,6 +127,8 @@
 <a href="#metro-091" class="anchor"></a>metro 0.9.1</h1>
 <ul>
 <li>Covered most <a href="https://developer.wmata.com/docs/services/">JSON endpoints</a> as tidy data frames. Buses stops, train stations, next bus or trains, incidents, paths, routes, circuits. (<a href='https://github.com/kiernann/metro/issues/1'>#1</a>)</li>
+<li>
+<code><a href="https://httr.r-lib.org/reference/RETRY.html">httr::RETRY()</a></code> in <code><a href="../reference/wmata_api.html">wmata_api()</a></code> does not retry on 401, 404, etc. The purpose of this change is to primarily retry on 429 errors when too many requests have been made on a rate-limited subscription. Waiting should successfully retry.</li>
 <li>Stops, Stations, Routes, and Lines saved as exported objects.</li>
 <li>All functions accept <code>api_key</code> argument. (<a href='https://github.com/kiernann/metro/issues/5'>#5</a>)</li>
 <li>Calls are made using <code><a href="https://httr.r-lib.org/reference/RETRY.html">httr::RETRY()</a></code> to deal with issues like rate limit. (<a href='https://github.com/kiernann/metro/issues/8'>#8</a>)</li>
