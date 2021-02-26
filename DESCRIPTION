@@ -7,12 +7,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "kiernann@protonmail.com")
 Description: The Washington Metropolitan Area Transit Authority
-    is the government agency that operates the light rail and passenger
-    buses of the Washington D.C. area. Developers can use their free API
-    to access train arrivals, bus predictions, schedules, and more. The
-    JSON data returned from that API is parsed as data frames for easy
-    analysis. Users must register for a free developer account to obtain
-    an API key.
+    is the government agency that operates light rail and passenger buses
+    in the Washington D.C. area. With a free developer account, access the
+    'Metro Transparent Data Sets API' <https://developer.wmata.com/> to
+    return data frames of transit data for easy analysis.
 License: GPL-3
 URL: https://github.com/kiernann/metro,
     https://kiernann.com/metro/
