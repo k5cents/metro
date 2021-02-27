@@ -8,3 +8,7 @@ test_that("stations info is listed for multiple stations", {
   expect_type(s$LineCodes, "list")
   expect_gt(length(unique(s$Code)), 1)
 })
+
+test_that("station info fails for more than 9", {
+  expect_error(station_info(StationCode = metro_stations[1:10]))
+})
