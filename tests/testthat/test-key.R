@@ -16,3 +16,7 @@ test_that("key can be validated", {
   skip_if_no_key()
   expect_true(wmata_validate(Sys.getenv("WMATA_KEY")))
 })
+
+test_that("bad keys are not validated", {
+  expect_error(wmata_validate("abcdefg"))
+})

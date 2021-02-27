@@ -61,7 +61,7 @@ wmata_validate <- function(api_key = wmata_key()) {
   )
   if (httr::http_error(val)) {
     msg <- httr::content(val)
-    httr::stop_for_status(msg$statusCode, msg$message)
+    stop(msg$message, call. = FALSE)
   } else {
     TRUE
   }
