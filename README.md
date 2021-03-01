@@ -9,6 +9,7 @@
 maturing](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/metro)](https://CRAN.R-project.org/package=metro)
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/metro)
 [![Codecov test
 coverage](https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg)](https://codecov.io/gh/kiernann/metro?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/kiernann/metro/badge)](https://www.codefactor.io/repository/github/kiernann/metro)
@@ -23,7 +24,14 @@ when possible.
 
 ## Installation
 
-You can install the development version of metro from
+The release version of metro (0.9.1) can be installed from
+\[CRAN\]\[cran\]:
+
+``` r
+install.packages("metro")
+```
+
+Or install the development version (0.9.1.9000) from
 [GitHub](https://github.com/kiernann/metro):
 
 ``` r
@@ -62,12 +70,12 @@ next_train(StationCodes = "A01")
 #> # A tibble: 6 x 9
 #>     Car Destination DestinationCode DestinationName Group Line  LocationCode LocationName   Min
 #>   <int> <chr>       <chr>           <chr>           <int> <chr> <chr>        <chr>        <int>
-#> 1     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     2
-#> 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     6
-#> 3     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    10
-#> 4     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    11
-#> 5     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    23
-#> 6    NA Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    39
+#> 1     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     3
+#> 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     5
+#> 3     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     8
+#> 4     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     9
+#> 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    14
+#> 6     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    14
 ```
 
 ### Coordinates
@@ -94,13 +102,14 @@ zone.
 
 ``` r
 bus_position(RouteId = "L2")[, 1:8]
-#> # A tibble: 4 x 8
+#> # A tibble: 5 x 8
 #>   VehicleID   Lat   Lon Distance Deviation DateTime            TripID     RouteID
 #>   <chr>     <dbl> <dbl>    <dbl>     <dbl> <dttm>              <chr>      <chr>  
-#> 1 7154       39.0 -77.1       NA         0 2021-02-24 02:27:40 1909112020 L2     
-#> 2 6514       38.9 -77.0       NA         0 2021-02-24 02:27:37 1909149020 L2     
-#> 3 7165       38.9 -77.1       NA        -3 2021-02-24 02:27:31 1909113020 L2     
-#> 4 7167       38.9 -77.1       NA         2 2021-02-24 02:27:40 1909150020 L2
+#> 1 6505       39.0 -77.1       NA         0 2021-03-01 15:55:09 1909132020 L2     
+#> 2 7128       38.9 -77.1       NA         2 2021-03-01 15:55:35 1909168020 L2     
+#> 3 7075       38.9 -77.1       NA         1 2021-03-01 15:55:26 1909133020 L2     
+#> 4 7162       39.0 -77.1       NA        -4 2021-03-01 15:55:14 1909169020 L2     
+#> 5 6503       38.9 -77.0       NA        -4 2021-03-01 15:55:31 1909134020 L2
 ```
 
 Time values are left in EST and are represented using the class

@@ -27,6 +27,7 @@ if (!interactive()) {
 <!-- badges: start -->
 [![Lifecycle: maturing][lc_badge]][lc_link]
 [![CRAN status][cran_badge]][cran_link]
+![Downloads][dl_badge]
 [![Codecov test coverage][cc_badge]][cc_link]
 [![CodeFactor][cf_badge]][cf_link]
 [![R build status][ga_badge]][ga_link]
@@ -38,9 +39,15 @@ when possible.
 
 ## Installation
 
-You can install the development version of metro from [GitHub][gh]:
+The release version of metro (0.9.1) can be installed from [CRAN][cran]:
 
-```{r install, eval=FALSE}
+```{r install_cran, eval=FALSE}
+install.packages("metro")
+```
+
+Or install the development version (0.9.1.9000) from [GitHub][gh]:
+
+```{r install_github, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("kiernann/metro")
 ```
@@ -113,6 +120,7 @@ metro_lines # rail_lines() for live
 [lc_link]: https://lifecycle.r-lib.org/articles/stages.html
 [cran_badge]: https://www.r-pkg.org/badges/version/metro
 [cran_link]: https://CRAN.R-project.org/package=metro
+[dl_badge]: https://cranlogs.r-pkg.org/badges/grand-total/metro
 [ga_badge]: https://github.com/kiernann/metro/workflows/R-CMD-check/badge.svg
 [ga_link]: https://github.com/kiernann/metro/actions
 [cc_badge]: https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg
