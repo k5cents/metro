@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metro</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.9002</span>
       </span>
     </div>
 
@@ -122,6 +122,19 @@
       <small>Source: <a href='https://github.com/kiernann/metro/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="metro-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#metro-development-version" class="anchor"></a>metro (development version)<small> Unreleased </small>
+</h1>
+<ul>
+<li>No longer calls <code><a href="https://rdrr.io/r/base/unlist.html">unlist()</a></code> on affected lines of length one.</li>
+<li>Messages given instead of warnings when empty tibbles returned.
+<ul>
+<li>These conditions are tested with <code><a href="../reference/no_data_now.html">no_data_now()</a></code> and <code><a href="https://krlmlr.github.io/mockr/reference/with_mock.html">mockr::with_mock()</a></code>.</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="metro-091" class="section level1">
 <h1 class="page-header" data-toc-text="0.9.1">
 <a href="#metro-091" class="anchor"></a>metro 0.9.1<small> 2021-03-01 </small>

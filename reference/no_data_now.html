@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All WMATA Bus Stops — metro_stops • metro</title>
+<title>Check if data has length and rows — no_data_now • metro</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="All WMATA Bus Stops — metro_stops" />
-<meta property="og:description" content="All WMATA Bus Stops" />
+<meta property="og:title" content="Check if data has length and rows — no_data_now" />
+<meta property="og:description" content="Check if data has length and rows" />
 <meta property="og:image" content="https://kiernann.com/metro/logo.png" />
 
 
@@ -119,38 +119,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>All WMATA Bus Stops</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>metro_stops.Rd</code></div>
+    <h1>Check if data has length and rows</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kiernann/metro/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>no_data_now.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>All WMATA Bus Stops</p>
+    <p>Check if data has length and rows</p>
     </div>
 
-    <pre class="usage"><span class='va'>metro_stops</span></pre>
+    <pre class="usage"><span class='fu'>no_data_now</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>A data frame or list to check</p></td>
+    </tr>
+    </table>
 
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A tibble with 9,044 rows and 5 variables:</p><dl>
-<dt>StopID</dt><dd><p>String array of route variants which provide service at this
-stop. Note that these are not date-specific; any route variant which stops
-at this stop on any day will be listed.</p></dd>
-<dt>Name</dt><dd><p>Stop name. May be slightly different from what is spoken or
-displayed in the bus.</p></dd>
-<dt>Lat</dt><dd><p>Latitude.</p></dd>
-<dt>Lon</dt><dd><p>Longitude.</p></dd>
-<dt>Routes</dt><dd><p>Character string of route variants which provide service at
-this stop. Note that these are not date-specific; any route variant which
-stops at this stop on any day will be listed.</p></dd>
-
-</dl>
-
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>As of 2021-02-22 22:00:00 ET.</p>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>no_data_now</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>no_data_now</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
