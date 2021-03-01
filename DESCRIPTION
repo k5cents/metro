@@ -1,6 +1,6 @@
 Package: metro
 Title: Washington Metropolitan Area Transit Authority API
-Version: 0.9.1.9000
+Version: 0.9.1.9002
 Authors@R: 
     person(given = "Kiernan",
            family = "Nicholls",
@@ -25,6 +25,7 @@ Imports:
     tibble (>= 3.0.4)
 Suggests: 
     covr (>= 3.5.1),
+    mockr (>= 0.1),
     spelling (>= 2.2),
     testthat (>= 3.0.0)
 Encoding: UTF-8

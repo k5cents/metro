@@ -37,7 +37,7 @@ bus_incidents <- function(Route = NULL, api_key = wmata_key()) {
     flatten = TRUE,
     level = 1
   )
-  if (length(dat) == 0 || nrow(dat) == 0) {
+  if (no_data_now(dat)) {
     message("No bus incidents reported")
     return(empty_bus_incident)
   }

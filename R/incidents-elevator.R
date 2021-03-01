@@ -45,7 +45,7 @@ elevator_incidents <- function(StationCode = NULL, api_key = wmata_key()) {
     level = 1,
     api_key = api_key
   )
-  if (length(dat) == 0) {
+  if (no_data_now(dat)) {
     message("no elevator incidents reported")
     return(empty_elevator)
   }

@@ -1,7 +1,7 @@
 test_that("entrace returns empty and warns for short radius", {
   skip_if_no_key()
   Sys.sleep(0.11)
-  e <- expect_warning(bus_position(NULL, 38, -77, 0))
+  e <- expect_message(bus_position(NULL, 38, -77, 0))
   expect_length(e, 13)
   expect_s3_class(e, "data.frame")
   expect_equal(nrow(e), 0)

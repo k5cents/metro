@@ -46,8 +46,8 @@ bus_stops <- function(Lat = NULL, Lon = NULL, Radius = NULL,
     level = 1,
     api_key = api_key
   )
-  if (length(dat) == 0) {
-    warning("No bus stops found, please expand your Radius")
+  if (no_data_now(dat)) {
+    message("No bus stops found, please expand your Radius")
     return(empty_stops)
   }
   if (is.null(Lat) || is.null(Lon)) {

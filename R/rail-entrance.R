@@ -49,8 +49,8 @@ rail_entrance <- function(Lat = NULL, Lon = NULL, Radius = NULL,
     level = 1,
     api_key = api_key
   )
-  if (length(dat) == 0) {
-    warning("no entrances found within your radius, please expand")
+  if (no_data_now(dat)) {
+    message("No entrances found within your radius, please expand")
     return(empty_entrance)
   }
   dat <- dat[, -1] # Deprecated: ID

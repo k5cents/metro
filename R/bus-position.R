@@ -62,8 +62,8 @@ bus_position <- function(RouteId = NULL, Lat = NULL, Lon = NULL, Radius = 1000,
     flatten = TRUE,
     level = 1
   )
-  if (length(dat) == 0) {
-    warning("no routes found within your radius, please expand")
+  if (no_data_now(dat)) {
+    message("No routes found within your radius, please expand")
     return(empty_positions)
   }
   dat <- dat[, -8] # DirectionNum Deprecated
@@ -77,7 +77,7 @@ bus_position <- function(RouteId = NULL, Lat = NULL, Lon = NULL, Radius = 1000,
   tibble::as_tibble(dat)
 }
 
-empty_positions <- data.frame(
+empty_positions <- tibble::tibble(
   VehicleID = character(),
   Lat = double(),
   Lon = double(),

@@ -64,8 +64,8 @@ next_train <- function(StationCodes = NULL, api_key = wmata_key()) {
     level = 1,
     api_key = api_key
   )
-  if (length(dat) == 0) {
-    warning("No next trains arriving at this station")
+  if (no_data_now(dat)) {
+    message("No next trains arriving at this station")
     return(empty_next_train)
   }
   dat$Min[dat$Min == "ARR"] <- 0L

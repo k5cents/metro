@@ -31,7 +31,7 @@ rail_incidents <- function(api_key = wmata_key()) {
     level = 1,
     api_key = api_key
   )
-  if (length(dat) == 0) {
+  if (no_data_now(dat)) {
     message("No rail incidents reported")
     return(empty_rail_incidents)
   }
