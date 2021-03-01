@@ -4,5 +4,6 @@ test_that("all rail incidents returned", {
   i <- rail_incidents()
   expect_length(i, 5)
   expect_s3_class(i, "data.frame")
+  expect_type(i$LinesAffected, "list")
   expect_s3_class(i$DateUpdated, "POSIXct")
 })
