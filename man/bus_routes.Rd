@@ -9,7 +9,7 @@ A tibble with 3 variables and one row per route variant:
 \item{RouteID}{Unique identifier for a given route variant. Can be used in
 various other bus-related methods.}
 \item{Name}{Descriptive name of the route variant.}
-\item{LineDescription}{Denotes the route variant's grouping – lines are a
+\item{LineDescription}{Denotes the route variant's grouping - lines are a
 combination of routes which lie in the same corridor and which have
 significant portions of their paths along the same roadways.}
 }
