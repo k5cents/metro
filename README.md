@@ -25,13 +25,13 @@ when possible.
 ## Installation
 
 The release version of metro (0.9.1) can be installed from
-\[CRAN\]\[cran\]:
+[CRAN](https://cran.r-project.org/package=metro):
 
 ``` r
 install.packages("metro")
 ```
 
-Or install the development version (0.9.1.9000) from
+Or install the development version from
 [GitHub](https://github.com/kiernann/metro):
 
 ``` r
@@ -51,16 +51,16 @@ try out the various features of the API. This key should **never** be
 used in production, it is rate limited and subject to change at any
 time.
 
-As of February 2021, the demo key can be used like this:
-
 ``` r
-Sys.setenv("WMATA_KEY" = "e13626d03d8e4c03ac07f95541b3091b")
+Sys.setenv(WMATA_KEY = "e13626d03d8e4c03ac07f95541b3091b")
 ```
 
 ## Example
 
 ``` r
 library(metro)
+packageVersion("metro")
+#> [1] '0.9.1.9002'
 ```
 
 Functions return data frames for easy analysis.
@@ -70,12 +70,12 @@ next_train(StationCodes = "A01")
 #> # A tibble: 6 x 9
 #>     Car Destination DestinationCode DestinationName Group Line  LocationCode LocationName   Min
 #>   <int> <chr>       <chr>           <chr>           <int> <chr> <chr>        <chr>        <int>
-#> 1     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     3
+#> 1     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    -1
 #> 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     5
-#> 3     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     8
+#> 3     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     6
 #> 4     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     9
-#> 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    14
-#> 6     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    14
+#> 5     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     9
+#> 6     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    17
 ```
 
 ### Coordinates
@@ -85,37 +85,39 @@ The [`geodist::geodist()`](https://github.com/hypertidy/geodist)
 function is used to calculate distance from the supplied coordinates.
 
 ``` r
-# White House coordinates
-rail_entrance(Lat = 38.8979, Lon = -77.0365, Radius = 500)[, -4]
-#> # A tibble: 3 x 6
-#>   Name                                 StationCode StationTogether   Lat   Lon Distance
-#>   <chr>                                <chr>       <chr>           <dbl> <dbl>    <dbl>
-#> 1 WEST ENTRANCE (VERMONT & I STs)      C02         <NA>             38.9 -77.0     383.
-#> 2 EAST ENTRANCE (EAST OF 17th & I STs) C03         <NA>             38.9 -77.0     430.
-#> 3 EAST ENTRANCE (14TH & I STs)         C02         <NA>             38.9 -77.0     499.
+# Washington Monument coordinates
+rail_entrance(Lat = 38.890, Lon = -77.035, Radius = 750)[, -(3:4)]
+#> # A tibble: 5 x 5
+#>   Name                                                         StationCode   Lat   Lon Distance
+#>   <chr>                                                        <chr>       <dbl> <dbl>    <dbl>
+#> 1 NORTH ENTRANCE (MALL EXIT, NORTHEAST OF 12TH ST & JEFERSON … D02          38.9 -77.0     582.
+#> 2 SOUTH ELEVATOR ENTRANCE (NORTHWEST CORNER OF 12TH ST & INDE… D02          38.9 -77.0     612.
+#> 3 SOUTH ENTRANCE (SOUTHWEST CORNER OF 12TH ST & INDEPENDENCE … D02          38.9 -77.0     626.
+#> 4 MAIN ENTRANCE (WEST SIDE 12TH BETWEEN PENNSYLVANIA &  CONNE… D01          38.9 -77.0     672.
+#> 5 ELEVATOR ENTRANCE (WEST SIDE 12TH BETWEEN PENNSYLVANIA &  C… D01          38.9 -77.0     714.
 ```
 
 ### Dates and Times
 
-Date columns with class `POSIXt` have been converted to the UTC time
-zone.
+Date columns with class `POSIXt` have been shifted from Eastern time to
+the UTC time zone (+5 hours).
 
 ``` r
-bus_position(RouteId = "L2")[, 1:8]
+bus_position(RouteId = "33")[, 1:8]
 #> # A tibble: 5 x 8
 #>   VehicleID   Lat   Lon Distance Deviation DateTime            TripID     RouteID
 #>   <chr>     <dbl> <dbl>    <dbl>     <dbl> <dttm>              <chr>      <chr>  
-#> 1 6505       39.0 -77.1       NA         0 2021-03-01 15:55:09 1909132020 L2     
-#> 2 7128       38.9 -77.1       NA         2 2021-03-01 15:55:35 1909168020 L2     
-#> 3 7075       38.9 -77.1       NA         1 2021-03-01 15:55:26 1909133020 L2     
-#> 4 7162       39.0 -77.1       NA        -4 2021-03-01 15:55:14 1909169020 L2     
-#> 5 6503       38.9 -77.0       NA        -4 2021-03-01 15:55:31 1909134020 L2
+#> 1 7149       39.0 -77.1       NA         0 2021-03-02 19:23:08 1932491020 33     
+#> 2 7140       38.9 -77.0       NA        -4 2021-03-02 19:22:50 1932532020 33     
+#> 3 7122       38.9 -77.1       NA        -3 2021-03-02 19:23:05 1932489020 33     
+#> 4 7163       38.9 -77.1       NA         6 2021-03-02 19:23:18 1932531020 33     
+#> 5 7151       38.9 -77.0       NA         4 2021-03-02 19:23:09 1932487020 33
 ```
 
-Time values are left in EST and are represented using the class
+Time values are left in Eastern time and are represented using the class
 [`hms`](https://github.com/tidyverse/hms/issues/28), which counts the
-seconds since midnight. If the last train on a Saturday leaves at 1:21
-AM on Sunday, this would be represented as `25:31` for *Saturday*.
+seconds since midnight. If the *last* train on a Saturday leaves at 1:21
+AM (past midnight), this would be represented as `25:21`.
 
 ``` r
 tail(rail_times(StationCode = "A07"))
