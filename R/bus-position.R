@@ -39,12 +39,13 @@
 #'   specified.
 #' @param Lon Center point Longitude, required if Latitude and Radius are
 #'   specified.
-#' @param Radius Radius (meters) to include in the search area, required if
-#'   `Latitude` and `Longitude` are specified.
+#' @param Radius Radius (meters) to include in the search area. If `NULL`
+#'   (default) when `Lat` and `Lon` are supplied, a generic max of 50 kilometers
+#'   is used.
 #' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
-#' bus_position("70", 38.8895, -77.0353, 2000)
+#' bus_position("70", 38.8895, -77.0353)
 #' }
 #' @return Data frame containing bus position information.
 #' @seealso <https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d68>
@@ -53,8 +54,11 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble add_column as_tibble
 #' @export
-bus_position <- function(RouteId = NULL, Lat = NULL, Lon = NULL, Radius = 1000,
+bus_position <- function(RouteId = NULL, Lat = NULL, Lon = NULL, Radius = NULL,
                          api_key = wmata_key()) {
+  if (!is.null(Lat) && !is.null(Lon) && is.null(Radius)) {
+    Radius <- 50000
+  }
   coord <- list(Lat = Lat, Lon = Lon, Radius = Radius)
   dat <- wmata_api(
     path = "Bus.svc/json/jBusPositions",

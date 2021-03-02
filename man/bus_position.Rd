@@ -37,7 +37,7 @@ bus_position(
   RouteId = NULL,
   Lat = NULL,
   Lon = NULL,
-  Radius = 1000,
+  Radius = NULL,
   api_key = wmata_key()
 )
 }
@@ -50,8 +50,9 @@ specified.}
 \item{Lon}{Center point Longitude, required if Latitude and Radius are
 specified.}
 
-\item{Radius}{Radius (meters) to include in the search area, required if
-\code{Latitude} and \code{Longitude} are specified.}
+\item{Radius}{Radius (meters) to include in the search area. If \code{NULL}
+(default) when \code{Lat} and \code{Lon} are supplied, a generic max of 50 kilometers
+is used.}
 
 \item{api_key}{Subscription key which provides access to this API. Defaults
 \code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
@@ -69,7 +70,7 @@ variations, i.e.: use 10A instead of 10Av1 or 10Av2.
 }
 \examples{
 \dontrun{
-bus_position("70", 38.8895, -77.0353, 2000)
+bus_position("70", 38.8895, -77.0353)
 }
 }
 \seealso{
