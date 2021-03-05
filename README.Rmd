@@ -133,5 +133,5 @@ metro_lines # rail_lines() for live
 [gh]: https://github.com/kiernann/metro
 [demo]: https://developer.wmata.com/products/5475f236031f590f380924ff
 [gd]: https://github.com/hypertidy/geodist
-[hms]: https://github.com/tidyverse/hms/issues/28
+[hms]: https://github.com/tidyverse/hms
 <!-- refs: end -->

@@ -71,11 +71,11 @@ next_train(StationCodes = "A01")
 #>     Car Destination DestinationCode DestinationName Group Line  LocationCode LocationName   Min
 #>   <int> <chr>       <chr>           <chr>           <int> <chr> <chr>        <chr>        <int>
 #> 1     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    -1
-#> 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     5
-#> 3     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     6
-#> 4     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     9
-#> 5     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     9
-#> 6     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    17
+#> 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     4
+#> 3     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     5
+#> 4     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     8
+#> 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    10
+#> 6     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    16
 ```
 
 ### Coordinates
@@ -104,20 +104,19 @@ the UTC time zone (+5 hours).
 
 ``` r
 bus_position(RouteId = "33")[, 1:8]
-#> # A tibble: 5 x 8
+#> # A tibble: 4 x 8
 #>   VehicleID   Lat   Lon Distance Deviation DateTime            TripID     RouteID
 #>   <chr>     <dbl> <dbl>    <dbl>     <dbl> <dttm>              <chr>      <chr>  
-#> 1 7149       39.0 -77.1       NA         0 2021-03-02 19:23:08 1932491020 33     
-#> 2 7140       38.9 -77.0       NA        -4 2021-03-02 19:22:50 1932532020 33     
-#> 3 7122       38.9 -77.1       NA        -3 2021-03-02 19:23:05 1932489020 33     
-#> 4 7163       38.9 -77.1       NA         6 2021-03-02 19:23:18 1932531020 33     
-#> 5 7151       38.9 -77.0       NA         4 2021-03-02 19:23:09 1932487020 33
+#> 1 6502       38.9 -77.0       NA         8 2021-03-05 19:36:32 1932532080 33     
+#> 2 6202       38.9 -77.1       NA        -4 2021-03-05 19:36:41 1932489080 33     
+#> 3 6497       38.9 -77.1       NA         3 2021-03-05 19:36:41 1932531080 33     
+#> 4 7117       38.9 -77.0       NA         6 2021-03-05 19:36:48 1932487080 33
 ```
 
 Time values are left in Eastern time and are represented using the class
-[`hms`](https://github.com/tidyverse/hms/issues/28), which counts the
-seconds since midnight. If the *last* train on a Saturday leaves at 1:21
-AM (past midnight), this would be represented as `25:21`.
+[`hms`](https://github.com/tidyverse/hms), which counts the seconds
+since midnight. If the *last* train on a Saturday leaves at 1:21 AM
+(past midnight), this would be represented as `25:21`.
 
 ``` r
 tail(rail_times(StationCode = "A07"))
