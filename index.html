@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">metro</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.9003</span>
       </span>
     </div>
 
@@ -90,10 +90,10 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>The release version of metro (0.9.1) can be installed from <br><span class="math display"><em>C</em><em>R</em><em>A</em><em>N</em></span><br><br><span class="math display"><em>c</em><em>r</em><em>a</em><em>n</em></span><br>:</p>
+<p>The release version of metro (0.9.1) can be installed from <a href="https://cran.r-project.org/package=metro">CRAN</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"metro"</span><span class="op">)</span></code></pre></div>
-<p>Or install the development version (0.9.1.9000) from <a href="https://github.com/kiernann/metro">GitHub</a>:</p>
+<p>Or install the development version from <a href="https://github.com/kiernann/metro">GitHub</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kiernann/metro"</span><span class="op">)</span></code></pre></div>
@@ -103,56 +103,58 @@
 <a href="#key" class="anchor"></a>Key</h2>
 <p>Usage of the WMATA API requires a developer API key. Such a key can be obtained by creating a developer account and subscribing to the free default tier.</p>
 <p>The WMATA also provides a <a href="https://developer.wmata.com/products/5475f236031f590f380924ff">demo key</a> to try out the various features of the API. This key should <strong>never</strong> be used in production, it is rate limited and subject to change at any time.</p>
-<p>As of February 2021, the demo key can be used like this:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"WMATA_KEY"</span> <span class="op">=</span> <span class="st">"e13626d03d8e4c03ac07f95541b3091b"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>WMATA_KEY <span class="op">=</span> <span class="st">"e13626d03d8e4c03ac07f95541b3091b"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kiernann/metro">metro</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kiernann/metro">metro</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"metro"</span><span class="op">)</span>
+<span class="co">#&gt; [1] '0.9.1.9002'</span></code></pre></div>
 <p>Functions return data frames for easy analysis.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/next_train.html">next_train</a></span><span class="op">(</span>StationCodes <span class="op">=</span> <span class="st">"A01"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 9</span>
 <span class="co">#&gt;     Car Destination DestinationCode DestinationName Group Line  LocationCode LocationName   Min</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;           &lt;chr&gt;           &lt;int&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;int&gt;</span>
-<span class="co">#&gt; 1     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     3</span>
-<span class="co">#&gt; 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     5</span>
-<span class="co">#&gt; 3     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     8</span>
-<span class="co">#&gt; 4     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     9</span>
-<span class="co">#&gt; 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    14</span>
-<span class="co">#&gt; 6     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    14</span></code></pre></div>
+<span class="co">#&gt; 1     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    -1</span>
+<span class="co">#&gt; 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     4</span>
+<span class="co">#&gt; 3     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     5</span>
+<span class="co">#&gt; 4     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     8</span>
+<span class="co">#&gt; 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    10</span>
+<span class="co">#&gt; 6     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    16</span></code></pre></div>
 <div id="coordinates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#coordinates" class="anchor"></a>Coordinates</h3>
 <p>Use coordinates to find station entrances or bus stops near a location. The <a href="https://github.com/hypertidy/geodist"><code>geodist::geodist()</code></a> function is used to calculate distance from the supplied coordinates.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># White House coordinates</span>
-<span class="fu"><a href="reference/rail_entrance.html">rail_entrance</a></span><span class="op">(</span>Lat <span class="op">=</span> <span class="fl">38.8979</span>, Lon <span class="op">=</span> <span class="op">-</span><span class="fl">77.0365</span>, Radius <span class="op">=</span> <span class="fl">500</span><span class="op">)</span><span class="op">[</span>, <span class="op">-</span><span class="fl">4</span><span class="op">]</span>
-<span class="co">#&gt; # A tibble: 3 x 6</span>
-<span class="co">#&gt;   Name                                 StationCode StationTogether   Lat   Lon Distance</span>
-<span class="co">#&gt;   &lt;chr&gt;                                &lt;chr&gt;       &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 WEST ENTRANCE (VERMONT &amp; I STs)      C02         &lt;NA&gt;             38.9 -77.0     383.</span>
-<span class="co">#&gt; 2 EAST ENTRANCE (EAST OF 17th &amp; I STs) C03         &lt;NA&gt;             38.9 -77.0     430.</span>
-<span class="co">#&gt; 3 EAST ENTRANCE (14TH &amp; I STs)         C02         &lt;NA&gt;             38.9 -77.0     499.</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># Washington Monument coordinates</span>
+<span class="fu"><a href="reference/rail_entrance.html">rail_entrance</a></span><span class="op">(</span>Lat <span class="op">=</span> <span class="fl">38.890</span>, Lon <span class="op">=</span> <span class="op">-</span><span class="fl">77.035</span>, Radius <span class="op">=</span> <span class="fl">750</span><span class="op">)</span><span class="op">[</span>, <span class="op">-</span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">]</span>
+<span class="co">#&gt; # A tibble: 5 x 5</span>
+<span class="co">#&gt;   Name                                                         StationCode   Lat   Lon Distance</span>
+<span class="co">#&gt;   &lt;chr&gt;                                                        &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 NORTH ENTRANCE (MALL EXIT, NORTHEAST OF 12TH ST &amp; JEFERSON … D02          38.9 -77.0     582.</span>
+<span class="co">#&gt; 2 SOUTH ELEVATOR ENTRANCE (NORTHWEST CORNER OF 12TH ST &amp; INDE… D02          38.9 -77.0     612.</span>
+<span class="co">#&gt; 3 SOUTH ENTRANCE (SOUTHWEST CORNER OF 12TH ST &amp; INDEPENDENCE … D02          38.9 -77.0     626.</span>
+<span class="co">#&gt; 4 MAIN ENTRANCE (WEST SIDE 12TH BETWEEN PENNSYLVANIA &amp;  CONNE… D01          38.9 -77.0     672.</span>
+<span class="co">#&gt; 5 ELEVATOR ENTRANCE (WEST SIDE 12TH BETWEEN PENNSYLVANIA &amp;  C… D01          38.9 -77.0     714.</span></code></pre></div>
 </div>
 <div id="dates-and-times" class="section level3">
 <h3 class="hasAnchor">
 <a href="#dates-and-times" class="anchor"></a>Dates and Times</h3>
-<p>Date columns with class <code>POSIXt</code> have been converted to the UTC time zone.</p>
+<p>Date columns with class <code>POSIXt</code> have been shifted from Eastern time to the UTC time zone (+5 hours).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/bus_position.html">bus_position</a></span><span class="op">(</span>RouteId <span class="op">=</span> <span class="st">"L2"</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>
-<span class="co">#&gt; # A tibble: 5 x 8</span>
+<code class="sourceCode R"><span class="fu"><a href="reference/bus_position.html">bus_position</a></span><span class="op">(</span>RouteId <span class="op">=</span> <span class="st">"33"</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>
+<span class="co">#&gt; # A tibble: 4 x 8</span>
 <span class="co">#&gt;   VehicleID   Lat   Lon Distance Deviation DateTime            TripID     RouteID</span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;      &lt;chr&gt;  </span>
-<span class="co">#&gt; 1 6505       39.0 -77.1       NA         0 2021-03-01 15:55:09 1909132020 L2     </span>
-<span class="co">#&gt; 2 7128       38.9 -77.1       NA         2 2021-03-01 15:55:35 1909168020 L2     </span>
-<span class="co">#&gt; 3 7075       38.9 -77.1       NA         1 2021-03-01 15:55:26 1909133020 L2     </span>
-<span class="co">#&gt; 4 7162       39.0 -77.1       NA        -4 2021-03-01 15:55:14 1909169020 L2     </span>
-<span class="co">#&gt; 5 6503       38.9 -77.0       NA        -4 2021-03-01 15:55:31 1909134020 L2</span></code></pre></div>
-<p>Time values are left in EST and are represented using the class <a href="https://github.com/tidyverse/hms/issues/28"><code>hms</code></a>, which counts the seconds since midnight. If the last train on a Saturday leaves at 1:21 AM on Sunday, this would be represented as <code>25:31</code> for <em>Saturday</em>.</p>
+<span class="co">#&gt; 1 6502       38.9 -77.0       NA         8 2021-03-05 19:36:32 1932532080 33     </span>
+<span class="co">#&gt; 2 6202       38.9 -77.1       NA        -4 2021-03-05 19:36:41 1932489080 33     </span>
+<span class="co">#&gt; 3 6497       38.9 -77.1       NA         3 2021-03-05 19:36:41 1932531080 33     </span>
+<span class="co">#&gt; 4 7117       38.9 -77.0       NA         6 2021-03-05 19:36:48 1932487080 33</span></code></pre></div>
+<p>Time values are left in Eastern time and are represented using the class <a href="https://github.com/tidyverse/hms"><code>hms</code></a>, which counts the seconds since midnight. If the <em>last</em> train on a Saturday leaves at 1:21 AM (past midnight), this would be represented as <code>25:21</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="reference/rail_times.html">rail_times</a></span><span class="op">(</span>StationCode <span class="op">=</span> <span class="st">"A07"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 7</span>
