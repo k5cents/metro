@@ -55,7 +55,7 @@ bus_schedule <- function(RouteID, IncludingVariations = TRUE, Date = NULL,
   if (!is.null(dat$Direction1)) {
     dir1_stops <- dat$Direction1$StopTimes
     dir1_stops <- rows_bind(dir1_stops, dat$Direction1$TripID, "TripID")
-    dat$Direction1 <- merge2(dat$Direction1[, -7], dir0_stops)
+    dat$Direction1 <- merge2(dat$Direction1[, -7], dir1_stops)
     dat <- rbind(dat$Direction0, dat$Direction1)
   } else {
     dat <- dat$Direction0

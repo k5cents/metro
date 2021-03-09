@@ -1,5 +1,6 @@
 # metro (development version)
 
+* `bus_schedule()` now correctly merges both directions (thanks Prof. Moore!)
 * No longer calls `unlist()` on affected lines of length one.
 * Messages given instead of warnings when empty tibbles returned.
     * These conditions are tested with `no_data_now()` and `mockr::with_mock()`.
