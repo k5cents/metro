@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://kiernann.com/metro/404.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/authors.html</loc>
+  </url>
+  <url>
     <loc>https://kiernann.com/metro/index.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/news/index.html</loc>
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/bus_departs.html</loc>
@@ -28,7 +43,10 @@
     <loc>https://kiernann.com/metro/reference/elevator_incidents.html</loc>
   </url>
   <url>
-    <loc>https://kiernann.com/metro/reference/metro.html</loc>
+    <loc>https://kiernann.com/metro/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://kiernann.com/metro/reference/metro-package.html</loc>
   </url>
   <url>
     <loc>https://kiernann.com/metro/reference/metro_lines.html</loc>
