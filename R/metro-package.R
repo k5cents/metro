@@ -45,7 +45,9 @@
 #'     * Standard Routes: [standard_routes()]
 #'     * Track Circuits: [track_circuits()]
 #'
-#' @docType package
-#' @name metro
+#' @keywords internal
+"_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
 NULL
-#> NULL

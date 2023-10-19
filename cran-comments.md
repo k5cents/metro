@@ -17,13 +17,9 @@ environment variable. Tests are not run without an API key on the system.
 
 * This is a new release.
 
-## Resubmission
-
-* URL of API added to DESCRIPTION.
-* Invalid URLs are removed from function documentation.
-
 ## Submission
 
+* Updated package doc help page with `usethis::use_package_doc()`.
 * All functions require a valid free API key. A demo key can be found on the
   WMATA products page. Examples are not run. Tests are skipped if a key is not
   found as an environmental variable named `WMATA_KEY`.

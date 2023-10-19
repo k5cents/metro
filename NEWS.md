@@ -1,5 +1,6 @@
-# metro (development version)
+# metro 0.9.2
 
+* Update to new package doc help page.
 * `bus_schedule()` now correctly merges both directions (thanks Prof. Moore!)
 * No longer calls `unlist()` on affected lines of length one.
 * Messages given instead of warnings when empty tibbles returned.
