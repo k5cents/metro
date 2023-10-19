@@ -6,8 +6,7 @@
 #'
 #' This function was modified from 'zamorarr/wmata' on GitHub:
 #' <https://github.com/zamorarr/wmata/blob/master/R/api.r>
-#' @param type The API base type to call, one of "Rail" or "Bus".
-#' @param endpoint The API endpoint (e.g., "jStations").
+#' @param path The path to an API endpoint (e.g., "Bus.svc/json/jStopSchedule")
 #' @param query Additional queries also passed, possibly your key if need be.
 #' @param ... Arguments passed to [jsonlite::fromJSON()] for parsing.
 #' @param level If parsed JSON is a list, select only this element. Useful if
@@ -26,7 +25,7 @@
 wmata_api <- function(path, query = NULL, ..., level, api_key = wmata_key()) {
   resp <- httr::RETRY(
     verb = "GET",
-    url = "https://api.wmata.com",,
+    url = "https://api.wmata.com",
     path = path,
     query = query,
     httr::accept_json(),

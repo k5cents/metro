@@ -7,6 +7,8 @@
 wmata_api(path, query = NULL, ..., level, api_key = wmata_key())
 }
 \arguments{
+\item{path}{The path to an API endpoint (e.g., "Bus.svc/json/jStopSchedule")}
+
 \item{query}{Additional queries also passed, possibly your key if need be.}
 
 \item{...}{Arguments passed to \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} for parsing.}
@@ -16,10 +18,6 @@ the list is length one containing a data frame or some other object.}
 
 \item{api_key}{Subscription key which provides access to this API. Defaults
 \code{Sys.getenv("WMATA_KEY")} via \code{\link[=wmata_key]{wmata_key()}}.}
-
-\item{type}{The API base type to call, one of "Rail" or "Bus".}
-
-\item{endpoint}{The API endpoint (e.g., "jStations").}
 }
 \value{
 A single JSON string.
