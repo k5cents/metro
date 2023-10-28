@@ -65,7 +65,7 @@ There are six endpoint categories returning JSON data.
 Useful links:
 \itemize{
   \item \url{https://github.com/kiernann/metro}
-  \item \url{https://kiernann.com/metro/}
+  \item \url{https://kiernann.github.io/metro/}
   \item Report bugs at \url{https://github.com/kiernann/metro/issues}
 }
 

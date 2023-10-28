@@ -19,7 +19,13 @@ environment variable. Tests are not run without an API key on the system.
 
 ## Submission
 
+* Fixed some of the broken links. All of the links to 
+  <https://developer.wmata.com/docs/> return a 500 error in the automated check
+  but they seem to work fine in a web browser. I will have to remove them all
+  if the package can't pass the automated checks.
+
 * Updated package doc help page with `usethis::use_package_doc()`.
+
 * All functions require a valid free API key. A demo key can be found on the
   WMATA products page. Examples are not run. Tests are skipped if a key is not
   found as an environmental variable named `WMATA_KEY`.

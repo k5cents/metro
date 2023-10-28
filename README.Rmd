@@ -125,7 +125,7 @@ metro_lines # rail_lines() for live
 [ga_badge]: https://github.com/kiernann/metro/workflows/R-CMD-check/badge.svg
 [ga_link]: https://github.com/kiernann/metro/actions
 [cc_badge]: https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg
-[cc_link]: https://codecov.io/gh/kiernann/metro?branch=master
+[cc_link]: https://app.codecov.io/gh/kiernann/metro?branch=master
 [cf_badge]: https://www.codefactor.io/repository/github/kiernann/metro/badge
 [cf_link]: https://www.codefactor.io/repository/github/kiernann/metro
 [tidy]: https://en.wikipedia.org/wiki/Tidy_data

@@ -11,7 +11,7 @@ maturing](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](
 status](https://www.r-pkg.org/badges/version/metro)](https://CRAN.R-project.org/package=metro)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/metro)
 [![Codecov test
-coverage](https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg)](https://codecov.io/gh/kiernann/metro?branch=master)
+coverage](https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg)](https://app.codecov.io/gh/kiernann/metro?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/kiernann/metro/badge)](https://www.codefactor.io/repository/github/kiernann/metro)
 [![R build
 status](https://github.com/kiernann/metro/workflows/R-CMD-check/badge.svg)](https://github.com/kiernann/metro/actions)

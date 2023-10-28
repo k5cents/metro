@@ -13,7 +13,7 @@ Description: The Washington Metropolitan Area Transit Authority
     return data frames of transit data for easy analysis.
 License: MIT + file LICENSE
 URL: https://github.com/kiernann/metro,
-    https://kiernann.com/metro/
+    https://kiernann.github.io/metro/
 BugReports: https://github.com/kiernann/metro/issues
 Depends: 
     R (>= 2.10)
