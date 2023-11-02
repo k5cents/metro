@@ -13,7 +13,9 @@ test_that("empty tibble returned without bus incidents", {
   i <- mockr::with_mock(
     .env = as.environment("package:metro"),
     `no_data_now` = function(x) TRUE,
-    expect_message(bus_incidents())
+    {
+      expect_message(bus_incidents())
+    }
   )
   expect_equal(nrow(i), 0)
   expect_s3_class(i, "data.frame")
