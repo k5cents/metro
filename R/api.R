@@ -38,7 +38,8 @@ wmata_api <- function(path, query = NULL, ..., level, api_key = wmata_key()) {
   }
   raw <- httr::content(resp, as = "text", encoding = "UTF-8")
   parsed <- jsonlite::fromJSON(raw, ...)
-  if (httr::http_error(resp) && "message" %in% names(parsed)) {
+  if (httr::http_error(resp) && "message" %in% tolower(names(parsed))) {
+    names(parsed) <- tolower(names(parsed))
     stop(
       sprintf(
         "WMATA API request failed [%s]\n%s",
