@@ -4,6 +4,7 @@
 #'
 #' @format A tibble with 1 row per bus departure and 8 variables:
 #' \describe{
+#'   \item{StopID}{7-digit regional ID which can be used in various bus-related
 #'   \item{ScheduleTime}{Date and time (UTC) when the bus is scheduled to stop
 #'   at this location.}
 #'   \item{DirectionNum}{Denotes a binary direction (0 or 1) of the bus. There
@@ -28,7 +29,7 @@
 #' @inheritParams wmata_key
 #' @examples
 #' \dontrun{
-#' bus_departs(1001195, "2021-01-01")
+#' bus_departs(1001195, Sys.Date())
 #' }
 #' @return Data frame containing scheduled arrival information.
 #' @seealso <https://developer.wmata.com/docs/services/54763629281d83086473f231/operations/5476362a281d830c946a3d6c/console>
@@ -44,5 +45,7 @@ bus_departs <- function(StopID, Date = NULL, api_key = wmata_key()) {
     api_key = api_key
   )
   dat[, c(1, 3:4)] <- lapply(dat[, c(1, 3:4)], api_time)
+  dat$StopID <- as.character(StopID)
+  dat <- dat[, c(length(dat), 1, seq(2, length(dat) - 1))]
   tibble::as_tibble(dat)
 }
