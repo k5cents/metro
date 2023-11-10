@@ -6,13 +6,12 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-maturing](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+experimental](https://img.shields.io/badge/lifecycle-stable-green)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/metro)](https://CRAN.R-project.org/package=metro)
-![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/metro)
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/gluedown)
 [![Codecov test
-coverage](https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg)](https://app.codecov.io/gh/kiernann/metro?branch=master)
-[![CodeFactor](https://www.codefactor.io/repository/github/kiernann/metro/badge)](https://www.codefactor.io/repository/github/kiernann/metro)
+coverage](https://img.shields.io/codecov/c/github/kiernann/metro/master.svg)](https://app.codecov.io/gh/kiernann/metro?branch=master')
 [![R build
 status](https://github.com/kiernann/metro/workflows/R-CMD-check/badge.svg)](https://github.com/kiernann/metro/actions)
 <!-- badges: end -->
@@ -60,22 +59,22 @@ Sys.setenv(WMATA_KEY = "e13626d03d8e4c03ac07f95541b3091b")
 ``` r
 library(metro)
 packageVersion("metro")
-#> [1] '0.9.1.9002'
+#> [1] '0.9.2'
 ```
 
 Functions return data frames for easy analysis.
 
 ``` r
 next_train(StationCodes = "A01")
-#> # A tibble: 6 x 9
+#> # A tibble: 6 × 9
 #>     Car Destination DestinationCode DestinationName Group Line  LocationCode LocationName   Min
 #>   <int> <chr>       <chr>           <chr>           <int> <chr> <chr>        <chr>        <int>
-#> 1     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    -1
-#> 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     4
-#> 3     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     5
-#> 4     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     8
-#> 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    10
-#> 6     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    16
+#> 1     6 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    -1
+#> 2     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center    -1
+#> 3     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     1
+#> 4     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     6
+#> 5     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center     6
+#> 6     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center    18
 ```
 
 ### Coordinates
@@ -87,14 +86,15 @@ function is used to calculate distance from the supplied coordinates.
 ``` r
 # Washington Monument coordinates
 rail_entrance(Lat = 38.890, Lon = -77.035, Radius = 750)[, -(3:4)]
-#> # A tibble: 5 x 5
-#>   Name                                                         StationCode   Lat   Lon Distance
-#>   <chr>                                                        <chr>       <dbl> <dbl>    <dbl>
-#> 1 NORTH ENTRANCE (MALL EXIT, NORTHEAST OF 12TH ST & JEFERSON … D02          38.9 -77.0     582.
-#> 2 SOUTH ELEVATOR ENTRANCE (NORTHWEST CORNER OF 12TH ST & INDE… D02          38.9 -77.0     612.
-#> 3 SOUTH ENTRANCE (SOUTHWEST CORNER OF 12TH ST & INDEPENDENCE … D02          38.9 -77.0     626.
-#> 4 MAIN ENTRANCE (WEST SIDE 12TH BETWEEN PENNSYLVANIA &  CONNE… D01          38.9 -77.0     672.
-#> 5 ELEVATOR ENTRANCE (WEST SIDE 12TH BETWEEN PENNSYLVANIA &  C… D01          38.9 -77.0     714.
+#> # A tibble: 6 × 5
+#>   Name                                        StationCode   Lat   Lon Distance
+#>   <chr>                                       <chr>       <dbl> <dbl>    <dbl>
+#> 1 12TH ST NW & JEFERSON DR SW                 D02          38.9 -77.0     582.
+#> 2 12TH ST SW & INDEPENDENCE AVE SW (ELEVATOR) D02          38.9 -77.0     612.
+#> 3 12TH ST SW & INDEPENDENCE AVE SW            D02          38.9 -77.0     626.
+#> 4 12TH ST NW & PENNSYLVANIA AVE NW            D01          38.9 -77.0     672.
+#> 5 13TH ST NW & PENNSYLVANIA AVE NW (BUILDING) D01          38.9 -77.0     685.
+#> 6 12TH ST NW & PENNSYLVANIA AVE NW (ELEVATOR) D01          38.9 -77.0     714.
 ```
 
 ### Dates and Times
@@ -104,13 +104,16 @@ the UTC time zone (+5 hours).
 
 ``` r
 bus_position(RouteId = "33")[, 1:8]
-#> # A tibble: 4 x 8
-#>   VehicleID   Lat   Lon Distance Deviation DateTime            TripID     RouteID
-#>   <chr>     <dbl> <dbl>    <dbl>     <dbl> <dttm>              <chr>      <chr>  
-#> 1 6502       38.9 -77.0       NA         8 2021-03-05 19:36:32 1932532080 33     
-#> 2 6202       38.9 -77.1       NA        -4 2021-03-05 19:36:41 1932489080 33     
-#> 3 6497       38.9 -77.1       NA         3 2021-03-05 19:36:41 1932531080 33     
-#> 4 7117       38.9 -77.0       NA         6 2021-03-05 19:36:48 1932487080 33
+#> # A tibble: 7 × 8
+#>   VehicleID   Lat   Lon Distance Deviation DateTime            TripID   RouteID
+#>   <chr>     <dbl> <dbl>    <dbl>     <dbl> <dttm>              <chr>    <chr>  
+#> 1 4611       38.9 -77.0       NA        22 2023-11-10 00:14:31 29636020 33     
+#> 2 7116       39.0 -77.1       NA         0 2023-11-10 00:14:08 18078020 33     
+#> 3 4572       38.9 -77.0       NA        14 2023-11-10 00:14:16 29847020 33     
+#> 4 7111       39.0 -77.1       NA        -3 2023-11-10 00:14:08 46929020 33     
+#> 5 4583       38.9 -77.1       NA         6 2023-11-10 00:14:15 16581020 33     
+#> 6 7107       38.8 -77.4       NA        32 2023-11-10 00:14:35 6694020  33     
+#> 7 7134       38.9 -77.0       NA         9 2023-11-10 00:14:30 26108020 33
 ```
 
 Time values are left in Eastern time and are represented using the class
@@ -119,16 +122,16 @@ since midnight. If the *last* train on a Saturday leaves at 1:21 AM
 (past midnight), this would be represented as `25:21`.
 
 ``` r
-tail(rail_times(StationCode = "A07"))
-#> # A tibble: 6 x 7
-#>   StationCode StationName   DestinationStation Weekday OpeningTime FirstTime LastTime
-#>   <chr>       <chr>         <chr>              <chr>   <time>      <time>    <time>  
-#> 1 A07         Tenleytown-AU A15                Fri     05:14       05:46     25:21   
-#> 2 A07         Tenleytown-AU B11                Fri     05:14       05:24     24:49   
-#> 3 A07         Tenleytown-AU A15                Sat     07:14       07:46     25:21   
-#> 4 A07         Tenleytown-AU B11                Sat     07:14       07:24     24:49   
-#> 5 A07         Tenleytown-AU A15                Sun     08:14       08:46     23:21   
-#> 6 A07         Tenleytown-AU B11                Sun     08:14       08:24     22:49
+tail(rail_times(StationCode = "E10"))
+#> # A tibble: 6 × 7
+#>   StationCode StationName DestinationStation Weekday OpeningTime FirstTime LastTime
+#>   <chr>       <chr>       <chr>              <chr>   <time>      <time>    <time>  
+#> 1 E10         Greenbelt   F11                Tue     04:50       05:00     23:30   
+#> 2 E10         Greenbelt   F11                Wed     04:50       05:00     23:30   
+#> 3 E10         Greenbelt   F11                Thu     04:50       05:00     23:30   
+#> 4 E10         Greenbelt   F11                Fri     04:50       05:00     26:30   
+#> 5 E10         Greenbelt   F11                Sat     06:50       07:00     26:30   
+#> 6 E10         Greenbelt   F11                Sun     06:50       07:00     23:30
 ```
 
 ### Data
@@ -138,7 +141,7 @@ return the same thing every time.
 
 ``` r
 metro_lines # rail_lines() for live
-#> # A tibble: 6 x 5
+#> # A tibble: 6 × 5
 #>   LineCode DisplayName StartStationCode EndStationCode InternalDestination
 #>   <chr>    <chr>       <chr>            <chr>          <list>             
 #> 1 BL       Blue        J03              G05            <chr [0]>          

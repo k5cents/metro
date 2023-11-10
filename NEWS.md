@@ -1,3 +1,8 @@
+# metro (development version)
+
+* Due to an error in the rail timing endpoint, the `rail_times()` function can
+  only return example data for the time being. (#15)
+
 # metro 0.9.2
 
 * Update to new package doc help page.
