@@ -1,0 +1,113 @@
+{
+    "StationTimes": [
+        {
+            "Code": "E10",
+            "StationName": "Greenbelt",
+            "Monday": {
+                "OpeningTime": "04:50",
+                "FirstTrains": [
+                    {
+                        "Time": "05:00",
+                        "DestinationStation": "F11"
+                    }
+                ],
+                "LastTrains": [
+                    {
+                        "Time": "23:30",
+                        "DestinationStation": "F11"
+                    }
+                ]
+            },
+            "Tuesday": {
+                "OpeningTime": "04:50",
+                "FirstTrains": [
+                    {
+                        "Time": "05:00",
+                        "DestinationStation": "F11"
+                    }
+                ],
+                "LastTrains": [
+                    {
+                        "Time": "23:30",
+                        "DestinationStation": "F11"
+                    }
+                ]
+            },
+            "Wednesday": {
+                "OpeningTime": "04:50",
+                "FirstTrains": [
+                    {
+                        "Time": "05:00",
+                        "DestinationStation": "F11"
+                    }
+                ],
+                "LastTrains": [
+                    {
+                        "Time": "23:30",
+                        "DestinationStation": "F11"
+                    }
+                ]
+            },
+            "Thursday": {
+                "OpeningTime": "04:50",
+                "FirstTrains": [
+                    {
+                        "Time": "05:00",
+                        "DestinationStation": "F11"
+                    }
+                ],
+                "LastTrains": [
+                    {
+                        "Time": "23:30",
+                        "DestinationStation": "F11"
+                    }
+                ]
+            },
+            "Friday": {
+                "OpeningTime": "04:50",
+                "FirstTrains": [
+                    {
+                        "Time": "05:00",
+                        "DestinationStation": "F11"
+                    }
+                ],
+                "LastTrains": [
+                    {
+                        "Time": "02:30",
+                        "DestinationStation": "F11"
+                    }
+                ]
+            },
+            "Saturday": {
+                "OpeningTime": "06:50",
+                "FirstTrains": [
+                    {
+                        "Time": "07:00",
+                        "DestinationStation": "F11"
+                    }
+                ],
+                "LastTrains": [
+                    {
+                        "Time": "02:30",
+                        "DestinationStation": "F11"
+                    }
+                ]
+            },
+            "Sunday": {
+                "OpeningTime": "06:50",
+                "FirstTrains": [
+                    {
+                        "Time": "07:00",
+                        "DestinationStation": "F11"
+                    }
+                ],
+                "LastTrains": [
+                    {
+                        "Time": "23:30",
+                        "DestinationStation": "F11"
+                    }
+                ]
+            }
+        }
+    ]
+}
