@@ -55,12 +55,18 @@
 #' @family Train Positions
 #' @importFrom tibble as_tibble
 #' @export
-rail_positions <- function(api_key = api_key) {
+rail_positions <- function(api_key = wmata_key()) {
    dat <- wmata_api(
       path = "TrainPositions/TrainPositions",
       query = list(contentType = "json"),
       flatten = TRUE,
       level = 1
    )
+   if (length(dat) == 0) {
+      warning("Using example data until issue is resolved: ",
+              "https://github.com/kiernann/metro/issues/16")
+      example_file <- system.file("TrainPositions.json", package = "metro")
+      dat <- jsonlite::fromJSON(example_file, flatten = TRUE)[[1]]
+   }
    tibble::as_tibble(dat)
 }
