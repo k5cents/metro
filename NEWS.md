@@ -2,7 +2,9 @@
 
 * Due to an error in the rail timing endpoint, the `rail_times()` function can
   only return example data for the time being. (#15)
-* Add `StopId` column and use current date in `bus_departs()` example.
+* Due to an error in the train position endpoint, the `train_position()` 
+  function can only return example data for the time being. (#16)
+* Add `StopId` column to `bus_departs()` and use current date in the example.
 
 # metro 0.9.2
 

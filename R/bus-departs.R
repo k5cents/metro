@@ -4,7 +4,7 @@
 #'
 #' @format A tibble with 1 row per bus departure and 8 variables:
 #' \describe{
-#'   \item{StopID}{7-digit regional ID which can be used in various bus-related
+#'   \item{StopID}{7-digit regional ID which can be used in various bus-related}
 #'   \item{ScheduleTime}{Date and time (UTC) when the bus is scheduled to stop
 #'   at this location.}
 #'   \item{DirectionNum}{Denotes a binary direction (0 or 1) of the bus. There

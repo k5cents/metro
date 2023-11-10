@@ -45,7 +45,7 @@ work.
 }
 }
 \usage{
-rail_positions(api_key = api_key)
+rail_positions(api_key = wmata_key())
 }
 \arguments{
 \item{api_key}{Subscription key which provides access to this API. Defaults
