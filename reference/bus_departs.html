@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metro</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.2.9000</span>
       </span>
     </div>
 
@@ -58,7 +58,10 @@
 
     <div id="format">
     <h2>Format</h2>
-    <p>A tibble with 1 row per bus departure and 8 variables:</p><dl><dt>ScheduleTime</dt>
+    <p>A tibble with 1 row per bus departure and 8 variables:</p><dl><dt>StopID</dt>
+<dd><p>7-digit regional ID which can be used in various bus-related</p></dd>
+
+<dt>ScheduleTime</dt>
 <dd><p>Date and time (UTC) when the bus is scheduled to stop
 at this location.</p></dd>
 
@@ -128,7 +131,7 @@ bus schedule information as well as bus positions.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">bus_departs</span><span class="op">(</span><span class="fl">1001195</span>, <span class="st">"2021-01-01"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">bus_departs</span><span class="op">(</span><span class="fl">1001195</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">metro</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.2.9000</span>
       </span>
     </div>
 
@@ -107,19 +107,19 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kiernann/metro" class="external-link">metro</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"metro"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] '0.9.1.9002'</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] '0.9.2'</span></span></code></pre></div>
 <p>Functions return data frames for easy analysis.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/next_train.html">next_train</a></span><span class="op">(</span>StationCodes <span class="op">=</span> <span class="st">"A01"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 x 9</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
 <span><span class="co">#&gt;     Car Destination DestinationCode DestinationName Group Line  LocationCode LocationName   Min</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;           &lt;chr&gt;           &lt;int&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    -1</span></span>
-<span><span class="co">#&gt; 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     4</span></span>
-<span><span class="co">#&gt; 3     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     5</span></span>
-<span><span class="co">#&gt; 4     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center     8</span></span>
-<span><span class="co">#&gt; 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    10</span></span>
-<span><span class="co">#&gt; 6     8 Shady Gr    A15             Shady Grove         2 RD    A01          Metro Center    16</span></span></code></pre></div>
+<span><span class="co">#&gt; 1     6 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    -1</span></span>
+<span><span class="co">#&gt; 2     6 Shady Grove &lt;NA&gt;            Shady Grove         2 RD    A01          Metro Center    -1</span></span>
+<span><span class="co">#&gt; 3     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     1</span></span>
+<span><span class="co">#&gt; 4     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     6</span></span>
+<span><span class="co">#&gt; 5     6 Shady Grove &lt;NA&gt;            Shady Grove         2 RD    A01          Metro Center     6</span></span>
+<span><span class="co">#&gt; 6     6 Shady Grove &lt;NA&gt;            Shady Grove         2 RD    A01          Metro Center    18</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="coordinates">Coordinates<a class="anchor" aria-label="anchor" href="#coordinates"></a>
 </h3>
@@ -127,14 +127,15 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Washington Monument coordinates</span></span>
 <span><span class="fu"><a href="reference/rail_entrance.html">rail_entrance</a></span><span class="op">(</span>Lat <span class="op">=</span> <span class="fl">38.890</span>, Lon <span class="op">=</span> <span class="op">-</span><span class="fl">77.035</span>, Radius <span class="op">=</span> <span class="fl">750</span><span class="op">)</span><span class="op">[</span>, <span class="op">-</span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt; # A tibble: 5 x 5</span></span>
-<span><span class="co">#&gt;   Name                                                         StationCode   Lat   Lon Distance</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                                                        &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 NORTH ENTRANCE (MALL EXIT, NORTHEAST OF 12TH ST &amp; JEFERSON … D02          38.9 -77.0     582.</span></span>
-<span><span class="co">#&gt; 2 SOUTH ELEVATOR ENTRANCE (NORTHWEST CORNER OF 12TH ST &amp; INDE… D02          38.9 -77.0     612.</span></span>
-<span><span class="co">#&gt; 3 SOUTH ENTRANCE (SOUTHWEST CORNER OF 12TH ST &amp; INDEPENDENCE … D02          38.9 -77.0     626.</span></span>
-<span><span class="co">#&gt; 4 MAIN ENTRANCE (WEST SIDE 12TH BETWEEN PENNSYLVANIA &amp;  CONNE… D01          38.9 -77.0     672.</span></span>
-<span><span class="co">#&gt; 5 ELEVATOR ENTRANCE (WEST SIDE 12TH BETWEEN PENNSYLVANIA &amp;  C… D01          38.9 -77.0     714.</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 6 × 5</span></span>
+<span><span class="co">#&gt;   Name                                        StationCode   Lat   Lon Distance</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                                       &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 12TH ST NW &amp; JEFERSON DR SW                 D02          38.9 -77.0     582.</span></span>
+<span><span class="co">#&gt; 2 12TH ST SW &amp; INDEPENDENCE AVE SW (ELEVATOR) D02          38.9 -77.0     612.</span></span>
+<span><span class="co">#&gt; 3 12TH ST SW &amp; INDEPENDENCE AVE SW            D02          38.9 -77.0     626.</span></span>
+<span><span class="co">#&gt; 4 12TH ST NW &amp; PENNSYLVANIA AVE NW            D01          38.9 -77.0     672.</span></span>
+<span><span class="co">#&gt; 5 13TH ST NW &amp; PENNSYLVANIA AVE NW (BUILDING) D01          38.9 -77.0     685.</span></span>
+<span><span class="co">#&gt; 6 12TH ST NW &amp; PENNSYLVANIA AVE NW (ELEVATOR) D01          38.9 -77.0     714.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="dates-and-times">Dates and Times<a class="anchor" aria-label="anchor" href="#dates-and-times"></a>
@@ -142,25 +143,28 @@
 <p>Date columns with class <code>POSIXt</code> have been shifted from Eastern time to the UTC time zone (+5 hours).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/bus_position.html">bus_position</a></span><span class="op">(</span>RouteId <span class="op">=</span> <span class="st">"33"</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span></span>
-<span><span class="co">#&gt; # A tibble: 4 x 8</span></span>
-<span><span class="co">#&gt;   VehicleID   Lat   Lon Distance Deviation DateTime            TripID     RouteID</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;      &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt; 1 6502       38.9 -77.0       NA         8 2021-03-05 19:36:32 1932532080 33     </span></span>
-<span><span class="co">#&gt; 2 6202       38.9 -77.1       NA        -4 2021-03-05 19:36:41 1932489080 33     </span></span>
-<span><span class="co">#&gt; 3 6497       38.9 -77.1       NA         3 2021-03-05 19:36:41 1932531080 33     </span></span>
-<span><span class="co">#&gt; 4 7117       38.9 -77.0       NA         6 2021-03-05 19:36:48 1932487080 33</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 7 × 8</span></span>
+<span><span class="co">#&gt;   VehicleID   Lat   Lon Distance Deviation DateTime            TripID   RouteID</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;    &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt; 1 4611       38.9 -77.0       NA        22 2023-11-10 00:14:31 29636020 33     </span></span>
+<span><span class="co">#&gt; 2 7116       39.0 -77.1       NA         0 2023-11-10 00:14:08 18078020 33     </span></span>
+<span><span class="co">#&gt; 3 4572       38.9 -77.0       NA        14 2023-11-10 00:14:16 29847020 33     </span></span>
+<span><span class="co">#&gt; 4 7111       39.0 -77.1       NA        -3 2023-11-10 00:14:08 46929020 33     </span></span>
+<span><span class="co">#&gt; 5 4583       38.9 -77.1       NA         6 2023-11-10 00:14:15 16581020 33     </span></span>
+<span><span class="co">#&gt; 6 7107       38.8 -77.4       NA        32 2023-11-10 00:14:35 6694020  33     </span></span>
+<span><span class="co">#&gt; 7 7134       38.9 -77.0       NA         9 2023-11-10 00:14:30 26108020 33</span></span></code></pre></div>
 <p>Time values are left in Eastern time and are represented using the class <a href="https://github.com/tidyverse/hms" class="external-link"><code>hms</code></a>, which counts the seconds since midnight. If the <em>last</em> train on a Saturday leaves at 1:21 AM (past midnight), this would be represented as <code>25:21</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fu"><a href="reference/rail_times.html">rail_times</a></span><span class="op">(</span>StationCode <span class="op">=</span> <span class="st">"A07"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 x 7</span></span>
-<span><span class="co">#&gt;   StationCode StationName   DestinationStation Weekday OpeningTime FirstTime LastTime</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;              &lt;chr&gt;   &lt;time&gt;      &lt;time&gt;    &lt;time&gt;  </span></span>
-<span><span class="co">#&gt; 1 A07         Tenleytown-AU A15                Fri     05:14       05:46     25:21   </span></span>
-<span><span class="co">#&gt; 2 A07         Tenleytown-AU B11                Fri     05:14       05:24     24:49   </span></span>
-<span><span class="co">#&gt; 3 A07         Tenleytown-AU A15                Sat     07:14       07:46     25:21   </span></span>
-<span><span class="co">#&gt; 4 A07         Tenleytown-AU B11                Sat     07:14       07:24     24:49   </span></span>
-<span><span class="co">#&gt; 5 A07         Tenleytown-AU A15                Sun     08:14       08:46     23:21   </span></span>
-<span><span class="co">#&gt; 6 A07         Tenleytown-AU B11                Sun     08:14       08:24     22:49</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fu"><a href="reference/rail_times.html">rail_times</a></span><span class="op">(</span>StationCode <span class="op">=</span> <span class="st">"E10"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 7</span></span>
+<span><span class="co">#&gt;   StationCode StationName DestinationStation Weekday OpeningTime FirstTime LastTime</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;              &lt;chr&gt;   &lt;time&gt;      &lt;time&gt;    &lt;time&gt;  </span></span>
+<span><span class="co">#&gt; 1 E10         Greenbelt   F11                Tue     04:50       05:00     23:30   </span></span>
+<span><span class="co">#&gt; 2 E10         Greenbelt   F11                Wed     04:50       05:00     23:30   </span></span>
+<span><span class="co">#&gt; 3 E10         Greenbelt   F11                Thu     04:50       05:00     23:30   </span></span>
+<span><span class="co">#&gt; 4 E10         Greenbelt   F11                Fri     04:50       05:00     26:30   </span></span>
+<span><span class="co">#&gt; 5 E10         Greenbelt   F11                Sat     06:50       07:00     26:30   </span></span>
+<span><span class="co">#&gt; 6 E10         Greenbelt   F11                Sun     06:50       07:00     23:30</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
@@ -168,7 +172,7 @@
 <p>Some data frames are includes as objects if their functions typically return the same thing every time.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metro_lines</span> <span class="co"># rail_lines() for live</span></span>
-<span><span class="co">#&gt; # A tibble: 6 x 5</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 5</span></span>
 <span><span class="co">#&gt;   LineCode DisplayName StartStationCode EndStationCode InternalDestination</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;          &lt;list&gt;             </span></span>
 <span><span class="co">#&gt; 1 BL       Blue        J03              G05            &lt;chr [0]&gt;          </span></span>
@@ -220,10 +224,9 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg" alt="Lifecycle: maturing"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-green" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://CRAN.R-project.org/package=metro" class="external-link"><img src="https://www.r-pkg.org/badges/version/metro" alt="CRAN status"></a></li>
-<li><a href="https://app.codecov.io/gh/kiernann/metro?branch=master" class="external-link"><img src="https://codecov.io/gh/kiernann/metro/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://www.codefactor.io/repository/github/kiernann/metro" class="external-link"><img src="https://www.codefactor.io/repository/github/kiernann/metro/badge" alt="CodeFactor"></a></li>
+<li><a href="https://app.codecov.io/gh/kiernann/metro?branch=master'" class="external-link"><img src="https://img.shields.io/codecov/c/github/kiernann/metro/master.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/kiernann/metro/actions" class="external-link"><img src="https://github.com/kiernann/metro/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 </ul>
 </div>
