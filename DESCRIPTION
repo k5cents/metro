@@ -1,20 +1,17 @@
 Package: metro
 Title: Washington Metropolitan Area Transit Authority API
-Version: 0.9.2.9000
+Version: 0.9.3
 Authors@R: 
-    person(given = "Kiernan",
-           family = "Nicholls",
-           role = c("aut", "cre"),
-           email = "kiernann@protonmail.com")
-Description: The Washington Metropolitan Area Transit Authority
-    is a government agency operating light rail and passenger buses in the
+    person("Kiernan", "Nicholls", email = "k5cents@gmail.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0002-9229-7897"))
+Description: The Washington Metropolitan Area Transit Authority is a
+    government agency operating light rail and passenger buses in the
     Washington D.C. area. With a free developer account, access their
     'Metro Transparent Data Sets API' <https://developer.wmata.com/> to
     return data frames of transit data for easy analysis.
-License: MIT + file LICENSE
-URL: https://github.com/kiernann/metro,
-    https://kiernann.github.io/metro/
-BugReports: https://github.com/kiernann/metro/issues
+License: GPL (>= 3)
+URL: https://k5cents.github.io/metro/, https://github.com/k5cents/metro
+BugReports: https://github.com/k5cents/metro/issues
 Depends: 
     R (>= 2.10)
 Imports: 

@@ -1,5 +1,7 @@
-# metro (development version)
+# metro 0.9.3
 
+* Switch from MIT license to GPL-3
+* Update maintainer email, website URL, and GitHub URL.
 * Due to an error in the rail timing endpoint, the `rail_times()` function can
   only return example data for the time being. (#15)
 * Due to an error in the train position endpoint, the `train_position()` 
