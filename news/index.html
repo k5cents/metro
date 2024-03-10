@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metro</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.3</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/kiernann/metro/" class="external-link">
+  <a href="https://github.com/k5cents/metro/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -44,13 +44,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/kiernann/metro/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/k5cents/metro/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="development version" id="metro-development-version">metro (development version)<a class="anchor" aria-label="anchor" href="#metro-development-version"></a></h2>
-<ul><li>Due to an error in the rail timing endpoint, the <code><a href="../reference/rail_times.html">rail_times()</a></code> function can only return example data for the time being. (<a href="https://github.com/kiernann/metro/issues/15" class="external-link">#15</a>)</li>
-<li>Due to an error in the train position endpoint, the <code>train_position()</code> function can only return example data for the time being. (<a href="https://github.com/kiernann/metro/issues/16" class="external-link">#16</a>)</li>
+<h2 class="page-header" data-toc-text="0.9.3" id="metro-093">metro 0.9.3<a class="anchor" aria-label="anchor" href="#metro-093"></a></h2>
+<ul><li>Switch from MIT license to GPL-3</li>
+<li>Update maintainer email, website URL, and GitHub URL.</li>
+<li>Due to an error in the rail timing endpoint, the <code><a href="../reference/rail_times.html">rail_times()</a></code> function can only return example data for the time being. (<a href="https://github.com/k5cents/metro/issues/15" class="external-link">#15</a>)</li>
+<li>Due to an error in the train position endpoint, the <code>train_position()</code> function can only return example data for the time being. (<a href="https://github.com/k5cents/metro/issues/16" class="external-link">#16</a>)</li>
 <li>Add <code>StopId</code> column to <code><a href="../reference/bus_departs.html">bus_departs()</a></code> and use current date in the example.</li>
 </ul></div>
     <div class="section level2">
@@ -65,19 +67,19 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.1" id="metro-091">metro 0.9.1<small>2021-03-01</small><a class="anchor" aria-label="anchor" href="#metro-091"></a></h2>
-<ul><li>Covered most <a href="https://developer.wmata.com/docs/services/" class="external-link">JSON endpoints</a> as tidy data frames. Buses stops, train stations, next bus or trains, incidents, paths, routes, circuits. (<a href="https://github.com/kiernann/metro/issues/1" class="external-link">#1</a>)</li>
+<ul><li>Covered most <a href="https://developer.wmata.com/docs/services/" class="external-link">JSON endpoints</a> as tidy data frames. Buses stops, train stations, next bus or trains, incidents, paths, routes, circuits. (<a href="https://github.com/k5cents/metro/issues/1" class="external-link">#1</a>)</li>
 <li>
 <code><a href="https://httr.r-lib.org/reference/RETRY.html" class="external-link">httr::RETRY()</a></code> in <code><a href="../reference/wmata_api.html">wmata_api()</a></code> does not retry on 401, 404, etc. The purpose of this change is to primarily retry on 429 errors when too many requests have been made on a rate-limited subscription. Waiting should successfully retry.</li>
 <li>Stops, Stations, Routes, and Lines saved as exported objects.</li>
-<li>All functions accept <code>api_key</code> argument. (<a href="https://github.com/kiernann/metro/issues/5" class="external-link">#5</a>)</li>
-<li>Calls are made using <code><a href="https://httr.r-lib.org/reference/RETRY.html" class="external-link">httr::RETRY()</a></code> to deal with issues like rate limit. (<a href="https://github.com/kiernann/metro/issues/8" class="external-link">#8</a>)</li>
-<li>Use the documentation and parameters in the official API documentation. (<a href="https://github.com/kiernann/metro/issues/7" class="external-link">#7</a>)</li>
+<li>All functions accept <code>api_key</code> argument. (<a href="https://github.com/k5cents/metro/issues/5" class="external-link">#5</a>)</li>
+<li>Calls are made using <code><a href="https://httr.r-lib.org/reference/RETRY.html" class="external-link">httr::RETRY()</a></code> to deal with issues like rate limit. (<a href="https://github.com/k5cents/metro/issues/8" class="external-link">#8</a>)</li>
+<li>Use the documentation and parameters in the official API documentation. (<a href="https://github.com/k5cents/metro/issues/7" class="external-link">#7</a>)</li>
 <li>Convert all dates to <code>POSIXct</code> with UTC time zone.</li>
-<li>Convert times to <code>hms</code> columns with values past midnight. (<a href="https://github.com/kiernann/metro/issues/6" class="external-link">#6</a>)</li>
+<li>Convert times to <code>hms</code> columns with values past midnight. (<a href="https://github.com/k5cents/metro/issues/6" class="external-link">#6</a>)</li>
 <li>Removed <code>parking_*()</code> functions until a data frames can be made.</li>
 <li>Removed <code><a href="../reference/rail_path.html">rail_path()</a></code> helper function. Keep only endpoint functions.</li>
 <li>Removed ability to automatically scrape demo API key.</li>
-<li>Removed package startup message about API key. (<a href="https://github.com/kiernann/metro/issues/2" class="external-link">#2</a>)</li>
+<li>Removed package startup message about API key. (<a href="https://github.com/k5cents/metro/issues/2" class="external-link">#2</a>)</li>
 <li>Invalid URLs are removed from function documentation.</li>
 </ul></div>
   </div>
