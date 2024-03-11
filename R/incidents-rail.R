@@ -44,9 +44,9 @@ rail_incidents <- function(api_key = wmata_key()) {
 }
 
 empty_rail_incidents <- tibble::tibble(
-  incident = character(),
-  type = character(),
-  lines = character(),
-  updated = as.POSIXct(character()),
-  description = character()
+  IncidentID = character(),
+  IncidentType = character(),
+  LinesAffected = list(),
+  DateUpdated = as.POSIXct(character()),
+  Description = character()
 )
