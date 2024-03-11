@@ -114,12 +114,12 @@
 <span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
 <span><span class="co">#&gt;     Car Destination DestinationCode DestinationName Group Line  LocationCode LocationName   Min</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;           &lt;chr&gt;           &lt;int&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1     6 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     0</span></span>
-<span><span class="co">#&gt; 2     8 Friendship  &lt;NA&gt;            Friendship          2 RD    A01          Metro Center     3</span></span>
-<span><span class="co">#&gt; 3     6 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     8</span></span>
-<span><span class="co">#&gt; 4     8 Friendship  &lt;NA&gt;            Friendship          2 RD    A01          Metro Center    10</span></span>
-<span><span class="co">#&gt; 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    15</span></span>
-<span><span class="co">#&gt; 6     8 Friendship  &lt;NA&gt;            Friendship          2 RD    A01          Metro Center    18</span></span></code></pre></div>
+<span><span class="co">#&gt; 1     6 Shady Grove &lt;NA&gt;            Shady Grove         2 RD    A01          Metro Center     0</span></span>
+<span><span class="co">#&gt; 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     2</span></span>
+<span><span class="co">#&gt; 3     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     5</span></span>
+<span><span class="co">#&gt; 4     6 Shady Grove &lt;NA&gt;            Shady Grove         2 RD    A01          Metro Center     8</span></span>
+<span><span class="co">#&gt; 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    11</span></span>
+<span><span class="co">#&gt; 6     6 Shady Grove &lt;NA&gt;            Shady Grove         2 RD    A01          Metro Center    14</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="coordinates">Coordinates<a class="anchor" aria-label="anchor" href="#coordinates"></a>
 </h3>
@@ -143,15 +143,17 @@
 <p>Date columns with class <code>POSIXt</code> have been shifted from Eastern time to the UTC time zone (+5 hours).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/bus_position.html">bus_position</a></span><span class="op">(</span>RouteId <span class="op">=</span> <span class="st">"33"</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 8</span></span>
+<span><span class="co">#&gt; # A tibble: 8 × 8</span></span>
 <span><span class="co">#&gt;   VehicleID   Lat   Lon Distance Deviation DateTime            TripID   RouteID</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;    &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt; 1 4566       38.9 -77.0       NA         4 2024-03-11 02:50:44 9684010  33     </span></span>
-<span><span class="co">#&gt; 2 7122       38.9 -77.1       NA         6 2024-03-11 02:50:45 1031010  33     </span></span>
-<span><span class="co">#&gt; 3 4794       38.9 -77.1       NA         8 2024-03-11 02:50:44 18769010 33     </span></span>
-<span><span class="co">#&gt; 4 4589       38.9 -77.1       NA         0 2024-03-11 02:50:50 30442010 33     </span></span>
-<span><span class="co">#&gt; 5 4786       39.0 -77.1       NA         8 2024-03-11 02:51:00 10847010 33     </span></span>
-<span><span class="co">#&gt; 6 4781       38.9 -77.0       NA         2 2024-03-11 02:50:43 47206010 33</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 7139       38.9 -77.0       NA         2 2024-03-11 15:24:28 45406020 33     </span></span>
+<span><span class="co">#&gt; 2 4595       38.9 -77.1       NA        -2 2024-03-11 15:24:48 3269020  33     </span></span>
+<span><span class="co">#&gt; 3 7119       38.9 -77.0       NA        -1 2024-03-11 15:24:30 9921020  33     </span></span>
+<span><span class="co">#&gt; 4 4783       38.9 -77.1       NA        -4 2024-03-11 15:24:45 33498020 33     </span></span>
+<span><span class="co">#&gt; 5 4787       38.9 -77.1       NA         9 2024-03-11 15:24:48 6634020  33     </span></span>
+<span><span class="co">#&gt; 6 7108       38.9 -77.0       NA        -2 2024-03-11 15:24:46 3492020  33     </span></span>
+<span><span class="co">#&gt; 7 4600       39.0 -77.1       NA         4 2024-03-11 15:24:28 33552020 33     </span></span>
+<span><span class="co">#&gt; 8 4588       38.9 -77.0       NA         1 2024-03-11 15:24:27 20757020 33</span></span></code></pre></div>
 <p>Time values are left in Eastern time and are represented using the class <a href="https://github.com/tidyverse/hms" class="external-link"><code>hms</code></a>, which counts the seconds since midnight. If the <em>last</em> train on a Saturday leaves at 1:21 AM (past midnight), this would be represented as <code>25:21</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fu"><a href="reference/rail_times.html">rail_times</a></span><span class="op">(</span>StationCode <span class="op">=</span> <span class="st">"E10"</span><span class="op">)</span><span class="op">)</span></span>
@@ -225,7 +227,7 @@
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-green" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://CRAN.R-project.org/package=metro" class="external-link"><img src="https://www.r-pkg.org/badges/version/metro" alt="CRAN status"></a></li>
-<li><a href="https://app.codecov.io/gh/k5cents/metro?branch=master'" class="external-link"><img src="https://img.shields.io/codecov/c/github/k5cents/metro/master.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://app.codecov.io/gh/k5cents/metro?branch=master'" class="external-link"><img src="https://codecov.io/gh/k5cents/metro/graph/badge.svg?token=bQ3eAdcpjd" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/k5cents/metro/actions" class="external-link"><img src="https://github.com/k5cents/metro/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 </ul>
 </div>
