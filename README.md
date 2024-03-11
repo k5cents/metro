@@ -11,7 +11,7 @@ experimental](https://img.shields.io/badge/lifecycle-stable-green)](https://life
 status](https://www.r-pkg.org/badges/version/metro)](https://CRAN.R-project.org/package=metro)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/gluedown)
 [![Codecov test
-coverage](https://img.shields.io/codecov/c/github/k5cents/metro/master.svg)](https://app.codecov.io/gh/k5cents/metro?branch=master')
+coverage](https://codecov.io/gh/k5cents/metro/graph/badge.svg?token=bQ3eAdcpjd)](https://app.codecov.io/gh/k5cents/metro?branch=master')
 [![R build
 status](https://github.com/k5cents/metro/workflows/R-CMD-check/badge.svg)](https://github.com/k5cents/metro/actions)
 <!-- badges: end -->
@@ -69,12 +69,12 @@ next_train(StationCodes = "A01")
 #> # A tibble: 6 × 9
 #>     Car Destination DestinationCode DestinationName Group Line  LocationCode LocationName   Min
 #>   <int> <chr>       <chr>           <chr>           <int> <chr> <chr>        <chr>        <int>
-#> 1     6 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     0
-#> 2     8 Friendship  <NA>            Friendship          2 RD    A01          Metro Center     3
-#> 3     6 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     8
-#> 4     8 Friendship  <NA>            Friendship          2 RD    A01          Metro Center    10
-#> 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    15
-#> 6     8 Friendship  <NA>            Friendship          2 RD    A01          Metro Center    18
+#> 1     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center     0
+#> 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     2
+#> 3     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     5
+#> 4     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center     8
+#> 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    11
+#> 6     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center    14
 ```
 
 ### Coordinates
@@ -104,15 +104,17 @@ the UTC time zone (+5 hours).
 
 ``` r
 bus_position(RouteId = "33")[, 1:8]
-#> # A tibble: 6 × 8
+#> # A tibble: 8 × 8
 #>   VehicleID   Lat   Lon Distance Deviation DateTime            TripID   RouteID
 #>   <chr>     <dbl> <dbl>    <dbl>     <dbl> <dttm>              <chr>    <chr>  
-#> 1 4566       38.9 -77.0       NA         4 2024-03-11 02:50:44 9684010  33     
-#> 2 7122       38.9 -77.1       NA         6 2024-03-11 02:50:45 1031010  33     
-#> 3 4794       38.9 -77.1       NA         8 2024-03-11 02:50:44 18769010 33     
-#> 4 4589       38.9 -77.1       NA         0 2024-03-11 02:50:50 30442010 33     
-#> 5 4786       39.0 -77.1       NA         8 2024-03-11 02:51:00 10847010 33     
-#> 6 4781       38.9 -77.0       NA         2 2024-03-11 02:50:43 47206010 33
+#> 1 7139       38.9 -77.0       NA         2 2024-03-11 15:24:28 45406020 33     
+#> 2 4595       38.9 -77.1       NA        -2 2024-03-11 15:24:48 3269020  33     
+#> 3 7119       38.9 -77.0       NA        -1 2024-03-11 15:24:30 9921020  33     
+#> 4 4783       38.9 -77.1       NA        -4 2024-03-11 15:24:45 33498020 33     
+#> 5 4787       38.9 -77.1       NA         9 2024-03-11 15:24:48 6634020  33     
+#> 6 7108       38.9 -77.0       NA        -2 2024-03-11 15:24:46 3492020  33     
+#> 7 4600       39.0 -77.1       NA         4 2024-03-11 15:24:28 33552020 33     
+#> 8 4588       38.9 -77.0       NA         1 2024-03-11 15:24:27 20757020 33
 ```
 
 Time values are left in Eastern time and are represented using the class
