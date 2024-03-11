@@ -11,9 +11,9 @@ experimental](https://img.shields.io/badge/lifecycle-stable-green)](https://life
 status](https://www.r-pkg.org/badges/version/metro)](https://CRAN.R-project.org/package=metro)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/gluedown)
 [![Codecov test
-coverage](https://img.shields.io/codecov/c/github/kiernann/metro/master.svg)](https://app.codecov.io/gh/kiernann/metro?branch=master')
+coverage](https://img.shields.io/codecov/c/github/k5cents/metro/master.svg)](https://app.codecov.io/gh/k5cents/metro?branch=master')
 [![R build
-status](https://github.com/kiernann/metro/workflows/R-CMD-check/badge.svg)](https://github.com/kiernann/metro/actions)
+status](https://github.com/k5cents/metro/workflows/R-CMD-check/badge.svg)](https://github.com/k5cents/metro/actions)
 <!-- badges: end -->
 
 The goal of metro is to return data frames from the Washington
@@ -31,11 +31,11 @@ install.packages("metro")
 ```
 
 Or install the development version from
-[GitHub](https://github.com/kiernann/metro):
+[GitHub](https://github.com/k5cents/metro):
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("kiernann/metro")
+devtools::install_github("k5cents/metro")
 ```
 
 ## Key
@@ -59,7 +59,7 @@ Sys.setenv(WMATA_KEY = "e13626d03d8e4c03ac07f95541b3091b")
 ``` r
 library(metro)
 packageVersion("metro")
-#> [1] '0.9.2'
+#> [1] '0.9.3'
 ```
 
 Functions return data frames for easy analysis.
@@ -69,12 +69,12 @@ next_train(StationCodes = "A01")
 #> # A tibble: 6 × 9
 #>     Car Destination DestinationCode DestinationName Group Line  LocationCode LocationName   Min
 #>   <int> <chr>       <chr>           <chr>           <int> <chr> <chr>        <chr>        <int>
-#> 1     6 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    -1
-#> 2     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center    -1
-#> 3     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     1
-#> 4     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     6
-#> 5     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center     6
-#> 6     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center    18
+#> 1     6 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     0
+#> 2     8 Friendship  <NA>            Friendship          2 RD    A01          Metro Center     3
+#> 3     6 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     8
+#> 4     8 Friendship  <NA>            Friendship          2 RD    A01          Metro Center    10
+#> 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    15
+#> 6     8 Friendship  <NA>            Friendship          2 RD    A01          Metro Center    18
 ```
 
 ### Coordinates
@@ -104,16 +104,15 @@ the UTC time zone (+5 hours).
 
 ``` r
 bus_position(RouteId = "33")[, 1:8]
-#> # A tibble: 7 × 8
+#> # A tibble: 6 × 8
 #>   VehicleID   Lat   Lon Distance Deviation DateTime            TripID   RouteID
 #>   <chr>     <dbl> <dbl>    <dbl>     <dbl> <dttm>              <chr>    <chr>  
-#> 1 4611       38.9 -77.0       NA        22 2023-11-10 00:14:31 29636020 33     
-#> 2 7116       39.0 -77.1       NA         0 2023-11-10 00:14:08 18078020 33     
-#> 3 4572       38.9 -77.0       NA        14 2023-11-10 00:14:16 29847020 33     
-#> 4 7111       39.0 -77.1       NA        -3 2023-11-10 00:14:08 46929020 33     
-#> 5 4583       38.9 -77.1       NA         6 2023-11-10 00:14:15 16581020 33     
-#> 6 7107       38.8 -77.4       NA        32 2023-11-10 00:14:35 6694020  33     
-#> 7 7134       38.9 -77.0       NA         9 2023-11-10 00:14:30 26108020 33
+#> 1 4566       38.9 -77.0       NA         4 2024-03-11 02:50:44 9684010  33     
+#> 2 7122       38.9 -77.1       NA         6 2024-03-11 02:50:45 1031010  33     
+#> 3 4794       38.9 -77.1       NA         8 2024-03-11 02:50:44 18769010 33     
+#> 4 4589       38.9 -77.1       NA         0 2024-03-11 02:50:50 30442010 33     
+#> 5 4786       39.0 -77.1       NA         8 2024-03-11 02:51:00 10847010 33     
+#> 6 4781       38.9 -77.0       NA         2 2024-03-11 02:50:43 47206010 33
 ```
 
 Time values are left in Eastern time and are represented using the class

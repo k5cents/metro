@@ -51,7 +51,7 @@ rail_times <- function(StationCode = NULL, api_key = wmata_key()) {
   )
   if (length(dat$Monday$FirstTrains[[1]]) == 0) {
     warning("Using example data until issue is resolved: ",
-             "https://github.com/kiernann/metro/issues/15")
+             "https://github.com/k5cents/metro/issues/15")
     example_file <- system.file("jStationTimes.json", package = "metro")
     dat <- jsonlite::fromJSON(example_file)[[1]]
   }

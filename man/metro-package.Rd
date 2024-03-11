@@ -64,14 +64,14 @@ There are six endpoint categories returning JSON data.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/kiernann/metro}
-  \item \url{https://kiernann.github.io/metro/}
-  \item Report bugs at \url{https://github.com/kiernann/metro/issues}
+  \item \url{https://k5cents.github.io/metro/}
+  \item \url{https://github.com/k5cents/metro}
+  \item Report bugs at \url{https://github.com/k5cents/metro/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Kiernan Nicholls \email{kiernann@protonmail.com}
+\strong{Maintainer}: Kiernan Nicholls \email{k5cents@gmail.com} (\href{https://orcid.org/0000-0002-9229-7897}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

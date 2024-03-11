@@ -64,7 +64,7 @@ rail_positions <- function(api_key = wmata_key()) {
    )
    if (length(dat) == 0) {
       warning("Using example data until issue is resolved: ",
-              "https://github.com/kiernann/metro/issues/16")
+              "https://github.com/k5cents/metro/issues/16")
       example_file <- system.file("TrainPositions.json", package = "metro")
       dat <- jsonlite::fromJSON(example_file, flatten = TRUE)[[1]]
    }
