@@ -25,7 +25,7 @@
 #' }
 #'
 #' [1]: https://www.wmata.com/about/records/public_docs/upload/Tariff-on-Fares-Annotated-2-12-18.pdf#page=6
-#' [2]: https://www.wmata.com/fares/reduced.cfm
+#' [2]: https://www.wmata.com/service/accessibility/reduced-fare.cfm
 #'
 #' @param FromStationCode Station code for the origin station. Use the
 #'   [rail_stations()] function to return a list of all station codes.
