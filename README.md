@@ -69,12 +69,12 @@ next_train(StationCodes = "A01")
 #> # A tibble: 6 × 9
 #>     Car Destination DestinationCode DestinationName Group Line  LocationCode LocationName   Min
 #>   <int> <chr>       <chr>           <chr>           <int> <chr> <chr>        <chr>        <int>
-#> 1     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center     0
-#> 2     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     2
-#> 3     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     5
-#> 4     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center     8
-#> 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    11
-#> 6     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center    14
+#> 1     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center    -1
+#> 2     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center     1
+#> 3     6 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     3
+#> 4     6 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center     7
+#> 5     8 Glenmont    B11             Glenmont            1 RD    A01          Metro Center     9
+#> 6     8 Shady Grove <NA>            Shady Grove         2 RD    A01          Metro Center    14
 ```
 
 ### Coordinates
@@ -107,14 +107,14 @@ bus_position(RouteId = "33")[, 1:8]
 #> # A tibble: 8 × 8
 #>   VehicleID   Lat   Lon Distance Deviation DateTime            TripID   RouteID
 #>   <chr>     <dbl> <dbl>    <dbl>     <dbl> <dttm>              <chr>    <chr>  
-#> 1 7139       38.9 -77.0       NA         2 2024-03-11 15:24:28 45406020 33     
-#> 2 4595       38.9 -77.1       NA        -2 2024-03-11 15:24:48 3269020  33     
-#> 3 7119       38.9 -77.0       NA        -1 2024-03-11 15:24:30 9921020  33     
-#> 4 4783       38.9 -77.1       NA        -4 2024-03-11 15:24:45 33498020 33     
-#> 5 4787       38.9 -77.1       NA         9 2024-03-11 15:24:48 6634020  33     
-#> 6 7108       38.9 -77.0       NA        -2 2024-03-11 15:24:46 3492020  33     
-#> 7 4600       39.0 -77.1       NA         4 2024-03-11 15:24:28 33552020 33     
-#> 8 4588       38.9 -77.0       NA         1 2024-03-11 15:24:27 20757020 33
+#> 1 7150       39.0 -77.1       NA         0 2024-03-12 01:51:23 31544020 33     
+#> 2 4604       38.9 -77.0       NA         3 2024-03-12 01:51:17 25897020 33     
+#> 3 7142       38.9 -77.1       NA         2 2024-03-12 01:51:37 46893020 33     
+#> 4 4788       38.9 -77.1       NA         7 2024-03-12 01:51:39 12908020 33     
+#> 5 4567       38.9 -77.0       NA         3 2024-03-12 01:51:39 12746020 33     
+#> 6 4579       38.9 -77.1       NA         0 2024-03-12 01:51:24 16822020 33     
+#> 7 7108       38.9 -77.0       NA         2 2024-03-12 01:51:38 25354020 33     
+#> 8 4610       39.0 -77.1       NA         0 2024-03-12 01:51:19 13917020 33
 ```
 
 Time values are left in Eastern time and are represented using the class
